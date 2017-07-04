@@ -18,7 +18,23 @@ $spartan-app-warn:    mat-palette($mat-deep-orange);
 // Create the theme object (a Sass map containing all of the palettes).
 $spartan-app-theme:   mat-light-theme($spartan-app-primary, $spartan-app-accent, $spartan-app-warn);
 
+// Grays
+$gray-light-0: #fdfdfd;
+$gray-light-1: #eaeaea;
+$gray-light-2: #dfdfdf;
+$gray-dark-2: #3a3a3a;
+$gray-dark-1: #1a1a1a;
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($spartan-app-theme);
+
+// Color Attributes
+.color-text-primary {
+  color: mat-color($spartan-app-primary);
+}
+
+.color-text-accent {
+  color: mat-color($spartan-app-accent);
+}

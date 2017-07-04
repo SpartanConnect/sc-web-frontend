@@ -1,0 +1,65 @@
+// Import Material theme
+@import '~@angular/material/theming';
+@import 'src/spartan-theme.scss';
+
+header {
+  background-color: $gray-light-0;
+  border-top: 15px solid mat-color($spartan-app-primary);
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  height: 115px;
+  margin: 0;
+  padding: 10px 5vw;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header-bar-heading {
+  display: inline-block;
+}
+
+.header-bar-text {
+  margin-left: 20px;
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.header-bar-heading img,
+.header-bar-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header-bar-text h1,
+.header-bar-text h3 {
+  margin: 0;
+  padding: 1px;
+}
+
+.header-bar-nav {
+  display: inline-flex;
+  float: right;
+
+  a {
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 25px;
+    margin-top: 24px;
+    padding: 6px 15px;
+  }
+
+  a:hover, a.active {
+    background-color: $gray-light-1;
+    color: $gray-dark-2;
+  }
+}

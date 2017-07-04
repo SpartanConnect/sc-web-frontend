@@ -1,17 +1,20 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title.value}}!
-  </h1>
-  <img width="300" src="/assets/logo.png" />
-</div>
-<br>
-<p style="text-align: center">
-  Full frontend coming soon!
-</p>
-<br>
+<header-bar></header-bar>
 
-<md-input-container style="margin: 10px auto;">
-  <input mdInput #title placeholder="App Title" value="Spartan Connect" mdTooltip="The name of the app">
-</md-input-container>
-<button md-raised-button mdTooltip="Shouts the input text" (click)="openDialog(title.value)">「{{title.value}}」と叫ぶ</button>
+<div class="container">
+    <div style="text-align:center; padding-top: 20px;">
+      <h1>
+        Welcome to {{title.value}}!
+      </h1>
+      <img width="300" src="/assets/logo.png" />
+    </div>
+    <br>
+    <p style="text-align: center">
+      Full frontend coming soon!
+    </p>
+    <br>
+
+    <md-input-container style="margin: 10px 10vw;">
+      <input mdInput #title placeholder="App Title" value="Spartan Connect" mdTooltip="The name of the app">
+    </md-input-container>
+    <button md-raised-button mdTooltip="Shouts the input text" (click)="openDialog(title.value)">「{{title.value}}」と叫ぶ</button>
+</div>
