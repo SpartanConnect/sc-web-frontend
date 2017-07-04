@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdInputModule, MdButtonModule, MdTooltipModule, MdSnackBarModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 
@@ -8,7 +10,12 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    MdInputModule,
+    MdButtonModule,
+    MdTooltipModule,
+    MdSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
