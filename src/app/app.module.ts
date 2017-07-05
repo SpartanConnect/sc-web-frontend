@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdInputModule, MdButtonModule, MdTooltipModule, MdSnackBarModule, MdIconModule, MdMenuModule } from '@angular/material';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { CovalentDataTableModule } from '@covalent/core';
 
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
@@ -40,8 +40,8 @@ const appRoutes: Routes = [
     MdSnackBarModule,
     MdIconModule,
     MdMenuModule,
-    RouterModule.forRoot(appRoutes),
-    NgxDatatableModule
+    CovalentDataTableModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

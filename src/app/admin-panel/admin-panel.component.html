@@ -2,8 +2,8 @@
     <div>
         <h3 style="display: inline-block; margin: 12px 0; float: left;">Admin Panel</h3>
         <md-menu #appMenu="mdMenu">
-          <button md-menu-item (click)="setTableData(this.unapprovedAnnouncements)">View Unapproved</button>
-          <button md-menu-item (click)="setTableData(this.approvedAnnouncements)">View Approved</button>
+          <button md-menu-item (click)="setTableData(this.unapprovedAnnouncements, this.announcementColumns)">View Unapproved</button>
+          <button md-menu-item (click)="setTableData(this.approvedAnnouncements, this.announcementColumns)">View Approved</button>
           <button md-menu-item (click)="setTableData([])">View Tags</button>
           <button md-menu-item (click)="setTableData(this.totalUsers, this.userColumns)">View Users</button>
         </md-menu>
@@ -13,12 +13,14 @@
         </button>
     </div>
     <br><br>
-    <ngx-datatable
-        [rows]="selectedData"
-        [columns]="selectedColumns"
-        [limit]="10"
-        class="material"
-        style="margin-top: 20px;">
-    </ngx-datatable>
+    <md-divider></md-divider>
+    <td-data-table
+      [data]="selectedData"
+      [columns]="selectedColumns"
+      [selectable]="true"
+      [multiple]="false"
+      [sortable]="false"
+      [sortOrder]="ASC">
+    </td-data-table>
 </div>
 <button md-fab class="app-fab"><md-icon>check</md-icon></button>

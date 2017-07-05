@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ITdDataTableColumn } from '@covalent/core';
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,18 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPanelComponent implements OnInit {
 
-    announcementColumns = [
-        {prop: 'title', width: 180},
-        {name: 'Description', width: 330},
-        {name: 'Author', width: 150},
-        {name: 'Tags', width: 300}
+    announcementColumns: ITdDataTableColumn[] = [
+        {name: 'title', label: "Title"},
+        {name: 'description', label: 'Description'},
+        {name: 'author', label: 'Author'},
+        {name: 'tags', label: 'Tags'}
     ];
 
-    userColumns = [
-        {prop: 'name', width: 250},
-        {name: 'Email', width: 300},
-        {name: 'Last Login', width: 260},
-        {name: 'Post Count', width: 150}
+    userColumns: ITdDataTableColumn[] = [
+        {name: 'name', label: "Name"},
+        {name: 'email', label: 'Email'},
+        {name: 'lastLogin', label: 'Last Login'},
+        {name: 'postCount', label: 'Post Count', numeric: true}
     ];
 
     selectedData: Array<any>;
@@ -46,7 +47,7 @@ export class AdminPanelComponent implements OnInit {
         { name: 'Zhang Caoli', email: 'zcaoli@notlcusd.net', lastLogin: '41 decades ago', postCount: 1240 }
     ];
 
-    setTableData(rows, columns = this.announcementColumns) {
+    setTableData(rows, columns = this.selectedColumns) {
         this.selectedData = rows;
         this.selectedColumns = columns;
     }
@@ -54,8 +55,7 @@ export class AdminPanelComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.selectedData = this.unapprovedAnnouncements;
-        this.selectedColumns = this.announcementColumns;
+        this.setTableData(this.unapprovedAnnouncements, this.announcementColumns);
     }
 
 }

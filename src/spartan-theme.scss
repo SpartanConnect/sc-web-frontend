@@ -1,4 +1,8 @@
 @import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
+
+@import '~@covalent/markdown/markdown-theme';
+@import '~@covalent/highlight/highlight-theme';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -29,6 +33,9 @@ $gray-dark-1: #1a1a1a;
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($spartan-app-theme);
+@include covalent-theme($spartan-app-theme);
+@include covalent-markdown-theme($spartan-app-theme);
+@include covalent-highlight-theme();
 
 // Color Attributes
 .color-text-primary {
