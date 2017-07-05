@@ -8,12 +8,12 @@
     <div style="max-width: 960px;">
         <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" style="width: 100%;">
           <span *ngIf="!searchBox.searchVisible" style="float: right;">
-            <button md-button>APPROVE</button>
-            <button md-button>DENY</button>
-            <button md-button>SET URGENT</button>
+            <button md-button [disabled]="!selectedRows.length">APPROVE</button>
+            <button md-button [disabled]="!selectedRows.length">DENY</button>
+            <button md-button [disabled]="!selectedRows.length">SET URGENT</button>
           </span>
           <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
-            <span *ngIf="selectedRows.length" class="md-body-1">0 item(s) selected</span>
+            <span *ngIf="selectedRows.length" class="md-body-1">{{selectedRows.length}} item(s) selected</span>
           </span>
           <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)" flex>
           </td-search-box>
@@ -43,7 +43,7 @@
         >
         </td-data-table>
         <md-divider></md-divider>
-        <td-paging-bar #pagingBar [pageSizes]="[5, 10, 15, 20]" [total]="filteredTotal" (change)="page($event)">
+        <td-paging-bar #pagingBar [pageSizes]="[5, 10, 15, 20, 100, 200]" [total]="filteredTotal" (change)="page($event)">
           <span td-paging-bar-label hide-xs>Row per page:</span>
           {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
         </td-paging-bar>
