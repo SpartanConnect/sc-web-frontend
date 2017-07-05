@@ -1,3 +1,25 @@
-<p>
-  admin-panel works!
-</p>
+<div class="container container-tight">
+    <div>
+        <h3 style="display: inline-block; margin: 12px 0; float: left;">Admin Panel</h3>
+        <md-menu #appMenu="mdMenu">
+          <button md-menu-item (click)="setTableData(this.unapprovedAnnouncements)">View Unapproved</button>
+          <button md-menu-item (click)="setTableData(this.approvedAnnouncements)">View Approved</button>
+          <button md-menu-item (click)="setTableData([])">View Tags</button>
+          <button md-menu-item (click)="setTableData(this.totalUsers, this.userColumns)">View Users</button>
+        </md-menu>
+
+        <button md-icon-button [mdMenuTriggerFor]="appMenu" style="float: right;">
+           <md-icon>more_vert</md-icon>
+        </button>
+    </div>
+    <br><br>
+    <ngx-datatable
+        [rows]="selectedData"
+        [columns]="selectedColumns"
+        [columnMode]="flex"
+        [limit]="10"
+        class="material"
+        style="margin-top: 20px;">
+    </ngx-datatable>
+</div>
+<button md-fab class="app-fab"><md-icon>check</md-icon></button>
