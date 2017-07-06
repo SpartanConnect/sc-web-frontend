@@ -1,16 +1,15 @@
 <div class="container container-tight">
     <div>
         <h3 style="display: inline-block; margin: 12px 0; float: left;">Admin Panel</h3>
-
     </div>
     <br><br>
     <md-divider></md-divider>
     <div style="max-width: 960px;">
         <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" style="width: 100%;">
           <span *ngIf="!searchBox.searchVisible" style="float: right;">
-            <button md-button [disabled]="!selectedRows.length">APPROVE</button>
-            <button md-button [disabled]="!selectedRows.length">DENY</button>
-            <button md-button [disabled]="!selectedRows.length">SET URGENT</button>
+            <button md-button [disabled]="!selectedRows.length" (click)="openApproveDialog()">APPROVE</button>
+            <button md-button [disabled]="!selectedRows.length" (click)="openDenyDialog()">DENY</button>
+            <button md-button [disabled]="!selectedRows.length" (click)="openSetUrgentDialog()">SET URGENT</button>
           </span>
           <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
             <span *ngIf="selectedRows.length" class="md-body-1">{{selectedRows.length}} item(s) selected</span>

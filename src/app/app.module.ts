@@ -2,8 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdInputModule, MdButtonModule, MdTooltipModule, MdSnackBarModule, MdIconModule, MdMenuModule } from '@angular/material';
-import { CovalentDataTableModule, CovalentPagingModule, CovalentCommonModule, CovalentSearchModule, CovalentMessageModule } from '@covalent/core';
+import {    MdInputModule, MdButtonModule,
+            MdTooltipModule, MdSnackBarModule,
+            MdIconModule, MdMenuModule,
+            MdDialog, MdDialogModule } from '@angular/material';
+import {    CovalentDataTableModule, CovalentPagingModule,
+            CovalentCommonModule, CovalentSearchModule,
+            CovalentMessageModule, TdDialogService,
+            CovalentDialogsModule, TdLoadingService,
+            CovalentLoadingModule } from '@covalent/core';
 
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
@@ -40,14 +47,21 @@ const appRoutes: Routes = [
     MdSnackBarModule,
     MdIconModule,
     MdMenuModule,
+    MdDialogModule,
     CovalentDataTableModule,
     CovalentPagingModule,
     CovalentCommonModule,
     CovalentSearchModule,
     CovalentMessageModule,
+    CovalentDialogsModule,
+    CovalentLoadingModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    MdDialog,
+    TdDialogService,
+    TdLoadingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

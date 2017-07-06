@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ITdDataTableColumn, IPageChangeEvent, TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent } from '@covalent/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import {    ITdDataTableColumn,
+            IPageChangeEvent,
+            TdDataTableService,
+            TdDataTableSortingOrder,
+            ITdDataTableSortChangeEvent,
+            TdDialogService,
+            ITdDataTableRowClickEvent,
+            TdLoadingService
+    } from '@covalent/core';
 
 @Component({
   selector: 'app-admin-panel',
@@ -46,7 +54,7 @@ export class AdminPanelComponent implements OnInit {
         { name: 'Zhang Caoli', email: 'zcaoli@notlcusd.net', lastLogin: '41 decades ago', postCount: 1240 }
     ];
 
-    selectedData: Array<any> = this.unapprovedAnnouncements;
+    selectedData: Array<any> = this.unapprovedAnnouncements;            // All of the rows. Can be filtered and selected.
     selectedColumns: Array<any> = this.announcementColumns;
 
     fromRow: number = 1;
@@ -61,6 +69,7 @@ export class AdminPanelComponent implements OnInit {
     sortOrder: TdDataTableSortingOrder = TdDataTableSortingOrder.Descending;
 
     setTableData(rows, columns = this.selectedColumns) {
+        this.selectedRows = [];
         this.selectedData = rows;
         this.selectedColumns = columns;
         this.sortBy = columns[0].name;
@@ -69,10 +78,20 @@ export class AdminPanelComponent implements OnInit {
         this.filter();
     }
 
-    constructor(private dataTableService: TdDataTableService) { }
+    constructor(
+        private dataTableService: TdDataTableService,
+        private dialogService: TdDialogService,
+        private viewContainerRef: ViewContainerRef,
+        private loadingService: TdLoadingService
+    ) { }
 
     ngOnInit() {
-        this.setTableData(this.unapprovedAnnouncements, this.announcementColumns);
+        this.setTableData([], this.announcementColumns);
+        this.loadingService.register();
+        setTimeout(() => {
+            this.loadingService.resolve();
+            this.setTableData(this.unapprovedAnnouncements, this.announcementColumns);
+        }, 1500);
     }
 
     search(searchTerm: string): void {
@@ -80,8 +99,54 @@ export class AdminPanelComponent implements OnInit {
         this.filter();
     }
 
-    openInfoDialog($event): void {
-        console.log($event);
+    openInfoDialog(clickEvent: ITdDataTableRowClickEvent): void {
+        console.log(clickEvent);
+        let message = "Viewing Information\n";
+        if (clickEvent.row.name) {          // User object
+            message += "Name: "+clickEvent.row.name+"\n";
+            message += "Email: "+clickEvent.row.email+"\n";
+            message += "Last Logged In: "+clickEvent.row.lastLogin+"\n";
+            message += "Post Count: "+clickEvent.row.postCount;
+        } else {
+            message += "Name: "+clickEvent.row.title+"\n";
+            message += "Author: "+clickEvent.row.author+"\n";
+            message += "Description: "+clickEvent.row.description+"\n";
+            message += "Tags: "+clickEvent.row.tags+"\n";
+        }
+        this.dialogService.openAlert({
+          message: message,
+          disableClose: true,
+          viewContainerRef: this.viewContainerRef,
+          title: 'Information',
+          closeButton: 'Close',
+        });
+    }
+
+    openApproveDialog(): void {
+        this.dialogService.openConfirm({
+            message: "Are you sure you want to approve these announcements?",
+            disableClose: true,
+            viewContainerRef: this.viewContainerRef,
+            title: 'Confirm Approval'
+        });
+    }
+
+    openSetUrgentDialog(): void {
+        this.dialogService.openConfirm({
+            message: "Are you sure you want to set these announcements to urgent?",
+            disableClose: true,
+            viewContainerRef: this.viewContainerRef,
+            title: 'Confirm Urgency'
+        });
+    }
+
+    openDenyDialog(): void {
+        this.dialogService.openConfirm({
+            message: "Are you sure you want to deny these announcements?",
+            disableClose: true,
+            viewContainerRef: this.viewContainerRef,
+            title: 'Confirm Denial'
+        });
     }
 
     sort(sortEvent: ITdDataTableSortChangeEvent): void {
