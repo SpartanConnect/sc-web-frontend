@@ -4,7 +4,7 @@ export const ANNOUNCEMENT_COLUMNS: ITdDataTableColumn[] = [
     {name: 'title', label: "Title"},
     {name: 'description', label: 'Description'},
     {name: 'author', label: 'Author'},
-    {name: 'tags', label: 'Tags'}
+    {name: 'tagsString', label: 'Tags'}
 ];
 
 export const TAG_COLUMNS: ITdDataTableColumn[] = [
@@ -17,6 +17,6 @@ export const USER_COLUMNS: ITdDataTableColumn[] = [
     {name: 'name', label: "Name"},
     {name: 'handle', label: 'Handle'},
     {name: 'email', label: 'Email'},
-    {name: 'rank', label: 'Ranking', numeric: true},
+    {name: 'rank', label: 'Rank', numeric: true},
     {name: 'lastLogin', label: 'Last Login'}
 ];

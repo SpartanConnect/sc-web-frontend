@@ -30,9 +30,8 @@ export class AnnouncementsService implements OnInit {
     getApprovedAnnouncements(approved = 1): Promise<Announcement[]> {
         return new Promise((resolve) => {
             this.retrieveAnnouncements().then(() => {
-                let today = new Date();
                 resolve(this.announcements.filter((announcement) => {
-                    return announcement.approved = approved;
+                    return announcement.approved === approved;
                 }));
             });
         });

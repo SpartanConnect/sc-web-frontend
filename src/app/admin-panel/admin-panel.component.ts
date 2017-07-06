@@ -21,46 +21,18 @@ import { ANNOUNCEMENT_COLUMNS, TAG_COLUMNS, USER_COLUMNS } from '../models/datat
 })
 export class AdminPanelComponent implements OnInit {
 
-    announcementColumns: ITdDataTableColumn[] = [
-        {name: 'title', label: "Title"},
-        {name: 'description', label: 'Description'},
-        {name: 'author', label: 'Author'},
-        {name: 'tags', label: 'Tags'}
-    ];
+    announcementColumns: ITdDataTableColumn[] = ANNOUNCEMENT_COLUMNS;
+    tagColumns: ITdDataTableColumn[] = TAG_COLUMNS;
+    userColumns: ITdDataTableColumn[] = USER_COLUMNS;
 
-    userColumns: ITdDataTableColumn[] = [
-        {name: 'name', label: "Name"},
-        {name: 'email', label: 'Email'},
-        {name: 'lastLogin', label: 'Last Login'},
-        {name: 'postCount', label: 'Post Count', numeric: true}
-    ];
+    // The arrays used by this component for displaying and caching.
+    approvedAnnouncements = [];
+    unapprovedAnnouncements = [];
+    totalTags = [];
+    totalUsers = [];
 
-    approvedAnnouncements = [
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' },
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' },
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' }
-    ];
-
-    unapprovedAnnouncements = [
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' },
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' },
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' },
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' },
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' },
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' },
-        { title: 'Korean Honor Society', description: 'Some Description of Korean Honor Society Here', author: 'Hedoku Taichi', tags: 'Grade 1, Grade 2, Grade Nonexistent' }
-    ];
-
-    totalUsers = [
-        { name: 'Yankie Dory', email: 'ydory@notlcusd.net', lastLogin: '1 day ago', postCount: 1240 },
-        { name: 'Hedoku Taichi', email: 'htaichi@notlcusd.net', lastLogin: '5 hours ago', postCount: 1240 },
-        { name: 'Horizon Berlot', email: 'hberlot@notlcusd.net', lastLogin: '3 years ago', postCount: 1240 },
-        { name: 'Cardigal Nartovich', email: 'cnartovich@notlcusd.net', lastLogin: '2 months ago', postCount: 1240 },
-        { name: 'Zhang Caoli', email: 'zcaoli@notlcusd.net', lastLogin: '41 decades ago', postCount: 1240 }
-    ];
-
-    selectedData: Array<any> = this.unapprovedAnnouncements;            // All of the rows. Can be filtered and selected.
-    selectedColumns: Array<any> = this.announcementColumns;
+    selectedData: Array<any> = [];            // All of the rows in an entire table (unfiltered). Can be filtered and selected.
+    selectedColumns: Array<any> = ANNOUNCEMENT_COLUMNS;
 
     fromRow: number = 1;
     currentPage: number = 1;
@@ -71,13 +43,15 @@ export class AdminPanelComponent implements OnInit {
     selectedRows: any[] = [];
 
     sortBy: string = 'title';
-    sortOrder: TdDataTableSortingOrder = TdDataTableSortingOrder.Descending;
+    sortOrder: TdDataTableSortingOrder = TdDataTableSortingOrder.Ascending;
 
     setTableData(rows, columns = this.selectedColumns) {
         this.selectedRows = [];
         this.selectedData = rows;
         this.selectedColumns = columns;
         this.sortBy = columns[0].name;
+        this.currentPage = 1;
+        this.fromRow = 1;
         this.filteredData = this.selectedData;
         this.filteredTotal = this.selectedData.length;
         this.filter();
@@ -87,17 +61,33 @@ export class AdminPanelComponent implements OnInit {
         private dataTableService: TdDataTableService,
         private dialogService: TdDialogService,
         private viewContainerRef: ViewContainerRef,
-        private loadingService: TdLoadingService
+        private loadingService: TdLoadingService,
+        private announcementsService: AnnouncementsService,
+        private tagsService: TagsService,
+        private usersService: UsersService
     ) { }
 
     ngOnInit() {
         this.setTableData([], this.announcementColumns);
         this.loadingService.register();
-        setTimeout(() => {
-            this.loadingService.resolve();
-            this.setTableData(this.unapprovedAnnouncements, this.announcementColumns);
-        }, 1500);
+        // Load all of our data from our services.
+        this.announcementsService.getApprovedAnnouncements(0).then((data) => {
+            this.unapprovedAnnouncements = data;
+            this.announcementsService.getApprovedAnnouncements(1).then((data) => {
+                this.approvedAnnouncements = data;
+                this.tagsService.getVisibleTags().then((data) => {
+                    this.totalTags = data;
+                    this.usersService.getUsers().then((data) => {
+                        this.totalUsers = data;
+                        this.setTableData(this.unapprovedAnnouncements, this.announcementColumns);
+                        this.loadingService.resolve();
+                    });
+                });
+            });
+        });
     }
+
+    // BEGIN SEARCH/FILTER + DIALOG CODE
 
     search(searchTerm: string): void {
         this.searchTerm = searchTerm;
@@ -127,30 +117,12 @@ export class AdminPanelComponent implements OnInit {
         });
     }
 
-    openApproveDialog(): void {
+    openConfirmDialog(): void {
         this.dialogService.openConfirm({
-            message: "Are you sure you want to approve these announcements?",
+            message: "Are you sure you want to continue with this action? (Heads up: I don't actually know what you want to do.)",
             disableClose: true,
             viewContainerRef: this.viewContainerRef,
-            title: 'Confirm Approval'
-        });
-    }
-
-    openSetUrgentDialog(): void {
-        this.dialogService.openConfirm({
-            message: "Are you sure you want to set these announcements to urgent?",
-            disableClose: true,
-            viewContainerRef: this.viewContainerRef,
-            title: 'Confirm Urgency'
-        });
-    }
-
-    openDenyDialog(): void {
-        this.dialogService.openConfirm({
-            message: "Are you sure you want to deny these announcements?",
-            disableClose: true,
-            viewContainerRef: this.viewContainerRef,
-            title: 'Confirm Denial'
+            title: 'Confirm Action'
         });
     }
 
