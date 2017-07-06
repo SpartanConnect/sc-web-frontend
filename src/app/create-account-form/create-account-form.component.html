@@ -1,0 +1,14 @@
+<div class="container container-tight">
+    <h3>Mock Account Creation</h3>
+    <p>Logging in normally with Google does not work as the current backend is not up yet. However, you can create a fake account here as a test instead.</p>
+    <md-input-container>
+        <input mdInput required [(ngModel)]="createAccountHandle" placeholder="Account Handle"/>
+    </md-input-container><br>
+    <md-input-container style="width: 40%">
+        <input mdInput required [(ngModel)]="createAccountEmail" placeholder="Email Address" style="width: 60%" type="email"/>
+    </md-input-container><br><br>
+    <md-select placeholder="Rank Level" required [(ngModel)]="createAccountRank">
+        <md-option *ngFor="let rank of ranks" [value]="rank.value">{{ rank.name }}</md-option>
+    </md-select><br><br><br>
+    <button md-raised-button (click)="setAccount()">SUBMIT</button>
+</div>

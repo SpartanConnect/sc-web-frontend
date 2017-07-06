@@ -5,7 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {    MdInputModule, MdButtonModule,
             MdTooltipModule, MdSnackBarModule,
             MdIconModule, MdMenuModule,
-            MdDialog, MdDialogModule } from '@angular/material';
+            MdDialog, MdDialogModule,
+            MdSelectModule } from '@angular/material';
 import {    CovalentDataTableModule, CovalentPagingModule,
             CovalentCommonModule, CovalentSearchModule,
             CovalentMessageModule, TdDialogService,
@@ -23,11 +24,17 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
 import { UsersService } from './_services/users.service';
+import { AuthService } from './_services/auth.service';
+import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
+import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
+
+import 'hammerjs';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent },
   { path: 'me', component: UserPanelComponent },
   { path: 'home', component: IndexViewComponent },
+  { path: 'login/create', component: CreateAccountFormComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -40,7 +47,9 @@ const appRoutes: Routes = [
     AnnouncementViewComponent,
     UserPanelComponent,
     AdminPanelComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CreateAccountFormComponent,
+    CreateAnnouncementFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +61,7 @@ const appRoutes: Routes = [
     MdIconModule,
     MdMenuModule,
     MdDialogModule,
+    MdSelectModule,
     CovalentDataTableModule,
     CovalentPagingModule,
     CovalentCommonModule,
@@ -67,7 +77,8 @@ const appRoutes: Routes = [
     TdLoadingService,
     AnnouncementsService,
     TagsService,
-    UsersService
+    UsersService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
