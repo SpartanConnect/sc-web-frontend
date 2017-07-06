@@ -20,6 +20,10 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { AnnouncementsService } from '../_services/announcements.service';
+import { TagsService } from '../_services/tags.service';
+import { UsersService } from '../_services/users.service';
+
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent },
   { path: 'me', component: UserPanelComponent },
@@ -60,7 +64,10 @@ const appRoutes: Routes = [
   providers: [
     MdDialog,
     TdDialogService,
-    TdLoadingService
+    TdLoadingService,
+    AnnouncementsService,
+    TagsService,
+    UsersService
   ],
   bootstrap: [AppComponent]
 })
