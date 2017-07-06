@@ -2,6 +2,9 @@
     <h3>Mock Account Creation</h3>
     <p>Logging in normally with Google does not work as the current backend is not up yet. However, you can create a fake account here as a test instead.</p>
     <md-input-container>
+        <input mdInput required [(ngModel)]="createAccountName" placeholder="Full Name"/>
+    </md-input-container><br>
+    <md-input-container>
         <input mdInput required [(ngModel)]="createAccountHandle" placeholder="Account Handle"/>
     </md-input-container><br>
     <md-input-container style="width: 40%">

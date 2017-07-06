@@ -4,12 +4,13 @@ import { Injectable, OnInit } from '@angular/core';
 export class AuthService implements OnInit {
     private currentUser = null;
 
-    initUser(userEmail, userName, userRank): void {
+    initUser(userEmail, userName, userRank, userHandle): void {
         localStorage.setItem('authenticated', '1');
         localStorage.setItem('userId', '20');
         localStorage.setItem('userEmail', userEmail);
         localStorage.setItem('userName', userName);
         localStorage.setItem('userRank', userRank);
+        localStorage.setItem('userHandle', userHandle);
     }
 
     getUser(): object {
@@ -18,11 +19,24 @@ export class AuthService implements OnInit {
         }
         return {
             authenticated: localStorage.getItem('authenticated') === '1',
-            userId: localStorage.getItem('userId'),
+            userId: parseInt(localStorage.getItem('userId')),
             userEmail: localStorage.getItem('userEmail'),
             userName: localStorage.getItem('userName'),
-            userRank: parseInt(localStorage.getItem('userRank'))
+            userRank: parseInt(localStorage.getItem('userRank')),
+            userHandle: localStorage.getItem('userHandle')
         };
+    }
+
+    logout(): Promise<boolean> {
+        return new Promise((resolve) => {
+            localStorage.setItem('authenticated', '0');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userRank');
+            localStorage.removeItem('userHandle');
+            resolve(true);
+        });
     }
 
     isAuthenticated(): boolean {

@@ -9,6 +9,7 @@ import { AuthService } from '../_services/auth.service';
 export class CreateAccountFormComponent implements OnInit {
 
     public createAccountHandle: string = "";
+    public createAccountName: string = "";
     public createAccountEmail: string = "";
     public createAccountRank: string = null;
 
@@ -20,9 +21,10 @@ export class CreateAccountFormComponent implements OnInit {
     ];
 
     setAccount() {
-        if (this.createAccountHandle.length && this.createAccountRank !== null && this.createAccountEmail.length) {
-            this.authService.initUser(this.createAccountEmail, this.createAccountHandle, this.createAccountRank);
+        if (this.createAccountHandle.length && this.createAccountRank !== null && this.createAccountEmail.length && this.createAccountName.length) {
+            this.authService.initUser(this.createAccountEmail, this.createAccountName, this.createAccountRank, this.createAccountHandle);
             window.location.reload();
+            window.location.href = '/home';
         } else {
             alert("Please fill out all fields.");
         }

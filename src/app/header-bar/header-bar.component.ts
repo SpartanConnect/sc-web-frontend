@@ -1,17 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'header-bar',
   templateUrl: './header-bar.component.html',
   styleUrls: ['./header-bar.component.scss']
 })
-export class HeaderBarComponent implements OnInit {
+export class HeaderBarComponent {
 
     @Input() authUser;
 
-    constructor() { }
+    constructor(private authService: AuthService) { }
 
-    ngOnInit() {
+    logout() {
+        this.authService.logout().then(() => {
+            window.location.reload();
+            window.location.href = '/home';
+        });
     }
 
 }
