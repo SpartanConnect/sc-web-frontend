@@ -8,18 +8,36 @@
         <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" style="width: 100%;">
           <!-- ACTION BUTTONS: START -->
           <span *ngIf="!searchBox.searchVisible && this.selectedColumns === this.announcementColumns" style="float: right;">
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">APPROVE</button>
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">DENY</button>
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">SET URGENT</button>
+            <button md-icon-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
+                <md-icon mdTooltip="Approve" *ngIf="selectedRows.length <= 1">done</md-icon>
+                <md-icon mdTooltip="Approve" *ngIf="selectedRows.length > 1">done_all</md-icon>
+            </button>
+            <button md-icon-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
+                <md-icon mdTooltip="Deny">remove_circle_outline</md-icon>
+            </button>
+            <button md-icon-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
+                <md-icon mdTooltip="Set Urgent">add_alert</md-icon>
+            </button>
           </span>
           <span *ngIf="!searchBox.searchVisible && this.selectedColumns === this.tagColumns" style="float: right;">
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">EDIT</button>
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">DELETE</button>
+            <button md-icon-button [disabled]="selectedRows.length !== 1" (click)="openConfirmDialog()">
+                <md-icon mdTooltip="Edit" *ngIf="selectedRows.length <= 1">mode_edit</md-icon>
+                <md-icon mdTooltip="Cannot edit multiple tags" *ngIf="selectedRows.length > 1">mode_edit</md-icon>
+            </button>
+            <button md-icon-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
+                <md-icon mdTooltip="Archive (Move to Trash)">archive</md-icon>
+            </button>
           </span>
           <span *ngIf="!searchBox.searchVisible && this.selectedColumns === this.userColumns" style="float: right;">
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">RESET PASSWORD</button>
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">BAN</button>
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">PROMOTE</button>
+            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
+
+            </button>
+            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
+
+            </button>
+            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
+
+            </button>
           </span>
           <!-- BUTTONS: END -->
           <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
