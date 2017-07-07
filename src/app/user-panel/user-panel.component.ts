@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { AnnouncementsService } from '../_services/announcements.service';
 import { USER_PANEL_VIEW } from '../models/userview';
@@ -11,14 +12,16 @@ import { USER_PANEL_VIEW } from '../models/userview';
 export class UserPanelComponent implements OnInit {
 
     public loading = true;
+    forbidden: boolean = false;
     selectedAnnouncements = [];
     selectedView = USER_PANEL_VIEW.VIEW_RECENT_FEED;
     userPanelViews = USER_PANEL_VIEW;
 
-    constructor(private announcementsService: AnnouncementsService) { }
+    constructor(private announcementsService: AnnouncementsService, private route: ActivatedRoute) { }
 
     changeView(view: USER_PANEL_VIEW) {
         this.loading = true;
+        this.forbidden = false;
         let promise = null;
         switch (view) {
             case USER_PANEL_VIEW.VIEW_RECENT_FEED:
@@ -51,6 +54,7 @@ export class UserPanelComponent implements OnInit {
 
     ngOnInit() {
         this.changeView(this.selectedView);
+        this.forbidden = (this.route.snapshot.queryParamMap.has('forbidden'));
     }
 
 }

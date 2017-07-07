@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class CreateAccountFormComponent implements OnInit {
     public createAccountName: string = "";
     public createAccountEmail: string = "";
     public createAccountRank: string = null;
+    forbidden: boolean = false;
 
     public ranks = [
         {name: 'Superadmin', value: 0},
@@ -30,9 +32,10 @@ export class CreateAccountFormComponent implements OnInit {
         }
     }
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit() {
+        this.forbidden = (this.route.snapshot.queryParamMap.has('forbidden'));
     }
 
 }

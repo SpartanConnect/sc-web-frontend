@@ -1,4 +1,5 @@
 <div class="container container-tight">
+    <td-message *ngIf="forbidden" label="Access Error" sublabel="The page you were attempting to access is not available to unauthenticated users. Please login with a teacher's or an admin's Google account." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
     <h3>Mock Account Creation</h3>
     <p>Logging in normally with Google does not work as the current backend is not up yet. However, you can create a fake account here as a test instead.</p>
     <md-input-container>
