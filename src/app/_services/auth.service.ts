@@ -43,6 +43,10 @@ export class AuthService implements OnInit {
         return localStorage.getItem('authenticated') === '1';
     }
 
+    isAdministrator(): boolean {
+        return (localStorage.getItem('authenticated') === '1') && (parseInt(localStorage.getItem('userRank')) <= 2);
+    }
+
     ngOnInit() {
         // Set up local storage for first users.
         if (localStorage.getItem('authenticated') !== '1') {

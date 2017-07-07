@@ -31,11 +31,12 @@ import { UsersService } from './_services/users.service';
 import { AuthService } from './_services/auth.service';
 
 import { UserOnlyGuard } from './_guards/useronly.guard';
+import { AdminOnlyGuard } from './_guards/adminonly.guard';
 
 import 'hammerjs';
 
 const appRoutes: Routes = [
-  { path: 'admin', component: AdminPanelComponent },
+  { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
   { path: 'me', component: UserPanelComponent, canActivate: [UserOnlyGuard] },
   { path: 'me/create', component: CreateAnnouncementFormComponent, canActivate: [UserOnlyGuard] },
   { path: 'home', component: IndexViewComponent },
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
     TagsService,
     UsersService,
     AuthService,
-    UserOnlyGuard
+    UserOnlyGuard,
+    AdminOnlyGuard
   ],
   bootstrap: [AppComponent]
 })
