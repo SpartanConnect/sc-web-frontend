@@ -6,12 +6,14 @@ import {    MdInputModule, MdButtonModule,
             MdTooltipModule, MdSnackBarModule,
             MdIconModule, MdMenuModule,
             MdDialog, MdDialogModule,
-            MdSelectModule } from '@angular/material';
+            MdSelectModule, MdCardModule,
+            MdProgressSpinnerModule } from '@angular/material';
 import {    CovalentDataTableModule, CovalentPagingModule,
             CovalentCommonModule, CovalentSearchModule,
             CovalentMessageModule, TdDialogService,
             CovalentDialogsModule, TdLoadingService,
-            CovalentLoadingModule } from '@covalent/core';
+            CovalentLoadingModule, CovalentStepsModule,
+            CovalentNotificationsModule } from '@covalent/core';
 
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
@@ -33,6 +35,7 @@ import 'hammerjs';
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent },
   { path: 'me', component: UserPanelComponent },
+  { path: 'me/create', component: CreateAnnouncementFormComponent },
   { path: 'home', component: IndexViewComponent },
   { path: 'login/create', component: CreateAccountFormComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -62,6 +65,8 @@ const appRoutes: Routes = [
     MdMenuModule,
     MdDialogModule,
     MdSelectModule,
+    MdCardModule,
+    MdProgressSpinnerModule,
     CovalentDataTableModule,
     CovalentPagingModule,
     CovalentCommonModule,
@@ -69,6 +74,8 @@ const appRoutes: Routes = [
     CovalentMessageModule,
     CovalentDialogsModule,
     CovalentLoadingModule,
+    CovalentStepsModule,
+    CovalentNotificationsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
