@@ -71,19 +71,18 @@ export class AdminPanelComponent implements OnInit {
         this.setTableData([], this.announcementColumns);
         this.loadingService.register();
         // Load all of our data from our services.
-        this.announcementsService.getApprovedAnnouncements(0).then((data) => {
-            this.unapprovedAnnouncements = data;
-            this.announcementsService.getApprovedAnnouncements(1).then((data) => {
-                this.approvedAnnouncements = data;
-                this.tagsService.getVisibleTags().then((data) => {
-                    this.totalTags = data;
-                    this.usersService.getUsers().then((data) => {
-                        this.totalUsers = data;
-                        this.setTableData(this.unapprovedAnnouncements, this.announcementColumns);
-                        this.loadingService.resolve();
-                    });
-                });
-            });
+        Promise.all([
+            this.announcementsService.getApprovedAnnouncements(0),
+            this.announcementsService.getApprovedAnnouncements(1),
+            this.tagsService.getVisibleTags(),
+            this.usersService.getUsers()
+        ]).then((data) => {
+            this.unapprovedAnnouncements = data[0];
+            this.approvedAnnouncements = data[1];
+            this.totalTags = data[2];
+            this.totalUsers = data[3];
+            this.setTableData(this.unapprovedAnnouncements, this.announcementColumns);
+            this.loadingService.resolve();
         });
     }
 
