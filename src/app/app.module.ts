@@ -22,20 +22,22 @@ import { AnnouncementViewComponent } from './announcement-view/announcement-view
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
+import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
 
 import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
 import { UsersService } from './_services/users.service';
 import { AuthService } from './_services/auth.service';
-import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
-import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
+
+import { UserOnlyGuard } from './_guards/useronly.guard';
 
 import 'hammerjs';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent },
-  { path: 'me', component: UserPanelComponent },
-  { path: 'me/create', component: CreateAnnouncementFormComponent },
+  { path: 'me', component: UserPanelComponent, canActivate: [UserOnlyGuard] },
+  { path: 'me/create', component: CreateAnnouncementFormComponent, canActivate: [UserOnlyGuard] },
   { path: 'home', component: IndexViewComponent },
   { path: 'login/create', component: CreateAccountFormComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -85,7 +87,8 @@ const appRoutes: Routes = [
     AnnouncementsService,
     TagsService,
     UsersService,
-    AuthService
+    AuthService,
+    UserOnlyGuard
   ],
   bootstrap: [AppComponent]
 })
