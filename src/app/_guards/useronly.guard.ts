@@ -8,7 +8,7 @@ export class UserOnlyGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this.authService.isAuthenticated()) {
-            this.router.navigate(['/login/create']);
+            this.router.navigate(['/login/create'], {queryParams: {forbidden: true}});
         }
         return this.authService.isAuthenticated();
     }

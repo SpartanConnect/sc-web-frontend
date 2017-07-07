@@ -8,7 +8,7 @@ export class AdminOnlyGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this.authService.isAdministrator()) {
-            this.router.navigate(['/me']);
+            this.router.navigate(['/me'], {queryParams: {forbidden: true}});
         }
         return this.authService.isAdministrator();
     }
