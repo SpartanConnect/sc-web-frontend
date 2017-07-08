@@ -46,7 +46,16 @@
         <td-step #step3 label="Tags" sublabel="Categories and tags" [active]="stepNumber === 3" (activated)="setStepNumber(3)">
             <h3>Tags</h3>
             <!-- Error Message -->
-            <td-message *ngIf="stepError === 3" label="Warning" sublabel="Your announcement must contain at least one tag." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
+            <td-message *ngIf="stepError === 3" label="Warning" sublabel="Your announcement must contain at least one tag and one grade level." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
+            <td-chips
+                [chipAddition]="true"
+                [chipRemoval]="true"
+                [(ngModel)]="announcement.tagsStrings"
+                [items]="filteredTagsStrings"
+                (inputChange)="filterTags($event)"
+                placeholder="Click to add a tag..."
+                requireMatch>
+            </td-chips>
             <!-- Continue Button -->
             <ng-template td-step-actions>
                 <button md-raised-button (click)="addStepNumber(3)">CONTINUE</button>

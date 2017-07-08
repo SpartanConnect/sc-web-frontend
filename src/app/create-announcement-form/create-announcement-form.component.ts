@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../_services/auth.service';
+import { TagsService } from '../_services/tags.service';
+
+import { Tag } from '../models/tag';
 
 import * as moment from 'moment';
 
@@ -10,6 +13,8 @@ interface AnnouncementInput {
     startDate: any;
     endDate: any;
     creatorName: string;
+    tagsStrings: string[];
+    grades: number[];
 }
 
 @Component({
@@ -24,25 +29,28 @@ export class CreateAnnouncementFormComponent implements OnInit {
     submitted: boolean = false;
     success: boolean = false;
     loading: boolean = false;
-
+    allTags: Tag[] = [];
+    allTagsStrings: string[] = [];
+    filteredTags: Tag[] = [];
+    filteredTagsStrings: string[] = [];
 
     announcement: AnnouncementInput = {
         title: '',
         description: '',
         startDate: '',
         endDate: '',
-        creatorName: ''
+        creatorName: '',
+        tagsStrings: [],
+        grades: []
     }
 
     // Activates when a person clicks 'Continue'
     addStepNumber(step: number) {
-        console.log(this.stepNumber);
         if (!this.validateForm(step)) {
             this.stepError = step;
             return false;
         } else {
             this.stepError = 0;
-            console.log(this.stepNumber);
             this.setStepNumber(step + 1);
             return true;
         }
@@ -84,10 +92,34 @@ export class CreateAnnouncementFormComponent implements OnInit {
         }
     }
 
-    constructor(private authService: AuthService) { }
+    // Called when input changed
+    filterTags(val: string): void {
+        this.filteredTags = this.allTags.filter((tag: any) => {
+            if (val) {
+                return (tag.name.toLowerCase().indexOf(val.toLowerCase()) > -1) || (tag.slug.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            } else {
+                return true;        // don't filter anything
+            }
+        }).filter((filteredTag: any) => {
+            // Remove any tags from autocomplete that the user already selected
+            return this.announcement.tagsStrings ? (this.announcement.tagsStrings.indexOf(filteredTag.name) < 0) : true;
+        });
+        this.filteredTagsStrings = this.filteredTags.map((tag: Tag) => {
+            return tag.name;
+        })
+    }
+
+    constructor(private authService: AuthService, private tagsService: TagsService) { }
 
     ngOnInit() {
         this.announcement.creatorName = this.authService.getUser().userName;
+        this.tagsService.getVisibleTags().then((data) => {
+            this.allTags = data;
+            this.allTagsStrings = this.allTags.map((tag) => {
+                return tag.name;
+            });
+            this.filterTags('');
+        });
     }
 
 }
