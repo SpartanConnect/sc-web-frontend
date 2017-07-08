@@ -43,19 +43,36 @@
                 <button md-raised-button (click)="addStepNumber(2)">CONTINUE</button>
             </ng-template>
         </td-step>
-        <td-step #step3 label="Tags" sublabel="Categories and tags" [active]="stepNumber === 3" (activated)="setStepNumber(3)">
-            <h3>Tags</h3>
-            <!-- Error Message -->
-            <td-message *ngIf="stepError === 3" label="Warning" sublabel="Your announcement must contain at least one tag and one grade level." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
-            <td-chips
-                [chipAddition]="true"
-                [chipRemoval]="true"
-                [(ngModel)]="announcement.tagsStrings"
-                [items]="filteredTagsStrings"
-                (inputChange)="filterTags($event)"
-                placeholder="Click to add a tag..."
-                requireMatch>
-            </td-chips>
+        <td-step #step3 label="Tags" sublabel="Categories, tags, and grades" [active]="stepNumber === 3" (activated)="setStepNumber(3)">
+            <div class="step-three">
+                <h3>Tags</h3>
+                <!-- Error Message -->
+                <td-message *ngIf="stepError === 3" label="Warning" sublabel="Your announcement must contain at least one tag and one grade level." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
+                <td-chips
+                    [chipAddition]="true"
+                    [chipRemoval]="true"
+                    [(ngModel)]="announcement.tagsStrings"
+                    [items]="filteredTagsStrings"
+                    (inputChange)="filterTags($event)"
+                    placeholder="Click to add a tag..."
+                    requireMatch>
+                </td-chips>
+                <h3>Grades</h3>
+                <md-checkbox [(ngModel)]="announcement.grades.grade7">Grade 7</md-checkbox>
+                <md-checkbox [(ngModel)]="announcement.grades.grade8">Grade 8</md-checkbox>
+                <md-checkbox [(ngModel)]="announcement.grades.grade9">Grade 9</md-checkbox>
+                <md-checkbox [(ngModel)]="announcement.grades.grade10">Grade 10</md-checkbox>
+                <md-checkbox [(ngModel)]="announcement.grades.grade11">Grade 11</md-checkbox>
+                <md-checkbox [(ngModel)]="announcement.grades.grade12">Grade 12</md-checkbox>
+                <br><br>
+                <button md-button (click)="selectGrades('middle')">GRADES 7/8</button>
+                <button md-button (click)="selectGrades('high')">GRADES 9-12</button>
+                <button md-button (click)="selectGrades('all')" *ngIf="!selectGrades('hasAllSelected')">ALL GRADES</button>
+                <button md-button (click)="selectGrades('none')" *ngIf="selectGrades('hasAllSelected')">NO GRADES</button>
+                <br>
+                <h3>Miscellaneous</h3>
+                <md-checkbox [(ngModel)]="announcement.isUrgent">Tag as Urgent</md-checkbox>
+            </div>
             <!-- Continue Button -->
             <ng-template td-step-actions>
                 <button md-raised-button (click)="addStepNumber(3)">CONTINUE</button>

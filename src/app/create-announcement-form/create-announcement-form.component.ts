@@ -7,6 +7,15 @@ import { Tag } from '../models/tag';
 
 import * as moment from 'moment';
 
+interface AnnouncementGrades {
+    grade7: boolean;
+    grade8: boolean;
+    grade9: boolean;
+    grade10: boolean;
+    grade11: boolean;
+    grade12: boolean;
+}
+
 interface AnnouncementInput {
     title: string;
     description: string;
@@ -14,7 +23,8 @@ interface AnnouncementInput {
     endDate: any;
     creatorName: string;
     tagsStrings: string[];
-    grades: number[];
+    isUrgent: boolean;
+    grades: AnnouncementGrades;
 }
 
 @Component({
@@ -41,7 +51,15 @@ export class CreateAnnouncementFormComponent implements OnInit {
         endDate: '',
         creatorName: '',
         tagsStrings: [],
-        grades: []
+        isUrgent: false,
+        grades: {
+            grade7: false,
+            grade8: false,
+            grade9: false,
+            grade10: false,
+            grade11: false,
+            grade12: false
+        }
     }
 
     // Activates when a person clicks 'Continue'
@@ -107,6 +125,52 @@ export class CreateAnnouncementFormComponent implements OnInit {
         this.filteredTagsStrings = this.filteredTags.map((tag: Tag) => {
             return tag.name;
         })
+    }
+
+    // Select checkboxes
+    selectGrades(mode: string) {
+        switch (mode) {
+            case 'middle':
+                this.announcement.grades.grade7 = true;
+                this.announcement.grades.grade8 = true;
+                this.announcement.grades.grade9 = false;
+                this.announcement.grades.grade10 = false;
+                this.announcement.grades.grade11 = false;
+                this.announcement.grades.grade12 = false;
+                break;
+            case 'high':
+                this.announcement.grades.grade7 = false;
+                this.announcement.grades.grade8 = false;
+                this.announcement.grades.grade9 = true;
+                this.announcement.grades.grade10 = true;
+                this.announcement.grades.grade11 = true;
+                this.announcement.grades.grade12 = true;
+                break;
+            case 'all':
+                this.announcement.grades.grade7 = true;
+                this.announcement.grades.grade8 = true;
+                this.announcement.grades.grade9 = true;
+                this.announcement.grades.grade10 = true;
+                this.announcement.grades.grade11 = true;
+                this.announcement.grades.grade12 = true;
+                break;
+            case 'none':
+                this.announcement.grades.grade7 = false;
+                this.announcement.grades.grade8 = false;
+                this.announcement.grades.grade9 = false;
+                this.announcement.grades.grade10 = false;
+                this.announcement.grades.grade11 = false;
+                this.announcement.grades.grade12 = false;
+                break;
+            case 'hasAllSelected':
+                if (!this.announcement.grades.grade7) return false;
+                if (!this.announcement.grades.grade8) return false;
+                if (!this.announcement.grades.grade9) return false;
+                if (!this.announcement.grades.grade10) return false;
+                if (!this.announcement.grades.grade11) return false;
+                if (!this.announcement.grades.grade12) return false;
+                return true;
+        }
     }
 
     constructor(private authService: AuthService, private tagsService: TagsService) { }
