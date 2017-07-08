@@ -8,13 +8,13 @@ import {    MdInputModule, MdButtonModule,
             MdDialog, MdDialogModule,
             MdSelectModule, MdCardModule,
             MdProgressSpinnerModule, MdDatepickerModule,
-            MdNativeDateModule } from '@angular/material';
+            MdNativeDateModule, MdChipsModule } from '@angular/material';
 import {    CovalentDataTableModule, CovalentPagingModule,
             CovalentCommonModule, CovalentSearchModule,
             CovalentMessageModule, TdDialogService,
             CovalentDialogsModule, TdLoadingService,
             CovalentLoadingModule, CovalentStepsModule,
-            CovalentNotificationsModule } from '@covalent/core';
+            CovalentNotificationsModule, CovalentChipsModule } from '@covalent/core';
 
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
@@ -73,6 +73,7 @@ const appRoutes: Routes = [
     MdDatepickerModule,
     MdProgressSpinnerModule,
     MdNativeDateModule,
+    MdChipsModule,
     CovalentDataTableModule,
     CovalentPagingModule,
     CovalentCommonModule,
@@ -82,6 +83,7 @@ const appRoutes: Routes = [
     CovalentLoadingModule,
     CovalentStepsModule,
     CovalentNotificationsModule,
+    CovalentChipsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
