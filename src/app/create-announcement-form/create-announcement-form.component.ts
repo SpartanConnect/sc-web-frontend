@@ -64,11 +64,13 @@ export class CreateAnnouncementFormComponent implements OnInit {
 
     // Activates when a person clicks 'Continue'
     addStepNumber(step: number) {
+        console.log(this.stepNumber);
         if (!this.validateForm(step)) {
             this.stepError = step;
             return false;
         } else {
             this.stepError = 0;
+            console.log(this.stepNumber);
             this.setStepNumber(step + 1);
             return true;
         }
@@ -183,7 +185,7 @@ export class CreateAnnouncementFormComponent implements OnInit {
                 return tag.name;
             });
             this.filterTags('');
-        });
+        })
     }
 
 }
