@@ -71,7 +71,11 @@
                 <button md-button (click)="selectGrades('none')" *ngIf="selectGrades('hasAllSelected')">NO GRADES</button>
                 <br>
                 <h3>Miscellaneous</h3>
-                <md-checkbox [(ngModel)]="announcement.isUrgent">Tag as Urgent</md-checkbox>
+                <md-checkbox [(ngModel)]="announcement.isUrgent" (click)="confirmUrgency()">Tag as Urgent</md-checkbox><br>
+                <small style="display: block; margin-top: 15px;">
+                    The urgent tag should <i>only</i> be reserved for <b>critical</b> and <b>time-sensitive</b> notices. Once an urgent announcement is approved,
+                    an app notification will be sent out to all Spartan Connect users. Exercise caution before enabling this option.
+                </small>
             </div>
             <!-- Continue Button -->
             <ng-template td-step-actions>

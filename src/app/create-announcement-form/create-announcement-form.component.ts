@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
+import { TdDialogService } from '@covalent/core';
 
 import { AuthService } from '../_services/auth.service';
 import { TagsService } from '../_services/tags.service';
@@ -94,12 +96,16 @@ export class CreateAnnouncementFormComponent implements OnInit {
         else if (!moment(this.announcement.startDate.toString()).isValid() && (step === 2 || step === null)) return false;
         else if (!moment(this.announcement.endDate.toString()).isValid() && (step === 2 || step === null)) return false;
         else if (this.announcement.endDate < this.announcement.startDate && (step === 2 || step === null)) return false;
+        else if (!this.announcement.tagsStrings.length && (step === 3 || step === null)) return false;
+        else if (!this.selectGrades('hasAnySelected') && (step === 3 || step === null)) return false;
         else return true;
     }
 
     submitForm() {
         if (!this.validateForm()) {
-            alert("This form has not been fully completed. Please confirm that all fields are filled in correctly and try again.");
+            this.snackbar.open("This form has not been fully completed. Please confirm that all fields are filled in correctly and try again.", "DISMISS", {
+                duration: 5000
+            });
         } else {
             this.submitted = false;
             this.loading = true;
@@ -172,10 +178,34 @@ export class CreateAnnouncementFormComponent implements OnInit {
                 if (!this.announcement.grades.grade11) return false;
                 if (!this.announcement.grades.grade12) return false;
                 return true;
+            case 'hasAnySelected':
+                if (this.announcement.grades.grade7) return true;
+                if (this.announcement.grades.grade8) return true;
+                if (this.announcement.grades.grade9) return true;
+                if (this.announcement.grades.grade10) return true;
+                if (this.announcement.grades.grade11) return true;
+                if (this.announcement.grades.grade12) return true;
+                return false;
         }
     }
 
-    constructor(private authService: AuthService, private tagsService: TagsService) { }
+    confirmUrgency() {
+        this.dialogService.openConfirm({
+            disableClose: true,
+            title: "Don't cry wolf!",
+            message: "The urgent tag is only reserved for announcements that contain critical and time-sensitive information. By accepting this dialog, you agree that your announcement is indeed urgent."
+        }).afterClosed().subscribe((confirmed: boolean) => {
+            if (confirmed) {
+                this.snackbar.open("Your announcement is now marked as urgent.", "DISMISS", {
+                    duration: 5000
+                });
+            } else {
+                this.announcement.isUrgent = false;
+            }
+        });
+    }
+
+    constructor(private authService: AuthService, private tagsService: TagsService, private dialogService: TdDialogService, private snackbar: MdSnackBar) { }
 
     ngOnInit() {
         this.announcement.creatorName = this.authService.getUser().userName;
