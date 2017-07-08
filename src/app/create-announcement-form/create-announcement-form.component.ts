@@ -25,6 +25,7 @@ export class CreateAnnouncementFormComponent implements OnInit {
     success: boolean = false;
     loading: boolean = false;
 
+
     announcement: AnnouncementInput = {
         title: '',
         description: '',
@@ -33,6 +34,7 @@ export class CreateAnnouncementFormComponent implements OnInit {
         creatorName: ''
     }
 
+    // Activates when a person clicks 'Continue'
     addStepNumber(step: number) {
         console.log(this.stepNumber);
         if (!this.validateForm(step)) {
@@ -46,11 +48,17 @@ export class CreateAnnouncementFormComponent implements OnInit {
         }
     }
 
+    // Function used mainly to affirm that when a step is open,
+    // the step number in the DOM is set to the step number in this component code.
+    // Steppers do not handle two-way binding very well
+    // so this is the solution to that.
     setStepNumber(step: number) {
         this.stepNumber = step;
     }
 
-    // Validates the entire form or by step.
+    // Validates the entire form or "by step".
+    // Example: running w/o a parameter checks the entire form while
+    // running with a step number checks only that step.
     validateForm(step: number = null): boolean {
         if (this.announcement.title.length < 10 && (step === 1 || step === null)) return false;
         else if (this.announcement.description.length < 10 && (step === 1 || step === null)) return false;

@@ -21,7 +21,7 @@ export class UserPanelComponent implements OnInit {
 
     changeView(view: USER_PANEL_VIEW) {
         this.loading = true;
-        this.forbidden = false;
+        this.forbidden = false;                         // Stop showing the forbidden warning when changing views
         let promise = null;
         switch (view) {
             case USER_PANEL_VIEW.VIEW_RECENT_FEED:
@@ -44,7 +44,7 @@ export class UserPanelComponent implements OnInit {
                 alert("Invalid view change attempted. This is most likely a problem with the website's code.");
         }
 
-        this.selectedView = view;
+        this.selectedView = view;                       // Update side bar
 
         promise.then((data) => {
             this.selectedAnnouncements = data;
