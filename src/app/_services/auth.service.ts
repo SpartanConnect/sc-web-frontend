@@ -13,7 +13,7 @@ export class AuthService implements OnInit {
         localStorage.setItem('userHandle', userHandle);
     }
 
-    getUser(): object {
+    getUser() {
         if (localStorage.getItem('authenticated') !== '1') {
             localStorage.setItem('authenticated', '0');
         }

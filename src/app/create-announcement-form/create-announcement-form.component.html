@@ -1,3 +1,92 @@
-<p>
-  create-announcement-form works!
-</p>
+<div class="container container-tight" mode="vertical">
+    <td-message *ngIf="success"
+      label="Success"
+      sublabel="Your announcement has successfully been submitted for approval." color="green" icon="done" style="padding: 16px 5px;">
+      <button td-message-actions md-button routerLink="/me">RETURN TO USER PANEL</button>
+    </td-message>
+    <td-steps *ngIf="!success">
+      <td-step #step1 label="Basic Info" sublabel="Announcement title and description" [active]="stepNumber === 1" style="width:100%;" (activated)="setStepNumber(1)">
+          <h3>Basic Info</h3>
+          <!-- Error Message -->
+          <td-message *ngIf="stepError === 1"
+            label="Warning"
+            sublabel="Use at least 10 characters in your announcement title and description." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
+          <!-- Announcement inputs -->
+          <md-input-container>
+              <input mdInput required [(ngModel)]="announcement.title" placeholder="Title" style="width: 300px;"/>
+          </md-input-container><br>
+          <md-input-container>
+              <textarea mdInput required [(ngModel)]="announcement.description" placeholder="Description" style="width: 720px; height: 100px;"></textarea>
+          </md-input-container><br>
+          <!-- Continue Button -->
+          <ng-template td-step-actions>
+              <button md-raised-button (click)="addStepNumber(1)">CONTINUE</button>
+          </ng-template>
+      </td-step>
+      <td-step #step2 label="Display Dates" sublabel="Window of dates for the announcement to appear" [active]="stepNumber === 2" (activated)="setStepNumber(2)">
+          <h3>Dates</h3>
+          <!-- Error Message -->
+          <td-message *ngIf="stepError === 2"
+            label="Warning"
+            sublabel="Please select or input a valid start and end date. The start date must come before the end date." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
+          <!-- Date inputs -->
+          <md-input-container>
+              <input mdInput [mdDatepicker]="announceStartDate" placeholder="Start Date" [(ngModel)]="announcement.startDate">
+              <button mdSuffix [mdDatepickerToggle]="announceStartDate"></button>
+          </md-input-container>
+          <md-datepicker #announceStartDate></md-datepicker><br>
+          <md-input-container>
+              <input mdInput [mdDatepicker]="announceEndDate" placeholder="End Date" [(ngModel)]="announcement.endDate">
+              <button mdSuffix [mdDatepickerToggle]="announceEndDate"></button>
+          </md-input-container>
+          <md-datepicker #announceEndDate></md-datepicker>
+          <!-- Continue Button -->
+          <ng-template td-step-actions>
+              <button md-raised-button (click)="addStepNumber(2)">CONTINUE</button>
+          </ng-template>
+      </td-step>
+      <td-step #step3 label="Tags" sublabel="Categories and tags" [active]="stepNumber === 3" (activated)="setStepNumber(3)">
+          <h3>Tags</h3>
+          <!-- Error Message -->
+          <td-message *ngIf="stepError === 3"
+            label="Warning"
+            sublabel="Your announcement must contain at least one tag." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
+          <!-- Continue Button -->
+          <ng-template td-step-actions>
+              <button md-raised-button (click)="addStepNumber(3)">CONTINUE</button>
+          </ng-template>
+      </td-step>
+      <td-step #step4 label="Events" sublabel="Dates to attach to your announcement" [active]="stepNumber === 4" (activated)="setStepNumber(4)">
+          <h3>Events</h3>
+          <p>Events are currently a work-in-progress feature and are not available in this version of the web app.</p>
+          <!-- Continue Button -->
+          <ng-template td-step-actions>
+              <button md-raised-button (click)="addStepNumber(4)">CONTINUE</button>
+          </ng-template>
+      </td-step>
+      <td-step #step5 label="Confirmation" sublabel="Confirm your announcement" [active]="stepNumber === 5" (activated)="setStepNumber(5)">
+          <td-message label="Notice" sublabel="Please keep in mind that the current frontend does not retrieve any data from our backend API, which means that adding announcements do not currently work." color="blue" icon="warning" style="padding: 16px 5px;"></td-message>
+          <br>
+          <!-- Example Announcement -->
+          <md-card class="card-announcement">
+            <md-card-header>
+              <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
+              <md-card-title>{{announcement.creatorName}} (You)</md-card-title>
+              <md-card-subtitle>Displaying from {{announcement.startDate | date:'yMd'}} to {{announcement.endDate | date:'yMd'}}</md-card-subtitle>
+            </md-card-header>
+            <md-card-content>
+              <h3>{{announcement.title || "(no title...)"}}</h3>
+              <p>{{announcement.description || "(no description...)"}}</p>
+            </md-card-content>
+            <md-card-actions>
+                <button md-button>READ MORE</button>
+                <button md-button>EDIT</button>
+            </md-card-actions>
+          </md-card>
+          <!-- Continue Button -->
+          <ng-template td-step-actions>
+              <button md-raised-button (click)="submitForm()">SUBMIT</button>
+          </ng-template>
+      </td-step>
+    </td-steps>
+</div>
