@@ -43,6 +43,7 @@ const appRoutes: Routes = [
   { path: 'me', component: UserPanelComponent, canActivate: [UserOnlyGuard] },
   { path: 'me/create', component: CreateAnnouncementFormComponent, canActivate: [UserOnlyGuard], canDeactivate: [ConfirmLeaveGuard] },
   { path: 'home', component: IndexViewComponent },
+  { path: 'view/:id', component: AnnouncementViewComponent},
   { path: 'login/create', component: CreateAccountFormComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
