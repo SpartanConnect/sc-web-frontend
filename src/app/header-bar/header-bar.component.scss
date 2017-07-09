@@ -3,9 +3,10 @@
 @import 'src/spartan-theme.scss';
 
 header {
-  background-color: $gray-light-0;
+  background-color: $white;
   border-top: 15px solid mat-color($spartan-app-primary);
-  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid $gray-light-2;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
   box-sizing: border-box;
   height: 115px;
   margin: 0;
