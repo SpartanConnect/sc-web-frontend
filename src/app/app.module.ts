@@ -34,13 +34,14 @@ import { AuthService } from './_services/auth.service';
 
 import { UserOnlyGuard } from './_guards/useronly.guard';
 import { AdminOnlyGuard } from './_guards/adminonly.guard';
+import { ConfirmLeaveGuard } from './_guards/confirmleave.guard';
 
 import 'hammerjs';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
   { path: 'me', component: UserPanelComponent, canActivate: [UserOnlyGuard] },
-  { path: 'me/create', component: CreateAnnouncementFormComponent, canActivate: [UserOnlyGuard] },
+  { path: 'me/create', component: CreateAnnouncementFormComponent, canActivate: [UserOnlyGuard], canDeactivate: [ConfirmLeaveGuard] },
   { path: 'home', component: IndexViewComponent },
   { path: 'login/create', component: CreateAccountFormComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -97,7 +98,8 @@ const appRoutes: Routes = [
     UsersService,
     AuthService,
     UserOnlyGuard,
-    AdminOnlyGuard
+    AdminOnlyGuard,
+    ConfirmLeaveGuard
   ],
   bootstrap: [AppComponent]
 })

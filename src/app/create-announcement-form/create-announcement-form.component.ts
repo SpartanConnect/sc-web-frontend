@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 import { TdDialogService } from '@covalent/core';
 
 import { AuthService } from '../_services/auth.service';
 import { TagsService } from '../_services/tags.service';
+
+import { ConfirmLeaveGuard, ComponentCanDeactivate } from '../_guards/confirmleave.guard';
 
 import { Tag } from '../models/tag';
 
@@ -34,7 +36,7 @@ interface AnnouncementInput {
   templateUrl: './create-announcement-form.component.html',
   styleUrls: ['./create-announcement-form.component.scss']
 })
-export class CreateAnnouncementFormComponent implements OnInit {
+export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeactivate {
 
     stepNumber: number = 1;
     stepError: number = 0;
@@ -62,6 +64,12 @@ export class CreateAnnouncementFormComponent implements OnInit {
             grade11: false,
             grade12: false
         }
+    }
+
+    // Make it so you cannot deactivate this page.
+    @HostListener('window:beforeunload')
+    canDeactivate() {
+        return false;
     }
 
     // Activates when a person clicks 'Continue'

@@ -86,7 +86,7 @@ export const MOCK_TAGS: Tag[] = [
         id: 9,
         name: "Grade 10",
         slug: "grade-10",
-        visible: true,
+        visible: false,
         isCritical: true,
         minUserLevelAssign: 3,
         minUserLevelRequest: 3
