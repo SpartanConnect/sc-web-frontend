@@ -100,9 +100,12 @@
                     <md-card-title>{{announcement.creatorName}} (You)</md-card-title>
                     <md-card-subtitle>Displaying from {{(announcement.startDate | date:'yMd') || "(no start date)"}} to {{(announcement.endDate | date:'yMd') || "(no end date)"}}</md-card-subtitle>
                 </md-card-header>
-                <md-card-content>
+                <md-card-content style="margin-bottom: 0">
                     <h3>{{announcement.title || "(no title)"}}</h3>
                     <p>{{announcement.description || "(no description)"}}</p>
+                    <md-chip-list *ngIf="announcement.tagsStrings">
+                        <md-chip *ngFor="let tag of announcement.tagsStrings">{{tag}}</md-chip>
+                    </md-chip-list>
                 </md-card-content>
                 <md-card-actions>
                     <button md-button>READ MORE</button>

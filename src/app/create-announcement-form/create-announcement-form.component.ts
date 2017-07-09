@@ -69,7 +69,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     // Make it so you cannot deactivate this page.
     @HostListener('window:beforeunload')
     canDeactivate() {
-        return false;
+        return this.success;
     }
 
     // Activates when a person clicks 'Continue'
@@ -110,6 +110,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     }
 
     submitForm() {
+        window.scrollTo(0, 0);
         if (!this.validateForm()) {
             this.snackbar.open("This form has not been fully completed. Please confirm that all fields are filled in correctly and try again.", "DISMISS", {
                 duration: 5000

@@ -11,7 +11,7 @@ export class ConfirmLeaveGuard implements CanDeactivate<ComponentCanDeactivate> 
         if (component.canDeactivate()) {
             return true;
         } else {
-            confirm('Are you sure you want to navigate away from this page? Any unsaved changes will be lost.');
+            return confirm('Are you sure you want to navigate away from this page? Any unsaved changes will be lost.');
         }
     }
 }
