@@ -1,4 +1,8 @@
 @import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
+
+@import '~@covalent/markdown/markdown-theme';
+@import '~@covalent/highlight/highlight-theme';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -18,7 +22,27 @@ $spartan-app-warn:    mat-palette($mat-deep-orange);
 // Create the theme object (a Sass map containing all of the palettes).
 $spartan-app-theme:   mat-light-theme($spartan-app-primary, $spartan-app-accent, $spartan-app-warn);
 
+// Grays
+$white: #fff;
+$gray-light-0: #fdfdfd;
+$gray-light-1: #eaeaea;
+$gray-light-2: #dfdfdf;
+$gray-dark-2: #3a3a3a;
+$gray-dark-1: #1a1a1a;
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($spartan-app-theme);
+@include covalent-theme($spartan-app-theme);
+@include covalent-markdown-theme($spartan-app-theme);
+@include covalent-highlight-theme();
+
+// Color Attributes
+.color-text-primary {
+  color: mat-color($spartan-app-primary);
+}
+
+.color-text-accent {
+  color: mat-color($spartan-app-accent);
+}
