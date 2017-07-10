@@ -1,0 +1,61 @@
+<div class="container container-tight">
+    <div class="panel-user-left">
+        <button md-raised-button style="width: 100%" routerLink="/me/create">+ CREATE NEW ANNOUNCEMENT</button>
+        <nav class="panel-user-nav">
+            <hr>
+            <a  (click)="changeView(this.userPanelViews.VIEW_RECENT_FEED)"
+                [class.active]="this.selectedView === this.userPanelViews.VIEW_RECENT_FEED">
+                <span>Recent Feed</span>
+            </a>
+            <hr>
+            <a  (click)="changeView(this.userPanelViews.VIEW_APPROVED)"
+                [class.active]="this.selectedView === this.userPanelViews.VIEW_APPROVED">
+                <span>Approved</span>
+            </a>
+            <hr>
+            <a  (click)="changeView(this.userPanelViews.VIEW_PENDING)"
+                [class.active]="this.selectedView === this.userPanelViews.VIEW_PENDING">
+                <span>Pending</span>
+            </a>
+            <hr>
+            <a  (click)="changeView(this.userPanelViews.VIEW_DENIED)"
+                [class.active]="this.selectedView === this.userPanelViews.VIEW_DENIED">
+                <span>Denied</span>
+            </a>
+            <hr>
+            <a  (click)="changeView(this.userPanelViews.VIEW_ARCHIVED)"
+                [class.active]="this.selectedView === this.userPanelViews.VIEW_ARCHIVED">
+                <span>Removed</span>
+            </a>
+            <hr>
+        </nav>
+        <td-message label="Notice"
+            sublabel="Please keep in mind that the current frontend does not retrieve any data from our backend API, which means that all of the data you see here is not real."
+            color="blue" icon="warning" style="padding: 16px 5px;"></td-message>
+    </div>
+    <div class="panel-user-right">
+        <td-message *ngIf="forbidden"
+            label="Access Error"
+            sublabel="You do not have sufficient privileges to access this resource. Please contact an admin if this mistake was made in error."
+            color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
+        <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
+        <div *ngIf="!loading">
+            <td-message *ngIf="!selectedAnnouncements.length && !loading" label="Notice" sublabel="No announcements found." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
+            <md-card class="card-announcement" *ngFor="let announcement of selectedAnnouncements">
+                <md-card-header>
+                    <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
+                    <md-card-title>{{announcement.author}}</md-card-title>
+                    <md-card-subtitle>created this some time ago</md-card-subtitle>
+                </md-card-header>
+                <md-card-content>
+                    <h3>{{announcement.title}}</h3>
+                    <p>{{announcement.description}}</p>
+                </md-card-content>
+                <md-card-actions>
+                    <button md-button>READ MORE</button>
+                    <button md-button>EDIT</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
+</div>

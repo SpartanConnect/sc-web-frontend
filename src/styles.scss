@@ -1,0 +1,29 @@
+// You can add global styles to this file, and also import other style files
+
+body {
+  background-color: #eee;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  background-color: #eee;
+  margin-top: 115px;
+}
+
+.container {
+  padding-top: 40px;
+}
+
+.container-tight {
+  margin: 0 auto;
+  width: 960px;
+}
+
+.app-fab {
+  bottom: 40px;
+  display: block;
+  position: fixed !important;
+  right: 40px;
+}
