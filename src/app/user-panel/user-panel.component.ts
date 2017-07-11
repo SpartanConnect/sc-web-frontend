@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AnnouncementsService } from '../_services/announcements.service';
+import { Announcement } from '../models/announcement';
 import { USER_PANEL_VIEW } from '../models/userview';
 
 @Component({
@@ -47,6 +48,7 @@ export class UserPanelComponent implements OnInit {
         this.selectedView = view;                       // Update side bar
 
         promise.then((data) => {
+            console.log(this.selectedAnnouncements);
             this.selectedAnnouncements = data;
             this.loading = false;
         });

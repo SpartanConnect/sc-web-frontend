@@ -1,13 +1,22 @@
+interface PostCount {
+    approvedCount: number;
+    unapprovedCount: number;
+    deniedCount: number;
+    removedCount: number;
+    totalCount: number;
+}
+
 export class User {
     id: number;
     name: string;
     email: string;
     handle: string;
     rank: number;
+    postCount: number;
     lastLogin: Date;
 }
 
-export const MOCK_USERS: User[] = [
+/*export const MOCK_USERS: User[] = [
     {
         id: 1,
         name: "Zhang Caoli",
@@ -72,4 +81,4 @@ export const MOCK_USERS: User[] = [
         rank: 0,
         lastLogin: new Date(1984, 1, 13, 1, 0, 3)
     },
-];
+];*/

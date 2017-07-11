@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 
-import { User, MOCK_USERS } from '../models/user';
+import { User } from '../models/user';
+import { API_BASE } from '../models/api';
 
 // NOTICE: This does not contain any authentication code.
 // Instead, it simply provides easy access to user data.
@@ -25,7 +26,7 @@ export class UsersService implements OnInit {
     // TODO: Remove this and the announcements array.
     retrieveUsers(): Promise<User[]> {
         return new Promise((resolve) => {
-            this.users = MOCK_USERS;                            // Replace with HTTP GET
+            this.users = [];                            // Replace with HTTP GET
             setTimeout(() => {resolve(this.users)}, 1500);      // Artificial delay
         });
     }

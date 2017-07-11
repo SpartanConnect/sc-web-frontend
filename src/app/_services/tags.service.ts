@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 
-import { Tag, MOCK_TAGS } from '../models/tag';
+import { Tag } from '../models/tag';
+import { API_BASE } from '../models/api';
 
 @Injectable()
 export class TagsService implements OnInit {
@@ -32,7 +33,7 @@ export class TagsService implements OnInit {
     // TODO: Remove this and the tags array.
     retrieveTags(): Promise<Tag[]> {
         return new Promise((resolve) => {
-            this.tags = MOCK_TAGS;                              // Replace with HTTP GET
+            this.tags = [];                              // Replace with HTTP GET
             setTimeout(() => {resolve(this.tags)}, 1500);       // Artificial delay
         });
     }
