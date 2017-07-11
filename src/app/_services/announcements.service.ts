@@ -14,7 +14,9 @@ export class AnnouncementsService implements OnInit {
         let apiLink = `${API_BASE}/announcements`;
         return this.http.get(apiLink)
             .toPromise()
-            .then((data) => data.json() as Announcement[])
+            .then((data) => {
+                return data.json() as Announcement[]
+            })
             .catch((err) => {
                 console.log(err);
             });
@@ -24,17 +26,22 @@ export class AnnouncementsService implements OnInit {
         let apiLink = `${API_BASE}/announcements/current`;
         return this.http.get(apiLink)
             .toPromise()
-            .then((data) => data.json() as Announcement[])
+            .then((data) => {
+                return data.json() as Announcement[]
+            })
             .catch((err) => {
                 console.log(err);
             });
     }
 
     getApprovedAnnouncements(approved = 1): Promise<Announcement[]> {
-        let apiLink = `${API_BASE}/announcements?status={approved}`;
+        let apiLink = `${API_BASE}/announcements?status=${approved}`;
         return this.http.get(apiLink)
             .toPromise()
-            .then((data) => data.json() as Announcement[])
+            .then((data) => {
+                if (!data.json()) return [];
+                return data.json() as Announcement[]
+            })
             .catch((err) => {
                 console.log(err);
             });

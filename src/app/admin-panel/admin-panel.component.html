@@ -72,7 +72,7 @@
         >
         </td-data-table>
         <md-divider></md-divider>
-        <td-paging-bar #pagingBar [pageSizes]="[5, 10, 15, 20, 100, 200]" [total]="filteredTotal" (change)="page($event)">
+        <td-paging-bar #pagingBar [pageSizes]="[10, 15, 20, 100, 200]" [total]="filteredTotal" (change)="page($event)">
           <span td-paging-bar-label hide-xs>Row per page:</span>
           {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
         </td-paging-bar>
