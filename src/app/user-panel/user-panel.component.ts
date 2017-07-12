@@ -48,8 +48,10 @@ export class UserPanelComponent implements OnInit {
         this.selectedView = view;                       // Update side bar
 
         promise.then((data) => {
-            console.log(this.selectedAnnouncements);
             this.selectedAnnouncements = data;
+            this.selectedAnnouncements.sort((a, b) => {
+                return (new Date(b.timeSubmitted).getTime() - new Date(a.timeSubmitted).getTime());
+            });
             this.loading = false;
         });
     }
