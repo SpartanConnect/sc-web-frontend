@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AnnouncementsService } from '../_services/announcements.service';
-import { AuthService } from '../_services/auth.service';
-import { Announcement } from '../models/announcement';
 import { USER_PANEL_VIEW } from '../models/userview';
 
 @Component({
@@ -19,7 +17,7 @@ export class UserPanelComponent implements OnInit {
     selectedView = USER_PANEL_VIEW.VIEW_RECENT_FEED;
     userPanelViews = USER_PANEL_VIEW;
 
-    constructor(private announcementsService: AnnouncementsService, private route: ActivatedRoute, private authService: AuthService) { }
+    constructor(private announcementsService: AnnouncementsService, private route: ActivatedRoute) { }
 
     changeView(view: USER_PANEL_VIEW) {
         this.loading = true;
@@ -27,22 +25,22 @@ export class UserPanelComponent implements OnInit {
         let promise = null;
         switch (view) {
             case USER_PANEL_VIEW.VIEW_RECENT_FEED:
-                promise = this.announcementsService.getAnnouncements(this.authService.getUser().userId);
+                promise = this.announcementsService.getAnnouncements();
                 break;
             case USER_PANEL_VIEW.VIEW_APPROVED:
-                promise = this.announcementsService.getApprovedAnnouncements(1, this.authService.getUser().userId);
+                promise = this.announcementsService.getApprovedAnnouncements(1);
                 break;
             case USER_PANEL_VIEW.VIEW_PENDING:
-                promise = this.announcementsService.getApprovedAnnouncements(0, this.authService.getUser().userId);
+                promise = this.announcementsService.getApprovedAnnouncements(0);
                 break;
             case USER_PANEL_VIEW.VIEW_DENIED:
-                promise = this.announcementsService.getApprovedAnnouncements(2, this.authService.getUser().userId);
+                promise = this.announcementsService.getApprovedAnnouncements(2);
                 break;
             case USER_PANEL_VIEW.VIEW_ARCHIVED:
-                promise = this.announcementsService.getApprovedAnnouncements(3, this.authService.getUser().userId);
+                promise = this.announcementsService.getApprovedAnnouncements(3);
                 break;
             default:
-                promise = this.announcementsService.getAnnouncements(this.authService.getUser().userId);
+                promise = this.announcementsService.getAnnouncements();
                 alert("Invalid view change attempted. This is most likely a problem with the website's code.");
         }
 
@@ -50,9 +48,6 @@ export class UserPanelComponent implements OnInit {
 
         promise.then((data) => {
             this.selectedAnnouncements = data;
-            this.selectedAnnouncements.sort((a, b) => {
-                return (new Date(b.timeSubmitted).getTime() - new Date(a.timeSubmitted).getTime());
-            });
             this.loading = false;
         });
     }

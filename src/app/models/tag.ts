@@ -2,15 +2,13 @@ export class Tag {
     id: number;
     name: string;
     slug: string;
-    visibility: boolean;
+    visible: boolean;
     minUserLevelAssign: number;
     minUserLevelRequest: number;
     parentId?: number;
     isCritical: boolean;
-    color?: boolean;
 };
 
-/*
 export const MOCK_TAGS: Tag[] = [
     {
         id: 1,
@@ -129,4 +127,4 @@ export const MOCK_TAGS: Tag[] = [
         minUserLevelAssign: 3,
         minUserLevelRequest: 3
     }
-];*/
+];

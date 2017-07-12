@@ -1,8 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Headers, Http } from '@angular/http';
 
-import { User } from '../models/user';
-import { API_BASE, httpHandler } from '../models/api';
+import { User, MOCK_USERS } from '../models/user';
 
 // NOTICE: This does not contain any authentication code.
 // Instead, it simply provides easy access to user data.
@@ -16,13 +14,26 @@ export class UsersService implements OnInit {
 
     // Exposed getters for other components to use
     getUsers(): Promise<User[]> {
-        let apiLink = `${API_BASE}/users`;
-        return httpHandler(this.http, apiLink);
+        return new Promise((resolve) => {
+            this.retrieveUsers().then(() => {
+                resolve(this.users);
+            });
+        });
     }
 
-    constructor(private http: Http) { }
+    // Refreshing the service itself with new announcements
+    // TODO: Remove this and the announcements array.
+    retrieveUsers(): Promise<User[]> {
+        return new Promise((resolve) => {
+            this.users = MOCK_USERS;                            // Replace with HTTP GET
+            setTimeout(() => {resolve(this.users)}, 1500);      // Artificial delay
+        });
+    }
+
+    constructor() { }
 
     ngOnInit() {
+        this.retrieveUsers();
     }
 
 }
