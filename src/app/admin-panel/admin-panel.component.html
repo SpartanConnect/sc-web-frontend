@@ -2,8 +2,7 @@
     <div>
         <h3 style="display: block; margin: 12px 0;">Admin Panel</h3>
     </div>
-    <td-message label="Notice" sublabel="Please keep in mind that the current frontend does not retrieve any data from our backend API, which means that all of the data you see here is not real." color="blue" icon="warning" style="padding: 16px 5px;"></td-message>
-    <br>
+    <td-message *ngIf="!filteredTotal" label="Notice" sublabel="No rows returned from database (empty set)." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
     <md-divider></md-divider>
     <div style="max-width: 960px;">
         <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" style="width: 100%;">
