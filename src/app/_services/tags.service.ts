@@ -1,8 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Headers, Http } from '@angular/http';
 
-import { Tag } from '../models/tag';
-import { API_BASE, httpHandler } from '../models/api';
+import { Tag, MOCK_TAGS } from '../models/tag';
 
 @Injectable()
 export class TagsService implements OnInit {
@@ -11,8 +9,11 @@ export class TagsService implements OnInit {
 
     // Exposed getters for other components to use
     getTags(): Promise<Tag[]> {
-        let apiLink = `${API_BASE}/tags`;
-        return httpHandler(this.http, apiLink);
+        return new Promise((resolve) => {
+            this.retrieveTags().then(() => {
+                resolve(this.tags);
+            });
+        });
     }
 
     // This is an additional function that doesn't serve any other purpose
@@ -20,12 +21,26 @@ export class TagsService implements OnInit {
     // If this serves any use, keep it.
     // IDEA: Delete this and incorporate it into getTags.
     getVisibleTags(): Promise<Tag[]> {
-        let apiLink = `${API_BASE}/tags?visibility=1`;
-        return httpHandler(this.http, apiLink);
+        return new Promise((resolve) => {
+            this.retrieveTags().then(() => {
+                resolve(this.tags.filter((tag) => tag.visible));
+            });
+        });
     }
 
-    constructor(private http: Http) { }
+    // Refreshing the service itself with new tags
+    // TODO: Remove this and the tags array.
+    retrieveTags(): Promise<Tag[]> {
+        return new Promise((resolve) => {
+            this.tags = MOCK_TAGS;                              // Replace with HTTP GET
+            setTimeout(() => {resolve(this.tags)}, 1500);       // Artificial delay
+        });
+    }
 
-    ngOnInit() {}
+    constructor() { }
+
+    ngOnInit() {
+        this.retrieveTags();
+    }
 
 }

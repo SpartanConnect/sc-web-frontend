@@ -1,31 +1,23 @@
-import {User} from './user';
-import {Tag} from './tag';
-
 export class Announcement {
     id: number;
     title: string;
     description: string;
-
+    creatorId: number;
+    approverId: number;
     startDate: Date;
     endDate: Date;
-
-    timeSubmitted: Date;
-    timeApproved: Date;
-    timeEdited: Date;
-
     urgent: boolean;
-    status: number;
-
-    creator: User;
-    admin: User;
-
-    tags: Tag[];
+    approved: number;
+    timeSubmitted: string;
+    timeApproved: string;
+    timeEdited: string;
+    author: string;             // This should come with the backend
+    tagsString: string;         // This should come with the backend
 };
 
 // Temporary array of mock announcements
 // In the future, we want a service that retrieves it from our API and
 // converts it to an Announcement object
-/*
 export const MOCK_ANNOUNCEMENTS: Announcement[] = [
     {
         id: 1,
@@ -36,7 +28,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 0,
+        approved: 0,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -52,7 +44,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 0,
+        approved: 0,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -68,7 +60,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 0,
+        approved: 0,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -84,7 +76,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 0,
+        approved: 0,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -100,7 +92,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 0,
+        approved: 0,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -116,7 +108,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 0,
+        approved: 0,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -132,7 +124,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 0,
+        approved: 0,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -148,7 +140,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 1,
+        approved: 1,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -164,7 +156,7 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         startDate: new Date("2017-04-30"),
         endDate: new Date("2017-08-31"),
         urgent: false,
-        status: 1,
+        approved: 1,
         timeSubmitted: "2017-03-31 05:06:01",
         timeApproved: "2017-03-31 05:06:01",
         timeEdited: "2017-03-31 05:06:01",
@@ -172,4 +164,3 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
         tagsString: "Clubs",
     }
 ];
-*/
