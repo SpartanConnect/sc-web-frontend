@@ -36,7 +36,7 @@ export class AdminPanelComponent implements OnInit {
 
     fromRow: number = 1;
     currentPage: number = 1;
-    pageSize: number = 5;
+    pageSize: number = 10;
     searchTerm: string = "";
     filteredData: any[] = this.selectedData;
     filteredTotal: number = this.selectedData.length;
