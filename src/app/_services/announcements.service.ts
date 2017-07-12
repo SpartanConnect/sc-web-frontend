@@ -10,8 +10,9 @@ import 'rxjs/add/operator/toPromise';
 export class AnnouncementsService implements OnInit {
 
     // Exposed getters for other components to use
-    getAnnouncements(): Promise<Announcement[]> {
+    getAnnouncements(userId: number = null): Promise<Announcement[]> {
         let apiLink = `${API_BASE}/announcements`;
+        if (userId !== null) apiLink += `?creatorId=${userId}`;
         return this.http.get(apiLink)
             .toPromise()
             .then((data) => {
@@ -22,8 +23,9 @@ export class AnnouncementsService implements OnInit {
             });
     }
 
-    getCurrentAnnouncements(): Promise<Announcement[]> {
+    getCurrentAnnouncements(userId: number = null): Promise<Announcement[]> {
         let apiLink = `${API_BASE}/announcements/current`;
+        if (userId !== null) apiLink += `?creatorId=${userId}`;
         return this.http.get(apiLink)
             .toPromise()
             .then((data) => {
@@ -34,8 +36,9 @@ export class AnnouncementsService implements OnInit {
             });
     }
 
-    getApprovedAnnouncements(approved = 1): Promise<Announcement[]> {
+    getApprovedAnnouncements(approved = 1, userId: number = null): Promise<Announcement[]> {
         let apiLink = `${API_BASE}/announcements?status=${approved}`;
+        if (userId !== null) apiLink += `&creatorId=${userId}`;
         return this.http.get(apiLink)
             .toPromise()
             .then((data) => {

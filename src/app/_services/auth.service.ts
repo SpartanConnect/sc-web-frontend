@@ -6,7 +6,7 @@ export class AuthService implements OnInit {
 
     initUser(userEmail, userName, userRank, userHandle): void {
         localStorage.setItem('authenticated', '1');
-        localStorage.setItem('userId', '20');
+        localStorage.setItem('userId', '2');
         localStorage.setItem('userEmail', userEmail);
         localStorage.setItem('userName', userName);
         localStorage.setItem('userRank', userRank);

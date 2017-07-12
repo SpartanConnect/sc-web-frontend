@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AnnouncementsService } from '../_services/announcements.service';
+import { AuthService } from '../_services/auth.service';
 import { Announcement } from '../models/announcement';
 import { USER_PANEL_VIEW } from '../models/userview';
 
@@ -18,7 +19,7 @@ export class UserPanelComponent implements OnInit {
     selectedView = USER_PANEL_VIEW.VIEW_RECENT_FEED;
     userPanelViews = USER_PANEL_VIEW;
 
-    constructor(private announcementsService: AnnouncementsService, private route: ActivatedRoute) { }
+    constructor(private announcementsService: AnnouncementsService, private route: ActivatedRoute, private authService: AuthService) { }
 
     changeView(view: USER_PANEL_VIEW) {
         this.loading = true;
@@ -26,22 +27,22 @@ export class UserPanelComponent implements OnInit {
         let promise = null;
         switch (view) {
             case USER_PANEL_VIEW.VIEW_RECENT_FEED:
-                promise = this.announcementsService.getAnnouncements();
+                promise = this.announcementsService.getAnnouncements(this.authService.getUser().userId);
                 break;
             case USER_PANEL_VIEW.VIEW_APPROVED:
-                promise = this.announcementsService.getApprovedAnnouncements(1);
+                promise = this.announcementsService.getApprovedAnnouncements(1, this.authService.getUser().userId);
                 break;
             case USER_PANEL_VIEW.VIEW_PENDING:
-                promise = this.announcementsService.getApprovedAnnouncements(0);
+                promise = this.announcementsService.getApprovedAnnouncements(0, this.authService.getUser().userId);
                 break;
             case USER_PANEL_VIEW.VIEW_DENIED:
-                promise = this.announcementsService.getApprovedAnnouncements(2);
+                promise = this.announcementsService.getApprovedAnnouncements(2, this.authService.getUser().userId);
                 break;
             case USER_PANEL_VIEW.VIEW_ARCHIVED:
-                promise = this.announcementsService.getApprovedAnnouncements(3);
+                promise = this.announcementsService.getApprovedAnnouncements(3, this.authService.getUser().userId);
                 break;
             default:
-                promise = this.announcementsService.getAnnouncements();
+                promise = this.announcementsService.getAnnouncements(this.authService.getUser().userId);
                 alert("Invalid view change attempted. This is most likely a problem with the website's code.");
         }
 
