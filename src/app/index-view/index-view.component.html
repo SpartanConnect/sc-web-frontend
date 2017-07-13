@@ -1,17 +1,27 @@
-<div style="container container-tight">
+<div class="container index-head" *ngIf="announcementHighlight">
+    <div class="index-head-focus">
+        <div class="index-head-highlight">
+            <h1>{{announcementHighlight.title}}</h1>
+            <p>{{announcementHighlight.description}}</p>
+        </div>
+    </div>
+    <ul class="index-head-list">
+        <li *ngFor="let announcement of announcementsSliced" [routerLink]="['/view', announcement.id]">{{announcement.title}}</li>
+    </ul>
+</div>
+<div class="container index-body">
     <md-card class="card-announcement" *ngFor="let announcement of announcements">
         <md-card-header>
             <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
-            <md-card-title>{{announcement.author}}</md-card-title>
-            <md-card-subtitle>created this some time ago</md-card-subtitle>
+            <md-card-title>{{announcement.creator.name}}</md-card-title>
+            <md-card-subtitle>created on {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
         </md-card-header>
         <md-card-content>
             <h3>{{announcement.title}}</h3>
             <p>{{announcement.description}}</p>
         </md-card-content>
         <md-card-actions>
-            <button md-button>READ MORE</button>
-            <button md-button>EDIT</button>
+            <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
         </md-card-actions>
     </md-card>
 </div>

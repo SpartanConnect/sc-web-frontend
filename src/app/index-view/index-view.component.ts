@@ -14,16 +14,14 @@ export class IndexViewComponent implements OnInit {
   constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService) { }
 
   announcements: Announcement[] = [];
-
-  openDialog(appName) {
-    this.snackBar.open("HEY! THIS '"+appName+"' IS THE BEST!", "Go Away, Sir", {
-      duration: 5000,
-    });
-  }
+  announcementsSliced: Announcement[] = [];
+  announcementHighlight: Announcement = null;
 
   ngOnInit() {
       this.announcementsService.getCurrentAnnouncements().then((data) => {
           this.announcements = data;
+          this.announcementsSliced = this.announcements.slice(0, 8);
+          this.announcementHighlight = this.announcements[0];
       });
   }
 
