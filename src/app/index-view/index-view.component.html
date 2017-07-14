@@ -15,7 +15,7 @@
         <h3 class="heading">Categories</h3>
         <ul class="index-body-categories-list">
             <li *ngFor="let category of categories" (click)="switchCategoryFilter(category.id)" [class.active]="categoryFilter === category.id">{{category.name}}</li>
-            <li *ngIf="categoryFilter" (click)="switchCategoryFilter(0)">All</li>
+            <li *ngIf="categoryFilter" (click)="switchCategoryFilter(0)">View All</li>
         </ul>
     </div>
     
