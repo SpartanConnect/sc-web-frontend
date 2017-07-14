@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 
 import { AnnouncementsService } from '../_services/announcements.service';
+import { TagsService } from '../_services/tags.service';
 import { Announcement } from '../models/announcement';
+import { Tag } from '../models/tag';
 
 @Component({
   selector: 'app-index-view',
@@ -11,17 +13,41 @@ import { Announcement } from '../models/announcement';
 })
 export class IndexViewComponent implements OnInit {
 
-  constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService) { }
+  announcements: Announcement[] = [];             // All announcements
+  announcementsSliced: Announcement[] = [];       // The header's first eight announcements
+  announcementHighlight: Announcement = null;     // The first announcement
+  categories: Tag[] = [];                         // All categories
+  categoryFilter = 0;                             // The current category selected.
+  sortedAnnouncements = {};                       // An assoc object.
 
-  announcements: Announcement[] = [];
-  announcementsSliced: Announcement[] = [];
-  announcementHighlight: Announcement = null;
+  constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService, private tagsService: TagsService) { }  
+
+  switchCategoryFilter(id: number) {
+      this.categoryFilter = id;
+  }
 
   ngOnInit() {
-      this.announcementsService.getCurrentAnnouncements().then((data) => {
+      const announcementPromise = this.announcementsService.getCurrentAnnouncements().then((data) => {
           this.announcements = data;
           this.announcementsSliced = this.announcements.slice(0, 8);
           this.announcementHighlight = this.announcements[0];
+      });
+      const tagsPromise = this.tagsService.getCategories().then((data) => {
+          this.categories = data;
+          this.categories.map((category) => {
+              this.sortedAnnouncements[category.slug] = [];
+          });
+      });
+
+      Promise.all([announcementPromise, tagsPromise]).then(() => {
+          this.announcements.map((announcement) => {
+              announcement.tags.map((tag) => {
+                  if (tag.parentId !== null) { return false; };
+                  this.sortedAnnouncements[tag.slug].push(announcement);
+                  return true;
+              });
+          });
+          console.log(this.sortedAnnouncements);
       });
   }
 

@@ -15,25 +15,34 @@
         <h3 class="heading">Categories</h3>
         <ul class="index-body-categories-list">
             <!-- Replace with categories -->
-            <li *ngIf="categoryFilter">Go Back</li>
-            <li *ngFor="let announcement of announcementsSliced">{{announcement.title}}</li>
+            <li *ngFor="let category of categories" (click)="switchCategoryFilter(category.id)" [class.active]="categoryFilter === category.id">{{category.name}}</li>
+            <li *ngIf="categoryFilter" (click)="switchCategoryFilter(0)">Go Back</li>
         </ul>
     </div>
     
     <div class="index-body-announcements">
-        <md-card class="card-announcement" *ngFor="let announcement of announcements">
-            <md-card-header>
-                <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
-                <md-card-title>{{announcement.creator.name}}</md-card-title>
-                <md-card-subtitle>created on {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
-                <h3>{{announcement.title}}</h3>
-                <p>{{announcement.description}}</p>
-            </md-card-content>
-            <md-card-actions>
-                <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
-            </md-card-actions>
-        </md-card>
+        <div *ngFor="let category of categories">
+            <div *ngIf="!sortedAnnouncements[category.slug].length && category.id === categoryFilter">
+                <br>
+                <td-message *ngIf="!sortedAnnouncements[category.slug].length && category.id === categoryFilter" label="Notice" sublabel="Could not find an announcement with the selected category. Please try again by selecting another category." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
+            </div>
+            <div *ngIf="(category.id === categoryFilter || !categoryFilter) && sortedAnnouncements[category.slug].length">
+                <h2 style="padding: 10px 20px;">{{category.name}}</h2>
+                <md-card class="card-announcement" *ngFor="let announcement of sortedAnnouncements[category.slug]">
+                    <md-card-header>
+                        <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
+                        <md-card-title>{{announcement.creator.name}}</md-card-title>
+                        <md-card-subtitle>created on {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        <h3>{{announcement.title}}</h3>
+                        <p>{{announcement.description}}</p>
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
     </div>
 </div>

@@ -81,6 +81,7 @@
     flex-grow: 1;
     height: 100%;
     margin: 10px 10px;
+    width: 250px;
     
     ul {
       background-color: mat-color($spartan-app-primary);
@@ -88,6 +89,7 @@
       flex-direction: column;
       list-style: none;
       margin: 0;
+      width: 250px;
       padding: 0;
 
       li {
@@ -127,7 +129,9 @@ a.small {
 
 h3.heading {
   border-bottom: 8px solid mat-color($spartan-app-accent);
-  display: inline-block;
+  box-sizing: border-box;
+  display: block;
   margin: 10px 0;
-  padding: 10px 10px;
+  max-width: 250px;
+  padding: 10px 50px 10px 20px;
 }
