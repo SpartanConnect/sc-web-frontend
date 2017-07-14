@@ -13,16 +13,19 @@
   width: 100%;
 }
 
+// Highlighted announcement
 .index-head-focus {
   background-color: #d8d8d8;
+  background-image: url('../../assets/AnnouncementDefault.png');
   display: inline-block;
   height: 320px;
   margin: 0 15px;
   position: relative;
   width: 540px;
 
+  // Text in highlighted announcement
   .index-head-highlight {
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,.7);
     bottom: 0;
     box-sizing: border-box;
     padding: 20px;
