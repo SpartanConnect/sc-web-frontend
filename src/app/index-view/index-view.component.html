@@ -1,8 +1,9 @@
 <div class="container index-head" *ngIf="announcementHighlight">
     <div class="index-head-focus">
         <div class="index-head-highlight">
-            <h1>{{announcementHighlight.title}}</h1>
+            <h1 [routerLink]="['/view', announcementHighlight.id]">{{announcementHighlight.title}}</h1>
             <p>{{announcementHighlight.description}}</p>
+            <a class="small" [routerLink]="['/view', announcementHighlight.id]">READ MORE</a>
         </div>
     </div>
     <ul class="index-head-list">
@@ -10,18 +11,29 @@
     </ul>
 </div>
 <div class="container index-body">
-    <md-card class="card-announcement" *ngFor="let announcement of announcements">
-        <md-card-header>
-            <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
-            <md-card-title>{{announcement.creator.name}}</md-card-title>
-            <md-card-subtitle>created on {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
-        </md-card-header>
-        <md-card-content>
-            <h3>{{announcement.title}}</h3>
-            <p>{{announcement.description}}</p>
-        </md-card-content>
-        <md-card-actions>
-            <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
-        </md-card-actions>
-    </md-card>
+    <div class="index-body-categories">
+        <h3 class="heading">Categories</h3>
+        <ul class="index-body-categories-list">
+            <!-- Replace with categories -->
+            <li *ngIf="categoryFilter">Go Back</li>
+            <li *ngFor="let announcement of announcementsSliced">{{announcement.title}}</li>
+        </ul>
+    </div>
+    
+    <div class="index-body-announcements">
+        <md-card class="card-announcement" *ngFor="let announcement of announcements">
+            <md-card-header>
+                <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
+                <md-card-title>{{announcement.creator.name}}</md-card-title>
+                <md-card-subtitle>created on {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
+            </md-card-header>
+            <md-card-content>
+                <h3>{{announcement.title}}</h3>
+                <p>{{announcement.description}}</p>
+            </md-card-content>
+            <md-card-actions>
+                <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
+            </md-card-actions>
+        </md-card>
+    </div>
 </div>

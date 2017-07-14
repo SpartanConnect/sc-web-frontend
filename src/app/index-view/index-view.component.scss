@@ -1,3 +1,7 @@
+// Import Material theme
+@import '~@angular/material/theming';
+@import 'src/spartan-theme.scss';
+
 .index-head {
   background-color: #252525;
   box-sizing: border-box;
@@ -24,6 +28,16 @@
     padding: 20px;
     position: absolute;
     width: 540px;
+
+    h1 {
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
@@ -52,4 +66,68 @@
     background-color: #1f1f1f;
     text-decoration: underline;
   }
+}
+
+.index-body {
+  max-width: 1080px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+
+  .index-body-categories {
+    display: inline-flex;
+    flex-basis: 20vw;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    margin: 10px 10px;
+    
+    ul {
+      background-color: mat-color($spartan-app-primary);
+      display: inline-flex;
+      flex-direction: column;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        box-sizing: border-box;
+        color: #fff;
+        height: 50px;
+        margin: 0;
+        padding: 15px 15px;
+        vertical-align: middle;
+
+        &.active, &:hover {
+          background-color: mat-color($spartan-app-accent);
+          color: #222;
+          cursor: pointer;
+        }
+      }
+    }
+    
+  }
+  
+  .index-body-announcements {
+    display: inline-flex;
+    flex-direction: column;
+    flex-grow: 2;
+  }
+}
+
+a.small {
+  color: #fff;
+  font-size: 0.75em;
+  text-decoration: none;
+
+  &:active { color: #fff; }
+  &:hover { text-decoration: underline; }
+  &:visited { color: #fff; }
+}
+
+h3.heading {
+  border-bottom: 8px solid mat-color($spartan-app-accent);
+  display: inline-block;
+  margin: 10px 0;
+  padding: 10px 10px;
 }
