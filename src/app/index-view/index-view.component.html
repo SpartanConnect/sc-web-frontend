@@ -14,9 +14,8 @@
     <div class="index-body-categories">
         <h3 class="heading">Categories</h3>
         <ul class="index-body-categories-list">
-            <!-- Replace with categories -->
             <li *ngFor="let category of categories" (click)="switchCategoryFilter(category.id)" [class.active]="categoryFilter === category.id">{{category.name}}</li>
-            <li *ngIf="categoryFilter" (click)="switchCategoryFilter(0)">Go Back</li>
+            <li *ngIf="categoryFilter" (click)="switchCategoryFilter(0)">All</li>
         </ul>
     </div>
     
@@ -37,6 +36,9 @@
                     <md-card-content>
                         <h3>{{announcement.title}}</h3>
                         <p>{{announcement.description}}</p>
+                        <md-chip-list *ngIf="announcement.tags">
+                            <md-chip *ngFor="let tag of announcement.tags">{{tag.name}} (#{{tag.slug}})</md-chip>
+                        </md-chip-list>
                     </md-card-content>
                     <md-card-actions>
                         <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
