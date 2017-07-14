@@ -47,7 +47,6 @@ export class IndexViewComponent implements OnInit {
                   return true;
               });
           });
-          console.log(this.sortedAnnouncements);
       });
   }
 
