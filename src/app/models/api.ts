@@ -1,6 +1,6 @@
 import { Headers, Http } from '@angular/http';
 
-export const API_BASE = "https://apisc.encadyma.com/";
+export const API_BASE = "https://apisc.encadyma.com";
 
 export function httpHandler(http, apiLink) {
     return http.get(apiLink)
