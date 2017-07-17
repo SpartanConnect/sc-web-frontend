@@ -1,3 +1,16 @@
-<p>
-  announcement-view works!
-</p>
+<div class="container container-tight">
+    <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
+    <md-card class="card-announcement" *ngIf="announcement">
+        <md-card-header>
+            <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
+            <md-card-title>{{announcement.creator.name}}</md-card-title>
+            <md-card-subtitle>created this {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+            <h3>{{announcement.title}}</h3>
+            <p>{{announcement.description}}</p>
+        </md-card-content>
+    </md-card>
+    <br>
+    <button md-button routerLink="/home">RETURN TO HOME PAGE</button>
+</div>

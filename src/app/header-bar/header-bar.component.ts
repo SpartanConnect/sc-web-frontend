@@ -15,6 +15,7 @@ export class HeaderBarComponent {
     constructor(private authService: AuthService, private router: Router) { }
 
     redirectToHome() {
+        window.scrollTo(0, 0);
         this.router.navigate(['/home']);
     }
 

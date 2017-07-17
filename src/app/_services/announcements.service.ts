@@ -12,7 +12,7 @@ export class AnnouncementsService implements OnInit {
     // Exposed getters for other components to use
     getAnnouncements(userId: number = null): Promise<Announcement[]> {
         let apiLink = `${API_BASE}/announcements`;
-        if (userId !== null) apiLink += `?creatorId=${userId}`;
+        if (userId !== null) { apiLink += `?creatorId=${userId}`; }
         return this.http.get(apiLink)
             .toPromise()
             .then((data) => {
@@ -23,9 +23,21 @@ export class AnnouncementsService implements OnInit {
             });
     }
 
+    getAnnouncementById(id: number): Promise<Announcement> {
+        let apiLink = `${API_BASE}/announcements/${id}`;
+        return this.http.get(apiLink)
+            .toPromise()
+            .then((data) => {
+                return data.json()[0] as Announcement
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     getCurrentAnnouncements(userId: number = null): Promise<Announcement[]> {
         let apiLink = `${API_BASE}/announcements/current`;
-        if (userId !== null) apiLink += `?creatorId=${userId}`;
+        if (userId !== null) { apiLink += `?creatorId=${userId}`; }
         return this.http.get(apiLink)
             .toPromise()
             .then((data) => {
@@ -38,7 +50,7 @@ export class AnnouncementsService implements OnInit {
 
     getApprovedAnnouncements(approved = 1, userId: number = null): Promise<Announcement[]> {
         let apiLink = `${API_BASE}/announcements?status=${approved}`;
-        if (userId !== null) apiLink += `&creatorId=${userId}`;
+        if (userId !== null) { apiLink += `&creatorId=${userId}`; }
         return this.http.get(apiLink)
             .toPromise()
             .then((data) => {
