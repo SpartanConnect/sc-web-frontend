@@ -26,7 +26,7 @@ export class CreateAccountFormComponent implements OnInit {
         if (this.createAccountHandle.length && this.createAccountRank !== null && this.createAccountEmail.length && this.createAccountName.length) {
             this.authService.initUser(this.createAccountEmail, this.createAccountName, this.createAccountRank, this.createAccountHandle);
             window.location.reload();
-            window.location.href = '/home';
+            window.location.href = '/login?authstatus=100';
         } else {
             alert("Please fill out all fields.");
         }

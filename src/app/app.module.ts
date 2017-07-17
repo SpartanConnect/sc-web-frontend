@@ -27,6 +27,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
+import { LoginViewComponent } from './login-view/login-view.component';
 
 import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
   { path: 'home', component: IndexViewComponent },
   { path: 'view/:id', component: AnnouncementViewComponent},
   { path: 'login/create', component: CreateAccountFormComponent },
+  { path: 'login', component: LoginViewComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -60,7 +62,8 @@ const appRoutes: Routes = [
     AdminPanelComponent,
     PageNotFoundComponent,
     CreateAccountFormComponent,
-    CreateAnnouncementFormComponent
+    CreateAnnouncementFormComponent,
+    LoginViewComponent
   ],
   imports: [
     BrowserModule,
