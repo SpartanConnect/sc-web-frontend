@@ -1,6 +1,7 @@
 import { Headers, Http } from '@angular/http';
+import { environment } from '../../environments/environment';
 
-export const API_BASE = "https://apisc.encadyma.com";
+export const API_BASE = environment.apiUrl;
 
 export function httpHandler(http, apiLink) {
     return http.get(apiLink)
