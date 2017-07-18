@@ -66,8 +66,11 @@ export class AuthService implements OnInit {
     }
 
     isAdministrator(): Promise<boolean> {
-        //return (localStorage.getItem('authenticated') === '1') && (parseInt(localStorage.getItem('userRank'), undefined) <= 2);
-        return Promise.resolve(false);
+        return new Promise((resolve) => {
+            this.getUser().then((user) => {
+                resolve(user.rank <= 2);
+            });
+        });
     }
 
     ngOnInit() {
