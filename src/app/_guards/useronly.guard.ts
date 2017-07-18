@@ -6,10 +6,12 @@ import { AuthService } from '../_services/auth.service';
 export class UserOnlyGuard implements CanActivate {
     constructor(private authService: AuthService, private router: Router) {}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        if (!this.authService.isAuthenticated()) {
-            this.router.navigate(['/login/create'], {queryParams: {forbidden: true}});
-        }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        this.authService.isAuthenticated().then((isAuth) => {
+            if (!isAuth) {
+                this.router.navigate(['/login/create'], {queryParams: {forbidden: true}});
+            }
+        });
         return this.authService.isAuthenticated();
     }
 }

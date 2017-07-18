@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
     public authUser = {
         success: false,
         isAuthenticated: false,
-        rank: 99
+        rank: 99,
+        isLoading: true
     };
 
     constructor(public snackBar: MdSnackBar, private authService: AuthService) {}
