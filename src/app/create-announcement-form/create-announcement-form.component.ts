@@ -215,7 +215,9 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     constructor(private authService: AuthService, private tagsService: TagsService, private dialogService: TdDialogService, private snackbar: MdSnackBar) { }
 
     ngOnInit() {
-        this.announcement.creatorName = this.authService.getUser().userName;
+        this.authService.getUser().then((user) => {
+            this.announcement.creatorName = user.name;
+        });
         this.tagsService.getVisibleTags().then((data) => {
             this.allTags = data;
             this.allTagsStrings = this.allTags.map((tag) => {

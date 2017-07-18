@@ -3,8 +3,8 @@ import { ITdDataTableColumn } from '@covalent/core';
 export const ANNOUNCEMENT_COLUMNS: ITdDataTableColumn[] = [
     {name: 'title', label: "Title"},
     {name: 'description', label: 'Description'},
-    {name: 'author', label: 'Author'},
-    {name: 'tagsString', label: 'Tags'}
+    {name: 'creator.name', label: 'Author'},
+    {name: 'tags', label: 'Tags'}
 ];
 
 export const TAG_COLUMNS: ITdDataTableColumn[] = [
