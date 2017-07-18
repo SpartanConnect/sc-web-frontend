@@ -11,9 +11,7 @@ import { API_BASE } from '../models/api';
 })
 export class HeaderBarComponent implements OnInit {
 
-    @Input() authUser;
-
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(public authService: AuthService, private router: Router) {}
 
     redirectToHome() {
         window.scrollTo(0, 0);
@@ -31,6 +29,12 @@ export class HeaderBarComponent implements OnInit {
     }
 
     ngOnInit() {
+        // Load in the user header
+        /*this.loadingService.register('appAuthLoading');
+        this.authService.getUser().then((data) => {
+            this.authUser = data;
+            this.loadingService.resolve('appAuthLoading');
+        });*/
     }
 
 }
