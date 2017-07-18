@@ -48,11 +48,6 @@ export class AuthService implements OnInit {
     logout(): Promise<boolean> {
         return new Promise((resolve) => {
             localStorage.setItem('authenticated', '0');
-            // localStorage.removeItem('userId');
-            // localStorage.removeItem('userEmail');
-            // localStorage.removeItem('userName');
-            // localStorage.removeItem('userRank');
-            // localStorage.removeItem('userHandle');
             resolve(true);
         });
     }
