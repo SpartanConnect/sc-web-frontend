@@ -31,15 +31,7 @@ export class AuthService implements OnInit {
                 });
             });
         } else {
-            return httpHandler(this.http, apiLink).catch((err) => {
-                // Most likely not authenticated (403)
-                localStorage.setItem('authenticated', '0');
-                return {
-                    success: false,
-                    isAuthenticated: false,
-                    rank: 99
-                };
-            });
+            return httpHandler(this.http, apiLink);
         }
 
 
