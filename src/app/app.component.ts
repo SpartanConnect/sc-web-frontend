@@ -10,11 +10,18 @@ import { AuthService } from './_services/auth.service';
 })
 export class AppComponent implements OnInit {
 
-    public authUser;
+    public authUser = {
+        success: false,
+        isAuthenticated: false,
+        rank: 99
+    };
 
     constructor(public snackBar: MdSnackBar, private authService: AuthService) {}
 
     ngOnInit() {
-        this.authUser = this.authService.getUser();
+        this.authService.getUser().then((data) => {
+            console.log(data);
+            this.authUser = data;
+        });
     }
 }

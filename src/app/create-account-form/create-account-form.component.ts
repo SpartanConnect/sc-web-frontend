@@ -23,12 +23,13 @@ export class CreateAccountFormComponent implements OnInit {
     ];
 
     setAccount() {
-        if (this.createAccountHandle.length && this.createAccountRank !== null && this.createAccountEmail.length && this.createAccountName.length) {
-            this.authService.initUser(this.createAccountEmail, this.createAccountName, this.createAccountRank, this.createAccountHandle);
+        if (this.createAccountHandle.length && this.createAccountRank !== null &&
+            this.createAccountEmail.length && this.createAccountName.length) {
+            this.authService.initUser();
             window.location.reload();
             window.location.href = '/login?authstatus=100';
         } else {
-            alert("Please fill out all fields.");
+            alert('Please fill out all fields.');
         }
     }
 
