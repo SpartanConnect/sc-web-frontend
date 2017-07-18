@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://apisc.encadyma.com'
+  apiUrl: 'https://sc.encadyma.com/api'
 };
