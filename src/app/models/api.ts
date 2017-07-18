@@ -11,5 +11,6 @@ export function httpHandler(http, apiLink) {
         })
         .catch((err) => {
             console.log(err);
+            return err.json();
         });
 };
