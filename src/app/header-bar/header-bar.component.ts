@@ -26,6 +26,10 @@ export class HeaderBarComponent implements OnInit {
         });
     }
 
+    login() {
+        window.location.href = `${API_BASE}/users/login`;
+    }
+
     ngOnInit() {
     }
 
