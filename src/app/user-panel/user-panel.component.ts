@@ -27,23 +27,23 @@ export class UserPanelComponent implements OnInit {
         let promise = null;
         switch (view) {
             case USER_PANEL_VIEW.VIEW_RECENT_FEED:
-                promise = this.announcementsService.getAnnouncements(this.authService.getUser().userId);
+                promise = this.announcementsService.getAnnouncements(this.authService.currentUser.id);
                 break;
             case USER_PANEL_VIEW.VIEW_APPROVED:
-                promise = this.announcementsService.getApprovedAnnouncements(1, this.authService.getUser().userId);
+                promise = this.announcementsService.getApprovedAnnouncements(1, this.authService.currentUser.id);
                 break;
             case USER_PANEL_VIEW.VIEW_PENDING:
-                promise = this.announcementsService.getApprovedAnnouncements(0, this.authService.getUser().userId);
+                promise = this.announcementsService.getApprovedAnnouncements(0, this.authService.currentUser.id);
                 break;
             case USER_PANEL_VIEW.VIEW_DENIED:
-                promise = this.announcementsService.getApprovedAnnouncements(2, this.authService.getUser().userId);
+                promise = this.announcementsService.getApprovedAnnouncements(2, this.authService.currentUser.id);
                 break;
             case USER_PANEL_VIEW.VIEW_ARCHIVED:
-                promise = this.announcementsService.getApprovedAnnouncements(3, this.authService.getUser().userId);
+                promise = this.announcementsService.getApprovedAnnouncements(3, this.authService.currentUser.id);
                 break;
             default:
                 promise = this.announcementsService.getAnnouncements(this.authService.getUser().userId);
-                alert("Invalid view change attempted. This is most likely a problem with the website's code.");
+                alert('Invalid view change attempted. This is most likely a problem with the website\'s code.');
         }
 
         this.selectedView = view;                       // Update side bar

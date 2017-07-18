@@ -10,7 +10,8 @@ export class AuthService implements OnInit {
     public forbiddenUser = {
         success: false,
         isAuthenticated: false,
-        rank: 99
+        rank: 99,
+        id: 0
     };
     public currentUser = this.forbiddenUser;
 
