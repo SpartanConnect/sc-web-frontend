@@ -6,7 +6,12 @@ import { API_BASE, httpHandler } from '../models/api';
 
 @Injectable()
 export class AuthService implements OnInit {
-    private currentUser = null;
+    public forbiddenUser = {
+        success: false,
+        isAuthenticated: false,
+        rank: 99
+    };
+    public currentUser = this.forbiddenUser;
 
     constructor(private http: Http) {}
 
@@ -24,14 +29,14 @@ export class AuthService implements OnInit {
         if (localStorage.getItem('authenticated') !== '1') {
             localStorage.setItem('authenticated', '0');
             return new Promise((resolve) => {
-                resolve({
-                    success: false,
-                    isAuthenticated: false,
-                    rank: 99
-                });
+                this.currentUser = this.forbiddenUser;
+                resolve(this.currentUser);
             });
         } else {
-            return httpHandler(this.http, apiLink);
+            return httpHandler(this.http, apiLink).then((user) => {
+                this.currentUser = user;
+                return user;
+            });
         }
 
 

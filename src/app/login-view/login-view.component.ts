@@ -23,8 +23,10 @@ export class LoginViewComponent implements OnInit {
 
     ngOnInit() {
         this.authStatus = parseInt(this.route.snapshot.queryParamMap.get('authstatus'), undefined);
-        if (!this.authStatus) {
+        if (this.authStatus === 101 || !this.authStatus) {
             window.location.href = `${API_BASE}/users/login/generate`;
+        } else if (this.authStatus === 100) {
+            this.authService.initUser();
         }
     }
 
