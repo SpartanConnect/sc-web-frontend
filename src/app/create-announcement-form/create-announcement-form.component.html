@@ -7,7 +7,7 @@
     </td-message>
     <!-- Stepper -->
     <td-steps *ngIf="!success && !loading">
-        <td-step #step1 label="Basic Info" sublabel="Announcement title and description" [active]="stepNumber === 1" style="width:100%;" (activated)="setStepNumber(1)">
+        <td-step #step1 label="Basic Info" sublabel="Announcement title and description" [active]="stepNumber === 1" style="width:100%;" (activated)="setStepNumber(1)" [disableRipple]="true">
             <h3>Basic Info</h3>
             <!-- Error Message -->
             <td-message *ngIf="stepError === 1" label="Warning" sublabel="Use at least 10 characters in your announcement title and description." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
@@ -23,7 +23,7 @@
                 <button md-raised-button (click)="addStepNumber(1)">CONTINUE</button>
             </ng-template>
         </td-step>
-        <td-step #step2 label="Display Dates" sublabel="Window of dates for the announcement to appear" [active]="stepNumber === 2" (activated)="setStepNumber(2)">
+        <td-step #step2 label="Display Dates" sublabel="Window of dates for the announcement to appear" [active]="stepNumber === 2" (activated)="setStepNumber(2)" [disableRipple]="true">
             <h3>Dates</h3>
             <!-- Error Message -->
             <td-message *ngIf="stepError === 2" label="Warning" sublabel="Please select or input a valid start and end date. The start date must come before the end date." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;"></td-message>
@@ -43,7 +43,7 @@
                 <button md-raised-button (click)="addStepNumber(2)">CONTINUE</button>
             </ng-template>
         </td-step>
-        <td-step #step3 label="Tags" sublabel="Categories, tags, and grades" [active]="stepNumber === 3" (activated)="setStepNumber(3)">
+        <td-step #step3 label="Tags" sublabel="Categories, tags, and grades" [active]="stepNumber === 3" (activated)="setStepNumber(3)" [disableRipple]="true">
             <div class="step-three">
                 <h3>Tags</h3>
                 <!-- Error Message -->
@@ -82,7 +82,7 @@
                 <button md-raised-button (click)="addStepNumber(3)">CONTINUE</button>
             </ng-template>
         </td-step>
-        <td-step #step4 label="Events" sublabel="Dates to attach to your announcement" [active]="stepNumber === 4" (activated)="setStepNumber(4)">
+        <td-step #step4 label="Events" sublabel="Dates to attach to your announcement" [active]="stepNumber === 4" (activated)="setStepNumber(4)" [disableRipple]="true">
             <h3>Events</h3>
             <p>Events are currently a work-in-progress feature and are not available in this version of the web app.</p>
             <!-- Continue Button -->
@@ -90,7 +90,7 @@
                 <button md-raised-button (click)="addStepNumber(4)">CONTINUE</button>
             </ng-template>
         </td-step>
-        <td-step #step5 label="Confirmation" sublabel="Confirm your announcement" [active]="stepNumber === 5" (activated)="setStepNumber(5)">
+        <td-step #step5 label="Confirmation" sublabel="Confirm your announcement" [active]="stepNumber === 5" (activated)="setStepNumber(5)" [disableRipple]="true">
             <td-message label="Notice" sublabel="Please keep in mind that the current frontend does not submit any data to our backend API, which means that adding announcements do not currently work." color="blue" icon="warning" style="padding: 16px 5px;"></td-message>
             <br>
             <!-- Example Announcement -->
