@@ -96,8 +96,10 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     // Example: running w/o a parameter checks the entire form while
     // running with a step number checks only that step.
     validateForm(step: number = null): boolean {
+        // tslint:disable:curly
         if (this.announcement.title.length < 10 && (step === 1 || step === null)) return false;
         else if (this.announcement.description.length < 10 && (step === 1 || step === null)) return false;
+        // tslint:disable-next-line:max-line-length
         else if (!((this.announcement.startDate instanceof Date) && (this.announcement.endDate instanceof Date)) && (step === 2 || step === null)) return false;
         else if (!moment(this.announcement.startDate.toString()).isValid() && (step === 2 || step === null)) return false;
         else if (!moment(this.announcement.endDate.toString()).isValid() && (step === 2 || step === null)) return false;
@@ -105,12 +107,14 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         else if (!this.announcement.tagsStrings.length && (step === 3 || step === null)) return false;
         else if (!this.selectGrades('hasAnySelected') && (step === 3 || step === null)) return false;
         else return true;
+        // tslint:enable:curly
     }
 
     submitForm() {
         window.scrollTo(0, 0);
         if (!this.validateForm()) {
-            this.snackbar.open("This form has not been fully completed. Please confirm that all fields are filled in correctly and try again.", "DISMISS", {
+            // tslint:disable-next-line:max-line-length
+            this.snackbar.open('This form has not been fully completed. Please confirm that all fields are filled in correctly and try again.', 'DISMISS', {
                 duration: 5000
             });
         } else {
@@ -144,6 +148,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
 
     // Select checkboxes
     selectGrades(mode: string) {
+        // tslint:disable:curly
         switch (mode) {
             case 'middle':
                 this.announcement.grades.grade7 = true;
@@ -194,25 +199,29 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
                 if (this.announcement.grades.grade12) return true;
                 return false;
         }
+        // tslint:enable:curly
     }
 
     confirmUrgency() {
+        // tslint:disable:max-line-length
         this.dialogService.openConfirm({
             disableClose: true,
-            title: "Don't cry wolf!",
-            message: "The urgent tag is only reserved for announcements that contain critical and time-sensitive information. By accepting this dialog, you agree that your announcement is indeed urgent."
+            title: 'Don\'t cry wolf!',
+            message: 'The urgent tag is only reserved for announcements that contain critical and time-sensitive information. By accepting this dialog, you agree that your announcement is indeed urgent.'
         }).afterClosed().subscribe((confirmed: boolean) => {
             if (confirmed) {
-                this.snackbar.open("Your announcement is now marked as urgent.", "DISMISS", {
+                this.snackbar.open('Your announcement is now marked as urgent.', 'DISMISS', {
                     duration: 5000
                 });
             } else {
                 this.announcement.isUrgent = false;
             }
         });
+        // tslint:enable:max-line-length
     }
 
-    constructor(private authService: AuthService, private tagsService: TagsService, private dialogService: TdDialogService, private snackbar: MdSnackBar) { }
+    constructor(private authService: AuthService, private tagsService: TagsService,
+            private dialogService: TdDialogService, private snackbar: MdSnackBar) { }
 
     ngOnInit() {
         this.authService.getUser().then((user) => {
