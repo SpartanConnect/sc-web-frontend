@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 
 import { AuthService } from './_services/auth.service';
+import { API_BASE } from './models/api';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,7 @@ import { AuthService } from './_services/auth.service';
 })
 export class AppComponent implements OnInit {
 
-    public authUser;
-
     constructor(public snackBar: MdSnackBar, private authService: AuthService) {}
 
-    ngOnInit() {
-        this.authUser = this.authService.getUser();
-    }
+    ngOnInit() {}
 }

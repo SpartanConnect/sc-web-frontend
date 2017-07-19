@@ -8,9 +8,9 @@
     </div>
     <nav class="header-bar-nav">
         <a routerLink="/home" routerLinkActive="active">Home</a>
-        <a routerLink="/me" routerLinkActive="active" *ngIf="this.authUser.authenticated">User Panel</a>
-        <a routerLink="/admin" routerLinkActive="active" *ngIf="this.authUser.authenticated && this.authUser.userRank <= 2">Admin Panel</a>
-        <a (click)="logout()" *ngIf="this.authUser.authenticated">Log Out</a>
-        <a routerLink="/login/create" routerLinkActive="active" *ngIf="!this.authUser.authenticated">Log In</a>
+        <a routerLink="/me" routerLinkActive="active" *ngIf="authService.currentUser.isAuthenticated">User Panel</a>
+        <a routerLink="/admin" routerLinkActive="active" *ngIf="authService.currentUser.isAuthenticated && authService.currentUser.rank <= 2">Admin Panel</a>
+        <a (click)="logout()" *ngIf="authService.currentUser.isAuthenticated">Log Out</a>
+        <a (click)="login()" routerLinkActive="active" *ngIf="!authService.currentUser.isAuthenticated">Log In</a>
     </nav>
 </header>

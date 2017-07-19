@@ -74,13 +74,11 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
 
     // Activates when a person clicks 'Continue'
     addStepNumber(step: number) {
-        console.log(this.stepNumber);
         if (!this.validateForm(step)) {
             this.stepError = step;
             return false;
         } else {
             this.stepError = 0;
-            console.log(this.stepNumber);
             this.setStepNumber(step + 1);
             return true;
         }
@@ -217,7 +215,9 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     constructor(private authService: AuthService, private tagsService: TagsService, private dialogService: TdDialogService, private snackbar: MdSnackBar) { }
 
     ngOnInit() {
-        this.announcement.creatorName = this.authService.getUser().userName;
+        this.authService.getUser().then((user) => {
+            this.announcement.creatorName = user.name;
+        });
         this.tagsService.getVisibleTags().then((data) => {
             this.allTags = data;
             this.allTagsStrings = this.allTags.map((tag) => {
