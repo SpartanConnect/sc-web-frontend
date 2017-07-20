@@ -27,6 +27,7 @@ interface AnnouncementInput {
     endDate: any;
     creatorName: string;
     tagsStrings: string[];
+    category: number;
     isUrgent: boolean;
     grades: AnnouncementGrades;
 }
@@ -48,6 +49,8 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     filteredTags: Tag[] = [];
     filteredTagsStrings: string[] = [];
 
+    allCategories: Tag[] = [];
+
     announcement: AnnouncementInput = {
         title: '',
         description: '',
@@ -55,6 +58,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         endDate: '',
         creatorName: '',
         tagsStrings: [],
+        category: 0,
         isUrgent: false,
         grades: {
             grade7: false,
@@ -104,7 +108,8 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         else if (!moment(this.announcement.startDate.toString()).isValid() && (step === 2 || step === null)) return false;
         else if (!moment(this.announcement.endDate.toString()).isValid() && (step === 2 || step === null)) return false;
         else if (this.announcement.endDate < this.announcement.startDate && (step === 2 || step === null)) return false;
-        else if (!this.announcement.tagsStrings.length && (step === 3 || step === null)) return false;
+        // else if (!this.announcement.tagsStrings.length && (step === 3 || step === null)) return false;
+        else if ((this.announcement.category === 0 || this.announcement.category === null) && (step === 3 || step === null)) return false;
         else if (!this.selectGrades('hasAnySelected') && (step === 3 || step === null)) return false;
         else return true;
         // tslint:enable:curly
@@ -204,19 +209,21 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
 
     confirmUrgency() {
         // tslint:disable:max-line-length
-        this.dialogService.openConfirm({
-            disableClose: true,
-            title: 'Don\'t cry wolf!',
-            message: 'The urgent tag is only reserved for announcements that contain critical and time-sensitive information. By accepting this dialog, you agree that your announcement is indeed urgent.'
-        }).afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed) {
-                this.snackbar.open('Your announcement is now marked as urgent.', 'DISMISS', {
-                    duration: 5000
-                });
-            } else {
-                this.announcement.isUrgent = false;
-            }
-        });
+        if (!this.announcement.isUrgent) {
+            this.dialogService.openConfirm({
+                disableClose: true,
+                title: 'Don\'t cry wolf!',
+                message: 'The urgent tag is only reserved for announcements that contain critical and time-sensitive information. By accepting this dialog, you agree that your announcement is indeed urgent.'
+            }).afterClosed().subscribe((confirmed: boolean) => {
+                if (confirmed) {
+                    this.snackbar.open('Your announcement is now marked as urgent.', 'DISMISS', {
+                        duration: 5000
+                    });
+                } else {
+                    this.announcement.isUrgent = false;
+                }
+            });
+        }
         // tslint:enable:max-line-length
     }
 
@@ -227,12 +234,16 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         this.authService.getUser().then((user) => {
             this.announcement.creatorName = user.name;
         });
+        /*
         this.tagsService.getVisibleTags().then((data) => {
             this.allTags = data;
             this.allTagsStrings = this.allTags.map((tag) => {
                 return tag.name;
             });
             this.filterTags('');
+        });*/
+        this.tagsService.getCategories().then((categories) => {
+            this.allCategories = categories;
         })
     }
 
