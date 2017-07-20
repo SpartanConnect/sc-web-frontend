@@ -151,7 +151,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         })
     }
 
-    // Select checkboxes
+    // Select checkboxes -- bad design..
     selectGrades(mode: string) {
         // tslint:disable:curly
         switch (mode) {
@@ -225,6 +225,10 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
             });
         }
         // tslint:enable:max-line-length
+    }
+
+    closeErrorDialog() {
+        this.submitted = false;
     }
 
     constructor(private authService: AuthService, private tagsService: TagsService,

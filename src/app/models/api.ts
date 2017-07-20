@@ -17,3 +17,18 @@ export function httpHandler(http, apiLink, queryData = {}) {
             return err.json();
         });
 };
+
+export function postHandler(http, apiLink, queryData) {
+    const httpOptions: RequestOptionsArgs = new RequestOptions({
+        withCredentials: true
+    });
+    return http.post(apiLink, queryData.stringify(), httpOptions)
+        .toPromise()
+        .then((data) => {
+            return data.json();
+        })
+        .catch((err) => {
+            console.log(err);
+            return err.json();
+        });
+}
