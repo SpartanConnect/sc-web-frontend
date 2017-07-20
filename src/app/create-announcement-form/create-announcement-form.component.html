@@ -96,8 +96,6 @@
             </ng-template>
         </td-step>
         <td-step #step5 label="Confirmation" sublabel="Confirm Your Announcement" [active]="stepNumber === 5" (activated)="setStepNumber(5)" [disableRipple]="true">
-            <td-message label="Notice" sublabel="Please keep in mind that the current frontend does not submit any data to our backend API, which means that adding announcements do not currently work." color="blue" icon="warning" style="padding: 16px 5px;"></td-message>
-            <br>
             <!-- Example Announcement -->
             <md-card class="card-announcement">
                 <md-card-header>

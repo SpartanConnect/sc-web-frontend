@@ -26,7 +26,11 @@ export class TagsService implements OnInit {
 
     getCategories(): Promise<Tag[]> {
         const apiLink = `${API_BASE}/tags?visibility=1&parentId=0`;
-        return httpHandler(this.http, apiLink);
+        return httpHandler(this.http, apiLink).then((data) => {
+            return data.filter((category) => {
+                return category.slug !== 'urgent';
+            });
+        });
     }
 
     constructor(private http: Http) { }
