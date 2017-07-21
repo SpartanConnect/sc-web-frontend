@@ -143,7 +143,6 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
                 endDate: this.announcement.endDate,
                 tags: this.returnTagsArray()
             }).then((postData) => {
-                console.log(postData);
                 if (postData.success === false) {
                     this.submitted = true;
                     this.loading = false;
@@ -155,7 +154,6 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
                     this.success = true;
                 }
             }).catch((error) => {
-                console.log(error);
                 this.submitted = true;
                 this.loading = false;
                 this.success = false;

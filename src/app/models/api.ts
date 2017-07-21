@@ -13,7 +13,7 @@ export function httpHandler(http, apiLink, queryData = {}) {
             return data.json();
         })
         .catch((err) => {
-            console.log(err);
+            // console.log(err);
             return err.json();
         });
 };
@@ -31,7 +31,7 @@ export function postHandler(http, apiLink, queryData) {
             return data.json();
         })
         .catch((err) => {
-            console.log(err);
+            // console.log(err);
             return err.json();
         });
 }
