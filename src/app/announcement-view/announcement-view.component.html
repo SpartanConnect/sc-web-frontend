@@ -1,5 +1,7 @@
 <div class="container container-tight">
     <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
+    <td-message *ngIf="!announcement && !loading" label="Error" sublabel="Could not find announcement." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
+    <td-message *ngIf="isHidden" label="Notice" sublabel="This announcement is pending approval. It will be hidden from all other users until an administrator approves your announcement." color="purple" icon="warning" style="padding: 16px 5px;"></td-message>
     <md-card class="card-announcement" *ngIf="announcement">
         <md-card-header>
             <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>

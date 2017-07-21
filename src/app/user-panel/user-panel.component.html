@@ -50,7 +50,7 @@
                     <p>{{announcement.description}}</p>
                 </md-card-content>
                 <md-card-actions>
-                    <button md-button>READ MORE</button>
+                    <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
                     <button md-button>EDIT</button>
                 </md-card-actions>
             </md-card>
