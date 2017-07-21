@@ -19,10 +19,13 @@ export function httpHandler(http, apiLink, queryData = {}) {
 };
 
 export function postHandler(http, apiLink, queryData) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
     const httpOptions: RequestOptionsArgs = new RequestOptions({
+        headers: headers,
         withCredentials: true
     });
-    return http.post(apiLink, queryData.stringify(), httpOptions)
+    console.log(queryData);
+    return http.post(apiLink, JSON.stringify(queryData), httpOptions)
         .toPromise()
         .then((data) => {
             return data.json();

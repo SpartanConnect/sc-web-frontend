@@ -5,7 +5,7 @@
     <td-message *ngIf="success && submitted && !loading" label="Success" sublabel="Your announcement has successfully been submitted for approval." color="green" icon="done" style="padding: 16px 5px;">
         <button td-message-actions md-button routerLink="/me">RETURN TO USER PANEL</button>
     </td-message>
-    <td-message *ngIf="!success && submitted && !loading" label="Error" sublabel="There was an error in submitting your announcement." color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;">
+    <td-message *ngIf="!success && submitted && !loading" label="Error" [sublabel]="submissionMessage" color="primary" icon="warning" style="padding: 16px 5px; margin-bottom: 15px;">
         <button td-message-actions md-button (click)="closeErrorDialog()">CLOSE</button>
     </td-message>
     <!-- Stepper -->

@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Http } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
 import { TdDialogService } from '@covalent/core';
 
@@ -8,6 +9,7 @@ import { TagsService } from '../_services/tags.service';
 import { ConfirmLeaveGuard, ComponentCanDeactivate } from '../_guards/confirmleave.guard';
 
 import { Tag } from '../models/tag';
+import { API_BASE, postHandler } from '../models/api';
 
 import * as moment from 'moment';
 
@@ -26,6 +28,7 @@ interface AnnouncementInput {
     startDate: any;
     endDate: any;
     creatorName: string;
+    creatorId: number;
     tagsStrings: string[];
     category: number;
     isUrgent: boolean;
@@ -45,9 +48,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     success: boolean = false;
     loading: boolean = false;
     allTags: Tag[] = [];
-    allTagsStrings: string[] = [];
-    filteredTags: Tag[] = [];
-    filteredTagsStrings: string[] = [];
+    submissionMessage = 'There was an error in submitting your announcement.';
 
     allCategories: Tag[] = [];
 
@@ -57,6 +58,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         startDate: '',
         endDate: '',
         creatorName: '',
+        creatorId: 0,
         tagsStrings: [],
         category: 0,
         isUrgent: false,
@@ -116,6 +118,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     }
 
     submitForm() {
+        const apiLink = `${API_BASE}/announcements`;
         window.scrollTo(0, 0);
         if (!this.validateForm()) {
             // tslint:disable-next-line:max-line-length
@@ -126,16 +129,42 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
             this.submitted = false;
             this.loading = true;
             this.success = false;
-            setTimeout(() => {
+            /*setTimeout(() => {
                 this.submitted = true;
                 this.loading = false;
                 this.success = true;
-            }, 1500);
+            }, 1500);*/
+            // tslint:disable-next-line:prefer-const
+            postHandler(this.http, apiLink, {
+                title: this.announcement.title,
+                description: this.announcement.description,
+                creatorId: this.announcement.creatorId,
+                startDate: this.announcement.startDate,
+                endDate: this.announcement.endDate,
+                tags: this.returnTagsArray()
+            }).then((postData) => {
+                console.log(postData);
+                if (postData.success === false) {
+                    this.submitted = true;
+                    this.loading = false;
+                    this.success = false;
+                    this.submissionMessage = 'There was an error in submitting your announcement. Error: ' + postData.reason;
+                } else {
+                    this.submitted = true;
+                    this.loading = false;
+                    this.success = true;
+                }
+            }).catch((error) => {
+                console.log(error);
+                this.submitted = true;
+                this.loading = false;
+                this.success = false;
+            });
         }
     }
 
     // Called when input changed
-    filterTags(val: string): void {
+    /*filterTags(val: string): void {
         this.filteredTags = this.allTags.filter((tag: any) => {
             if (val) {
                 return (tag.name.toLowerCase().indexOf(val.toLowerCase()) > -1) || (tag.slug.toLowerCase().indexOf(val.toLowerCase()) > -1);
@@ -149,7 +178,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         this.filteredTagsStrings = this.filteredTags.map((tag: Tag) => {
             return tag.name;
         })
-    }
+    }*/
 
     // Select checkboxes -- bad design..
     selectGrades(mode: string) {
@@ -207,6 +236,22 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         // tslint:enable:curly
     }
 
+    returnTagsArray() {
+        // tslint:disable:curly
+        const tagsArray = [];
+        // Redesign some time soon with regex?
+        if (this.announcement.grades.grade7) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade7')[0]);
+        if (this.announcement.grades.grade8) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade8')[0]);
+        if (this.announcement.grades.grade9) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade9')[0]);
+        if (this.announcement.grades.grade10) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade10')[0]);
+        if (this.announcement.grades.grade11) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade11')[0]);
+        if (this.announcement.grades.grade12) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade12')[0]);
+        if (this.announcement.isUrgent) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'urgent')[0]);
+        tagsArray.push(this.announcement.category);
+        return tagsArray;
+        // tslint:enable:curly
+    }
+
     confirmUrgency() {
         // tslint:disable:max-line-length
         if (!this.announcement.isUrgent) {
@@ -232,20 +277,17 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     }
 
     constructor(private authService: AuthService, private tagsService: TagsService,
-            private dialogService: TdDialogService, private snackbar: MdSnackBar) { }
+            private dialogService: TdDialogService, private snackbar: MdSnackBar,
+            private http: Http) { }
 
     ngOnInit() {
         this.authService.getUser().then((user) => {
             this.announcement.creatorName = user.name;
+            this.announcement.creatorId = user.id;
         });
-        /*
-        this.tagsService.getVisibleTags().then((data) => {
+        this.tagsService.getTags().then((data) => {
             this.allTags = data;
-            this.allTagsStrings = this.allTags.map((tag) => {
-                return tag.name;
-            });
-            this.filterTags('');
-        });*/
+        });
         this.tagsService.getCategories().then((categories) => {
             this.allCategories = categories;
         })
