@@ -139,8 +139,8 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
                 title: this.announcement.title,
                 description: this.announcement.description,
                 creatorId: this.announcement.creatorId,
-                startDate: this.announcement.startDate,
-                endDate: this.announcement.endDate,
+                startDate: moment(this.announcement.startDate).format('YYYY-MM-DD'),
+                endDate: moment(this.announcement.endDate).format('YYYY-MM-DD'),
                 tags: this.returnTagsArray()
             }).then((postData) => {
                 if (postData.success === false) {
