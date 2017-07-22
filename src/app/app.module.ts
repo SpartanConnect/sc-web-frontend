@@ -28,6 +28,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { StatusTagComponent } from './_components/status-tag.component';
+import { PostAnnouncementComponent } from './_components/post-announcement.component';
 
 import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
@@ -62,7 +63,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     CreateAnnouncementFormComponent,
     LoginViewComponent,
-    StatusTagComponent
+    StatusTagComponent,
+    PostAnnouncementComponent
   ],
   imports: [
     BrowserModule,

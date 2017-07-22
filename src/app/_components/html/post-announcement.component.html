@@ -1,0 +1,20 @@
+<div class="pac-container" [class.activated]="step !== steps.IS_RESTING">
+    <div class="pac-steps">
+        <div class="pac-step-resting" *ngIf="step === steps.IS_RESTING" (click)="changeStep()">Start writing your announcement here...</div>
+        <div class="pac-step-one" *ngIf="step === steps.STEP_ONE_POST_CREATE">
+            <input type="text" [(ngModel)]="announcement.title" class="pac-af-title" placeholder="Come up with a brilliant title..." autofocus="autofocus"><br>
+            <textarea class="pac-af-description" [(ngModel)]="announcement.description" placeholder="Write up an awesome description for your announcement..."></textarea>
+        </div>
+        <div class="pac-step-two" *ngIf="step === steps.STEP_TWO_CATEGORY_ASSIGN">
+
+        </div>
+    </div>
+    <div class="pac-footer" *ngIf="step !== steps.IS_RESTING && step !== steps.SUBMISSION_SUCCESS" [class.success]="validateForm(this.step)" (click)="changeStep()">
+        <span class="pac-step-counter"><b>{{currentStepCounter}}</b></span>
+        <span class="pac-step-validator">
+            <!--<md-icon *ngIf="!validateForm(this.step)" [mdTooltip]="currentTooltip">info</md-icon>
+            <span *ngIf="validateForm(this.step)">CONTINUE</span>-->
+            <span [mdTooltip]="currentTooltip" [mdTooltipDisabled]="validateForm(this.step)">CONTINUE</span>
+        </span>
+    </div>
+</div>

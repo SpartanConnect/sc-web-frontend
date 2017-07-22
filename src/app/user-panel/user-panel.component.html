@@ -39,6 +39,7 @@
         <div *ngIf="!loading">
             <td-message *ngIf="!selectedAnnouncements.length && !loading && this.selectedView !== this.userPanelViews.VIEW_RECENT_FEED" label="Notice" sublabel="No announcements found." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
             <td-message *ngIf="!selectedAnnouncements.length && !loading && this.selectedView === this.userPanelViews.VIEW_RECENT_FEED" label="Welcome to the User Panel!" sublabel="It seems like this is your first time using Spartan Connect. Why don't you create your first announcement by clicking on 'Create An Announcement'?" color="blue" icon="info" style="padding: 16px 5px;"></td-message>
+            <app-cx-post-announcement></app-cx-post-announcement>
             <md-card class="card-announcement" *ngFor="let announcement of selectedAnnouncements">
                 <md-card-header>
                     <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
