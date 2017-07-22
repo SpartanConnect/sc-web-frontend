@@ -160,6 +160,11 @@ export class PostAnnouncementComponent implements OnInit {
                     this.updateTooltip();
                     this.submitAnnouncement();
                 }
+                if (this.step === AnnouncementStep.STEP_FIVE_SUBMISSION_FAILURE && this.validateForm()) {
+                    this.step = AnnouncementStep.STEP_FIVE_SUBMIT_LOADING;
+                    this.updateTooltip();
+                    this.submitAnnouncement();
+                }
             } else {
                 this.step += 1;
                 this.updateTooltip();
@@ -169,8 +174,11 @@ export class PostAnnouncementComponent implements OnInit {
 
     moveBackStep() {
         this.isExplanationOpen = false;
-        if (this.step !== AnnouncementStep.STEP_ONE_POST_CREATE) {
+        if (this.step !== AnnouncementStep.STEP_ONE_POST_CREATE && this.step !== AnnouncementStep.STEP_FIVE_SUBMISSION_FAILURE) {
             this.step = this.step - 1;
+            this.updateTooltip();
+        } else if (this.step === AnnouncementStep.STEP_FIVE_SUBMISSION_FAILURE) {
+            this.step = AnnouncementStep.STEP_FIVE_SUBMIT_CONFIRMATION - 1;
             this.updateTooltip();
         }
     }
@@ -285,6 +293,7 @@ export class PostAnnouncementComponent implements OnInit {
                         duration: 5000
                     });
                     this.step = AnnouncementStep.STEP_FIVE_SUBMISSION_FAILURE;
+                    this.updateTooltip();
                 } else {
                     this.step = AnnouncementStep.SUBMISSION_SUCCESS;
                     localStorage.removeItem('ann_title');
@@ -299,6 +308,7 @@ export class PostAnnouncementComponent implements OnInit {
                 this.snackbar.open('Error: ' + (err.message || err.reason), 'DISMISS', {
                     duration: 5000
                 });
+                this.updateTooltip();
             });
         } else {
             // tslint:disable-next-line:max-line-length
