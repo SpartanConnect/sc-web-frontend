@@ -36,12 +36,13 @@ enum AnnouncementStep {
     IS_RESTING = 0,                     // User has not clicked into the creation box
     STEP_ONE_POST_CREATE = 1,           // Includes creating a title and description
     STEP_TWO_CATEGORY_ASSIGN = 2,       // Includes category assignment
-    STEP_THREE_DATE_ASSIGN = 3,         // Includes date assignment
-    STEP_FOUR_EVENTS_CREATION = 4,      // Includes event creation
-    STEP_FIVE_SUBMIT_CONFIRMATION = 5,  // Includes confirmation
-    STEP_FIVE_SUBMIT_LOADING = 6,       // Sending POST request, awaiting response...
-    STEP_FIVE_SUBMISSION_FAILURE = 7,   // Submission failed
-    SUBMISSION_SUCCESS = 8              // Submission success!
+    STEP_TWO_GRADES_ASSIGN = 3,         // Includes grade assignment
+    STEP_THREE_DATE_ASSIGN = 4,         // Includes date assignment
+    STEP_FOUR_EVENTS_CREATION = 5,      // Includes event creation
+    STEP_FIVE_SUBMIT_CONFIRMATION = 6,  // Includes confirmation
+    STEP_FIVE_SUBMIT_LOADING = 7,       // Sending POST request, awaiting response...
+    STEP_FIVE_SUBMISSION_FAILURE = 8,   // Submission failed
+    SUBMISSION_SUCCESS = 9              // Submission success!
 }
 
 @Component({
@@ -71,6 +72,7 @@ export class PostAnnouncementComponent implements OnInit {
     }
 
     allTags: Tag[];
+    allCategories: Tag[];
 
     step = AnnouncementStep.IS_RESTING;
     steps = AnnouncementStep;
@@ -106,19 +108,50 @@ export class PostAnnouncementComponent implements OnInit {
     }
 
     changeStep() {
-        this.step += 1;
-        this.updateTooltip();
+        if (this.validateForm(this.step)) {
+            this.step += 1;
+            this.updateTooltip();
+        }
+    }
+
+    moveBackStep() {
+        if (this.step !== AnnouncementStep.STEP_ONE_POST_CREATE) {
+            this.step = this.step - 1;
+            this.updateTooltip();
+        }
     }
 
     updateTooltip() {
         switch (this.step) {
+            // tslint:disable:max-line-length
             case AnnouncementStep.STEP_ONE_POST_CREATE:
-                // tslint:disable-next-line:max-line-length
                 this.currentStepCounter = 'STEP 1: BASIC INFO';
                 this.currentTooltip = 'Announcement titles must be at least 10 characters long. Descriptions must be at least 20 characters long.';
                 break;
+            case AnnouncementStep.STEP_TWO_CATEGORY_ASSIGN:
+                this.currentStepCounter = 'STEP 2: CATEGORIES';
+                this.currentTooltip = 'You must select one category.';
+                break;
+            case AnnouncementStep.STEP_TWO_GRADES_ASSIGN:
+                this.currentStepCounter = 'STEP 2: GRADES';
+                this.currentTooltip = 'You must select at least one grade level.';
+                break;
+            case AnnouncementStep.STEP_THREE_DATE_ASSIGN:
+                this.currentStepCounter = 'STEP 3: DISPLAY DATES';
+                this.currentTooltip = 'You must select a valid start and end date window.';
+                break;
+            case AnnouncementStep.STEP_FOUR_EVENTS_CREATION:
+                this.currentStepCounter = 'STEP 4: EVENTS';
+                this.currentTooltip = '(Optional) You can add events and deadlines.';
+                break;
+            case AnnouncementStep.STEP_FIVE_SUBMIT_CONFIRMATION:
+                this.currentStepCounter = 'STEP 5: CONFIRMATION';
+                this.currentTooltip = 'Please confirm that your announcement is valid. Feel free to skip back to any steps.';
+                break;
             default:
+                this.currentStepCounter = 'STEP ?: UNKNOWN STEP';
                 this.currentTooltip = '(no information)';
+            // tslint:enable:max-line-length
         }
     }
 
@@ -138,9 +171,16 @@ export class PostAnnouncementComponent implements OnInit {
         // tslint:enable:curly
     }*/
 
+    setCategory(id: number) {
+        this.announcement.category = id;
+    }
+
     ngOnInit() {
         this.tagsService.getTags().then((tags) => {
             this.allTags = tags;
+            this.allCategories = tags.filter((tag) => {
+                return tag.parentId === null && tag.visibility && (tag.slug !== 'urgent');
+            });
         });
     }
 }

@@ -35,6 +35,16 @@
     font-weight: 300;
     padding: 16px 25px;
   }
+
+  .pac-step-two {
+    cursor: default;
+    padding: 16px 25px;
+    padding-top: 8px;
+
+    p {
+      font-size: 14px;
+    }
+  }
 }
 
 // Input reset
@@ -107,5 +117,43 @@ textarea {
   md-icon {
     cursor: pointer;
     font-size: 18px;
+  }
+}
+
+.pac-step-back {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 25px;
+  margin-top: 16px;
+}
+
+.pac-e-category {
+  background-color: #ccc;
+  border: 5px solid #ccc;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  margin: 5px auto;
+  padding: 10px 0;
+  text-align: center;
+  transform: scale(1);
+  transition: all 150ms ease;
+  width: 80%;
+
+  &:hover {
+    background-color: #aaa;
+    border: 5px solid #aaa;
+    transition: all 150ms ease;
+  }
+
+  &.selected {
+    background-color: #27ae60;
+    border: 5px solid #27ae60;
+    color: #fdfdfd;
+    transform: scale(1.1);
+    transition: all 150ms ease;
   }
 }

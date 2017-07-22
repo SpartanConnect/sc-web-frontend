@@ -1,4 +1,5 @@
 <div class="pac-container" [class.activated]="step !== steps.IS_RESTING">
+    <span class="pac-step-back" (click)="moveBackStep()" *ngIf="step !== steps.STEP_ONE_POST_CREATE && step !== steps.IS_RESTING">GO BACK</span>
     <div class="pac-steps">
         <div class="pac-step-resting" *ngIf="step === steps.IS_RESTING" (click)="changeStep()">Start writing your announcement here...</div>
         <div class="pac-step-one" *ngIf="step === steps.STEP_ONE_POST_CREATE">
@@ -6,7 +7,11 @@
             <textarea class="pac-af-description" [(ngModel)]="announcement.description" placeholder="Write up an awesome description for your announcement..."></textarea>
         </div>
         <div class="pac-step-two" *ngIf="step === steps.STEP_TWO_CATEGORY_ASSIGN">
-
+            <p>
+                Selecting a category helps your announcement become recognized among a wide audience.
+                Select a category that relates to your announcement.
+            </p>
+            <div class="pac-e-category" *ngFor="let category of allCategories" [class.selected]="announcement.category === category.id" (click)="setCategory(category.id)">{{category.name}}</div>
         </div>
     </div>
     <div class="pac-footer" *ngIf="step !== steps.IS_RESTING && step !== steps.SUBMISSION_SUCCESS" [class.success]="validateForm(this.step)" (click)="changeStep()">
