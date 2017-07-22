@@ -279,6 +279,7 @@ export class PostAnnouncementComponent implements OnInit {
             postHandler(this.http, apiLink, {
                 title: this.announcement.title,
                 description: this.announcement.description,
+                creatorId: this.announcement.creatorId,                                 // TODO: Remove this!
                 startDate: ((this.dateMode === AnnouncementDateMode.SHOW_ONE_DAY) ?
                     moment(this.announcement.omniDate).format('YYYY-MM-DD') :
                     moment(this.announcement.startDate).format('YYYY-MM-DD')),
