@@ -2,8 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { TdLoadingService, LoadingType, LoadingMode } from '@covalent/core';
 
-import { Announcement } from '../models/announcement';
-import { API_BASE, httpHandler } from '../models/api';
+import { Announcement } from '../_models/announcement';
+import { API_BASE, httpHandler } from '../_models/api';
 
 @Injectable()
 export class AuthService implements OnInit {

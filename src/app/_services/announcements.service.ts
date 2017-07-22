@@ -1,8 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import { Announcement } from '../models/announcement';
-import { API_BASE } from '../models/api';
+import { Announcement } from '../_models/announcement';
+import { API_BASE } from '../_models/api';
 
 import 'rxjs/add/operator/toPromise';
 

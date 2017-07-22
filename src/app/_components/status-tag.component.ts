@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
     selector: 'app-cx-status-tag',
     template: `<div [class]="statusStyle" [mdTooltip]="statusTip" mdTooltipPosition="right">{{statusValue}}</div>`,
-    styleUrls: ['status-tag.component.scss']
+    styleUrls: ['scss/status-tag.component.scss']
 })
 export class StatusTagComponent implements OnInit {
     @Input() announcement;

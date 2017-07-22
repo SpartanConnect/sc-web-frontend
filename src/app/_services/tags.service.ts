@@ -1,8 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import { Tag } from '../models/tag';
-import { API_BASE, httpHandler } from '../models/api';
+import { Tag } from '../_models/tag';
+import { API_BASE, httpHandler } from '../_models/api';
 
 @Injectable()
 export class TagsService implements OnInit {

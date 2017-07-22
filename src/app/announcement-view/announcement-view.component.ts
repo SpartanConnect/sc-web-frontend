@@ -5,7 +5,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { AnnouncementsService } from '../_services/announcements.service';
 import { AuthService } from '../_services/auth.service';
-import { Announcement } from '../models/announcement';
+import { Announcement } from '../_models/announcement';
 
 @Component({
     selector: 'app-announcement-view',

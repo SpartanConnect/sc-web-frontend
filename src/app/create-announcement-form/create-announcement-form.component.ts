@@ -8,8 +8,8 @@ import { TagsService } from '../_services/tags.service';
 
 import { ConfirmLeaveGuard, ComponentCanDeactivate } from '../_guards/confirmleave.guard';
 
-import { Tag } from '../models/tag';
-import { API_BASE, postHandler } from '../models/api';
+import { Tag } from '../_models/tag';
+import { API_BASE, postHandler } from '../_models/api';
 
 import * as moment from 'moment';
 

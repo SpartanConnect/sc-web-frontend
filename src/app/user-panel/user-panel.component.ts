@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AnnouncementsService } from '../_services/announcements.service';
 import { AuthService } from '../_services/auth.service';
-import { Announcement } from '../models/announcement';
-import { USER_PANEL_VIEW } from '../models/userview';
+import { Announcement } from '../_models/announcement';
+import { USER_PANEL_VIEW } from '../_models/userview';
 
 @Component({
   selector: 'app-user-panel',

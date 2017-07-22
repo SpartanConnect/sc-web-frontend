@@ -3,8 +3,8 @@ import { MdSnackBar } from '@angular/material';
 
 import { AnnouncementsService } from '../_services/announcements.service';
 import { TagsService } from '../_services/tags.service';
-import { Announcement } from '../models/announcement';
-import { Tag } from '../models/tag';
+import { Announcement } from '../_models/announcement';
+import { Tag } from '../_models/tag';
 
 @Component({
   selector: 'app-index-view',
@@ -20,7 +20,7 @@ export class IndexViewComponent implements OnInit {
   categoryFilter = 0;                             // The current category selected.
   sortedAnnouncements = {};                       // An assoc object.
 
-  constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService, private tagsService: TagsService) { }  
+  constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService, private tagsService: TagsService) { }
 
   switchCategoryFilter(id: number) {
       this.categoryFilter = id;

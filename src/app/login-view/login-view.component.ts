@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../_services/auth.service';
-import { API_BASE } from '../models/api';
+import { API_BASE } from '../_models/api';
 
 @Component({
   selector: 'app-login-view',
