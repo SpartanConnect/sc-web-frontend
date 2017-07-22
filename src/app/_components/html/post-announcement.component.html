@@ -1,10 +1,12 @@
-<div class="pac-container" [class.activated]="step !== steps.IS_RESTING">
-    <span class="pac-step-back" (click)="moveBackStep()" *ngIf="step !== steps.STEP_ONE_POST_CREATE && step !== steps.IS_RESTING">GO BACK</span>
+<div class="pac-container" [class.activated]="step !== steps.IS_RESTING" [class.green]="step === steps.SUBMISSION_SUCCESS" *tdLoading="'submissionLoading'; type:'linear'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
+    <span class="pac-step-back" (click)="moveBackStep()" *ngIf="step !== steps.STEP_ONE_POST_CREATE
+        && step !== steps.IS_RESTING && step !== steps.STEP_FIVE_SUBMIT_LOADING
+        && step !== steps.STEP_FIVE_SUBMIT_LOADING && step !== steps.SUBMISSION_SUCCESS">GO BACK</span>
     <div class="pac-steps">
         <div class="pac-step-resting" *ngIf="step === steps.IS_RESTING" (click)="changeStep()">Start writing your announcement here...</div>
         <div class="pac-step-one" *ngIf="step === steps.STEP_ONE_POST_CREATE">
-            <input type="text" [(ngModel)]="announcement.title" class="pac-af-title" placeholder="Come up with a brilliant title..." autofocus="autofocus"><br>
-            <textarea class="pac-af-description" [(ngModel)]="announcement.description" placeholder="Write up an awesome description for your announcement..."></textarea>
+            <input type="text" [(ngModel)]="announcement.title" class="pac-af-title" placeholder="Come up with a brilliant title..." autofocus="autofocus" (keyup)="cacheResponse('ann_title', this.announcement.title)"><br>
+            <textarea class="pac-af-description" [(ngModel)]="announcement.description" placeholder="Write up an awesome description for your announcement..." (keyup)="cacheResponse('ann_description', this.announcement.description)"></textarea>
         </div>
         <div class="pac-step-two" *ngIf="step === steps.STEP_TWO_CATEGORY_ASSIGN">
             <p>
@@ -13,6 +15,88 @@
             </p>
             <div class="pac-e-category" *ngFor="let category of allCategories" [class.selected]="announcement.category === category.id" (click)="setCategory(category.id)">{{category.name}}</div>
         </div>
+        <div class="pac-step-two-grades" *ngIf="step === steps.STEP_TWO_GRADES_ASSIGN">
+            <h3>"{{announcement.title}}" should be viewable by grades...</h3>
+            <div class="pac-e-grades">
+                <div class="pac-e-grade" (click)="toggleGrade(7)" [class.selected]="this.announcement.grades.grade7">7</div>
+                <div class="pac-e-grade" (click)="toggleGrade(8)" [class.selected]="this.announcement.grades.grade8">8</div>
+                <div class="pac-e-grade" (click)="toggleGrade(9)" [class.selected]="this.announcement.grades.grade9">9</div>
+                <div class="pac-e-grade" (click)="toggleGrade(10)" [class.selected]="this.announcement.grades.grade10">10</div>
+                <div class="pac-e-grade" (click)="toggleGrade(11)" [class.selected]="this.announcement.grades.grade11">11</div>
+                <div class="pac-e-grade" (click)="toggleGrade(12)" [class.selected]="this.announcement.grades.grade12">12</div>
+            </div>
+            <p>
+                If a grade level is not selected, then users in that grade will not be notified through the web application.
+                Users of the mobile app will still be able to view your announcement regardless of the grades chosen.
+            </p>
+        </div>
+        <div class="pac-step-three" *ngIf="step === steps.STEP_THREE_DATE_ASSIGN">
+            <p>
+                There are two main modes for choosing when to display an announcement.
+                Select the mode that relates to your announcement.
+            </p>
+            <md-radio-group [(ngModel)]="dateMode">
+                <md-radio-button [value]="dateModes.SHOW_ONE_DAY">I want my announcement to only show on one day.</md-radio-button><br>
+                <md-radio-button [value]="dateModes.SHOW_OVER_RANGE">I want my announcement to show over a period of time.</md-radio-button>
+            </md-radio-group>
+            <div class="pac-e-date-mode" *ngIf="dateMode === dateModes.SHOW_ONE_DAY">
+                <p></p>
+                <md-input-container>
+                    <input mdInput [mdDatepicker]="announceOneStartDate" placeholder="Date" [(ngModel)]="announcement.omniDate">
+                    <button mdSuffix [mdDatepickerToggle]="announceOneStartDate"></button>
+                </md-input-container>
+                <md-datepicker #announceOneStartDate></md-datepicker><br>
+            </div>
+            <div class="pac-e-date-mode" *ngIf="dateMode === dateModes.SHOW_OVER_RANGE">
+                <md-input-container>
+                    <input mdInput [mdDatepicker]="announceRangeStartDate" placeholder="Start Date" [(ngModel)]="announcement.startDate">
+                    <button mdSuffix [mdDatepickerToggle]="announceRangeStartDate"></button>
+                </md-input-container>
+                <md-datepicker #announceRangeStartDate></md-datepicker>
+                <md-input-container>
+                    <input mdInput [mdDatepicker]="announceRangeEndDate" placeholder="End Date" [(ngModel)]="announcement.endDate">
+                    <button mdSuffix [mdDatepickerToggle]="announceRangeEndDate"></button>
+                </md-input-container>
+                <md-datepicker #announceRangeEndDate></md-datepicker>
+            </div>
+            <p>At the moment, we do not support a mode for displaying an announcement periodically.</p>
+        </div>
+        <div class="pac-step-four" *ngIf="step === steps.STEP_FOUR_EVENTS_CREATION">
+            <md-icon style="font-size: 36px;">event</md-icon>
+            <h3>Events for Spartan Connect are coming soon.</h3>
+            <p>
+                Events are a new way for students to stay updated with the latest announcements.
+                Attach an event or deadline to an announcement and subscribed users will automatically be notified.
+                This feature is perfect for assigning urgent deadlines or reminding users on the latest school dance.
+            </p>
+            <p>
+                Events will roll out over the first quarter of the 2017-2018 school year.
+            </p>
+            <p>Select <b>CONTINUE</b> to confirm your announcement submission.</p>
+        </div>
+        <div class="pac-step-confirm" *ngIf="step === steps.STEP_FIVE_SUBMIT_CONFIRMATION || step === steps.STEP_FIVE_SUBMIT_LOADING || step === steps.STEP_FIVE_SUBMISSION_FAILURE">
+            <p>Please confirm that all announcement details are correct. You may go back and edit any values before submitting.</p>
+            <md-card class="card-announcement">
+                <md-card-header>
+                    <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
+                    <md-card-title>{{announcement.creatorName}} (You)</md-card-title>
+                    <md-card-subtitle *ngIf="dateMode === dateModes.SHOW_ONE_DAY">Displaying on {{(announcement.omniDate | date:'yMd') || "(no date)"}}</md-card-subtitle>
+                    <md-card-subtitle *ngIf="dateMode === dateModes.SHOW_OVER_RANGE">Displaying from {{(announcement.startDate | date:'yMd') || "(no start date)"}} to {{(announcement.endDate | date:'yMd') || "(no end date)"}}</md-card-subtitle>
+                </md-card-header>
+                <md-card-content style="margin-bottom: 0">
+                    <h3>{{announcement.title || "(no title)"}}</h3>
+                    <p>{{announcement.description || "(no description)"}}</p>
+                    <md-chip-list *ngIf="selectedTags && stepNumber === 5">
+                        <md-chip *ngFor="let tag of selectedTags">{{tag.name}}</md-chip>
+                    </md-chip-list>
+                </md-card-content>
+                <md-card-actions>
+                    <button md-button>READ MORE</button>
+                    <button md-button>EDIT</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+        <div class="pac-step-success" *ngIf="step === steps.SUBMISSION_SUCCESS" (click)="reloadPage()">Your announcement has been successfully submitted. Click to reload.</div>
     </div>
     <div class="pac-footer" *ngIf="step !== steps.IS_RESTING && step !== steps.SUBMISSION_SUCCESS" [class.success]="validateForm(this.step)" (click)="changeStep()">
         <span class="pac-step-counter"><b>{{currentStepCounter}}</b></span>

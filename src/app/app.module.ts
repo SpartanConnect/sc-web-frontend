@@ -10,7 +10,7 @@ import {    MdInputModule, MdButtonModule,
             MdSelectModule, MdCardModule,
             MdProgressSpinnerModule, MdDatepickerModule,
             MdNativeDateModule, MdChipsModule,
-            MdCheckboxModule } from '@angular/material';
+            MdCheckboxModule, MdRadioModule } from '@angular/material';
 import {    CovalentDataTableModule, CovalentPagingModule,
             CovalentCommonModule, CovalentSearchModule,
             CovalentMessageModule, TdDialogService,
@@ -84,6 +84,7 @@ const appRoutes: Routes = [
     MdNativeDateModule,
     MdChipsModule,
     MdCheckboxModule,
+    MdRadioModule,
     CovalentDataTableModule,
     CovalentPagingModule,
     CovalentCommonModule,
