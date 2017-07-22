@@ -109,8 +109,8 @@
                 <md-card-content style="margin-bottom: 0">
                     <h3>{{announcement.title || "(no title)"}}</h3>
                     <p>{{announcement.description || "(no description)"}}</p>
-                    <md-chip-list *ngIf="announcement.tagsStrings">
-                        <md-chip *ngFor="let tag of announcement.tagsStrings">{{tag}}</md-chip>
+                    <md-chip-list *ngIf="selectedTags && stepNumber === 5">
+                        <md-chip *ngFor="let tag of selectedTags">{{tag.name}}</md-chip>
                     </md-chip-list>
                 </md-card-content>
                 <md-card-actions>

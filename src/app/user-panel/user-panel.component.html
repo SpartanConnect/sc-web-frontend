@@ -46,6 +46,7 @@
                     <md-card-subtitle>created this {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
                 </md-card-header>
                 <md-card-content>
+                    <app-cx-status-tag [announcement]="announcement"></app-cx-status-tag>
                     <h3>{{announcement.title}}</h3>
                     <p>{{announcement.description}}</p>
                 </md-card-content>

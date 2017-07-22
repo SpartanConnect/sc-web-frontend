@@ -48,6 +48,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     success: boolean = false;
     loading: boolean = false;
     allTags: Tag[] = [];
+    selectedTags: Tag[] = [];
     submissionMessage = 'There was an error in submitting your announcement.';
 
     allCategories: Tag[] = [];
@@ -96,6 +97,9 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     // so this is the solution to that.
     setStepNumber(step: number) {
         this.stepNumber = step;
+        if (step === 5) {
+            this.selectedTags = this.returnTagsArray();
+        }
     }
 
     // Validates the entire form or "by step".
@@ -245,7 +249,7 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         if (this.announcement.grades.grade11) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade11')[0]);
         if (this.announcement.grades.grade12) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade12')[0]);
         if (this.announcement.isUrgent) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'urgent')[0]);
-        tagsArray.push(this.allTags.filter((tag) => tag.id === this.announcement.category)[0]);
+        if (this.announcement.category) tagsArray.push(this.allTags.filter((tag) => tag.id === this.announcement.category)[0]);
         return tagsArray;
         // tslint:enable:curly
     }

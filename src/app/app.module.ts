@@ -27,6 +27,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
 import { LoginViewComponent } from './login-view/login-view.component';
+import { StatusTagComponent } from './_components/status-tag.component';
 
 import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
@@ -60,7 +61,8 @@ const appRoutes: Routes = [
     AdminPanelComponent,
     PageNotFoundComponent,
     CreateAnnouncementFormComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    StatusTagComponent
   ],
   imports: [
     BrowserModule,
