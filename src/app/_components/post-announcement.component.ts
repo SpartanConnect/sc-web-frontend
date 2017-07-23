@@ -81,6 +81,7 @@ export class PostAnnouncementComponent implements OnInit {
 
     allTags: Tag[];
     allCategories: Tag[];
+    selectedTags: Tag[];
 
     step = AnnouncementStep.IS_RESTING;
     steps = AnnouncementStep;
@@ -150,6 +151,7 @@ export class PostAnnouncementComponent implements OnInit {
                     this.announcement.creatorName = user.name;
                     this.announcement.creatorId = user.id;
                 });
+                this.selectedTags = this.returnTagsArray();
             }
             // Make sure user doesn't normally proceed when on confirmation stage
             if (this.step === AnnouncementStep.STEP_FIVE_SUBMIT_CONFIRMATION
