@@ -29,23 +29,10 @@
             </div>
             <div *ngIf="(category.id === categoryFilter || !categoryFilter) && sortedAnnouncements[category.slug].length">
                 <h2 style="padding: 10px 20px;">{{category.name}}</h2>
-                <md-card class="card-announcement" *ngFor="let announcement of sortedAnnouncements[category.slug]">
-                    <md-card-header>
-                        <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
-                        <md-card-title>{{announcement.creator.name}}</md-card-title>
-                        <md-card-subtitle>created on {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
-                    </md-card-header>
-                    <md-card-content>
-                        <h3>{{announcement.title}}</h3>
-                        <p>{{announcement.description}}</p>
-                        <md-chip-list *ngIf="announcement.tags">
-                            <md-chip *ngFor="let tag of announcement.tags">{{tag.name}} (#{{tag.slug}})</md-chip>
-                        </md-chip-list>
-                    </md-card-content>
-                    <md-card-actions>
-                        <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
-                    </md-card-actions>
-                </md-card>
+                <div *ngFor="let announcement of sortedAnnouncements[category.slug]">
+                    <span>{{announcement.name}}</span>
+                    <app-announcement mode="compact" [announcement]="announcement" [routerLink]="['/view', announcement.id]"></app-announcement>
+                </div>
             </div>
         </div>
     </div>

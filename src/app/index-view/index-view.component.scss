@@ -76,6 +76,7 @@
   display: flex;
   flex-direction: row;
   margin: 0 auto;
+  padding-bottom: 40px;
 
   md-card-content {
     margin: 0;
@@ -88,8 +89,9 @@
     flex-grow: 1;
     height: 100%;
     margin: 10px 10px;
+    max-width: 300px;
     width: 250px;
-    
+
     ul {
       background-color: mat-color($spartan-app-primary);
       display: inline-flex;
@@ -114,9 +116,9 @@
         }
       }
     }
-    
+
   }
-  
+
   .index-body-announcements {
     display: inline-flex;
     flex-direction: column;
