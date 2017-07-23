@@ -1,0 +1,22 @@
+<div class="card-announcement" [class.compact]="mode === 'compact'" (click)="clickHandler()">
+    <div class="card-a-header">
+        <b>FROM #(replace with subject)</b>
+        <span class="card-a-fac">SUBSCRIBE</span>
+    </div>
+    <div class="card-a-content">
+        <h3 class="card-a-title">{{announcement.title}}</h3>
+        <div class="card-a-title-tag" *ngIf="mode === 'compact' || mode === 'adminpanel'">#(replace with subject)</div>
+        <p class="card-a-description" *ngIf="mode !== 'compact' && mode !== 'adminpanel'">{{announcement.description}}</p>
+    </div>
+    <div class="card-a-footer">
+        <span class="card-a-footnote">
+            <b>POSTED BY</b>
+            <span class="card-a-creator">{{announcement.creator.name}}</span>
+        </span>
+        <span class="card-a-footnote margin-push">
+            <b>{{recentActionWord}}</b>
+            <span>{{recentActionDate | timeAgo}}</span>
+        </span>
+    </div>
+    <div class="card-a-float-action" *ngIf="mode === 'compact' || mode === 'adminpanel'">READ MORE</div>
+</div>

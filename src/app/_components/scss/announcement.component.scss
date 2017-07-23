@@ -1,0 +1,131 @@
+// Import Material theme
+@import '~@angular/material/theming';
+@import 'src/spartan-theme.scss';
+
+.card-announcement {
+  background-color: #fefefe;
+  // border-radius: 4px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  cursor: default;
+  display: block;
+  margin: 10px 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+// Card's "header": (the FROM part)
+.card-a-header {
+  background-color: mat-color($spartan-app-primary);
+  color: #fefefe;
+  font-size: 14px;
+  padding: 12px 20px;
+}
+
+// Front Action Click (eg. the subscribe button)
+.card-a-fac {
+  border: 1px solid #fefefe;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 11px;
+  margin: 0 10px;
+  min-width: 50px;
+  padding: 3px 6px;
+  transition: all 150ms ease;
+
+  &:hover {
+    background-color: lighten(mat-color($spartan-app-primary), 5%);
+    transition: all 150ms ease;
+  }
+
+  &.selected {
+    background-color: #fefefe;
+    color: darken(mat-color($spartan-app-primary), 5%);
+    transition: all 150ms ease;
+  }
+}
+
+// Title and description
+.card-a-content {
+  padding: 8px 20px;
+
+  .card-a-title {
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  .card-a-description {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .card-a-title-tag {
+    background-color: #aaa;
+    border-radius: 4px;
+    color: #fefefe;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0 10px;
+    padding: 4px 10px;
+  }
+}
+
+.card-a-footer {
+  padding: 8px 20px;
+  padding-bottom: 16px;
+
+  .card-a-footnote {
+    font-size: 12px;
+    text-transform: uppercase;
+
+    &.margin-push {
+      margin-left: 40px;
+    }
+  }
+
+  .card-a-creator {
+    text-transform: none;
+  }
+}
+
+.compact {
+  border-left: 5px solid mat-color($spartan-app-primary);
+  box-shadow: none;
+  cursor: pointer;
+  .card-a-header {
+    display: none;
+  }
+  .card-a-title {
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0;
+  }
+  .card-a-content {
+    padding-top: 16px;
+  }
+  .card-a-footer {
+    padding-top: 2px;
+    padding-bottom: 16px;
+  }
+
+  &:hover {
+    .card-a-title {
+      text-decoration: underline;
+    }
+    .card-a-float-action {
+      opacity: 1;
+      right: 20px;
+      transition: all 150ms ease;
+    }
+  }
+}
+
+.card-a-float-action {
+  bottom: 18px;
+  font-size: 12px;
+  font-weight: bold;
+  opacity: 0;
+  position: absolute;
+  right: 30px;
+  transition: all 150ms ease;
+}

@@ -29,6 +29,7 @@ import { CreateAnnouncementFormComponent } from './create-announcement-form/crea
 import { LoginViewComponent } from './login-view/login-view.component';
 import { StatusTagComponent } from './_components/status-tag.component';
 import { PostAnnouncementComponent } from './_components/post-announcement.component';
+import { AnnouncementComponent } from './_components/announcement.component';
 
 import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
     LoginViewComponent,
     StatusTagComponent,
     PostAnnouncementComponent,
-    AnnouncementAllViewComponent
+    AnnouncementAllViewComponent,
+    AnnouncementComponent
   ],
   imports: [
     BrowserModule,
