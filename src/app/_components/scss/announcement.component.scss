@@ -98,7 +98,9 @@
   }
   .card-a-title {
     cursor: pointer;
+    display: inline;
     font-size: 18px;
+    line-height: 1.5;
     margin: 0;
   }
   .card-a-content {

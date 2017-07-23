@@ -14,8 +14,6 @@ import { Tag } from '../_models/tag';
 export class IndexViewComponent implements OnInit {
 
     announcements: Announcement[] = [];             // All announcements
-    announcementsSliced: Announcement[] = [];       // The header's first eight announcements
-    announcementHighlight: Announcement = null;     // The first announcement
     categories: Tag[] = [];                         // All categories
     categoryFilter = 0;                             // The current category selected.
     sortedAnnouncements = {};                       // An assoc object.
@@ -29,8 +27,6 @@ export class IndexViewComponent implements OnInit {
     ngOnInit() {
         const announcementPromise = this.announcementsService.getCurrentAnnouncements().then((data) => {
             this.announcements = data;
-            this.announcementsSliced = this.announcements.slice(0, 8);
-            this.announcementHighlight = this.announcements[0];
         });
         const tagsPromise = this.tagsService.getCategories().then((data) => {
             this.categories = data;
