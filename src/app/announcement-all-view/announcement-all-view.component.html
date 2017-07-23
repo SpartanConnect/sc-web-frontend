@@ -11,7 +11,8 @@
     <br>
     <button md-button routerLink="/home" style="display: block; margin: 0 auto;">RETURN TO HOME PAGE</button>
     <br>
-    <md-card class="card-announcement" *ngFor="let announcement of announcements">
+    <app-announcement *ngFor="let announcement of announcements" [announcement]="announcement" mode="archive"></app-announcement>
+    <!--<md-card class="card-announcement" *ngFor="let announcement of announcements">
         <md-card-header>
             <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
             <md-card-title>{{announcement.creator.name}}</md-card-title>
@@ -21,7 +22,7 @@
             <h3>{{announcement.title}}</h3>
             <p>{{announcement.description}}</p>
         </md-card-content>
-    </md-card>
+    </md-card>-->
     <br>
     <button md-button routerLink="/home">RETURN TO HOME PAGE</button>
     <br>

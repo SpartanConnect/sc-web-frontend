@@ -35,6 +35,7 @@ export class IndexViewComponent implements OnInit {
             });
         });
 
+        // Sort announcements by category for viewing
         Promise.all([announcementPromise, tagsPromise]).then(() => {
             this.announcements.map((announcement) => {
                 announcement.tags.map((tag) => {
