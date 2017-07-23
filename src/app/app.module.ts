@@ -40,12 +40,14 @@ import { AdminOnlyGuard } from './_guards/adminonly.guard';
 import { ConfirmLeaveGuard } from './_guards/confirmleave.guard';
 
 import 'hammerjs';
+import { AnnouncementAllViewComponent } from './announcement-all-view/announcement-all-view.component';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
   { path: 'me', component: UserPanelComponent, canActivate: [UserOnlyGuard] },
   { path: 'me/create', component: CreateAnnouncementFormComponent, canActivate: [UserOnlyGuard], canDeactivate: [ConfirmLeaveGuard] },
   { path: 'home', component: IndexViewComponent },
+  { path: 'view/archived', component: AnnouncementAllViewComponent},
   { path: 'view/:id', component: AnnouncementViewComponent},
   { path: 'login', component: LoginViewComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -64,7 +66,8 @@ const appRoutes: Routes = [
     CreateAnnouncementFormComponent,
     LoginViewComponent,
     StatusTagComponent,
-    PostAnnouncementComponent
+    PostAnnouncementComponent,
+    AnnouncementAllViewComponent
   ],
   imports: [
     BrowserModule,

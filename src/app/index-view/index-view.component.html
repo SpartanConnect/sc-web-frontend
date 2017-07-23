@@ -17,8 +17,10 @@
             <li *ngFor="let category of categories" (click)="switchCategoryFilter(category.id)" [class.active]="categoryFilter === category.id">{{category.name}}</li>
             <li *ngIf="categoryFilter" (click)="switchCategoryFilter(0)">View All</li>
         </ul>
+        <br>
+        <small routerLink="/view/archived" style="display: inline-block; padding: 10px 10px; cursor: pointer; color: #999;" *ngIf="announcements.length">View Archive</small>
     </div>
-    
+
     <div class="index-body-announcements">
         <div *ngFor="let category of categories">
             <div *ngIf="!sortedAnnouncements[category.slug].length && category.id === categoryFilter">
