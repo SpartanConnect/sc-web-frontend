@@ -1,5 +1,5 @@
 <div style="padding-top: 20px;">
-    <div class="card-spotlight">
+    <div class="card-spotlight" *ngIf="!currentUser.isAuthenticated">
         <h1 class="card-spotlight-emoji">👋</h1>
         <h3>Say goodbye to PA announcements.</h3>
         <p>

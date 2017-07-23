@@ -3,6 +3,7 @@ import { MdSnackBar } from '@angular/material';
 
 import { AnnouncementsService } from '../_services/announcements.service';
 import { TagsService } from '../_services/tags.service';
+import { AuthService } from '../_services/auth.service';
 import { Announcement } from '../_models/announcement';
 import { Tag } from '../_models/tag';
 
@@ -17,8 +18,10 @@ export class IndexViewComponent implements OnInit {
     categories: Tag[] = [];                         // All categories
     categoryFilter = 0;                             // The current category selected.
     sortedAnnouncements = {};                       // An assoc object.
+    currentUser = this.authService.currentUser;
 
-    constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService, private tagsService: TagsService) { }
+    constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService,
+                private tagsService: TagsService, private authService: AuthService) { }
 
     switchCategoryFilter(id: number) {
         this.categoryFilter = id;
@@ -46,6 +49,8 @@ export class IndexViewComponent implements OnInit {
                 });
             });
         });
+
+        this.currentUser = this.authService.currentUser;
     }
 
 }
