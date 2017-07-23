@@ -1,8 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import { User } from '../models/user';
-import { API_BASE, httpHandler } from '../models/api';
+import { User } from '../_models/user';
+import { API_BASE, httpHandler } from '../_models/api';
 
 // NOTICE: This does not contain any authentication code.
 // Instead, it simply provides easy access to user data.

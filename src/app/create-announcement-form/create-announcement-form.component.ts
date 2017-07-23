@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Http } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
 import { TdDialogService } from '@covalent/core';
 
@@ -7,7 +8,8 @@ import { TagsService } from '../_services/tags.service';
 
 import { ConfirmLeaveGuard, ComponentCanDeactivate } from '../_guards/confirmleave.guard';
 
-import { Tag } from '../models/tag';
+import { Tag } from '../_models/tag';
+import { API_BASE, postHandler } from '../_models/api';
 
 import * as moment from 'moment';
 
@@ -26,7 +28,9 @@ interface AnnouncementInput {
     startDate: any;
     endDate: any;
     creatorName: string;
+    creatorId: number;
     tagsStrings: string[];
+    category: number;
     isUrgent: boolean;
     grades: AnnouncementGrades;
 }
@@ -44,9 +48,10 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     success: boolean = false;
     loading: boolean = false;
     allTags: Tag[] = [];
-    allTagsStrings: string[] = [];
-    filteredTags: Tag[] = [];
-    filteredTagsStrings: string[] = [];
+    selectedTags: Tag[] = [];
+    submissionMessage = 'There was an error in submitting your announcement.';
+
+    allCategories: Tag[] = [];
 
     announcement: AnnouncementInput = {
         title: '',
@@ -54,7 +59,9 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         startDate: '',
         endDate: '',
         creatorName: '',
+        creatorId: 0,
         tagsStrings: [],
+        category: 0,
         isUrgent: false,
         grades: {
             grade7: false,
@@ -90,43 +97,76 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
     // so this is the solution to that.
     setStepNumber(step: number) {
         this.stepNumber = step;
+        if (step === 5) {
+            this.selectedTags = this.returnTagsArray();
+        }
     }
 
     // Validates the entire form or "by step".
     // Example: running w/o a parameter checks the entire form while
     // running with a step number checks only that step.
     validateForm(step: number = null): boolean {
+        // tslint:disable:curly
         if (this.announcement.title.length < 10 && (step === 1 || step === null)) return false;
         else if (this.announcement.description.length < 10 && (step === 1 || step === null)) return false;
+        // tslint:disable-next-line:max-line-length
         else if (!((this.announcement.startDate instanceof Date) && (this.announcement.endDate instanceof Date)) && (step === 2 || step === null)) return false;
         else if (!moment(this.announcement.startDate.toString()).isValid() && (step === 2 || step === null)) return false;
         else if (!moment(this.announcement.endDate.toString()).isValid() && (step === 2 || step === null)) return false;
         else if (this.announcement.endDate < this.announcement.startDate && (step === 2 || step === null)) return false;
-        else if (!this.announcement.tagsStrings.length && (step === 3 || step === null)) return false;
+        // else if (!this.announcement.tagsStrings.length && (step === 3 || step === null)) return false;
+        else if ((this.announcement.category === 0 || this.announcement.category === null) && (step === 3 || step === null)) return false;
         else if (!this.selectGrades('hasAnySelected') && (step === 3 || step === null)) return false;
         else return true;
+        // tslint:enable:curly
     }
 
     submitForm() {
+        const apiLink = `${API_BASE}/announcements`;
         window.scrollTo(0, 0);
         if (!this.validateForm()) {
-            this.snackbar.open("This form has not been fully completed. Please confirm that all fields are filled in correctly and try again.", "DISMISS", {
+            // tslint:disable-next-line:max-line-length
+            this.snackbar.open('This form has not been fully completed. Please confirm that all fields are filled in correctly and try again.', 'DISMISS', {
                 duration: 5000
             });
         } else {
             this.submitted = false;
             this.loading = true;
             this.success = false;
-            setTimeout(() => {
+            /*setTimeout(() => {
                 this.submitted = true;
                 this.loading = false;
                 this.success = true;
-            }, 1500);
+            }, 1500);*/
+            // tslint:disable-next-line:prefer-const
+            postHandler(this.http, apiLink, {
+                title: this.announcement.title,
+                description: this.announcement.description,
+                creatorId: this.announcement.creatorId,
+                startDate: moment(this.announcement.startDate).format('YYYY-MM-DD'),
+                endDate: moment(this.announcement.endDate).format('YYYY-MM-DD'),
+                tags: this.returnTagsArray()
+            }).then((postData) => {
+                if (postData.success === false) {
+                    this.submitted = true;
+                    this.loading = false;
+                    this.success = false;
+                    this.submissionMessage = 'There was an error in submitting your announcement. Error: ' + postData.reason;
+                } else {
+                    this.submitted = true;
+                    this.loading = false;
+                    this.success = true;
+                }
+            }).catch((error) => {
+                this.submitted = true;
+                this.loading = false;
+                this.success = false;
+            });
         }
     }
 
     // Called when input changed
-    filterTags(val: string): void {
+    /*filterTags(val: string): void {
         this.filteredTags = this.allTags.filter((tag: any) => {
             if (val) {
                 return (tag.name.toLowerCase().indexOf(val.toLowerCase()) > -1) || (tag.slug.toLowerCase().indexOf(val.toLowerCase()) > -1);
@@ -140,10 +180,11 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
         this.filteredTagsStrings = this.filteredTags.map((tag: Tag) => {
             return tag.name;
         })
-    }
+    }*/
 
-    // Select checkboxes
+    // Select checkboxes -- bad design..
     selectGrades(mode: string) {
+        // tslint:disable:curly
         switch (mode) {
             case 'middle':
                 this.announcement.grades.grade7 = true;
@@ -194,36 +235,63 @@ export class CreateAnnouncementFormComponent implements OnInit, ComponentCanDeac
                 if (this.announcement.grades.grade12) return true;
                 return false;
         }
+        // tslint:enable:curly
+    }
+
+    returnTagsArray() {
+        // tslint:disable:curly
+        const tagsArray = [];
+        // Redesign some time soon with regex?
+        if (this.announcement.grades.grade7) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade7')[0]);
+        if (this.announcement.grades.grade8) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade8')[0]);
+        if (this.announcement.grades.grade9) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade9')[0]);
+        if (this.announcement.grades.grade10) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade10')[0]);
+        if (this.announcement.grades.grade11) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade11')[0]);
+        if (this.announcement.grades.grade12) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'grade12')[0]);
+        if (this.announcement.isUrgent) tagsArray.push(this.allTags.filter((tag) => tag.slug === 'urgent')[0]);
+        if (this.announcement.category) tagsArray.push(this.allTags.filter((tag) => tag.id === this.announcement.category)[0]);
+        return tagsArray;
+        // tslint:enable:curly
     }
 
     confirmUrgency() {
-        this.dialogService.openConfirm({
-            disableClose: true,
-            title: "Don't cry wolf!",
-            message: "The urgent tag is only reserved for announcements that contain critical and time-sensitive information. By accepting this dialog, you agree that your announcement is indeed urgent."
-        }).afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed) {
-                this.snackbar.open("Your announcement is now marked as urgent.", "DISMISS", {
-                    duration: 5000
-                });
-            } else {
-                this.announcement.isUrgent = false;
-            }
-        });
+        // tslint:disable:max-line-length
+        if (!this.announcement.isUrgent) {
+            this.dialogService.openConfirm({
+                disableClose: true,
+                title: 'Don\'t cry wolf!',
+                message: 'The urgent tag is only reserved for announcements that contain critical and time-sensitive information. By accepting this dialog, you agree that your announcement is indeed urgent.'
+            }).afterClosed().subscribe((confirmed: boolean) => {
+                if (confirmed) {
+                    this.snackbar.open('Your announcement is now marked as urgent.', 'DISMISS', {
+                        duration: 5000
+                    });
+                } else {
+                    this.announcement.isUrgent = false;
+                }
+            });
+        }
+        // tslint:enable:max-line-length
     }
 
-    constructor(private authService: AuthService, private tagsService: TagsService, private dialogService: TdDialogService, private snackbar: MdSnackBar) { }
+    closeErrorDialog() {
+        this.submitted = false;
+    }
+
+    constructor(private authService: AuthService, private tagsService: TagsService,
+            private dialogService: TdDialogService, private snackbar: MdSnackBar,
+            private http: Http) { }
 
     ngOnInit() {
         this.authService.getUser().then((user) => {
             this.announcement.creatorName = user.name;
+            this.announcement.creatorId = user.id;
         });
-        this.tagsService.getVisibleTags().then((data) => {
+        this.tagsService.getTags().then((data) => {
             this.allTags = data;
-            this.allTagsStrings = this.allTags.map((tag) => {
-                return tag.name;
-            });
-            this.filterTags('');
+        });
+        this.tagsService.getCategories().then((categories) => {
+            this.allCategories = categories;
         })
     }
 

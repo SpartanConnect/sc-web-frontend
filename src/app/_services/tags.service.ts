@@ -1,8 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import { Tag } from '../models/tag';
-import { API_BASE, httpHandler } from '../models/api';
+import { Tag } from '../_models/tag';
+import { API_BASE, httpHandler } from '../_models/api';
 
 @Injectable()
 export class TagsService implements OnInit {
@@ -26,7 +26,11 @@ export class TagsService implements OnInit {
 
     getCategories(): Promise<Tag[]> {
         const apiLink = `${API_BASE}/tags?visibility=1&parentId=0`;
-        return httpHandler(this.http, apiLink);
+        return httpHandler(this.http, apiLink).then((data) => {
+            return data.filter((category) => {
+                return category.slug !== 'urgent';
+            });
+        });
     }
 
     constructor(private http: Http) { }

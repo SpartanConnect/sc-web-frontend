@@ -12,7 +12,7 @@ import {    ITdDataTableColumn,
 import { AnnouncementsService } from '../_services/announcements.service';
 import { TagsService } from '../_services/tags.service';
 import { UsersService } from '../_services/users.service';
-import { ANNOUNCEMENT_COLUMNS, TAG_COLUMNS, USER_COLUMNS } from '../models/datatable';
+import { ANNOUNCEMENT_COLUMNS, TAG_COLUMNS, USER_COLUMNS } from '../_models/datatable';
 
 @Component({
   selector: 'app-admin-panel',

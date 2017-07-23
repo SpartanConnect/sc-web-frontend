@@ -1,0 +1,265 @@
+.pac-container {
+  background-color: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  cursor: default;
+  margin: 10px 0;
+  min-height: 50px;
+  transition: all 150ms ease;
+  width: 100%;
+
+  &:hover {
+    box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.1);
+    transition: all 150ms ease;
+  }
+
+  &.activated {
+    box-shadow: 0 2px 12px 4px rgba(0, 0, 0, 0.1);
+    min-height: 200px;
+    transition: all 150ms ease;
+
+    .pac-af-description {
+      min-height: 150px;
+      transition: all 150ms ease;
+    }
+  }
+
+  &.green {
+    background-color: #2ecc71;
+    color: #fdfdfd;
+    cursor: pointer;
+    font-size: 14px;
+    min-height: 50px;
+    transition: all 150ms ease;
+
+    &:hover {
+      background-color: #27ae60;
+      transition: all 150ms ease;
+    }
+  }
+}
+
+.pac-steps {
+  cursor: default;
+
+  .pac-step-resting {
+    color: #aaa;
+    cursor: text;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 300;
+    padding: 16px 25px;
+  }
+
+  .pac-step-one {
+    cursor: text;
+  }
+
+  .pac-step-two, .pac-step-three {
+    padding: 16px 25px;
+  }
+
+  .pac-step-two-grades {
+    text-align: center;
+    padding: 10px 20px;
+  }
+
+  .pac-step-four {
+    text-align: center;
+    padding: 10px 45px;
+  }
+
+  .pac-step-confirm {
+    padding: 10px 25px;
+    p {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .pac-step-success {
+    cursor: pointer;
+    padding: 16px 25px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.25;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+  }
+}
+
+// Input reset
+input[type="text"], textarea {
+  background-color: #fdfdfd;
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+  padding: 12px 25px;
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+}
+
+.pac-af-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.pac-af-description {
+  font-size: 14px;
+  min-height: 0;
+  transition: all 150ms ease;
+}
+
+.pac-footer {
+  color: #666;
+  cursor: default;
+  display: block;
+  padding: 14px 0;
+  transition: all 150ms ease;
+
+  &.success {
+    background-color: #2ecc71;
+    color: #fdfdfd;
+    cursor: pointer;
+    transition: all 150ms ease;
+
+    & .pac-step-validator {
+      font-weight: bold;
+    }
+
+    &:hover {
+      background-color: #27ae60;
+      transition: all 150ms ease;
+    }
+  }
+
+  &.error {
+    background-color: #e74c3c;
+    color: #fdfdfd;
+  }
+}
+
+.pac-step-counter {
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 25px;
+}
+
+.pac-step-validator {
+  float: right;
+  font-size: 12px;
+  margin-right: 20px;
+  margin-top: 2px;
+
+  md-icon {
+    cursor: pointer;
+    font-size: 18px;
+  }
+}
+
+.pac-step-back {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 25px;
+  margin-top: 16px;
+}
+
+.pac-e-category {
+  background-color: #ccc;
+  border: 5px solid #ccc;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  margin: 5px auto;
+  padding: 10px 0;
+  text-align: center;
+  transform: scale(1);
+  transition: all 150ms ease;
+  width: 80%;
+
+  &:hover {
+    background-color: #aaa;
+    border: 5px solid #aaa;
+    transition: all 150ms ease;
+  }
+
+  &.selected {
+    background-color: #27ae60;
+    border: 5px solid #27ae60;
+    color: #fdfdfd;
+    transform: scale(1.1);
+    transition: all 150ms ease;
+  }
+}
+
+.pac-e-grades {
+  display: block;
+  margin: 10px auto;
+}
+
+.pac-e-grade {
+  background-color: #aaa;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 2px;
+  padding: 8px 4px;
+  text-align: center;
+  transform: scale(1);
+  transition: all 150ms ease;
+  width: 30px;
+
+  &.selected {
+    background-color: #27ae60;
+    color: #fdfdfd;
+    transform: scale(1.2);
+    transition: all 150ms ease;
+  }
+}
+
+.pac-e-date-mode {
+  md-input-container {
+    margin: 0 10px;
+  }
+}
+
+.pac-e-alert {
+  background-color: #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 10px;
+  padding: 4px 6px;
+  width: 150px;
+
+  &:hover {
+    background-color: #aaa;
+  }
+}
+
+md-radio-group {
+  display: block;
+  margin: 10px 0;
+  md-radio-button {
+    margin: 2px 0;
+
+    &.mat-radio-checked {
+      font-weight: bold;
+    }
+  }
+}
