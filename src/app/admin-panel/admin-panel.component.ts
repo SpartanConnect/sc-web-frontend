@@ -94,7 +94,6 @@ export class AdminPanelComponent implements OnInit {
     }
 
     openInfoDialog(clickEvent: ITdDataTableRowClickEvent): void {
-        console.log(clickEvent);
         let message = "Viewing Information\n";
         if (clickEvent.row.name) {          // User object
             message += "Name: "+clickEvent.row.name+"\n";
