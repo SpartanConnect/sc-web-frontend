@@ -30,21 +30,3 @@
         <md-icon>exit_to_app</md-icon> <span>Log Out</span>
     </div>
 </nav>
-<!--
-<header>
-    <div class="header-bar-heading" (click)="redirectToHome()">
-        <div class="header-bar-image"></div>
-        <div class="header-bar-text">
-            <h3>La Cañada High School</h3>
-            <h1><span class="color-text-primary">Spartan</span> <span class="color-text-accent">Connect</span></h1>
-        </div>
-    </div>
-    <nav class="header-bar-nav">
-        <a routerLink="/home" routerLinkActive="active">Home</a>
-        <a routerLink="/me" routerLinkActive="active" *ngIf="authService.currentUser.isAuthenticated">User Panel</a>
-        <a routerLink="/admin" routerLinkActive="active" *ngIf="authService.currentUser.isAuthenticated && authService.currentUser.rank <= 2">Admin Panel</a>
-        <a (click)="logout()" *ngIf="authService.currentUser.isAuthenticated">Log Out</a>
-        <a (click)="login()" routerLinkActive="active" *ngIf="!authService.currentUser.isAuthenticated">Log In</a>
-    </nav>
-</header>
--->
