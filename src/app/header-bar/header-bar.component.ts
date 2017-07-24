@@ -11,6 +11,9 @@ import { API_BASE } from '../_models/api';
 })
 export class HeaderBarComponent implements OnInit {
 
+    brandName = 'Spartan Connect';
+    userDropActivated = false;
+
     constructor(public authService: AuthService, private router: Router) {}
 
     redirectToHome() {
@@ -26,6 +29,23 @@ export class HeaderBarComponent implements OnInit {
 
     login() {
         window.location.href = `${API_BASE}/users/login`;
+    }
+
+    handleUserClick() {
+        if (this.authService.currentUser.isAuthenticated) {
+            // Toggle show header
+            if (this.userDropActivated) {
+                this.userDropActivated = false;
+            } else {
+                this.userDropActivated = true;
+            }
+        } else {
+            this.login();
+        }
+    }
+
+    hideDrop() {
+        this.userDropActivated = false;
     }
 
     ngOnInit() {

@@ -1,15 +1,16 @@
 // You can add global styles to this file, and also import other style files
 
-body {
+html, body {
   background-color: #eee;
   font-family: 'Roboto', sans-serif;
   margin: 0;
+  min-width: 960px;     // Temporary until mobile style implemented.
   padding: 0;
 }
 
 .app-container {
   background-color: #eee;
-  margin-top: 115px;
+  margin-top: 60px;
 }
 
 .container {
