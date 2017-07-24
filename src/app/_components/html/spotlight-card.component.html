@@ -2,6 +2,5 @@
     <!-- work around to styling the ng-content is to wrap them in divs with classes -->
     <div class="card-spotlight-emoji"><ng-content select="h1"></ng-content></div>
     <div class="card-spotlight-title"><ng-content select="h3"></ng-content></div>
-    <div class="card-spotlight-description"><ng-content select="p"></ng-content></div>
-    <ng-content select="button"></ng-content>
+    <div class="card-spotlight-description"><ng-content select="[content]"></ng-content></div>
 </div>

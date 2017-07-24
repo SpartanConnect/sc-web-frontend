@@ -57,4 +57,14 @@ html, body {
     margin: 20px 0;
     padding: 0;
   }
+
+  ul {
+    text-align: left;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    li {
+      margin: 5px 0;
+    }
+  }
 }
