@@ -28,6 +28,8 @@ export class HeaderBarComponent implements OnInit {
     }
 
     login() {
+        // Set marker first before leaving.
+        localStorage.setItem('authenticated', '1');
         window.location.href = `${API_BASE}/users/login`;
     }
 
