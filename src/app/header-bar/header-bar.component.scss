@@ -15,6 +15,16 @@ header {
   top: 0;
   width: 100%;
   z-index: 99;
+
+  &::-moz-selection{
+    background-color: transparent;
+    color: #4A4A4A;
+  }
+
+  &::selection {
+    background-color: transparent;
+    color: #4A4A4A;
+  }
 }
 
 // All the header contents should be here
