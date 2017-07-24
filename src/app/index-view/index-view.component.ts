@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
 import { AnnouncementsService } from '../_services/announcements.service';
 import { TagsService } from '../_services/tags.service';
@@ -19,15 +20,18 @@ export class IndexViewComponent implements OnInit {
     categoryFilter = 0;                             // The current category selected.
     sortedAnnouncements = {};                       // An assoc object.
     currentUser = this.authService.currentUser;
+    loggedOut = false;                              // If the user has recently logged out.
 
     constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService,
-                private tagsService: TagsService, private authService: AuthService) { }
+                private tagsService: TagsService, private authService: AuthService,
+                private route: ActivatedRoute) { }
 
     switchCategoryFilter(id: number) {
         this.categoryFilter = id;
     }
 
     ngOnInit() {
+        this.loggedOut = this.route.snapshot.queryParamMap.has('loggedout');
         const announcementPromise = this.announcementsService.getCurrentAnnouncements().then((data) => {
             this.announcements = data;
         });

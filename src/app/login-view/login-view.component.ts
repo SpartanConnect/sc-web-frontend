@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '../_services/auth.service';
 import { API_BASE } from '../_models/api';
@@ -19,7 +19,7 @@ export class LoginViewComponent implements OnInit {
         generalError: [102, 103, 104, 105, 106, 107, 108, 109, 110]
     };
 
-    constructor(private authService: AuthService, private route: ActivatedRoute) { }
+    constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit() {
         this.authStatus = parseInt(this.route.snapshot.queryParamMap.get('authstatus'), undefined);
@@ -27,6 +27,12 @@ export class LoginViewComponent implements OnInit {
             window.location.href = `${API_BASE}/users/login/generate`;
         } else if (this.authStatus === 100) {
             this.authService.initUser();
+        } else if (this.authStatus === 200) {
+            this.router.navigate(['/home'], {
+                queryParams: {
+                    loggedout: true
+                }
+            });
         }
     }
 
