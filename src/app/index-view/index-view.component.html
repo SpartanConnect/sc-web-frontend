@@ -1,12 +1,12 @@
 <div style="padding-top: 20px;">
-    <div class="card-spotlight" *ngIf="loggedOut">
+    <app-spotlight-card *ngIf="loggedOut">
         <h1><md-icon>exit_to_app</md-icon></h1>
         <h3>Logged out.</h3>
         <p>
             You have logged out of Spartan Connect.
         </p>
-    </div>
-    <div class="card-spotlight" *ngIf="!currentUser.isAuthenticated && !loggedOut">
+    </app-spotlight-card>
+    <app-spotlight-card *ngIf="!currentUser.isAuthenticated && !loggedOut">
         <h1 class="card-spotlight-emoji">👋</h1>
         <h3>Say goodbye to PA announcements.</h3>
         <p>
@@ -14,7 +14,7 @@
             and stay connected to the rest. Download our announcements app today on the App Store or on the Play Store.
         </p><br>
         <button md-raised-button routerLink="/login">SIGN UP TODAY</button>
-    </div>
+    </app-spotlight-card>
 </div>
 <div class="index-body">
     <div class="index-body-categories">

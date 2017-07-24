@@ -28,3 +28,33 @@ html, body {
   position: fixed !important;
   right: 40px;
 }
+
+// Spotlight card styles
+.card-spotlight-emoji {
+  h1 {
+    font-size: 48px;
+    margin: 20px 0;
+
+    md-icon {
+      font-size: 48px;  // force 48px on md-icon
+    }
+  }
+}
+
+.card-spotlight-title {
+  font-size: 16px;
+  h3 {
+    margin: 5px 0;
+    padding: 0;
+  }
+}
+
+.card-spotlight-description {
+  font-size: 14px;
+  line-height: 1.35;
+
+  p {
+    margin: 20px 0;
+    padding: 0;
+  }
+}
