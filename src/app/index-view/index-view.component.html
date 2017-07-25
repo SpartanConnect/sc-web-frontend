@@ -18,7 +18,7 @@
         </div>
     </app-spotlight-card>
 </div>
- <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
+<md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
 <div class="index-body" *ngIf="!loading">
     <div class="index-body-categories">
         <h3 class="heading">Categories</h3>
@@ -31,6 +31,16 @@
     </div>
 
     <div class="index-body-announcements">
+        <app-spotlight-card *ngIf="!announcements.length && !loading" style="margin-top: 20px;">
+            <h1 class="card-spotlight-emoji"><md-icon>info</md-icon></h1>
+            <h3>No announcements to display. Weird.</h3>
+            <div content>
+                <p>
+                    It seems like there are no announcements that are currently going on today.
+                    Why not take a look <a routerLink="/view/archived">at the archives</a>?
+                </p>
+            </div>
+        </app-spotlight-card>
         <div *ngFor="let category of categories">
             <div *ngIf="!sortedAnnouncements[category.slug].length && category.id === categoryFilter">
                 <br>
