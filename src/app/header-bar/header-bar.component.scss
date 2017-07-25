@@ -104,6 +104,21 @@ header {
       background-color: transparent;
       color: #4A4A4A;
     }
+
+    &.right {
+      float: right;
+      margin-left: 10px;
+    }
+  }
+
+  .header-user-image {
+    background-size: 100%;
+    border-radius: 16px;
+    float: left;
+    height: 32px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    width: 32px;
   }
 
   &.activated {

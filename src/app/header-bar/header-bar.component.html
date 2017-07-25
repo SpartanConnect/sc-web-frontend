@@ -11,7 +11,9 @@
             <div class="header-search"></div>
             <div class="header-user" (click)="handleUserClick()" [class.activated]="userDropActivated">
                 <span class="header-user-text" *ngIf="!authService.currentUser.isAuthenticated">LOG IN WITH GOOGLE</span>
-                <span class="header-user-text" *ngIf="authService.currentUser.isAuthenticated">{{authService.currentUser.name}}</span>
+                <div class="header-user-image" *ngIf="authService.currentUser.isAuthenticated"
+                    [ngStyle]="{'background-image': 'url('+authService.currentUser.profileUrl+')'}"></div>
+                <span class="header-user-text right" *ngIf="authService.currentUser.isAuthenticated">{{authService.currentUser.name}}</span>
             </div>
         </div>
     </div>
