@@ -24,9 +24,9 @@ export class AuthService implements OnInit {
         });
     }
 
-    initUser(): void {
+    initUser() {
         localStorage.setItem('authenticated', '1');
-        this.getUser();
+        return this.getUser();
         // localStorage.setItem('userId', '2');
         // localStorage.setItem('userEmail', userEmail);
         // localStorage.setItem('userName', userName);

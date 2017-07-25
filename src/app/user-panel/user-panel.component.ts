@@ -15,6 +15,7 @@ export class UserPanelComponent implements OnInit {
 
     public loading = true;
     forbidden: boolean = false;
+    justLoggedIn: boolean = false;
     selectedAnnouncements = [];
     selectedView = USER_PANEL_VIEW.VIEW_RECENT_FEED;
     userPanelViews = USER_PANEL_VIEW;
@@ -24,6 +25,7 @@ export class UserPanelComponent implements OnInit {
     changeView(view: USER_PANEL_VIEW) {
         this.loading = true;
         this.forbidden = false;                         // Stop showing the forbidden warning when changing views
+        this.justLoggedIn = false;
         let promise = null;
         switch (view) {
             case USER_PANEL_VIEW.VIEW_RECENT_FEED:
@@ -60,6 +62,7 @@ export class UserPanelComponent implements OnInit {
     ngOnInit() {
         this.changeView(this.selectedView);
         this.forbidden = (this.route.snapshot.queryParamMap.has('forbidden'));
+        this.justLoggedIn = (this.route.snapshot.queryParamMap.has('loggedin'));
     }
 
 }

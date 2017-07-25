@@ -16,7 +16,8 @@ export class LoginViewComponent implements OnInit {
         successLogin: [100],
         successLogout: [200],
         notLoggedIn: [101],
-        generalError: [102, 103, 104, 105, 106, 107, 108, 109, 110]
+        generalError: [102, 103, 104, 105, 106, 107, 108, 109, 110],
+        incorrectDomain: [109]
     };
 
     constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
@@ -26,7 +27,17 @@ export class LoginViewComponent implements OnInit {
         if (this.authStatus === 101 || !this.authStatus) {
             window.location.href = `${API_BASE}/users/login/generate`;
         } else if (this.authStatus === 100) {
-            this.authService.initUser();
+            this.authService.initUser().then((user) => {
+                if (user.isAuthenticated) {
+                    this.router.navigate(['/me'], {
+                        queryParams: {
+                            loggedin: true
+                        }
+                    });
+                } else {
+                    this.authStatus = 111;
+                }
+            });
         } else if (this.authStatus === 200) {
             this.router.navigate(['/home'], {
                 queryParams: {

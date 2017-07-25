@@ -1,4 +1,4 @@
-<div class="card-spotlight">
+<div class="card-spotlight" [class.compact]="mode === 'compact'">
     <!-- work around to styling the ng-content is to wrap them in divs with classes -->
     <div class="card-spotlight-emoji"><ng-content select="h1"></ng-content></div>
     <div class="card-spotlight-title"><ng-content select="h3"></ng-content></div>

@@ -30,6 +30,38 @@ html, body {
 }
 
 // Spotlight card styles
+
+.card-spotlight {
+  &.compact {
+    .card-spotlight-emoji {
+      display: inline-block;
+      vertical-align: middle;
+      h1, md-icon {
+        display: inline-block;
+        font-size: 14px;
+        margin: 0 5px;
+      }
+      md-icon {
+        font-size: 24px;
+      }
+    }
+    .card-spotlight-title {
+      display: inline-block;
+      font-size: 14px;
+      h3 {
+        font-size: 14px;
+      }
+    }
+    .card-spotlight-description {
+      display: inline-block;
+      font-size: 14px;
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
 .card-spotlight-emoji {
   h1 {
     font-size: 48px;
