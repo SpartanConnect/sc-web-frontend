@@ -21,6 +21,7 @@ export class IndexViewComponent implements OnInit {
     sortedAnnouncements = {};                       // An assoc object.
     currentUser = this.authService.currentUser;
     loggedOut = false;                              // If the user has recently logged out.
+    loading = true;
 
     constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService,
                 private tagsService: TagsService, private authService: AuthService,
@@ -31,6 +32,7 @@ export class IndexViewComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loading = true;
         this.loggedOut = this.route.snapshot.queryParamMap.has('loggedout');
         const announcementPromise = this.announcementsService.getCurrentAnnouncements().then((data) => {
             this.announcements = data;
@@ -52,6 +54,7 @@ export class IndexViewComponent implements OnInit {
                     return true;
                 });
             });
+            this.loading = false;
         });
 
         this.currentUser = this.authService.currentUser;
