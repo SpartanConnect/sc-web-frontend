@@ -19,14 +19,17 @@ export class AdminPanelComponent implements OnInit {
 
     collectedData = {
         users: {
-            all: []
+            all: [],
+            unapproved: [],
+            teachers: []
         },
         tags: {
-            all: []
+            all: [],
+            categories: []
         },
         announcements: {
             all: [],
-            pending: [],
+            unapproved: [],
             current: []
         }
     };
@@ -41,14 +44,21 @@ export class AdminPanelComponent implements OnInit {
             this.announcementsService.getAnnouncements(),
             this.announcementsService.getCurrentAnnouncements(),
             this.tagsService.getTags(),
+            this.tagsService.getCategories(),
             this.usersService.getUsers()
         ]).then((data) => {
             this.collectedData.announcements.all = data[0];
             this.collectedData.announcements.current = data[1];
             this.collectedData.tags.all = data[2];
-            this.collectedData.users.all = data[3];
-
-            this.collectedData.announcements.pending = data[0].filter((a) => {
+            this.collectedData.tags.categories = data[3];
+            this.collectedData.users.all = data[4];
+            this.collectedData.users.teachers = data[4].filter((u) => {
+                return u.rank === 3;
+            });
+            this.collectedData.users.unapproved = data[4].filter((u) => {
+                return u.rank === 4 || u.rank === 99;
+            });
+            this.collectedData.announcements.unapproved = data[0].filter((a) => {
                 return a.status === 0;
             });
             this.loading = false;
