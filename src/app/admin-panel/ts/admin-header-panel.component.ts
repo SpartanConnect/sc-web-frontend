@@ -10,14 +10,16 @@ import { AdminPanelPage } from '../ap-datatypes';
 export class AdminHeaderPanelComponent implements OnInit {
 
     pages = AdminPanelPage;
-    @Output() navigate = new EventEmitter<AdminPanelPage>();
+    @Input() page;
+    @Output() change = new EventEmitter<AdminPanelPage>();
 
     navigateToPage(page) {
-        this.navigate.emit(page);
+        this.page = page;
+        this.change.emit(page);
     }
 
     goBack() {
-        this.navigate.emit(AdminPanelPage.PAGE_OVERVIEW)
+        this.change.emit(AdminPanelPage.PAGE_OVERVIEW);
     }
 
     constructor() { }

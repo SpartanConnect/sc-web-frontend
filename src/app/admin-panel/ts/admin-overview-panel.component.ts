@@ -27,10 +27,12 @@ export class AdminOverviewPanelComponent implements OnInit {
         }
     };
 
-    @Output() navigate = new EventEmitter<AdminPanelPage>();
+    @Input() page;
+    @Output() change = new EventEmitter<AdminPanelPage>();
 
     navigateToPage(page) {
-        this.navigate.emit(page);
+        this.page = page;
+        this.change.emit(page);
     }
 
     constructor() { }
