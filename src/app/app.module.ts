@@ -32,6 +32,8 @@ import { PostAnnouncementComponent } from './_components/post-announcement.compo
 import { AnnouncementComponent } from './_components/announcement.component';
 import { SpotlightCardComponent } from './_components/spotlight-card.component';
 
+import { AdminPanelModule } from './admin-panel/admin-panel.module';
+
 import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
 import { UsersService } from './_services/users.service';
@@ -102,6 +104,7 @@ const appRoutes: Routes = [
     CovalentStepsModule,
     CovalentNotificationsModule,
     CovalentChipsModule,
+    AdminPanelModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

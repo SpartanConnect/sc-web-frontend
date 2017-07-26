@@ -20,7 +20,7 @@
 </div>
 <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
 <div class="index-body" *ngIf="!loading">
-    <div class="index-body-categories">
+    <div class="index-body-categories" *ngIf="announcements.length">
         <h3 class="heading">Categories</h3>
         <ul class="index-body-categories-list">
             <li *ngFor="let category of categories" (click)="switchCategoryFilter(category.id)" [class.active]="categoryFilter === category.id">{{category.name}}</li>
