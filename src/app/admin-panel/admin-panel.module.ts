@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { MdIconModule, MdProgressSpinnerModule } from '@angular/material';
+import { MdIconModule, MdProgressSpinnerModule,
+         MdButtonModule } from '@angular/material';
 
 import { AdminDatatableComponent } from './ts/admin-datatable.component';
 import { AdminHeaderPanelComponent } from './ts/admin-header-panel.component';
@@ -15,7 +16,8 @@ import { AdminPanelComponent } from './admin-panel.component';
         CommonModule,
         FormsModule,
         MdIconModule,
-        MdProgressSpinnerModule
+        MdProgressSpinnerModule,
+        MdButtonModule
     ],
     exports: [],
     declarations: [
