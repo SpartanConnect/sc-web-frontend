@@ -1,0 +1,129 @@
+.overview {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+.overarch {
+  color: #fefefe;
+  display: block;
+  margin: 0 4px;
+  min-height: 300px;
+  overflow: hidden;
+  position: relative;
+  width: 316px;
+
+  .overarch-head {
+    background-color: #1E88E5;
+    cursor: default;
+    margin: 0 8px;
+    overflow: hidden;
+    padding: 14px 25px;
+    position: relative;
+
+    .overarch-head-heading {
+      margin: 0;
+      margin-top: 10px;
+      padding: 0;
+    }
+    .overarch-head-description {
+      font-size: 14px;
+      margin: 10px 0;
+      max-width: 240px;
+      padding: 0;
+    }
+    .overarch-head-background {
+      color: rgba(255, 255, 255, 0.2);
+      cursor: default;
+      font-size: 144px;
+      top: -20px;
+      position: absolute;
+      right: -30px;
+
+      &::-moz-selection{
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      &::selection {
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+  .overarch-cta {
+    background-color: #1565C0;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    margin: 0;
+    .overarch-cta-text {
+      display: block;
+      float: left;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 30px;
+      transition: all 150ms ease;
+    }
+    .overarch-cta-arrow {
+      display: block;
+      float: right;
+      opacity: 0;
+      padding: 8px 35px;
+      padding-left: 0;
+      transition: all 150ms ease;
+    }
+
+    &:hover {
+      .overarch-cta-text {
+        padding: 12px 25px;
+        transition: all 150ms ease;
+      }
+      .overarch-cta-arrow {
+        opacity: 1;
+        padding: 8px 20px;
+        padding-left: 0;
+        transition: all 150ms ease;
+      }
+    }
+  }
+  .overarch-body {
+    background-color: #2196F3;
+    margin: 0 8px;
+    padding: 12px 28px;
+    .overarch-body-list {
+      .overarch-body-list-element {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  &.orange {
+    .overarch-head {
+      background-color: #FB8C00;
+    }
+    .overarch-cta {
+      background-color: #EF6C00;
+    }
+    .overarch-body {
+      background-color: #FF9800;
+    }
+  }
+
+  &.red {
+    .overarch-head {
+      background-color: #E53935;
+    }
+    .overarch-cta {
+      background-color: #C62828;
+    }
+    .overarch-body {
+      background-color: #E53935;
+    }
+  }
+}

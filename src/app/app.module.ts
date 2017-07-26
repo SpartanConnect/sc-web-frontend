@@ -65,7 +65,7 @@ const appRoutes: Routes = [
     IndexViewComponent,
     AnnouncementViewComponent,
     UserPanelComponent,
-    AdminPanelComponent,
+    // AdminPanelComponent,
     PageNotFoundComponent,
     CreateAnnouncementFormComponent,
     LoginViewComponent,

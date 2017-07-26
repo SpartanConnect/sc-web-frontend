@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AdminPanelPage } from '../ap-datatypes';
 
 @Component({
     selector: 'app-admin-overview-panel',
@@ -7,6 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class AdminOverviewPanelComponent implements OnInit {
+    pages = AdminPanelPage;
+
+    @Output() navigate = new EventEmitter<AdminPanelPage>();
+
+    navigateToPage(page) {
+        this.navigate.emit(page);
+    }
+
     constructor() { }
 
     ngOnInit() { }
