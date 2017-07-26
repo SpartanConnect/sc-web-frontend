@@ -1,0 +1,47 @@
+.admin-header-g {
+  display: flex;
+  flex-direction: row;
+}
+
+.admin-header-btn {
+  background-color: #2196F3;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  color: #fefefe;
+  cursor: pointer;
+  height: 150px;
+  margin: 0 10px;
+  padding: 15px 25px;
+  transition: all 150ms ease;
+  width: 300px;
+
+  &:hover {
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
+    transition: all 150ms ease;
+  }
+
+  .admin-header-btn-number {
+    font-size: 48px;
+    font-weight: 400;
+    margin: 5px 0;
+    padding: 0;
+  }
+
+  .admin-header-btn-desc {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 5px;
+  }
+
+  &.blue {
+    background-color: #2196F3;
+  }
+
+  &.orange {
+    background-color: #FF9800;
+  }
+
+  &.red {
+    background-color: #E53935;
+  }
+}

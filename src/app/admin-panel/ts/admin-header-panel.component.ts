@@ -11,7 +11,22 @@ export class AdminHeaderPanelComponent implements OnInit {
 
     pages = AdminPanelPage;
     @Input() page;
+    @Input() data;
     @Output() change = new EventEmitter<AdminPanelPage>();
+    announcementPages = [
+        AdminPanelPage.PAGE_ANNOUNCEMENTS_CURRENT,
+        AdminPanelPage.PAGE_ANNOUNCEMENTS_PENDING,
+        AdminPanelPage.PAGE_ANNOUNCEMENTS_TOTAL
+    ];
+    tagPages = [
+        AdminPanelPage.PAGE_TAGS_ALL,
+        AdminPanelPage.PAGE_TAGS_CATEGORIES,
+    ];
+    userPages = [
+        AdminPanelPage.PAGE_USERS_ALL,
+        AdminPanelPage.PAGE_USERS_TEACHERS,
+        AdminPanelPage.PAGE_USERS_UNAPPROVED
+    ];
 
     navigateToPage(page) {
         this.page = page;

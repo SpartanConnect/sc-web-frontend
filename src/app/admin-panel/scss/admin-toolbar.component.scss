@@ -1,0 +1,30 @@
+.admin-toolbar-actions {
+  background-color: #F9F9F9;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 60px;
+  padding: 0;
+  min-width: 60px;
+
+
+
+  .admin-toolbar-action {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    height: 60px;
+    padding: 18px;
+    width: 60px;
+    transition: all 150ms ease;
+
+    &.admin-toolbar-checkbox {
+      float: left;
+      padding: 20px;
+    }
+
+    &:hover {
+      background-color: #F0F0F0;
+      transition: all 150ms ease;
+    }
+  }
+}

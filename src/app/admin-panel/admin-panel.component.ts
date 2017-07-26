@@ -66,7 +66,90 @@ export class AdminPanelComponent implements OnInit {
     }
 
     navigateChange(page) {
-        this.currentPage = page;
+        let promise;
+        this.loading = true;
+        switch (page) {
+            case AdminPanelPage.PAGE_ANNOUNCEMENTS_CURRENT:
+                promise = this.announcementsService.getCurrentAnnouncements().then((data) => {
+                    this.collectedData.announcements.current = data;
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_ANNOUNCEMENTS_PENDING:
+                promise = this.announcementsService.getAnnouncements().then((data) => {
+                    this.collectedData.announcements.all = data;
+                    this.collectedData.announcements.unapproved = data.filter((a) => {
+                        return a.status === 0;
+                    });
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_ANNOUNCEMENTS_TOTAL:
+                promise = this.announcementsService.getAnnouncements().then((data) => {
+                    this.collectedData.announcements.all = data;
+                    this.collectedData.announcements.unapproved = data.filter((a) => {
+                        return a.status === 0;
+                    });
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_TAGS_ALL:
+                promise = this.tagsService.getTags().then((data) => {
+                    this.collectedData.tags.all = data;
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_TAGS_ALL:
+                promise = this.tagsService.getCategories().then((data) => {
+                    this.collectedData.tags.categories = data;
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_USERS_ALL:
+                promise = this.usersService.getUsers().then((data) => {
+                    this.collectedData.users.all = data;
+                    this.collectedData.users.teachers = data.filter((u) => {
+                        return u.rank === 3;
+                    });
+                    this.collectedData.users.unapproved = data.filter((u) => {
+                        return u.rank === 4;
+                    });
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_USERS_TEACHERS:
+                promise = this.usersService.getUsers().then((data) => {
+                    this.collectedData.users.all = data;
+                    this.collectedData.users.teachers = data.filter((u) => {
+                        return u.rank === 3;
+                    });
+                    this.collectedData.users.unapproved = data.filter((u) => {
+                        return u.rank === 4;
+                    });
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_USERS_UNAPPROVED:
+                promise = this.usersService.getUsers().then((data) => {
+                    this.collectedData.users.all = data;
+                    this.collectedData.users.teachers = data.filter((u) => {
+                        return u.rank === 3;
+                    });
+                    this.collectedData.users.unapproved = data.filter((u) => {
+                        return u.rank === 4;
+                    });
+                    return data;
+                });
+                break;
+            default:
+                promise = new Promise((resolve) => {
+                    resolve(true);
+                });
+        }
+        promise.then((data) => {
+            this.loading = false;
+            this.currentPage = page;
+        });
     }
 
 }

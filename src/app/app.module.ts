@@ -27,9 +27,9 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
 import { LoginViewComponent } from './login-view/login-view.component';
-import { StatusTagComponent } from './_components/status-tag.component';
+// import { StatusTagComponent } from './_components/status-tag.component';
 import { PostAnnouncementComponent } from './_components/post-announcement.component';
-import { AnnouncementComponent } from './_components/announcement.component';
+// import { AnnouncementComponent } from './_components/announcement.component';
 import { SpotlightCardComponent } from './_components/spotlight-card.component';
 
 import { AdminPanelModule } from './admin-panel/admin-panel.module';
@@ -69,10 +69,9 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     CreateAnnouncementFormComponent,
     LoginViewComponent,
-    StatusTagComponent,
+    // StatusTagComponent,
     PostAnnouncementComponent,
     AnnouncementAllViewComponent,
-    AnnouncementComponent,
     SpotlightCardComponent
   ],
   imports: [

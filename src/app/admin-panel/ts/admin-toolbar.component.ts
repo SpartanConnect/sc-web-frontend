@@ -7,7 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class AdminToolbarComponent implements OnInit {
+
+    @Input() page;
+
     constructor() { }
 
     ngOnInit() { }
+
 }
