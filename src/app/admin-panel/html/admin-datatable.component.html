@@ -1,6 +1,6 @@
 <div class="admin-datatables">
     <div class="admin-datatable" *ngIf="announcementPages.indexOf(page) !== -1">
-        <!--<app-announcement *ngFor="let announcement of data"></app-announcement>-->
+        <app-announcement *ngFor="let announcement of data"></app-announcement>
     </div>
     <div class="admin-datatable" *ngIf="tagPages.indexOf(page) !== -1">
 
@@ -8,4 +8,5 @@
     <div class="admin-datatable" *ngIf="userPages.indexOf(page) !== -1">
 
     </div>
+    <i *ngIf="!data.length" style="display: block; margin: 10px auto; color: #888; text-align: center;">Nothing to show.</i>
 </div>

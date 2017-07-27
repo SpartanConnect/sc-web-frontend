@@ -33,6 +33,7 @@ export class AdminPanelComponent implements OnInit {
             current: []
         }
     };
+    datatableData = [];
 
     constructor(
         private authService: AuthService, private announcementsService: AnnouncementsService,
@@ -81,7 +82,9 @@ export class AdminPanelComponent implements OnInit {
                     this.collectedData.announcements.unapproved = data.filter((a) => {
                         return a.status === 0;
                     });
-                    return data;
+                    return data.filter((a) => {
+                        return a.status === 0;
+                    });
                 });
                 break;
             case AdminPanelPage.PAGE_ANNOUNCEMENTS_TOTAL:
@@ -126,7 +129,9 @@ export class AdminPanelComponent implements OnInit {
                     this.collectedData.users.unapproved = data.filter((u) => {
                         return u.rank === 4;
                     });
-                    return data;
+                    return data.filter((u) => {
+                        return u.rank === 3;
+                    });
                 });
                 break;
             case AdminPanelPage.PAGE_USERS_UNAPPROVED:
@@ -138,17 +143,20 @@ export class AdminPanelComponent implements OnInit {
                     this.collectedData.users.unapproved = data.filter((u) => {
                         return u.rank === 4;
                     });
-                    return data;
+                    return data.filter((u) => {
+                        return u.rank === 4;
+                    });
                 });
                 break;
             default:
                 promise = new Promise((resolve) => {
-                    resolve(true);
+                    resolve([]);
                 });
         }
         promise.then((data) => {
-            this.loading = false;
             this.currentPage = page;
+            this.datatableData = data;
+            this.loading = false;
         });
     }
 
