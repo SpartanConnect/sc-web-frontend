@@ -30,6 +30,19 @@ export class AdminDatatableComponent implements OnInit {
         AdminPanelPage.PAGE_USERS_UNAPPROVED
     ];
 
+    // Announcements
+    selectedAnnouncements = [];
+    openedAnnouncements = [];
+
+    // toggles opening the announcement
+    openAnnouncement(announcementId) {
+        if (this.openedAnnouncements.indexOf(announcementId) !== -1) {
+            this.openedAnnouncements.splice(this.openedAnnouncements.indexOf(announcementId), 1);
+        } else {
+            this.openedAnnouncements.push(announcementId);
+        }
+    }
+
     constructor() { }
 
     ngOnInit() { }

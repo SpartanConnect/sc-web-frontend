@@ -6,7 +6,7 @@
     <div class="card-a-content">
         <h3 class="card-a-title">{{announcement.title}}</h3>
         <div class="card-a-title-tag" *ngIf="mode === 'compact' || mode === 'adminpanel'">#(replace with subject)</div>
-        <p class="card-a-description" *ngIf="mode !== 'compact' && mode !== 'adminpanel'">{{announcement.description}}</p>
+        <p class="card-a-description" *ngIf="mode !== 'compact'">{{announcement.description}}</p>
     </div>
     <div class="card-a-footer">
         <span class="card-a-footnote">

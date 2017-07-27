@@ -1,0 +1,75 @@
+.admin-dt-announcement {
+  background-color: #FEFEFE;
+  box-sizing: border-box;
+  display: block;
+  margin: 10px 0;
+  position: relative;
+  width: 100%;
+}
+
+.admin-dt-announcement-head {
+  cursor: default;
+  min-height: 80px;
+  position: relative;
+  .admin-dt-announcement-head-check {
+    background-color: #F9F9F9;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all 150ms ease;
+    width: 70px;
+
+    md-checkbox {
+      padding: 0 25px;
+      position: absolute;
+      top: calc(50% - 10px);
+    }
+
+    &:hover {
+      background-color: #EAEAEA;
+      transition: all 150ms ease;
+    }
+  }
+  .admin-dt-announcement-head-body {
+    display: inline-block;
+    margin: 16px 0;
+    margin-left: 90px;
+    .admin-dt-announcement-head-heading {
+      font-size: 18px;
+      margin: 0;
+      padding: 0;
+    }
+    .admin-dt-announcement-head-status {
+      font-size: 12px;
+      margin: 0;
+      margin-top: 10px;
+      padding: 0;
+    }
+  }
+  .admin-dt-announcement-head-buttons {
+    position: absolute;
+    right: 20px;
+    top: calc(50% - 20px);
+
+    md-icon {
+      cursor: pointer;
+      margin: 0 8px;
+    }
+  }
+}
+
+.admin-dt-announcement-desc {
+  background-color: #F9F9F9;
+  max-height: 100%;
+  overflow: hidden;
+  padding: 40px 20px;
+  transition: all 150ms ease;
+
+  &.hidden {
+    max-height: 0;
+    padding: 0 20px;
+    transition: all 150ms ease;
+  }
+}
