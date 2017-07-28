@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ITdDataTableColumn } from '@covalent/core';
 
-import { AdminPanelPage } from '../ap-datatypes';
+import { AdminPanelService } from '../admin-panel.service';
+import { AdminPanelPage, AdminPanelActions } from '../ap-datatypes';
 
 import * as moment from 'moment';
 
@@ -16,8 +17,10 @@ export class AdminDatatableComponent implements OnInit {
     @Input() data;
     @Input() selectedIds;
     @Output() change = new EventEmitter<number[]>();
+    @Output() refresh = new EventEmitter<boolean>();
 
     pages = AdminPanelPage;
+    actions = AdminPanelActions;
 
     selectedData = null;
 
@@ -76,7 +79,28 @@ export class AdminDatatableComponent implements OnInit {
         this.change.emit(this.selectedIds);
     }
 
-    constructor() { }
+    doAction(action, announcementId) {
+        this.adminPanelService.doAction(action, [announcementId], () => {
+            this.refresh.emit(true);
+        })
+    }
+
+    returnStringStatus(status) {
+        switch (status) {
+            case 0:
+                return 'PENDING APPROVAL';
+            case 1:
+                return 'APPROVED';
+            case 2:
+                return 'DENIED';
+            case 3:
+                return 'REMOVED BY USER';
+            default:
+                return 'NOT FOUND';
+        }
+    }
+
+    constructor(private adminPanelService: AdminPanelService) { }
 
     ngOnInit() { }
 }

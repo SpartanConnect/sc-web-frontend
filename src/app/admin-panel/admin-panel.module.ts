@@ -16,6 +16,8 @@ import { AdminPanelComponent } from './admin-panel.component';
 import { StatusTagComponent } from '../_components/status-tag.component';
 import { AnnouncementComponent } from '../_components/announcement.component';
 
+import { AdminPanelService } from './admin-panel.service';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -41,6 +43,8 @@ import { AnnouncementComponent } from '../_components/announcement.component';
         AnnouncementComponent,
         StatusTagComponent
     ],
-    providers: [],
+    providers: [
+        AdminPanelService
+    ],
 })
 export class AdminPanelModule { }

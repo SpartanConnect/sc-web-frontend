@@ -41,6 +41,11 @@
       margin: 0;
       margin-top: 10px;
       padding: 0;
+
+      span {
+        display: inline-block;
+        min-width: 160px;
+      }
     }
   }
   .admin-dt-announcement-head-buttons {

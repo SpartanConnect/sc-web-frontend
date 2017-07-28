@@ -71,6 +71,10 @@ export class AdminPanelComponent implements OnInit {
         this.selectedIds = selection;
     }
 
+    successfulChange(success) {
+        this.navigateChange(this.currentPage);
+    }
+
     navigateChange(page) {
         let promise;
         this.loading = true;
