@@ -6,7 +6,7 @@ import { CovalentCommonModule, CovalentDataTableModule } from '@covalent/core';
 
 import { MdIconModule, MdProgressSpinnerModule,
          MdButtonModule, MdCheckboxModule,
-         MdTooltipModule } from '@angular/material';
+         MdTooltipModule, MdSnackBarModule } from '@angular/material';
 
 import { AdminDatatableComponent } from './ts/admin-datatable.component';
 import { AdminHeaderPanelComponent } from './ts/admin-header-panel.component';
@@ -25,6 +25,7 @@ import { AnnouncementComponent } from '../_components/announcement.component';
         MdButtonModule,
         MdCheckboxModule,
         MdTooltipModule,
+        MdSnackBarModule,
         CovalentCommonModule,
         CovalentDataTableModule
     ],

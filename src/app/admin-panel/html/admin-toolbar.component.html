@@ -8,29 +8,38 @@
         <!-- Actions for Announcements -->
         <!-- Approval: Pending Announcements -->
         <div class="admin-toolbar-action"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_APPROVE)"
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING">
             <md-icon>check</md-icon>
         </div>
         <!-- Deny: Pending Announcements, Approved Announcements -->
         <div class="admin-toolbar-action"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_DENY)"
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_CURRENT || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>block</md-icon>
         </div>
         <!-- Setting to Urgent: Pending Announcements-->
         <div class="admin-toolbar-action"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_SET_URGENT)"
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING">
             <md-icon>notifications</md-icon>
         </div>
 
         <!-- Actions for Users -->
+        <!-- Add New User: All User Actions -->
+        <div class="admin-toolbar-action"
+            (click)="doAction(actions.ACTION_USER_INVITE)"
+            *ngIf="page === pages.PAGE_USERS_ALL || page === pages.PAGE_USERS_UNAPPROVED || page === pages.PAGE_USERS_TEACHERS">
+            <md-icon>person_add</md-icon>
+        </div>
+        <!-- Edit User: All User Actions -->
+        <div class="admin-toolbar-action"
+            (click)="doAction(actions.ACTION_USER_EDIT)"
+            *ngIf="page === pages.PAGE_USERS_ALL || page === pages.PAGE_USERS_UNAPPROVED || page === pages.PAGE_USERS_TEACHERS">
+            <md-icon>mode_edit</md-icon>
+        </div>
 
         <!-- Actions for Tags -->
-        <!-- Nothing yet! Come up with an idea sometime and add it as a GH issue... -->
-
-        <!-- General Actions -->
-        <!-- Feedback Button: All! -->
-        <div class="admin-toolbar-action">
-            <md-icon>feedback</md-icon>
-        </div>
+        <!-- Nothing yet. Come up with an idea sometime and add it as a GH issue... -->
     </div>
 </div>
