@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AdminPanelPage, AdminPanelActions } from '../ap-datatypes';
 
 @Component({
     selector: 'app-admin-toolbar',
@@ -13,6 +14,9 @@ export class AdminToolbarComponent implements OnInit {
     @Input() selectedIds;
 
     @Output() change = new EventEmitter<number[]>();
+
+    pages = AdminPanelPage;
+    actions = AdminPanelActions;
 
     constructor() { }
 

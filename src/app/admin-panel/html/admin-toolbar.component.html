@@ -1,16 +1,36 @@
 <div class="admin-toolbar">
     <div class="admin-toolbar-actions">
+        <!-- Checkbox for selecting ids (disabled because we want to handle clicks ourselves) -->
         <div class="admin-toolbar-action admin-toolbar-checkbox" (click)="toggleAll()">
             <md-checkbox [checked]="(data.length === selectedIds.length)" [disabled]="true"></md-checkbox>
         </div>
-        <div class="admin-toolbar-action">
+
+        <!-- Actions for Announcements -->
+        <!-- Approval: Pending Announcements -->
+        <div class="admin-toolbar-action"
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING">
             <md-icon>check</md-icon>
         </div>
-        <div class="admin-toolbar-action">
+        <!-- Deny: Pending Announcements, Approved Announcements -->
+        <div class="admin-toolbar-action"
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_CURRENT || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>block</md-icon>
         </div>
-        <div class="admin-toolbar-action">
+        <!-- Setting to Urgent: Pending Announcements-->
+        <div class="admin-toolbar-action"
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING">
             <md-icon>notifications</md-icon>
+        </div>
+
+        <!-- Actions for Users -->
+
+        <!-- Actions for Tags -->
+        <!-- Nothing yet! Come up with an idea sometime and add it as a GH issue... -->
+
+        <!-- General Actions -->
+        <!-- Feedback Button: All! -->
+        <div class="admin-toolbar-action">
+            <md-icon>feedback</md-icon>
         </div>
     </div>
 </div>
