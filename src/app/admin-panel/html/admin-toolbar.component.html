@@ -2,7 +2,7 @@
     <div class="admin-toolbar-actions">
         <!-- Checkbox for selecting ids (disabled because we want to handle clicks ourselves) -->
         <div class="admin-toolbar-action admin-toolbar-checkbox" (click)="toggleAll()">
-            <md-checkbox [checked]="(data.length === selectedIds.length)" [disabled]="true"></md-checkbox>
+            <md-checkbox [checked]="(data.length === selectedIds.length)" [disabled]="true" [indeterminate]="(data.length !== selectedIds.length) && selectedIds.length"></md-checkbox>
         </div>
 
         <!-- Actions for Announcements -->

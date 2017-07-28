@@ -14,13 +14,13 @@
   .admin-dt-announcement-head-check {
     background-color: #F9F9F9;
     box-sizing: border-box;
-    cursor: pointer;
     display: block;
     height: 100%;
     position: absolute;
     width: 70px;
 
     md-checkbox {
+      cursor: pointer;
       padding: 0 25px;
       position: absolute;
       top: calc(50% - 10px);

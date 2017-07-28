@@ -6,8 +6,6 @@
   padding: 0;
   min-width: 60px;
 
-
-
   .admin-toolbar-action {
     box-sizing: border-box;
     cursor: pointer;
@@ -23,6 +21,16 @@
 
       md-checkbox {
         cursor: pointer;
+        .mat-checkbox-layout {
+          .mat-checkbox-inner-container {
+            .mat-checkbox-frame {
+              border-color: rgba(0, 0, 0, 0.54) !important;
+            }
+            .mat-checkbox-background {
+              background-color: #ffc400 !important;
+            }
+          }
+        }
       }
     }
 
