@@ -13,5 +13,7 @@ export class AppComponent implements OnInit {
 
     constructor(public snackBar: MdSnackBar, private authService: AuthService) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.authService.getUser();
+    }
 }

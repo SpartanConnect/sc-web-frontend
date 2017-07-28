@@ -27,8 +27,12 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
 import { LoginViewComponent } from './login-view/login-view.component';
-import { StatusTagComponent } from './_components/status-tag.component';
+// import { StatusTagComponent } from './_components/status-tag.component';
 import { PostAnnouncementComponent } from './_components/post-announcement.component';
+// import { AnnouncementComponent } from './_components/announcement.component';
+import { SpotlightCardComponent } from './_components/spotlight-card.component';
+
+import { AdminPanelModule } from './admin-panel/admin-panel.module';
 
 import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
@@ -40,12 +44,14 @@ import { AdminOnlyGuard } from './_guards/adminonly.guard';
 import { ConfirmLeaveGuard } from './_guards/confirmleave.guard';
 
 import 'hammerjs';
+import { AnnouncementAllViewComponent } from './announcement-all-view/announcement-all-view.component';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
   { path: 'me', component: UserPanelComponent, canActivate: [UserOnlyGuard] },
   { path: 'me/create', component: CreateAnnouncementFormComponent, canActivate: [UserOnlyGuard], canDeactivate: [ConfirmLeaveGuard] },
   { path: 'home', component: IndexViewComponent },
+  { path: 'view/archived', component: AnnouncementAllViewComponent},
   { path: 'view/:id', component: AnnouncementViewComponent},
   { path: 'login', component: LoginViewComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -59,12 +65,14 @@ const appRoutes: Routes = [
     IndexViewComponent,
     AnnouncementViewComponent,
     UserPanelComponent,
-    AdminPanelComponent,
+    // AdminPanelComponent,
     PageNotFoundComponent,
     CreateAnnouncementFormComponent,
     LoginViewComponent,
-    StatusTagComponent,
-    PostAnnouncementComponent
+    // StatusTagComponent,
+    PostAnnouncementComponent,
+    AnnouncementAllViewComponent,
+    SpotlightCardComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +103,7 @@ const appRoutes: Routes = [
     CovalentStepsModule,
     CovalentNotificationsModule,
     CovalentChipsModule,
+    AdminPanelModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

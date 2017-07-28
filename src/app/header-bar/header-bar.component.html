@@ -1,16 +1,34 @@
 <header>
-    <div class="header-bar-heading" (click)="redirectToHome()">
-        <img width="80" src="/assets/logo.png" />
-        <div class="header-bar-text">
-            <h3>La Cañada High School</h3>
-            <h1><span class="color-text-primary">Spartan</span> <span class="color-text-accent">Connect</span></h1>
+    <div class="header-bar">
+        <div class="header-bar-left">
+            <div class="header-brand" (click)="redirectToHome()">
+                <div class="header-brand-logo"></div>
+                <div class="header-brand-name">{{brandName}}</div>
+            </div>
+            <div class="header-breadcrumb"></div>
+        </div>
+        <div class="header-bar-right">
+            <div class="header-search"></div>
+            <div class="header-user" (click)="handleUserClick()" [class.activated]="userDropActivated">
+                <span class="header-user-text" *ngIf="!authService.currentUser.isAuthenticated">LOG IN WITH GOOGLE</span>
+                <div class="header-user-image" *ngIf="authService.currentUser.isAuthenticated"
+                    [ngStyle]="{'background-image': 'url('+authService.currentUser.profileUrl+')'}"></div>
+                <span class="header-user-text right" *ngIf="authService.currentUser.isAuthenticated">{{authService.currentUser.name}}</span>
+            </div>
         </div>
     </div>
-    <nav class="header-bar-nav">
-        <a routerLink="/home" routerLinkActive="active">Home</a>
-        <a routerLink="/me" routerLinkActive="active" *ngIf="authService.currentUser.isAuthenticated">User Panel</a>
-        <a routerLink="/admin" routerLinkActive="active" *ngIf="authService.currentUser.isAuthenticated && authService.currentUser.rank <= 2">Admin Panel</a>
-        <a (click)="logout()" *ngIf="authService.currentUser.isAuthenticated">Log Out</a>
-        <a (click)="login()" routerLinkActive="active" *ngIf="!authService.currentUser.isAuthenticated">Log In</a>
-    </nav>
 </header>
+<nav class="header-user-popup" [class.activated]="userDropActivated" *ngIf="authService.currentUser.isAuthenticated" (click)="hideDrop()">
+    <div class="header-ep-dash" routerLinkActive="activated" routerLink="/me">
+        <md-icon>account_circle</md-icon> <span>User Panel</span>
+    </div>
+    <div class="header-ep-dash" routerLinkActive="activated" routerLink="/admin" *ngIf="authService.currentUser.rank <= 2">
+        <md-icon>dashboard</md-icon> <span>Admin Panel</span>
+    </div>
+    <div class="header-ep-dash" routerLinkActive="activated">
+        <md-icon>settings</md-icon> <span>Preferences</span>
+    </div>
+    <div class="header-ep-dash" (click)="logout()">
+        <md-icon>exit_to_app</md-icon> <span>Log Out</span>
+    </div>
+</nav>

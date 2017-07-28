@@ -1,21 +1,19 @@
 <div class="container container-tight" style="margin: 0 auto;">
     <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="!authStatus"></md-spinner>
-    <div *ngIf="errors.successLogin.indexOf(authStatus) !== -1">
+    <app-spotlight-card *ngIf="errors.successLogin.indexOf(authStatus) !== -1">
         <h1 style="font-size: 4em;">Logged in!</h1>
         <h3>Welcome to Spartan Connect!</h3>
-        <p style="max-width: 600px;">Welcome to Spartan Connect. There's a wide range of possibilities available! From here, you can:</p>
-        <ul>
-            <li><b>View your announcements:</b> Click on USER PANEL. From here, you can select from a range of filters.</li>
-            <li><b>Create an announcement:</b> Click on USER PANEL, and then click on CREATE AN ANNOUNCEMENT.</li>
-            <li><b>Edit your announcement:</b> Click on USER PANEL, click on RECENT FEED, and then scroll down until you locate your announcement. From there, you can click EDIT and edit your announcement.</li>
-        </ul>
-    </div>
-    <div *ngIf="errors.successLogout.indexOf(authStatus) !== -1">
-        <h1 style="font-size: 4em;">Logged out!</h1>
-        <h3>Thank you for using Spartan Connect!</h3>
-    </div>
-    <div *ngIf="errors.generalError.indexOf(authStatus) !== -1">
+        <div content>
+            <p>Welcome to Spartan Connect. There's a wide range of possibilities available! From here, you can:</p>
+            <ul>
+                <li><b>View your announcements:</b> Click on USER PANEL. From here, you can select from a range of filters.</li>
+                <li><b>Create an announcement:</b> Click on USER PANEL, and then click on CREATE AN ANNOUNCEMENT.</li>
+                <li><b>Edit your announcement:</b> Click on USER PANEL, click on RECENT FEED, and then scroll down until you locate your announcement. From there, you can click EDIT and edit your announcement.</li>
+            </ul>
+        </div>
+    </app-spotlight-card>
+    <app-spotlight-card *ngIf="errors.generalError.indexOf(authStatus) !== -1" mode="compact">
         <h3>An error has occurred.</h3>
-        <p style="max-width: 600px;">It seems like we couldn't authenticate you. Try and login again; if that doesn't work, contact the web team with the number code #{{authStatus}} (this number means something!).</p>
-    </div>
+        <p content>It seems like we couldn't authenticate you. Try and login again; if that doesn't work, contact the web team with the number code #{{authStatus}} (this number means something!).</p>
+    </app-spotlight-card>
 </div>

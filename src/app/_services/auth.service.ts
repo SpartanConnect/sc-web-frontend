@@ -24,9 +24,9 @@ export class AuthService implements OnInit {
         });
     }
 
-    initUser(): void {
+    initUser() {
         localStorage.setItem('authenticated', '1');
-        this.getUser();
+        return this.getUser();
         // localStorage.setItem('userId', '2');
         // localStorage.setItem('userEmail', userEmail);
         // localStorage.setItem('userName', userName);
@@ -40,9 +40,11 @@ export class AuthService implements OnInit {
         if (localStorage.getItem('authenticated') !== '1') {
             localStorage.setItem('authenticated', '0');
             return new Promise((resolve) => {
-                this.currentUser = this.forbiddenUser;
-                this.loadingService.resolve('appAuthLoading');
-                resolve(this.currentUser);
+                setTimeout(() => {
+                    this.currentUser = this.forbiddenUser;
+                    this.loadingService.resolve('serviceAuthLoading');
+                    resolve(this.forbiddenUser);
+                }, 500);
             });
         } else {
             return httpHandler(this.http, apiLink).then((user) => {
@@ -50,6 +52,10 @@ export class AuthService implements OnInit {
                 if (!user.isAuthenticated) { localStorage.setItem('authenticated', '0'); }
                 this.loadingService.resolve('serviceAuthLoading');
                 return user;
+            }).catch((error) => {
+                this.currentUser = this.forbiddenUser;
+                this.loadingService.resolve('serviceAuthLoading');
+                return this.forbiddenUser;
             });
         }
 

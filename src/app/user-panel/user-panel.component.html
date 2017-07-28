@@ -35,27 +35,19 @@
             label="Access Error"
             sublabel="You do not have sufficient privileges to access this resource. Please contact an admin if this mistake was made in error."
             color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
+        <app-spotlight-card *ngIf="justLoggedIn" mode="compact">
+            <h1><md-icon>account_box</md-icon></h1>
+            <h3>Logged in.</h3>
+            <p content>You have logged into Spartan Connect.</p>
+        </app-spotlight-card>
         <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
         <div *ngIf="!loading">
-            <td-message *ngIf="!selectedAnnouncements.length && !loading && this.selectedView !== this.userPanelViews.VIEW_RECENT_FEED" label="Notice" sublabel="No announcements found." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
+            <app-cx-post-announcement></app-cx-post-announcement><br>
             <td-message *ngIf="!selectedAnnouncements.length && !loading && this.selectedView === this.userPanelViews.VIEW_RECENT_FEED" label="Welcome to the User Panel!" sublabel="It seems like this is your first time using Spartan Connect. Why don't you create your first announcement by clicking on 'Create An Announcement'?" color="blue" icon="info" style="padding: 16px 5px;"></td-message>
-            <app-cx-post-announcement></app-cx-post-announcement>
-            <md-card class="card-announcement" *ngFor="let announcement of selectedAnnouncements">
-                <md-card-header>
-                    <div md-card-avatar class="example-header-image" style="background-image:url('http://via.placeholder.com/40/b71c1c/ffffff')"></div>
-                    <md-card-title>{{announcement.creator.name}}</md-card-title>
-                    <md-card-subtitle>created this {{announcement.timeSubmitted | timeAgo}}</md-card-subtitle>
-                </md-card-header>
-                <md-card-content>
-                    <app-cx-status-tag [announcement]="announcement"></app-cx-status-tag>
-                    <h3>{{announcement.title}}</h3>
-                    <p>{{announcement.description}}</p>
-                </md-card-content>
-                <md-card-actions>
-                    <button md-button [routerLink]="['/view', announcement.id]">READ MORE</button>
-                    <button md-button>EDIT</button>
-                </md-card-actions>
-            </md-card>
+            <span *ngIf="!selectedAnnouncements.length && !loading && this.selectedView !== this.userPanelViews.VIEW_RECENT_FEED" class="subtle">
+                No announcements found.
+            </span>
+            <app-announcement *ngFor="let announcement of selectedAnnouncements" [announcement]="announcement" mode="userpanel"></app-announcement>
         </div>
     </div>
 </div>

@@ -2,69 +2,183 @@
 @import '~@angular/material/theming';
 @import 'src/spartan-theme.scss';
 
+// White bar itself
 header {
   background-color: $white;
-  border-top: 15px solid mat-color($spartan-app-primary);
   border-bottom: 1px solid $gray-light-2;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
   box-sizing: border-box;
-  height: 115px;
+  height: 50px;
   margin: 0;
-  padding: 10px 5vw;
+  overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 199;
+  z-index: 99;
 }
 
-.header-bar-heading {
-  display: inline-block;
+// All the header contents should be here
+.header-bar {
+  margin: 0 auto;
+  width: 960px;
+}
+
+// Elements that float left go here
+.header-bar-left {
+  float: left;
+}
+
+.header-bar-right {
+  float: right;
+}
+
+// Logo + Heading
+.header-brand {
   cursor: pointer;
-}
+  display: inline-block;
+  padding: 0 15px;
+  transition: all 150ms ease;
 
-.header-bar-text {
-  margin-left: 20px;
+  .header-brand-logo {
+    background-image: url('/assets/logo.png');
+    background-size: 100%;
+    float: left;
+    height: 36px;
+    margin: 7px 0;
+    width: 36px;
+  }
+  .header-brand-name {
+    box-sizing: border-box;
+    float: right;
+    font-weight: bold;
+    height: 50px;
+    margin-left: 10px;
+    padding: 15px 0;
 
-  h1 {
-    font-size: 28px;
+    &::-moz-selection{
+      background-color: transparent;
+      color: #000000;
+    }
+
+    &::selection {
+      background-color: transparent;
+      color: #000000;
+    }
   }
 
-  h3 {
+  &:hover {
+    background-color: #f1f1f1;
+    transition: all 150ms ease;
+  }
+}
+
+// User profile
+.header-user {
+  border-bottom: 4px solid rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 15px;
+  transition: all 150ms ease;
+
+  &:hover {
+    background-color: #f1f1f1;
+    transition: all 150ms ease;
+  }
+
+  .header-user-text {
+    box-sizing: border-box;
+    color: #4A4A4A;
+    display: block;
     font-size: 14px;
     font-weight: 500;
+    padding-bottom: 12px;
+    padding-top: 16px;
+
+    &::-moz-selection{
+      background-color: transparent;
+      color: #4A4A4A;
+    }
+
+    &::selection {
+      background-color: transparent;
+      color: #4A4A4A;
+    }
+
+    &.right {
+      float: right;
+      margin-left: 10px;
+    }
+  }
+
+  .header-user-image {
+    background-size: 100%;
+    border-radius: 16px;
+    float: left;
+    height: 32px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    width: 32px;
+  }
+
+  &.activated {
+    background-color: #f1f1f1;
+    border-bottom: 4px solid mat-color($spartan-app-primary);
+    transition: all 150ms ease;
   }
 }
 
-.header-bar-heading img,
-.header-bar-text {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.header-bar-text h1,
-.header-bar-text h3 {
+// Popup when user profile is clicked on
+.header-user-popup {
+  background-color: #F0F0F0;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.10);
+  box-sizing: border-box;
   margin: 0;
-  padding: 1px;
-}
+  min-width: 240px;
+  //min-height: 180px;
+  padding: 0;
+  position: fixed;
+  right: calc((100% - 960px) / 2);
+  opacity: 0;
+  top: 45px;
+  visibility: hidden;
+  z-index: 100;
+  transition: all 250ms ease;
 
-.header-bar-nav {
-  display: inline-flex;
-  float: right;
-
-  a {
-    border-radius: 6px;
-    color: $gray-dark-1;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 25px;
-    margin-top: 24px;
-    padding: 6px 15px;
-    text-decoration: none;
+  &.activated {
+    top: 60px;
+    opacity: 1;
+    transition: visibility 0s, all 250ms ease;
+    visibility: visible;
   }
 
-  a:hover, a.active {
-    background-color: $gray-light-1;
-    color: $gray-dark-2;
+  // This is the individual link in the popup
+  .header-ep-dash {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    height: 45px;
+    overflow: hidden;
+    transition: all 150ms ease;
+
+    md-icon {
+      vertical-align: middle;
+      padding: 10px 15px;
+    }
+
+    span {
+      vertical-align: middle;
+    }
+
+    &:hover {
+      background-color: #D8D8D8;
+      transition: all 150ms ease;
+    }
+
+    &.activated {
+      background-color: mat-color($spartan-app-primary);
+      color: #F0F0F0;
+      transition: all 150ms ease;
+    }
   }
 }

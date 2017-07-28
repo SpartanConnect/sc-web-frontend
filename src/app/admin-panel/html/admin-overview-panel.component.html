@@ -1,0 +1,71 @@
+<div class="overview">
+    <div class="overarch orange">
+        <div class="overarch-head">
+            <md-icon class="overarch-head-background">supervisor_account</md-icon>
+            <h3 class="overarch-head-heading">Users</h3>
+            <p class="overarch-head-description">Invite and manage Spartan Connect users</p>
+        </div>
+        <div class="overarch-cta" (click)="navigateToPage(pages.PAGE_USERS_ALL)">
+            <div class="overarch-cta-text">MANAGE USERS</div>
+            <md-icon class="overarch-cta-arrow">chevron_right</md-icon>
+        </div>
+        <div class="overarch-body">
+            <div class="overarch-body-list">
+                <div class="overarch-body-list-element">
+                    {{adminData.users.all.length}} TOTAL USER<span *ngIf="adminData.users.all.length !== 1">S</span>
+                </div>
+                <div class="overarch-body-list-element">
+                    {{adminData.users.unapproved.length}} UNAPPROVED ACCOUNT<span *ngIf="adminData.users.unapproved.length !== 1">S</span>
+                </div>
+                <div class="overarch-body-list-element">
+                    {{adminData.users.teachers.length}} TEACHER ACCOUNT<span *ngIf="adminData.users.teachers.length !== 1">S</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overarch blue">
+        <div class="overarch-head">
+            <md-icon class="overarch-head-background">speaker_notes</md-icon>
+            <h3 class="overarch-head-heading">Announcements</h3>
+            <p class="overarch-head-description">Approve, reject, and manage announcements</p>
+        </div>
+        <div class="overarch-cta" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_PENDING)">
+            <div class="overarch-cta-text">MANAGE ANNOUNCEMENTS</div>
+            <md-icon class="overarch-cta-arrow">chevron_right</md-icon>
+        </div>
+        <div class="overarch-body">
+            <div class="overarch-body-list">
+                <div class="overarch-body-list-element">
+                    {{adminData.announcements.unapproved.length}} PENDING ANNOUNCEMENT<span *ngIf="adminData.announcements.unapproved.length !== 1">S</span>
+                </div>
+                <div class="overarch-body-list-element">
+                    {{adminData.announcements.current.length}} CURRENT ANNOUNCEMENT<span *ngIf="adminData.announcements.current.length !== 1">S</span>
+                </div>
+                <div class="overarch-body-list-element">
+                    {{adminData.announcements.all.length}} TOTAL ANNOUNCEMENT<span *ngIf="adminData.announcements.all.length !== 1">S</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overarch red">
+        <div class="overarch-head">
+            <md-icon class="overarch-head-background">local_offer</md-icon>
+            <h3 class="overarch-head-heading">Tags</h3>
+            <p class="overarch-head-description">Create, modify, and manage tags for announcements</p>
+        </div>
+        <div class="overarch-cta" (click)="navigateToPage(pages.PAGE_TAGS_ALL)">
+            <div class="overarch-cta-text">MANAGE TAGS</div>
+            <md-icon class="overarch-cta-arrow">chevron_right</md-icon>
+        </div>
+        <div class="overarch-body">
+            <div class="overarch-body-list">
+                <div class="overarch-body-list-element">
+                    {{adminData.tags.categories.length}} TOTAL CATEGORIE<span *ngIf="adminData.tags.categories.length !== 1">S</span>
+                </div>
+                <div class="overarch-body-list-element">
+                    {{adminData.tags.all.length}} TOTAL TAG<span *ngIf="adminData.tags.all.length !== 1">S</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

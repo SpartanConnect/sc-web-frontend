@@ -1,0 +1,42 @@
+<button md-button (click)="goBack()" style="margin-bottom: 10px;">GO BACK</button>
+<br>
+<div class="admin-header">
+    <div *ngIf="announcementPages.indexOf(page) !== -1" class="admin-header-g">
+        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_PENDING)">
+            <h1 class="admin-header-btn-number">{{data.announcements.unapproved.length}}</h1>
+            <div class="admin-header-btn-desc">PENDING ANNOUNCEMENTS</div>
+        </div>
+        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_CURRENT)">
+            <h1 class="admin-header-btn-number">{{data.announcements.current.length}}</h1>
+            <div class="admin-header-btn-desc">CURRENT ANNOUNCEMENTS</div>
+        </div>
+        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_TOTAL)">
+            <h1 class="admin-header-btn-number">{{data.announcements.all.length}}</h1>
+            <div class="admin-header-btn-desc">TOTAL ANNOUNCEMENTS</div>
+        </div>
+    </div>
+    <div *ngIf="tagPages.indexOf(page) !== -1" class="admin-header-g">
+        <div class="admin-header-btn red" (click)="navigateToPage(pages.PAGE_TAGS_CATEGORIES)">
+            <h1 class="admin-header-btn-number">{{data.tags.categories.length}}</h1>
+            <div class="admin-header-btn-desc">TOTAL CATEGORIES</div>
+        </div>
+        <div class="admin-header-btn red" (click)="navigateToPage(pages.PAGE_TAGS_ALL)">
+            <h1 class="admin-header-btn-number">{{data.tags.all.length}}</h1>
+            <div class="admin-header-btn-desc">TOTAL TAGS</div>
+        </div>
+    </div>
+    <div *ngIf="userPages.indexOf(page) !== -1" class="admin-header-g">
+        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_ALL)">
+            <h1 class="admin-header-btn-number">{{data.users.all.length}}</h1>
+            <div class="admin-header-btn-desc">TOTAL USERS</div>
+        </div>
+        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_UNAPPROVED)">
+            <h1 class="admin-header-btn-number">{{data.users.unapproved.length}}</h1>
+            <div class="admin-header-btn-desc">UNAPPROVED ACCOUNTS</div>
+        </div>
+        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_TEACHERS)">
+            <h1 class="admin-header-btn-number">{{data.users.teachers.length}}</h1>
+            <div class="admin-header-btn-desc">TEACHER ACCOUNTS</div>
+        </div>
+    </div>
+</div>

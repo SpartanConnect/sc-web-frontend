@@ -24,7 +24,6 @@ export function postHandler(http, apiLink, queryData) {
         headers: headers,
         withCredentials: true
     });
-    console.log(queryData);
     return http.post(apiLink, JSON.stringify(queryData), httpOptions)
         .toPromise()
         .then((data) => {

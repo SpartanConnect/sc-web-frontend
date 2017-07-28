@@ -1,0 +1,68 @@
+<div class="admin-datatables">
+    <div class="admin-datatable" *ngIf="announcementPages.indexOf(page) !== -1 && data.length">
+        <div class="admin-dt-announcement" *ngFor="let announcement of data">
+            <div class="admin-dt-announcement-head">
+                <div class="admin-dt-announcement-head-check">
+                    <md-checkbox></md-checkbox>
+                </div>
+                <div class="admin-dt-announcement-head-body">
+                    <h3 class="admin-dt-announcement-head-heading">{{announcement.title}}</h3>
+                    <div class="admin-dt-announcement-head-status">
+                        <span><b>POSTED BY</b> {{announcement.creator.name}}</span>
+                        <span style="margin-left: 40px; text-transform: uppercase;"><b>CREATED {{announcement.timeSubmitted | timeAgo}}</b></span>
+                    </div>
+                </div>
+                <div class="admin-dt-announcement-head-buttons">
+                    <button md-icon-button><md-icon>check</md-icon></button>
+                    <button md-icon-button><md-icon>block</md-icon></button>
+                    <button md-icon-button *ngIf="openedAnnouncements.indexOf(announcement.id) === -1" (click)="openAnnouncement(announcement.id)"><md-icon>expand_more</md-icon></button>
+                    <button md-icon-button *ngIf="openedAnnouncements.indexOf(announcement.id) !== -1" (click)="openAnnouncement(announcement.id)"><md-icon>expand_less</md-icon></button>
+                </div>
+            </div>
+            <div class="admin-dt-announcement-desc" [class.hidden]="openedAnnouncements.indexOf(announcement.id) === -1">
+                <app-announcement [announcement]="announcement" mode="adminpanel"></app-announcement>
+            </div>
+        </div>
+    </div>
+    <div class="admin-datatable" *ngIf="tagPages.indexOf(page) !== -1 && data.length">
+        <table td-data-table>
+            <!-- Headers -->
+            <th td-data-table-column></th>
+            <th td-data-table-column
+                *ngFor="let column of tagColumns"
+                [numeric]="column.numeric">
+                {{column.label}}
+            </th>
+            <!-- Data -->
+            <tr td-data-table-row *ngFor="let row of data">
+                <td td-data-table-cell>
+                    <md-checkbox></md-checkbox>
+                </td>
+                <td td-data-table-cell *ngFor="let column of tagColumns" [numeric]="column.numeric">
+                    {{column.format ? column.format(row[column.name]) : row[column.name]}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="admin-datatable" *ngIf="userPages.indexOf(page) !== -1 && data.length">
+        <table td-data-table>
+            <!-- Headers -->
+            <th td-data-table-column></th>
+            <th td-data-table-column
+                *ngFor="let column of userColumns"
+                [numeric]="column.numeric">
+                {{column.label}}
+            </th>
+            <!-- Data -->
+            <tr td-data-table-row *ngFor="let row of data">
+                <td td-data-table-cell>
+                    <md-checkbox></md-checkbox>
+                </td>
+                <td td-data-table-cell *ngFor="let column of userColumns" [numeric]="column.numeric">
+                    {{column.format ? column.format(row[column.name]) : row[column.name]}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <i *ngIf="!data.length" style="display: block; margin: 10px auto; color: #888; text-align: center;">Nothing to show.</i>
+</div>
