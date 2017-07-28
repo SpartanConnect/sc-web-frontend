@@ -3,7 +3,7 @@
         <div class="admin-dt-announcement" *ngFor="let announcement of data">
             <div class="admin-dt-announcement-head">
                 <div class="admin-dt-announcement-head-check">
-                    <md-checkbox></md-checkbox>
+                    <md-checkbox [checked]="selectedIds.indexOf(announcement.id) !== -1" (change)="selectElement(announcement.id)"></md-checkbox>
                 </div>
                 <div class="admin-dt-announcement-head-body">
                     <h3 class="admin-dt-announcement-head-heading">{{announcement.title}}</h3>
@@ -36,7 +36,7 @@
             <!-- Data -->
             <tr td-data-table-row *ngFor="let row of data">
                 <td td-data-table-cell>
-                    <md-checkbox></md-checkbox>
+                    <md-checkbox [checked]="selectedIds.indexOf(row.id) !== -1" (change)="selectElement(row.id)"></md-checkbox>
                 </td>
                 <td td-data-table-cell *ngFor="let column of tagColumns" [numeric]="column.numeric">
                     {{column.format ? column.format(row[column.name]) : row[column.name]}}
@@ -56,7 +56,7 @@
             <!-- Data -->
             <tr td-data-table-row *ngFor="let row of data">
                 <td td-data-table-cell>
-                    <md-checkbox></md-checkbox>
+                    <md-checkbox [checked]="selectedIds.indexOf(row.id) !== -1" (change)="selectElement(row.id)"></md-checkbox>
                 </td>
                 <td td-data-table-cell *ngFor="let column of userColumns" [numeric]="column.numeric">
                     {{column.format ? column.format(row[column.name]) : row[column.name]}}

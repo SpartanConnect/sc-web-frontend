@@ -20,6 +20,10 @@
     &.admin-toolbar-checkbox {
       float: left;
       padding: 20px;
+
+      md-checkbox {
+        cursor: pointer;
+      }
     }
 
     &:hover {

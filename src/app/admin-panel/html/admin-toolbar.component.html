@@ -1,7 +1,7 @@
 <div class="admin-toolbar">
     <div class="admin-toolbar-actions">
-        <div class="admin-toolbar-action admin-toolbar-checkbox">
-            <md-checkbox></md-checkbox>
+        <div class="admin-toolbar-action admin-toolbar-checkbox" (click)="toggleAll()">
+            <md-checkbox [checked]="(data.length === selectedIds.length)" [disabled]="true"></md-checkbox>
         </div>
         <div class="admin-toolbar-action">
             <md-icon>check</md-icon>

@@ -34,6 +34,7 @@ export class AdminPanelComponent implements OnInit {
         }
     };
     datatableData = [];
+    selectedIds = [];
 
     constructor(
         private authService: AuthService, private announcementsService: AnnouncementsService,
@@ -66,9 +67,14 @@ export class AdminPanelComponent implements OnInit {
         });
     }
 
+    selectionChange(selection) {
+        this.selectedIds = selection;
+    }
+
     navigateChange(page) {
         let promise;
         this.loading = true;
+        this.selectedIds = [];
         switch (page) {
             case AdminPanelPage.PAGE_ANNOUNCEMENTS_CURRENT:
                 promise = this.announcementsService.getCurrentAnnouncements().then((data) => {

@@ -18,18 +18,12 @@
     display: block;
     height: 100%;
     position: absolute;
-    transition: all 150ms ease;
     width: 70px;
 
     md-checkbox {
       padding: 0 25px;
       position: absolute;
       top: calc(50% - 10px);
-    }
-
-    &:hover {
-      background-color: #EAEAEA;
-      transition: all 150ms ease;
     }
   }
   .admin-dt-announcement-head-body {

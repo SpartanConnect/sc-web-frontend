@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ITdDataTableColumn } from '@covalent/core';
 
 import { AdminPanelPage } from '../ap-datatypes';
@@ -14,6 +14,8 @@ import * as moment from 'moment';
 export class AdminDatatableComponent implements OnInit {
     @Input() page;
     @Input() data;
+    @Input() selectedIds;
+    @Output() change = new EventEmitter<number[]>();
 
     pages = AdminPanelPage;
 
@@ -35,7 +37,6 @@ export class AdminDatatableComponent implements OnInit {
     ];
 
     // Announcements
-    selectedAnnouncements = [];
     openedAnnouncements = [];
 
     // Tags
@@ -64,6 +65,15 @@ export class AdminDatatableComponent implements OnInit {
         } else {
             this.openedAnnouncements.push(announcementId);
         }
+    }
+
+    selectElement(id) {
+        if (this.selectedIds.indexOf(id) !== -1) {
+            this.selectedIds.splice(this.selectedIds.indexOf(id), 1);
+        } else {
+            this.selectedIds.push(id);
+        }
+        this.change.emit(this.selectedIds);
     }
 
     constructor() { }
