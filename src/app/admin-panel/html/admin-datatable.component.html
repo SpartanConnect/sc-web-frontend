@@ -25,10 +25,44 @@
         </div>
     </div>
     <div class="admin-datatable" *ngIf="tagPages.indexOf(page) !== -1 && data.length">
-
+        <table td-data-table>
+            <!-- Headers -->
+            <th td-data-table-column></th>
+            <th td-data-table-column
+                *ngFor="let column of tagColumns"
+                [numeric]="column.numeric">
+                {{column.label}}
+            </th>
+            <!-- Data -->
+            <tr td-data-table-row *ngFor="let row of data">
+                <td td-data-table-cell>
+                    <md-checkbox></md-checkbox>
+                </td>
+                <td td-data-table-cell *ngFor="let column of tagColumns" [numeric]="column.numeric">
+                    {{column.format ? column.format(row[column.name]) : row[column.name]}}
+                </td>
+            </tr>
+        </table>
     </div>
     <div class="admin-datatable" *ngIf="userPages.indexOf(page) !== -1 && data.length">
-
+        <table td-data-table>
+            <!-- Headers -->
+            <th td-data-table-column></th>
+            <th td-data-table-column
+                *ngFor="let column of userColumns"
+                [numeric]="column.numeric">
+                {{column.label}}
+            </th>
+            <!-- Data -->
+            <tr td-data-table-row *ngFor="let row of data">
+                <td td-data-table-cell>
+                    <md-checkbox></md-checkbox>
+                </td>
+                <td td-data-table-cell *ngFor="let column of userColumns" [numeric]="column.numeric">
+                    {{column.format ? column.format(row[column.name]) : row[column.name]}}
+                </td>
+            </tr>
+        </table>
     </div>
     <i *ngIf="!data.length" style="display: block; margin: 10px auto; color: #888; text-align: center;">Nothing to show.</i>
 </div>

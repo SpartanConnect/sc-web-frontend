@@ -102,7 +102,7 @@ export class AdminPanelComponent implements OnInit {
                     return data;
                 });
                 break;
-            case AdminPanelPage.PAGE_TAGS_ALL:
+            case AdminPanelPage.PAGE_TAGS_CATEGORIES:
                 promise = this.tagsService.getCategories().then((data) => {
                     this.collectedData.tags.categories = data;
                     return data;

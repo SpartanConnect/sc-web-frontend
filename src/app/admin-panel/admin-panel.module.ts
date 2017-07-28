@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { CovalentCommonModule } from '@covalent/core';
+import { CovalentCommonModule, CovalentDataTableModule } from '@covalent/core';
 
 import { MdIconModule, MdProgressSpinnerModule,
-         MdButtonModule, MdTableModule,
-         MdCheckboxModule, MdTooltipModule } from '@angular/material';
+         MdButtonModule, MdCheckboxModule,
+         MdTooltipModule } from '@angular/material';
 
 import { AdminDatatableComponent } from './ts/admin-datatable.component';
 import { AdminHeaderPanelComponent } from './ts/admin-header-panel.component';
@@ -23,10 +23,10 @@ import { AnnouncementComponent } from '../_components/announcement.component';
         MdIconModule,
         MdProgressSpinnerModule,
         MdButtonModule,
-        MdTableModule,
         MdCheckboxModule,
         MdTooltipModule,
-        CovalentCommonModule
+        CovalentCommonModule,
+        CovalentDataTableModule
     ],
     exports: [
         AnnouncementComponent

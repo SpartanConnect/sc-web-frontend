@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ITdDataTableColumn } from '@covalent/core';
+
 import { AdminPanelPage } from '../ap-datatypes';
+
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-admin-datatable',
@@ -33,6 +37,25 @@ export class AdminDatatableComponent implements OnInit {
     // Announcements
     selectedAnnouncements = [];
     openedAnnouncements = [];
+
+    // Tags
+    tagColumns = [
+        { name: 'id', label: 'ID', numeric: true },
+        { name: 'name', label: 'Name' },
+        { name: 'slug', label: 'Slug', format: f => '#' + f },
+        { name: 'color', label: 'Color', format: c => '#' + c },
+        { name: 'visibility', label: 'Visible', format: b => (b ? 'Y' : 'N') }
+    ];
+
+    // Users
+    userColumns = [
+        { name: 'id', label: 'ID', numeric: true },
+        { name: 'name', label: 'Name' },
+        { name: 'handle', label: 'Handle', format: f => '@' + f },
+        { name: 'email', label: 'Email' },
+        { name: 'rank', label: 'Rank', numeric: true },
+        { name: 'lastLogin', label: 'Last Login', format: d => moment(d).format('MM/DD/YY h:mmA') }
+    ];
 
     // toggles opening the announcement
     openAnnouncement(announcementId) {
