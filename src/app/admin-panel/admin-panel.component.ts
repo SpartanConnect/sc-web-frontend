@@ -72,28 +72,40 @@ export class AdminPanelComponent implements OnInit {
         switch (page) {
             case AdminPanelPage.PAGE_ANNOUNCEMENTS_CURRENT:
                 promise = this.announcementsService.getCurrentAnnouncements().then((data) => {
-                    this.collectedData.announcements.current = data;
-                    return data;
+                    this.collectedData.announcements.current = data.sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
+                    });
+                    return this.collectedData.announcements.current;
                 });
                 break;
             case AdminPanelPage.PAGE_ANNOUNCEMENTS_PENDING:
                 promise = this.announcementsService.getAnnouncements().then((data) => {
-                    this.collectedData.announcements.all = data;
+                    this.collectedData.announcements.all = data.sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
+                    });
+
                     this.collectedData.announcements.unapproved = data.filter((a) => {
                         return a.status === 0;
+                    }).sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
                     });
-                    return data.filter((a) => {
-                        return a.status === 0;
-                    });
+
+                    return this.collectedData.announcements.unapproved;
                 });
                 break;
             case AdminPanelPage.PAGE_ANNOUNCEMENTS_TOTAL:
                 promise = this.announcementsService.getAnnouncements().then((data) => {
-                    this.collectedData.announcements.all = data;
+                    this.collectedData.announcements.all = data.sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
+                    });
+
                     this.collectedData.announcements.unapproved = data.filter((a) => {
                         return a.status === 0;
+                    }).sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
                     });
-                    return data;
+
+                    return this.collectedData.announcements.all;
                 });
                 break;
             case AdminPanelPage.PAGE_TAGS_ALL:
