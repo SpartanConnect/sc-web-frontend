@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { CovalentCommonModule, CovalentDataTableModule } from '@covalent/core';
+import { CovalentCommonModule, CovalentDataTableModule, TdDialogService } from '@covalent/core';
 
 import { MdIconModule, MdProgressSpinnerModule,
          MdButtonModule, MdCheckboxModule,
@@ -44,7 +44,8 @@ import { AdminPanelService } from './admin-panel.service';
         StatusTagComponent
     ],
     providers: [
-        AdminPanelService
+        AdminPanelService,
+        TdDialogService
     ],
 })
 export class AdminPanelModule { }

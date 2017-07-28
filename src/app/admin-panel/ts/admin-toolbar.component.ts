@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
+import { TdDialogService } from '@covalent/core';
 import { AdminPanelPage, AdminPanelActions } from '../ap-datatypes';
 import { AdminPanelService } from '../admin-panel.service';
 import { AnnouncementsService } from '../../_services/announcements.service';
@@ -25,7 +26,7 @@ export class AdminToolbarComponent implements OnInit {
     announcementReason = '';
 
     constructor(private announcementsService: AnnouncementsService, private snackbar: MdSnackBar,
-                private adminPanelService: AdminPanelService) { }
+                private adminPanelService: AdminPanelService, private dialogService: TdDialogService) { }
 
     toggleAll() {
         if (this.selectedIds.length === this.data.length) {
@@ -39,13 +40,25 @@ export class AdminToolbarComponent implements OnInit {
         this.change.emit(this.selectedIds);
     }
 
-    doAction(action, announcementIds = []) {
-        if (!announcementIds.length) {
-            announcementIds = this.selectedIds;
+    doAction(action, affectedIds = []) {
+        if (!affectedIds.length) {
+            affectedIds = this.selectedIds;
         }
-        this.adminPanelService.doAction(action, announcementIds, () => {
-            this.refresh.emit(true);
-        })
+        if (affectedIds.length) {
+            this.dialogService.openConfirm({
+                message: `Are you sure you want to affect ${affectedIds.length} rows?`,
+                disableClose: true,
+                title: 'Confirm Action?',
+                cancelButton: 'NO',
+                acceptButton: 'YES'
+            }).afterClosed().subscribe((accept) => {
+                if (accept) {
+                    this.adminPanelService.doAction(action, affectedIds, () => {
+                        this.refresh.emit(true);
+                    });
+                }
+            });
+        }
     }
 
     ngOnInit() {

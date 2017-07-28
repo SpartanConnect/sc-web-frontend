@@ -6,22 +6,16 @@
         </div>
 
         <!-- Actions for Announcements -->
-        <!-- Approval: Pending Announcements -->
+        <!-- Approval: Pending Announcements, Total Announcements -->
         <div class="admin-toolbar-action"
             (click)="doAction(actions.ACTION_ANNOUNCEMENT_APPROVE)"
-            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING">
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>check</md-icon>
         </div>
-        <!-- Deny: Pending Announcements, Approved Announcements -->
-        <div class="admin-toolbar-action"
-            (click)="doAction(actions.ACTION_ANNOUNCEMENT_DENY)"
-            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_CURRENT || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
-            <md-icon>block</md-icon>
-        </div>
-        <!-- Setting to Urgent: Pending Announcements-->
+        <!-- Setting to Urgent: Pending Announcements, Total Announcements -->
         <div class="admin-toolbar-action"
             (click)="doAction(actions.ACTION_ANNOUNCEMENT_SET_URGENT)"
-            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING">
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>notifications</md-icon>
         </div>
 
