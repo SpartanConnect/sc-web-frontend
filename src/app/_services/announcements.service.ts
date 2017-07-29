@@ -84,7 +84,8 @@ export class AnnouncementsService implements OnInit {
             ]).then((data) => {
                 let updatedTags = data[0].tags;
                 if (isUrgent) {
-                    updatedTags.filter(t => t.slug !== 'urgent').push(data[1].filter(t => t.slug === 'urgent')[0]);
+                    updatedTags = updatedTags.filter(t => t.slug !== 'urgent');
+                    updatedTags.push(data[1].filter(t => t.slug === 'urgent')[0]);
                 } else {
                     updatedTags = updatedTags.filter(t => t.slug !== 'urgent');
                 }
