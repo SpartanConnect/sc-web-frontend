@@ -56,6 +56,19 @@ export class AdminPanelService {
                     promise = Promise.all(promises).then(this.promiseAllHandler);
                 }
                 break;
+            case AdminPanelActions.ACTION_ANNOUNCEMENT_REMOVE_URGENT:
+                if (announcementIds.length === 0) {
+                    promise = Promise.resolve({
+                        success: false,
+                        reason: 'No announcement selected.'
+                    });
+                } else {
+                    promises = announcementIds.map((id) => {
+                        return this.announcementsService.setAnnouncementUrgency(id, false);
+                    });
+                    promise = Promise.all(promises).then(this.promiseAllHandler);
+                }
+                break;
             case AdminPanelActions.ACTION_USER_INVITE:
                 promise = Promise.resolve({
                     success: false,

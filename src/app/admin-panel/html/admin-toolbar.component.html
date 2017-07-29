@@ -7,27 +7,33 @@
 
         <!-- Actions for Announcements -->
         <!-- Approval: Pending Announcements, Total Announcements -->
-        <div class="admin-toolbar-action"
+        <div class="admin-toolbar-action" mdTooltip="Approve"
             (click)="doAction(actions.ACTION_ANNOUNCEMENT_APPROVE)"
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>check</md-icon>
         </div>
         <!-- Setting to Urgent: Pending Announcements, Total Announcements -->
-        <div class="admin-toolbar-action"
+        <div class="admin-toolbar-action" mdTooltip="Set Urgency"
             (click)="doAction(actions.ACTION_ANNOUNCEMENT_SET_URGENT)"
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>notifications</md-icon>
         </div>
+        <!-- Removing Urgent: Pending Announcements, Total Announcements -->
+        <div class="admin-toolbar-action" mdTooltip="Remove Urgency"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_REMOVE_URGENT)"
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
+            <md-icon>notifications_off</md-icon>
+        </div>
 
         <!-- Actions for Users -->
         <!-- Add New User: All User Actions -->
-        <div class="admin-toolbar-action"
+        <div class="admin-toolbar-action" mdTooltip="Add User"
             (click)="doAction(actions.ACTION_USER_INVITE)"
             *ngIf="page === pages.PAGE_USERS_ALL || page === pages.PAGE_USERS_UNAPPROVED || page === pages.PAGE_USERS_TEACHERS">
             <md-icon>person_add</md-icon>
         </div>
         <!-- Edit User: All User Actions -->
-        <div class="admin-toolbar-action"
+        <div class="admin-toolbar-action" mdTooltip="Edit User"
             (click)="doAction(actions.ACTION_USER_EDIT)"
             *ngIf="page === pages.PAGE_USERS_ALL || page === pages.PAGE_USERS_UNAPPROVED || page === pages.PAGE_USERS_TEACHERS">
             <md-icon>mode_edit</md-icon>
