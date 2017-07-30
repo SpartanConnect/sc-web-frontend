@@ -26,7 +26,7 @@ export class AnnouncementsService implements OnInit {
     }
 
     getAnnouncementById(id: number): Promise<Announcement> {
-        let apiLink = `${API_BASE}/announcements/${id}`;
+        const apiLink = `${API_BASE}/announcements/${id}`;
         return this.http.get(apiLink)
             .toPromise()
             .then((data) => {
@@ -99,20 +99,8 @@ export class AnnouncementsService implements OnInit {
         });
     }
 
-    /*
-    // Refreshing the service itself with new announcements
-    // TODO: Remove this and the announcements array.
-    retrieveAnnouncements(): Promise<Announcement[]> {
-        return new Promise((resolve) => {
-            this.announcements = [];                    // Replace with HTTP GET
-            setTimeout(() => {resolve(this.announcements)}, 1500);      // Artificial delay
-        });
-    }*/
-
     constructor(private http: Http, private tagsService: TagsService) { }
 
-    ngOnInit() {
-        // this.retrieveAnnouncements();
-    }
+    ngOnInit() {}
 
 }
