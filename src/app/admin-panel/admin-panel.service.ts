@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
+import { TdDialogService } from '@covalent/core';
 import { AdminPanelPage, AdminPanelActions } from './ap-datatypes';
 import { AnnouncementsService } from '../_services/announcements.service';
 
 @Injectable()
 export class AdminPanelService {
-    constructor(private announcementsService: AnnouncementsService, private snackbar: MdSnackBar) {}
+    constructor (
+        private announcementsService: AnnouncementsService, private snackbar: MdSnackBar,
+        private dialogService: TdDialogService ) {}
 
     doAction(action, announcementIds, cb) {
         let promise: any = Promise.resolve({
@@ -40,7 +43,29 @@ export class AdminPanelService {
                     });
                 } else {
                     // ! Prompt for a reason here...
-                    promise = this.announcementsService.setAnnouncementStatus(announcementIds[0], 2);
+                    promise = new Promise((resolve) => {
+                        this.dialogService.openPrompt({
+                            message:
+                                `Please enter in a specific reason for why this announcement should be denied.
+                                The original poster will be notified of this denial and your reason.`,
+                            disableClose: true,
+                            title: 'Deny Announcement',
+                            cancelButton: 'CANCEL',
+                            acceptButton: 'CONTINUE'
+                        }).afterClosed().subscribe((reason: string) => {
+                            if (reason) {
+                                this.announcementsService.setAnnouncementStatus(announcementIds[0], 2, reason).then((d) => {
+                                    resolve(d);
+                                    return d;
+                                });
+                            } else {
+                                resolve({
+                                    success: false,
+                                    reason: 'Canceled out of deny dialog.'
+                                });
+                            }
+                        });
+                    });
                 }
                 break;
             case AdminPanelActions.ACTION_ANNOUNCEMENT_SET_URGENT:
