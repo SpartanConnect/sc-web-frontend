@@ -22,6 +22,7 @@ export class AnnouncementComponent implements OnInit {
     placeHolderImage = 'http://via.placeholder.com/40/b71c1c/ffffff';
     recentActionWord = 'POSTED';
     recentActionDate: Date;
+    highlightTags = [];
 
     constructor() { }
 
@@ -52,6 +53,8 @@ export class AnnouncementComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.highlightTags =
+            this.announcement.tags.filter(t => (t.slug !== 'urgent') && (t.visibility) && (t.parentId === null));
         this.getLatestAction();
     }
 }

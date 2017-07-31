@@ -1,12 +1,15 @@
 <div class="card-announcement" [class.compact]="mode === 'compact'" (click)="clickHandler()">
-    <div class="card-a-header">
-        <b>FROM #(replace with subject)</b>
+    <div class="card-a-header" *ngIf="highlightTags.length">
+        <b>FROM #{{highlightTags[0].slug}}</b>
         <span class="card-a-fac" *ngIf="mode === 'default'">SUBSCRIBE</span>
     </div>
     <div class="card-a-content">
         <h3 class="card-a-title">{{announcement.title}}</h3>
-        <div class="card-a-title-tag" *ngIf="mode === 'compact' || mode === 'adminpanel'">#(replace with subject)</div>
+        <div class="card-a-title-tag" *ngIf="(mode === 'compact' || mode === 'adminpanel') && highlightTags.length">#{{highlightTags[0].slug}}</div>
         <p class="card-a-description" *ngIf="mode !== 'compact'">{{announcement.description}}</p>
+        <div class="card-a-tags" *ngIf="mode !== 'compact'">
+            <div class="card-a-tag" *ngFor="let tag of announcement.tags">{{tag.name}}</div>
+        </div>
     </div>
     <div class="card-a-footer">
         <span class="card-a-footnote">

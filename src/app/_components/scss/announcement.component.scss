@@ -68,6 +68,20 @@
     margin: 0 10px;
     padding: 4px 10px;
   }
+
+  .card-a-tags {
+    display: block;
+    line-height: 1.5;
+    .card-a-tag {
+      background-color: #aaa;
+      border-radius: 4px;
+      color: #fefefe;
+      display: inline-block;
+      font-size: 12px;
+      margin-right: 5px;
+      padding: 3px 6px;
+    }
+  }
 }
 
 .card-a-footer {
@@ -88,6 +102,7 @@
   }
 }
 
+// The compact style seen in the index page
 .compact {
   border-left: 5px solid mat-color($spartan-app-primary);
   box-shadow: none;
