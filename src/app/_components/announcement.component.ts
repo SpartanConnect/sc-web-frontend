@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { TagsService } from '../_services/tags.service';
 import { Announcement } from '../_models/announcement';
 
 @Component({
@@ -24,7 +25,18 @@ export class AnnouncementComponent implements OnInit {
     recentActionDate: Date;
     highlightTags = [];
 
-    constructor() { }
+    isEditing = false;
+    isHidden = false;
+
+    categories = [];
+
+    editedAnnouncement = {
+        title: '',
+        description: '',
+        category: 0
+    }
+
+    constructor(private tagsService: TagsService) { }
 
     // Gets the latest action and sets it in the announcement footer
     getLatestAction() {
@@ -48,8 +60,26 @@ export class AnnouncementComponent implements OnInit {
         }
     }
 
-    clickHandler() {
+    clickHandler() {}
 
+    toggleEditing() {
+        this.isEditing = !this.isEditing;
+        if (this.isEditing) {
+            this.editedAnnouncement.title = this.announcement.title;
+            this.editedAnnouncement.description = this.announcement.description;
+            this.editedAnnouncement.category = this.highlightTags[0].id;
+            this.tagsService.getCategories().then((d) => {
+                this.categories = d;
+            });
+        }
+    }
+
+    submitForEditing() {
+        // send post request
+    }
+
+    archiveAnnouncement() {
+        this.isHidden = true;
     }
 
     ngOnInit() {
