@@ -14,8 +14,8 @@
                     </div>
                 </div>
                 <div class="admin-dt-announcement-head-buttons">
-                    <button md-icon-button (click)="doAction(actions.ACTION_ANNOUNCEMENT_APPROVE, announcement.id)"><md-icon>check</md-icon></button>
-                    <button md-icon-button (click)="doAction(actions.ACTION_ANNOUNCEMENT_DENY, announcement.id)"><md-icon>block</md-icon></button>
+                    <button md-icon-button (click)="doAction(actions.ACTION_ANNOUNCEMENT_APPROVE, announcement.id)" *ngIf="announcement.status !== 3"><md-icon>check</md-icon></button>
+                    <button md-icon-button (click)="doAction(actions.ACTION_ANNOUNCEMENT_DENY, announcement.id)" *ngIf="announcement.status !== 3"><md-icon>block</md-icon></button>
                     <button md-icon-button *ngIf="openedAnnouncements.indexOf(announcement.id) === -1" (click)="openAnnouncement(announcement.id)"><md-icon>expand_more</md-icon></button>
                     <button md-icon-button *ngIf="openedAnnouncements.indexOf(announcement.id) !== -1" (click)="openAnnouncement(announcement.id)"><md-icon>expand_less</md-icon></button>
                 </div>
