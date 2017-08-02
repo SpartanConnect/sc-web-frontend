@@ -106,11 +106,11 @@ export class AnnouncementComponent implements OnInit {
             this.announcementsService.removeAnnouncementTag(
                 this.announcement.id,
                 this.highlightTags[0].id
-            ).then((d) => {
+            ).then((d: any) => {
                 this.announcementsService.addAnnouncementTag(
                     this.announcement.id,
                     this.editedAnnouncement.category
-                ).then((di) => {
+                ).then((di: any) => {
                     if (di.success && d.success) {
                         this.announcement.tags = this.announcement.tags.filter(t => t.id !== this.highlightTags[0].id);
                         this.announcement.tags.push(this.categories.filter(t => t.id === this.editedAnnouncement.category)[0]);

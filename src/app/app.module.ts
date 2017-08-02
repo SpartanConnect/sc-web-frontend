@@ -55,6 +55,7 @@ const appRoutes: Routes = [
   { path: 'view/archived', component: AnnouncementAllViewComponent},
   { path: 'view/:id', component: AnnouncementViewComponent},
   { path: 'login', component: LoginViewComponent },
+  { path: 'privacy', component: StaticPrivacyPolicyComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
