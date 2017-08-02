@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
 import { TdDialogService } from '@covalent/core';
 
 import { AnnouncementsService } from '../_services/announcements.service';
@@ -40,7 +41,9 @@ export class AnnouncementComponent implements OnInit {
 
     constructor(
         private tagsService: TagsService, private dialogService: TdDialogService,
-        private announcementsService: AnnouncementsService, private ref: ChangeDetectorRef) { }
+        private announcementsService: AnnouncementsService, private ref: ChangeDetectorRef,
+        private snackbar: MdSnackBar
+    ) { }
 
     // Gets the latest action and sets it in the announcement footer
     getLatestAction() {
@@ -80,11 +83,47 @@ export class AnnouncementComponent implements OnInit {
 
     submitForEditing() {
         // send post request
-        this.isEditing = false;
-        this.announcement.title = this.editedAnnouncement.title;
-        this.announcement.description = this.editedAnnouncement.description;
-        this.announcement.timeEdited = new Date();
-        this.getLatestAction();
+        this.announcementsService.setAnnouncementBasic(
+            this.announcement.id,
+            this.editedAnnouncement.title,
+            this.editedAnnouncement.description
+        ).then(d => {
+            if (d.success) {
+                this.isEditing = false;
+                this.announcement.title = this.editedAnnouncement.title;
+                this.announcement.description = this.editedAnnouncement.description;
+                this.announcement.timeEdited = new Date();
+                this.getLatestAction();
+            } else {
+                this.snackbar.open(
+                    'There was an error in updating the title and description of "' + this.announcement.title + '".',
+                    'DISMISS'
+                );
+            }
+        });
+        // Only update if category changed
+        if (this.highlightTags[0].id !== this.editedAnnouncement.category) {
+            this.announcementsService.removeAnnouncementTag(
+                this.announcement.id,
+                this.highlightTags[0].id
+            ).then((d) => {
+                this.announcementsService.addAnnouncementTag(
+                    this.announcement.id,
+                    this.editedAnnouncement.category
+                ).then((di) => {
+                    if (di.success && d.success) {
+                        this.announcement.tags = this.announcement.tags.filter(t => t.id !== this.highlightTags[0].id);
+                        this.announcement.tags.push(this.categories.filter(t => t.id === this.editedAnnouncement.category)[0]);
+                        this.highlightTags[0] = this.categories.filter(t => t.id === this.editedAnnouncement.category)[0];
+                    } else {
+                        this.snackbar.open(
+                            'There was an error in updating the tags of "' + this.announcement.title + '".',
+                            'DISMISS'
+                        );
+                    }
+                });
+            });
+        }
     }
 
     archiveAnnouncement(archive = true) {

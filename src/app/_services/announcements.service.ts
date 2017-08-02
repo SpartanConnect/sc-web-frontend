@@ -99,6 +99,45 @@ export class AnnouncementsService implements OnInit {
         });
     }
 
+    setAnnouncementBasic(announcementId, title, description) {
+        const apiLink = `${API_BASE}/announcements/${announcementId}`;
+        return postHandler(this.http, apiLink, {
+            title: title,
+            description: description
+        });
+    }
+
+    // Warning! this will override the current tags!
+    addAnnouncementTag(announcementId, tagId) {
+        const apiLink = `${API_BASE}/announcements/${announcementId}`;
+        return new Promise((resolve) => {
+            this.getAnnouncementById(announcementId).then((a) => {
+                const updatedTags: any = a.tags;
+                updatedTags.push({id: tagId});
+                postHandler(this.http, apiLink, {
+                    tags: updatedTags
+                }).then((d) => {
+                    resolve(d);
+                    return d;
+                });
+            });
+        });
+    }
+
+    removeAnnouncementTag(announcementId, tagId) {
+        const apiLink = `${API_BASE}/announcements/${announcementId}`;
+        return new Promise((resolve) => {
+            this.getAnnouncementById(announcementId).then((a) => {
+                postHandler(this.http, apiLink, {
+                    tags: a.tags.filter(t => t.id !== tagId)
+                }).then((d) => {
+                    resolve(d);
+                    return d;
+                });
+            });
+        });
+    }
+
     constructor(private http: Http, private tagsService: TagsService) { }
 
     ngOnInit() {}
