@@ -46,6 +46,7 @@ import { ConfirmLeaveGuard } from './_guards/confirmleave.guard';
 import 'hammerjs';
 import { AnnouncementAllViewComponent } from './announcement-all-view/announcement-all-view.component';
 import { StaticPrivacyPolicyComponent } from './static-privacy-policy/static-privacy-policy.component';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     PostAnnouncementComponent,
     AnnouncementAllViewComponent,
     SpotlightCardComponent,
-    StaticPrivacyPolicyComponent
+    StaticPrivacyPolicyComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
