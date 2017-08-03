@@ -38,6 +38,7 @@ import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
 import { UsersService } from './_services/users.service';
 import { AuthService } from './_services/auth.service';
+import { PopupModalService } from './popup-modal/popup-modal.service';
 
 import { UserOnlyGuard } from './_guards/useronly.guard';
 import { AdminOnlyGuard } from './_guards/adminonly.guard';
@@ -47,6 +48,7 @@ import 'hammerjs';
 import { AnnouncementAllViewComponent } from './announcement-all-view/announcement-all-view.component';
 import { StaticPrivacyPolicyComponent } from './static-privacy-policy/static-privacy-policy.component';
 import { FooterComponent } from './footer/footer.component';
+import { PopupModalComponent } from './popup-modal/popup-modal.component';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
@@ -77,7 +79,8 @@ const appRoutes: Routes = [
     AnnouncementAllViewComponent,
     SpotlightCardComponent,
     StaticPrivacyPolicyComponent,
-    FooterComponent
+    FooterComponent,
+    PopupModalComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +124,8 @@ const appRoutes: Routes = [
     AuthService,
     UserOnlyGuard,
     AdminOnlyGuard,
-    ConfirmLeaveGuard
+    ConfirmLeaveGuard,
+    PopupModalService
   ],
   bootstrap: [AppComponent]
 })

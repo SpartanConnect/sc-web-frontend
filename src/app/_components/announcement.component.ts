@@ -4,6 +4,7 @@ import { TdDialogService } from '@covalent/core';
 
 import { AnnouncementsService } from '../_services/announcements.service';
 import { TagsService } from '../_services/tags.service';
+import { AuthService } from '../_services/auth.service';
 import { Announcement } from '../_models/announcement';
 
 @Component({
@@ -42,7 +43,7 @@ export class AnnouncementComponent implements OnInit {
     constructor(
         private tagsService: TagsService, private dialogService: TdDialogService,
         private announcementsService: AnnouncementsService, private ref: ChangeDetectorRef,
-        private snackbar: MdSnackBar
+        private snackbar: MdSnackBar, private authService: AuthService
     ) { }
 
     // Gets the latest action and sets it in the announcement footer

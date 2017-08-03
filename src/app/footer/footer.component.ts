@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopupModalService, PopupModalTypes } from '../popup-modal/popup-modal.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+    constructor(private popup: PopupModalService) { }
 
-  ngOnInit() {
-  }
+    openCredits() {
+        this.popup.openPopup(PopupModalTypes.CREDITS);
+    }
+
+    ngOnInit() {
+    }
 
 }

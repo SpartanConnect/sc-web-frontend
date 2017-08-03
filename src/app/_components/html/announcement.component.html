@@ -3,7 +3,7 @@
         <b>FROM #{{highlightTags[0].slug}}</b>
         <span class="card-a-fac" *ngIf="mode === 'default'">SUBSCRIBE</span>
         <span *ngIf="mode === 'adminpanel' || mode === 'userpanel'" class="card-a-header-tools">
-            <md-icon mdTooltip="Edit" (click)="toggleEditing()" *ngIf="!(announcement.status === 1) && !(mode === 'adminpanel' && announcement.status === 3)">edit</md-icon>
+            <md-icon mdTooltip="Edit" (click)="toggleEditing()" *ngIf="!(announcement.status === 1 && mode === 'userpanel') && !(mode === 'adminpanel' && announcement.status === 3)">edit</md-icon>
             <md-icon mdTooltip="Remove" (click)="archiveAnnouncement(true)" *ngIf="mode === 'userpanel' && announcement.status !== 3">delete</md-icon>
             <md-icon mdTooltip="Resubmit for Approval" (click)="archiveAnnouncement(false)" *ngIf="mode === 'userpanel' && announcement.status === 3">restore</md-icon>
         </span>
