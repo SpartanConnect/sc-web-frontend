@@ -125,7 +125,8 @@ const appRoutes: Routes = [
     UserOnlyGuard,
     AdminOnlyGuard,
     ConfirmLeaveGuard,
-    PopupModalService
+    PopupModalService,
+    AppComponent
   ],
   bootstrap: [AppComponent]
 })

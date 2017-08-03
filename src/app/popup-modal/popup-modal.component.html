@@ -1,5 +1,221 @@
 <div class="app-popup" [class.hidden]="!popup.activated">
     <div class="app-popup-header">
-        <md-icon class="app-popup-header-close">close</md-icon>
+        <md-icon class="app-popup-header-close" (click)="popup.closePopup()">close</md-icon>
+    </div>
+    <div class="app-popup-body app-popup-credits" *ngIf="popup.type === types.CREDITS">
+        <h2 class="credits-heading">
+            <span class="credits-heading-red">Spartan</span>
+            <span class="credits-heading-yellow">Connect</span>
+        </h2>
+        <p class="credits-blurb">
+            Spartan Connect was made with ❤ by the following contributors.
+        </p>
+        <ul class="credits-contributors">
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Lucas Cardell</span>
+                    <span class="contributor-role">Project Advisor</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Harry Coleman</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Justin Hyon</span>
+                    <span class="contributor-role">Designer</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Rucha Kadam</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Jeffrey Kaufman</span>
+                    <span class="contributor-role">Web Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Nicholas Lysek</span>
+                    <span class="contributor-role">Web Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Kevin Mo</span>
+                    <span class="contributor-role">Web Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://github.com/encadyma">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Jon Potter</span>
+                    <span class="contributor-role">Designer</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Sandro Del Rivo</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Kamyar Salahi</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Andre der Sarkissian</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <p class="credits-blurb">
+            Special thanks to Mrs. Lewsadder, Mr. Lewsadder, and the whole Technology Department for their amazing help in bringing this project to life!
+        </p>
+        <br>
+        <h4 class="credits-heading">Open Source Libraries</h4>
+        <ul class="credits-libraries">
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Angular</span>
+                    <span class="contributor-role">Google</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Teradata Covalent</span>
+                    <span class="contributor-role">Teradata</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Typescript</span>
+                    <span class="contributor-role">Microsoft</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">node.js</span>
+                    <span class="contributor-role">node.js Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Express</span>
+                    <span class="contributor-role">Express Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">React Native</span>
+                    <span class="contributor-role">Facebook</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Expo</span>
+                    <span class="contributor-role">Expo Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

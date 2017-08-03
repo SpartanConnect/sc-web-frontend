@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 export enum PopupModalTypes {
     DEFAULT,
-    CREDITS
+    CREDITS,
+    FIRST_SETUP
 }
 
 @Injectable()
@@ -22,11 +24,13 @@ export class PopupModalService {
     openPopup(type: PopupModalTypes) {
         this._type = type;
         this._isShowing = true;
+        this.body.disableScroll = true;
     }
 
     closePopup() {
         this._isShowing = false;
+        this.body.disableScroll = false;
     }
 
-    constructor() { }
+    constructor(private body: AppComponent) { }
 }
