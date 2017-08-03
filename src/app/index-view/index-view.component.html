@@ -13,7 +13,16 @@
             <p>
                 You don't deserve to listen to minutes of boring announcements. With Spartan Connect, you can tune out the ones you don't care about
                 and stay connected to the rest. Download our announcements app today on the App Store or on the Play Store.
-            </p><br>
+            </p>
+            <div style="vertical-align:middle;">
+                <a target="_blank">
+                    <img style="vertical-align:middle;" height="54" alt='Download on the App Store' src='./assets/apple_badge.png'/>
+                </a>
+                <a target="_blank" href='https://play.google.com/store/apps/details?id=com.spartanconnect.SpartanConnect&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+                    <img style="vertical-align:middle;" height="80" alt='Get it on Google Play' src='./assets/google_play_badge.png'/>
+                </a>
+            </div>
+            <br><br>
             <button md-raised-button routerLink="/login">SIGN UP TODAY</button>
         </div>
     </app-spotlight-card>
@@ -26,8 +35,6 @@
             <li *ngFor="let category of categories" (click)="switchCategoryFilter(category.id)" [class.active]="categoryFilter === category.id">{{category.name}}</li>
             <li *ngIf="categoryFilter" (click)="switchCategoryFilter(0)">View All</li>
         </ul>
-        <br>
-        <small routerLink="/view/archived" style="display: inline-block; padding: 10px 10px; cursor: pointer; color: #999;" *ngIf="announcements.length">View Archive</small>
     </div>
 
     <div class="index-body-announcements">
