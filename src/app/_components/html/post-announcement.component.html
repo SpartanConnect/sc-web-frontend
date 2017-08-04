@@ -85,7 +85,7 @@
                 </md-card-header>
                 <md-card-content style="margin-bottom: 0">
                     <h3>{{announcement.title || "(no title)"}}</h3>
-                    <p>{{announcement.description || "(no description)"}}</p>
+                    <p style="white-space: pre-wrap;">{{announcement.description || "(no description)"}}</p>
                     <md-chip-list *ngIf="selectedTags">
                         <md-chip *ngFor="let tag of selectedTags">{{tag.name}}</md-chip>
                     </md-chip-list>
