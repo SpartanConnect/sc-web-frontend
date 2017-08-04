@@ -4,16 +4,16 @@
     <h3 *ngIf="isDesktop">Spartan Connect on Mobile!</h3>
     <div content>
         <p *ngIf="!isDesktop">
-            If you are not redirected within a few moments, you can click on <a href="http://itunes.apple.com/us/app/spartan-connect/id1257927264?mt=8">here</a> to go to the Apple Store or <a href="market://details?id=com.spartanconnect.SpartanConnect">here</a> to go to the Play Store.
+            If you are not redirected within a few moments, you can click on <a href="{{getiOSUrl()}}">here</a> to go to the Apple Store or <a href="{{getAndroidUrl()}}">here</a> to go to the Play Store.
         </p>
         <p *ngIf="isDesktop">
-            Spartan Connect is available in both the Apple App Store and the Google Play Store. Please go <a href="http://itunes.apple.com/us/app/spartan-connect/id1257927264?mt=8">here</a> to go to the Apple Store or <a href="market://details?id=com.spartanconnect.SpartanConnect">here</a> to go to the Play Store.
+            Spartan Connect is available in both the Apple App Store and the Google Play Store. Please go <a href="{{getiOSUrl()}}">here</a> to go to the Apple Store or <a href="{{getAndroidUrl()}}">here</a> to go to the Play Store.
         </p>
         <div style="vertical-align:middle;">
-            <a target="_blank" href="http://itunes.apple.com/us/app/spartan-connect/id1257927264?mt=8">
+            <a target="_blank" href="{{getiOSUrl()}}">
                 <img style="vertical-align:middle;" height="54" alt='Download on the App Store' src='./assets/apple_badge.png'/>
             </a>
-            <a target="_blank" href='{{androidLink}}'>
+            <a target="_blank" href='{{getAndroidUrl()}}'>
                 <img style="vertical-align:middle;" height="80" alt='Get it on Google Play' src='./assets/google_play_badge.png'/>
             </a>
         </div><br>
