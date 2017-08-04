@@ -14,6 +14,10 @@ export class FooterComponent implements OnInit {
         this.popup.openPopup(PopupModalTypes.CREDITS);
     }
 
+    openSetup() {
+        this.popup.openPopup(PopupModalTypes.FIRST_SETUP);
+    }
+
     ngOnInit() {
     }
 

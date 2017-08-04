@@ -127,3 +127,40 @@
     }
   }
 }
+
+// Final Setup Styling
+.app-popup-setup {
+  padding-top: 40px;
+}
+
+.setup-description {
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+.setup-input {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 5px 0;
+  .setup-input-before {
+    background-color: #aaa;
+    color: #fefefe;
+    display: inline-block;
+    font-weight: bold;
+    padding: 8px 10px;
+    transition: background-color 150ms ease;
+
+    &.correct {
+      background-color: #27ae60;
+      transition: background-color 150ms ease;
+    }
+  }
+  input {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    outline: none;
+    padding: 8px 5px;
+  }
+}

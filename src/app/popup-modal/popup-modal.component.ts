@@ -10,6 +10,11 @@ export class PopupModalComponent implements OnInit {
 
     types = PopupModalTypes;
 
+    // Variables for Setup
+    setupHasConsent = false;
+    setupUserHandle = '';
+    setupUserName = '';
+
     constructor(private popup: PopupModalService) { }
 
     ngOnInit() {
