@@ -25,7 +25,6 @@ import { AnnouncementViewComponent } from './announcement-view/announcement-view
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CreateAnnouncementFormComponent } from './create-announcement-form/create-announcement-form.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 // import { StatusTagComponent } from './_components/status-tag.component';
 import { PostAnnouncementComponent } from './_components/post-announcement.component';
@@ -54,7 +53,6 @@ import { RedirectMobileAppComponent } from './redirect-mobile-app/redirect-mobil
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
   { path: 'me', component: UserPanelComponent, canActivate: [UserOnlyGuard] },
-  { path: 'me/create', component: CreateAnnouncementFormComponent, canActivate: [UserOnlyGuard], canDeactivate: [ConfirmLeaveGuard] },
   { path: 'home', component: IndexViewComponent },
   { path: 'view/archived', component: AnnouncementAllViewComponent},
   { path: 'view/:id', component: AnnouncementViewComponent},
@@ -74,7 +72,6 @@ const appRoutes: Routes = [
     UserPanelComponent,
     // AdminPanelComponent,
     PageNotFoundComponent,
-    CreateAnnouncementFormComponent,
     LoginViewComponent,
     // StatusTagComponent,
     PostAnnouncementComponent,
