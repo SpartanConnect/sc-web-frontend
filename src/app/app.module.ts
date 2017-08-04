@@ -49,6 +49,7 @@ import { AnnouncementAllViewComponent } from './announcement-all-view/announceme
 import { StaticPrivacyPolicyComponent } from './static-privacy-policy/static-privacy-policy.component';
 import { FooterComponent } from './footer/footer.component';
 import { PopupModalComponent } from './popup-modal/popup-modal.component';
+import { RedirectMobileAppComponent } from './redirect-mobile-app/redirect-mobile-app.component';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
   { path: 'view/:id', component: AnnouncementViewComponent},
   { path: 'login', component: LoginViewComponent },
   { path: 'privacy', component: StaticPrivacyPolicyComponent },
+  { path: 'm', component: RedirectMobileAppComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -80,7 +82,8 @@ const appRoutes: Routes = [
     SpotlightCardComponent,
     StaticPrivacyPolicyComponent,
     FooterComponent,
-    PopupModalComponent
+    PopupModalComponent,
+    RedirectMobileAppComponent
   ],
   imports: [
     BrowserModule,
