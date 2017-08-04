@@ -15,7 +15,7 @@ export class PopupModalComponent implements OnInit {
     setupUserHandle = '';
     setupUserName = '';
 
-    constructor(private popup: PopupModalService) { }
+    constructor(public popup: PopupModalService) { }
 
     ngOnInit() {
     }
