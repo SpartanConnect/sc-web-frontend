@@ -6,7 +6,7 @@
             You have logged out of Spartan Connect.
         </p>
     </app-spotlight-card>
-    <app-spotlight-card *ngIf="!currentUser.isAuthenticated && !loggedOut">
+    <app-spotlight-card *ngIf="!currentUser.isAuthenticated && !loggedOut" width="500" mode="small">
         <h1 class="card-spotlight-emoji">👋</h1>
         <h3>Say goodbye to PA announcements.</h3>
         <div content>
@@ -16,14 +16,13 @@
             </p>
             <div style="vertical-align:middle;">
                 <a target="_blank" href="http://itunes.apple.com/us/app/spartan-connect/id1257927264?mt=8">
-                    <img style="vertical-align:middle;" height="54" alt='Download on the App Store' src='./assets/apple_badge.png'/>
+                    <img style="vertical-align:middle;" height="40" alt='Download on the App Store' src='./assets/apple_badge.png'/>
                 </a>
                 <a target="_blank" href='https://play.google.com/store/apps/details?id=com.spartanconnect.SpartanConnect&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-                    <img style="vertical-align:middle;" height="80" alt='Get it on Google Play' src='./assets/google_play_badge.png'/>
+                    <img style="vertical-align:middle;" height="60" alt='Get it on Google Play' src='./assets/google_play_badge.png'/>
                 </a>
             </div>
-            <br><br>
-            <button md-raised-button routerLink="/login">SIGN UP TODAY</button>
+            <br>
         </div>
     </app-spotlight-card>
 </div>

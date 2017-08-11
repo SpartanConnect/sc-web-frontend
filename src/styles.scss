@@ -36,6 +36,20 @@ body.noscroll {
 // Spotlight card styles
 
 .card-spotlight {
+  &.small {
+    .card-spotlight-emoji {
+      h1, md-icon {
+        font-size: 36px;
+      }
+    }
+    .card-spotlight-title {
+      font-size: 14px;
+    }
+    .card-spotlight-description {
+      font-size: 13px;
+    }
+  }
+
   &.compact {
     .card-spotlight-emoji {
       display: inline-block;
