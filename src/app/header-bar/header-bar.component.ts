@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../_services/auth.service';
+import { AnnouncementsService } from '../_services/announcements.service';
+import { NotificationsService } from '../_services/notifications.service';
 import { API_BASE } from '../_models/api';
 
 @Component({
@@ -14,7 +16,10 @@ export class HeaderBarComponent implements OnInit {
     brandName = 'Spartan Connect';
     userDropActivated = false;
 
-    constructor(public authService: AuthService, private router: Router) {}
+    constructor(
+        public authService: AuthService, private router: Router,
+        public notificationsService: NotificationsService
+    ) {}
 
     redirectToHome() {
         window.scrollTo(0, 0);
@@ -51,12 +56,7 @@ export class HeaderBarComponent implements OnInit {
     }
 
     ngOnInit() {
-        // Load in the user header
-        /*this.loadingService.register('appAuthLoading');
-        this.authService.getUser().then((data) => {
-            this.authUser = data;
-            this.loadingService.resolve('appAuthLoading');
-        });*/
+        this.notificationsService.fetchNotifications();
     }
 
 }

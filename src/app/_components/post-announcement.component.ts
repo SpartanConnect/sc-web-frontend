@@ -5,6 +5,7 @@ import { TdDialogService, TdLoadingService } from '@covalent/core';
 
 import { AuthService } from '../_services/auth.service';
 import { TagsService } from '../_services/tags.service';
+import { NotificationsService } from '../_services/notifications.service';
 
 import { Tag } from '../_models/tag';
 import { API_BASE, postHandler } from '../_models/api';
@@ -93,9 +94,12 @@ export class PostAnnouncementComponent implements OnInit {
     currentTooltip = 'Initializing...';
     currentStepCounter = 'STEP 1: BASIC INFO';
 
-    constructor(private authService: AuthService, private tagsService: TagsService,
-            private dialogService: TdDialogService, private snackbar: MdSnackBar,
-            private http: Http, private loadingService: TdLoadingService) { }
+    constructor(
+        private authService: AuthService, private tagsService: TagsService,
+        private dialogService: TdDialogService, private snackbar: MdSnackBar,
+        private http: Http, private loadingService: TdLoadingService,
+        private notificationsService: NotificationsService
+    ) { }
 
     // Validates the entire form or "by step".
     // Example: running w/o a parameter checks the entire form while
@@ -299,6 +303,7 @@ export class PostAnnouncementComponent implements OnInit {
                     this.updateTooltip();
                 } else {
                     this.step = AnnouncementStep.SUBMISSION_SUCCESS;
+                    this.notificationsService.fetchNotifications();
                     localStorage.removeItem('ann_title');
                     localStorage.removeItem('ann_description');
                     localStorage.removeItem('ann_grades');

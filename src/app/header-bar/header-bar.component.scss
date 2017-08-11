@@ -72,6 +72,44 @@ header {
   }
 }
 
+.header-notifications {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  padding: 10px 10px;
+  padding-top: 12px;
+  position: relative;
+  transition: all 150ms ease;
+  vertical-align: top;
+
+  md-icon {
+    &::selection {
+      background-color: transparent;
+      color: #000000;
+    }
+    &::-moz-selection{
+      background-color: transparent;
+      color: #000000;
+    }
+  }
+
+  &:hover {
+    background-color: #f1f1f1;
+    transition: all 150ms ease;
+  }
+
+  .badge {
+    background-color: #E53935;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    top: 27px;
+    right: 8px;
+  }
+
+}
+
 // User profile
 .header-user {
   border-bottom: 4px solid rgba(0, 0, 0, 0);

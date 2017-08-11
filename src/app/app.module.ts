@@ -37,6 +37,7 @@ import { AnnouncementsService } from './_services/announcements.service';
 import { TagsService } from './_services/tags.service';
 import { UsersService } from './_services/users.service';
 import { AuthService } from './_services/auth.service';
+import { NotificationsService } from './_services/notifications.service';
 import { PopupModalService } from './popup-modal/popup-modal.service';
 
 import { UserOnlyGuard } from './_guards/useronly.guard';
@@ -126,7 +127,8 @@ const appRoutes: Routes = [
     AdminOnlyGuard,
     ConfirmLeaveGuard,
     PopupModalService,
-    AppComponent
+    AppComponent,
+    NotificationsService
   ],
   bootstrap: [AppComponent]
 })

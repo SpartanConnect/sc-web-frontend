@@ -3,6 +3,7 @@ import { MdSnackBar } from '@angular/material';
 import { TdDialogService } from '@covalent/core';
 
 import { AnnouncementsService } from '../_services/announcements.service';
+import { NotificationsService } from '../_services/notifications.service';
 import { TagsService } from '../_services/tags.service';
 import { AuthService } from '../_services/auth.service';
 import { Announcement } from '../_models/announcement';
@@ -43,7 +44,8 @@ export class AnnouncementComponent implements OnInit {
     constructor(
         private tagsService: TagsService, private dialogService: TdDialogService,
         private announcementsService: AnnouncementsService, private ref: ChangeDetectorRef,
-        private snackbar: MdSnackBar, private authService: AuthService
+        private snackbar: MdSnackBar, private authService: AuthService,
+        private notificationsService: NotificationsService
     ) { }
 
     // Gets the latest action and sets it in the announcement footer
@@ -144,6 +146,7 @@ export class AnnouncementComponent implements OnInit {
                         this.announcement.id,
                         3
                     ).then((r) => {
+                        this.notificationsService.fetchNotifications();
                         if (r.success) {
                             this.announcement.status = 3;
                         }
@@ -163,6 +166,7 @@ export class AnnouncementComponent implements OnInit {
                         this.announcement.id,
                         0
                     ).then((r) => {
+                        this.notificationsService.fetchNotifications();
                         if (r.success) {
                             this.announcement.status = 0;
                         }

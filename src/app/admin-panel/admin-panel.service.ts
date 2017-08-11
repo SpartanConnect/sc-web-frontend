@@ -1,14 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 import { TdDialogService } from '@covalent/core';
+import { NotificationsService } from '../_services/notifications.service';
 import { AdminPanelPage, AdminPanelActions } from './ap-datatypes';
 import { AnnouncementsService } from '../_services/announcements.service';
 
 @Injectable()
-export class AdminPanelService {
+export class AdminPanelService implements OnInit {
+
     constructor (
         private announcementsService: AnnouncementsService, private snackbar: MdSnackBar,
-        private dialogService: TdDialogService ) {}
+        private dialogService: TdDialogService, private notificationsService: NotificationsService
+    ) {}
+
+    ngOnInit() {
+        this.notificationsService.fetchNotifications();
+    }
 
     doAction(action, announcementIds, cb) {
         let promise: any = Promise.resolve({
@@ -135,6 +142,7 @@ export class AdminPanelService {
     handleAction(promise, cb) {
         return promise.then((d) => {
             // handle success or not
+            this.notificationsService.fetchNotifications();
             if (d.success) {
                 this.snackbar.open('Action was successful.', 'DISMISS', {
                     duration: 5000

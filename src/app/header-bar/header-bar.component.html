@@ -8,8 +8,10 @@
             <div class="header-breadcrumb"></div>
         </div>
         <div class="header-bar-right">
-            <div class="header-search"></div>
-            <div class="header-user" (click)="handleUserClick()" [class.activated]="userDropActivated">
+            <div class="header-search"></div><!--
+            --><div class="header-notifications" *ngIf="authService.currentUser.isAuthenticated && !notificationsService.hasNotifications"><md-icon>notifications_none</md-icon></div><!--
+            --><div class="header-notifications" *ngIf="authService.currentUser.isAuthenticated && notificationsService.hasNotifications"><md-icon>notifications</md-icon><span class="badge"></span></div><!--
+            --><div class="header-user" (click)="handleUserClick()" [class.activated]="userDropActivated">
                 <span class="header-user-text" *ngIf="!authService.currentUser.isAuthenticated">LOG IN WITH GOOGLE</span>
                 <div class="header-user-image" *ngIf="authService.currentUser.isAuthenticated"
                     [ngStyle]="{'background-image': 'url('+authService.currentUser.profileUrl+')'}"></div>

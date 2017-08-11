@@ -18,6 +18,8 @@ import { StatusTagComponent } from '../_components/status-tag.component';
 import { AnnouncementComponent } from '../_components/announcement.component';
 
 import { AdminPanelService } from './admin-panel.service';
+import { NotificationsService } from '../_services/notifications.service';
+
 
 @NgModule({
     imports: [
@@ -47,7 +49,8 @@ import { AdminPanelService } from './admin-panel.service';
     ],
     providers: [
         AdminPanelService,
-        TdDialogService
+        TdDialogService,
+        NotificationsService
     ],
 })
 export class AdminPanelModule { }

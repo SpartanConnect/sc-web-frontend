@@ -72,6 +72,8 @@ export class AnnouncementsService implements OnInit {
         return postHandler(this.http, apiLink, {
             status: status,
             reason: reason
+        }).then((data) => {
+            return data;
         });
     }
 
@@ -138,7 +140,9 @@ export class AnnouncementsService implements OnInit {
         });
     }
 
-    constructor(private http: Http, private tagsService: TagsService) { }
+    constructor(
+        private http: Http, private tagsService: TagsService
+    ) { }
 
     ngOnInit() {}
 
