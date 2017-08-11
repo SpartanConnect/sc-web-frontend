@@ -63,6 +63,14 @@ export class UserPanelComponent implements OnInit {
         this.changeView(this.selectedView);
         this.forbidden = (this.route.snapshot.queryParamMap.has('forbidden'));
         this.justLoggedIn = (this.route.snapshot.queryParamMap.has('loggedin'));
+
+        // To fix the issue of people refreshing their browser
+        // and getting the login message again
+        if (localStorage.getItem('hasloggedin') === 'true') {
+            this.justLoggedIn = false;
+        } else if (this.justLoggedIn) {
+            localStorage.setItem('hasloggedin', 'true');
+        }
     }
 
 }

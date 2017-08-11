@@ -39,6 +39,7 @@ export class LoginViewComponent implements OnInit {
                 }
             });
         } else if (this.authStatus === 200) {
+            localStorage.removeItem('hasloggedin');
             this.router.navigate(['/home'], {
                 queryParams: {
                     loggedout: true
