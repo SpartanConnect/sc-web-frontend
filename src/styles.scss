@@ -57,10 +57,11 @@ body.noscroll {
       h1, md-icon {
         display: inline-block;
         font-size: 14px;
-        margin: 0 5px;
+        margin: 0;
       }
       md-icon {
         font-size: 24px;
+        margin-right: 5px;
       }
     }
     .card-spotlight-title {
