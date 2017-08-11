@@ -220,3 +220,80 @@ header {
     }
   }
 }
+
+.header-notifications-popup {
+  background-color: #F0F0F0;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.10);
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 480px;
+  //min-height: 180px;
+  padding: 5px;
+  position: fixed;
+  right: calc((100% - 960px) / 2);
+  opacity: 0;
+  top: 45px;
+  visibility: hidden;
+  z-index: 100;
+  transition: all 250ms ease;
+
+  &.activated {
+    top: 60px;
+    opacity: 1;
+    transition: visibility 0s, all 250ms ease;
+    visibility: visible;
+  }
+
+  .header-popup-notif {
+    background-color: #FEFEFE;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 4px;
+    margin: 5px 20px;
+  }
+
+  .pnotif-head {
+    margin: 0;
+    padding: 8px 12px;
+
+    md-icon {
+      font-size: 18px;
+      vertical-align: middle;
+    }
+
+    .metadata {
+      color: #aaa;
+      font-size: 13px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+  }
+
+  .pnotif-content {
+    padding: 10px 12px;
+    padding-top: 0;
+
+    h4 {
+      font-size: 14px;
+      margin: 5px 0;
+      padding: 0;
+    }
+
+    p {
+      font-size: 13px;
+      margin: 5px 0;
+      padding: 0;
+    }
+  }
+}
+
+div.dim-container {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+span.dim, i.dim {
+  display: inline-block;
+  color: #aaa;
+  font-size: 14px;
+}

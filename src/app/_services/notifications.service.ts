@@ -30,7 +30,11 @@ export class NotificationsService implements OnInit {
                 this._notifications.push({
                     title: 'Admin Panel: New Pending Announcements',
                     content: 'There are new announcements awaiting approval.',
-                    timeCreated: new Date()
+                    icon: 'assignment_late',
+                    timeCreated: new Date(),
+                    author: {
+                        name: 'Student Developer Team'
+                    }
                 });
             }
         });

@@ -15,6 +15,7 @@ export class HeaderBarComponent implements OnInit {
 
     brandName = 'Spartan Connect';
     userDropActivated = false;
+    notifsDropActivated = false;
 
     constructor(
         public authService: AuthService, private router: Router,
@@ -46,13 +47,27 @@ export class HeaderBarComponent implements OnInit {
             } else {
                 this.userDropActivated = true;
             }
+            this.hideNotifDrop();
         } else {
             this.login();
         }
     }
 
-    hideDrop() {
+    handleNotifClick() {
+        if (this.notifsDropActivated) {
+            this.notifsDropActivated = false;
+        } else {
+            this.notifsDropActivated = true;
+        }
+        this.hideUserDrop();
+    }
+
+    hideUserDrop() {
         this.userDropActivated = false;
+    }
+
+    hideNotifDrop() {
+        this.notifsDropActivated = false;
     }
 
     ngOnInit() {
