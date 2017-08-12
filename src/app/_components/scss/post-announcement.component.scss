@@ -237,6 +237,43 @@ textarea {
   }
 }
 
+.pac-e-date-status {
+  background-color: #ccc;
+  border-radius: 4px;
+  color: #111;
+  font-size: 13px;
+  padding: 8px 12px;
+  transition: all 150ms ease;
+
+  b {
+    display: inline-block;
+    margin-bottom: 2px;
+  }
+
+  p {
+    display: inline;
+    font-size: 12px;
+  }
+
+  &.yellow {
+    background-color: #f1c40f;
+    color: #111;
+    transition: all 150ms ease;
+  }
+
+  &.green {
+    background-color: #27ae60;
+    color: #fefefe;
+    transition: all 150ms ease;
+  }
+
+  &.red {
+    background-color: #c0392b;
+    color: #fefefe;
+    transition: all 150ms ease;
+  }
+}
+
 .pac-e-alert {
   background-color: #ccc;
   border-radius: 4px;

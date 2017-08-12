@@ -189,6 +189,68 @@ export class PostAnnouncementComponent implements OnInit {
         }
     }
 
+    getDateStatus() {
+        if (!this.validateForm(AnnouncementStep.STEP_THREE_DATE_ASSIGN)) {
+            return {
+                code: 'gray',
+                status: 'UNKNOWN',
+                reason: 'This bar is a guide to help determine if your selected dates follow our announcement guidelines.'
+            }
+        } else if (this.dateMode === AnnouncementDateMode.SHOW_OVER_RANGE) {
+            if (moment(this.announcement.endDate).diff(moment(this.announcement.startDate), 'days') >= 14) {
+                return {
+                    code: 'red',
+                    status: 'APPROVAL UNLIKELY',
+                    reason:
+                        `Our announcement policy highly recommends each announcement to only show for two weeks or less.
+                        Surpassing this limit will significantly diminish your chances for approval.`
+                }
+            } else if (moment(this.announcement.startDate).isBefore(moment().add(3, 'days'), 'day')) {
+                // send a warning if it's three days before
+                return {
+                    code: 'yellow',
+                    status: 'NEEDS ATTENTION',
+                    reason:
+                        `The selected start date (${moment(this.announcement.startDate).format('MM/DD/YYYY')})
+                        is ${moment(this.announcement.startDate).fromNow()}.
+                        For an administrator to approve your announcement on time, please select a new start date that is
+                        at least three days from today.`
+                }
+            } else {
+                return {
+                    code: 'green',
+                    status: 'GOOD',
+                    reason: 'The selected dates comply with our announcement guidelines and have a good chance for approval.'
+                }
+            }
+        } else if (this.dateMode === AnnouncementDateMode.SHOW_ONE_DAY) {
+            if (moment(this.announcement.omniDate).isBefore(moment().add(3, 'days'), 'day')) {
+                // send a warning if it's three days before
+                return {
+                    code: 'yellow',
+                    status: 'NEEDS ATTENTION',
+                    reason:
+                        `The selected date (${moment(this.announcement.omniDate).format('MM/DD/YYYY')})
+                        is ${moment(this.announcement.omniDate).fromNow()}.
+                        For an administrator to approve your announcement on time, please select a new date that is
+                        at least three days from today.`
+                }
+            } else {
+                return {
+                    code: 'green',
+                    status: 'GOOD',
+                    reason: 'The selected date complies with our announcement guidelines and has a good chance for approval.'
+                }
+            }
+        } else {
+            return {
+                code: 'gray',
+                status: 'UNKNOWN',
+                reason: 'This bar is a guide to help determine if your selected dates follow our announcement guidelines.'
+            }
+        }
+    }
+
     updateTooltip() {
         switch (this.step) {
             // tslint:disable:max-line-length

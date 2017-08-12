@@ -53,12 +53,14 @@ export class AdminPanelService implements OnInit {
                     promise = new Promise((resolve) => {
                         this.dialogService.openPrompt({
                             message:
-                                `Please enter in a specific reason for why this announcement should be denied.
+                                `Are you sure you want to deny this announcement?
+                                You may enter in a reason below for your denial.
                                 The original poster will be notified of this denial and your reason.`,
                             disableClose: true,
                             title: 'Deny Announcement',
                             cancelButton: 'CANCEL',
-                            acceptButton: 'CONTINUE'
+                            acceptButton: 'CONTINUE',
+                            value: '(no reason provided)'
                         }).afterClosed().subscribe((reason: string) => {
                             if (reason) {
                                 this.announcementsService.setAnnouncementStatus(announcementIds[0], 2, reason).then((d) => {
