@@ -100,6 +100,29 @@ export class AdminDatatableComponent implements OnInit {
         }
     }
 
+    returnAnnouncementRating(announcement) {
+        if (moment(announcement.endDate).diff(moment(announcement.startDate), 'days') >= 14) {
+            return {
+                code: 'red',
+                icon: 'error_outline',
+                status: 'Review Dates Carefully'
+            }
+        } else if (moment(announcement.startDate).isBefore(moment().add(1, 'days'), 'day')) {
+            return {
+                code: 'yellow',
+                icon: 'warning',
+                status: 'Review Start Date'
+            }
+        } else {
+            return {
+                code: 'green',
+                icon: 'check',
+                status: 'Good'
+            }
+        }
+
+    }
+
     constructor(private adminPanelService: AdminPanelService) { }
 
     ngOnInit() { }
