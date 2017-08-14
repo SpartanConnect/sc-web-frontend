@@ -27,9 +27,9 @@
     <div class="header-ep-dash" routerLinkActive="activated" routerLink="/admin" *ngIf="authService.currentUser.rank <= 2">
         <md-icon>dashboard</md-icon> <span>Admin Panel</span>
     </div>
-    <div class="header-ep-dash" routerLinkActive="activated">
+    <!--<div class="header-ep-dash" routerLinkActive="activated">
         <md-icon>settings</md-icon> <span>Preferences</span>
-    </div>
+    </div>-->
     <div class="header-ep-dash" (click)="logout()">
         <md-icon>exit_to_app</md-icon> <span>Log Out</span>
     </div>
