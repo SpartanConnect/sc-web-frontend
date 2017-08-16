@@ -35,7 +35,7 @@ export class UsersService implements OnInit {
                         email: email
                     }).then(() => {
                         this.getUsers().then((newUsers) => {
-                            const userId = data.filter((u) => u.email === email)[0].id;
+                            const userId = newUsers.filter((u) => u.email === email)[0].id;
                             postHandler(this.http, apiLink + `/${userId}`, {
                                 rank: 3
                             }).then((data2) => {
