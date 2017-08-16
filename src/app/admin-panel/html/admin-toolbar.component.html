@@ -28,16 +28,16 @@
         <!-- Actions for Users -->
         <!-- Add New User: All User Actions -->
         <div class="admin-toolbar-action" mdTooltip="Add User"
-            (click)="doAction(actions.ACTION_USER_INVITE)"
+            routerLink="/admin/newuser"
             *ngIf="page === pages.PAGE_USERS_ALL || page === pages.PAGE_USERS_UNAPPROVED || page === pages.PAGE_USERS_TEACHERS">
             <md-icon>person_add</md-icon>
         </div>
         <!-- Edit User: All User Actions -->
-        <div class="admin-toolbar-action" mdTooltip="Edit User"
+        <!--<div class="admin-toolbar-action" mdTooltip="Edit User"
             (click)="doAction(actions.ACTION_USER_EDIT)"
             *ngIf="page === pages.PAGE_USERS_ALL || page === pages.PAGE_USERS_UNAPPROVED || page === pages.PAGE_USERS_TEACHERS">
             <md-icon>mode_edit</md-icon>
-        </div>
+        </div>-->
 
         <!-- Actions for Tags -->
         <!-- Nothing yet. Come up with an idea sometime and add it as a GH issue... -->

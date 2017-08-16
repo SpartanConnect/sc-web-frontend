@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {    MdInputModule, MdButtonModule,
             MdTooltipModule, MdSnackBarModule,
@@ -50,9 +51,11 @@ import { StaticPrivacyPolicyComponent } from './static-privacy-policy/static-pri
 import { FooterComponent } from './footer/footer.component';
 import { PopupModalComponent } from './popup-modal/popup-modal.component';
 import { RedirectMobileAppComponent } from './redirect-mobile-app/redirect-mobile-app.component';
+import { NewUserComponent } from './new-user/new-user.component';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
+  { path: 'admin/newuser', component: NewUserComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },
   { path: 'me', component: UserPanelComponent, canActivate: [UserOnlyGuard] },
   { path: 'home', component: IndexViewComponent },
   { path: 'view/archived', component: AnnouncementAllViewComponent},
@@ -81,12 +84,15 @@ const appRoutes: Routes = [
     StaticPrivacyPolicyComponent,
     FooterComponent,
     PopupModalComponent,
-    RedirectMobileAppComponent
+    RedirectMobileAppComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
     MdInputModule,
     MdButtonModule,
     MdTooltipModule,

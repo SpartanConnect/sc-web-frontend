@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { CovalentCommonModule, CovalentDataTableModule, TdDialogService } from '@covalent/core';
 
@@ -25,6 +26,7 @@ import { NotificationsService } from '../_services/notifications.service';
     imports: [
         CommonModule,
         FormsModule,
+        RouterModule,
         MdIconModule,
         MdProgressSpinnerModule,
         MdButtonModule,
