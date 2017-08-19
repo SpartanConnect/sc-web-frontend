@@ -10,9 +10,9 @@ export class HtmlLinkPipe implements PipeTransform {
         const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
 
         // Remove http(s?) and add http:// again
-        newValue = newValue.replace(httpRegex, '');
+        newValue = newValue.replace(httpRegex, ``);
 
-        newValue = newValue.replace(urlRegex, `<a href="//$&">$&</a>`);
+        newValue = newValue.replace(urlRegex, `<a href="//$&">http://$&</a>`);
         return newValue;
     }
 }
