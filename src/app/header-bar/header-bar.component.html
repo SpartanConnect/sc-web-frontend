@@ -8,8 +8,10 @@
             <div class="header-breadcrumb"></div>
         </div>
         <div class="header-bar-right">
-            <div class="header-search"></div>
-            <div class="header-user" (click)="handleUserClick()" [class.activated]="userDropActivated">
+            <div class="header-search"></div><!--
+            --><div class="header-notifications" *ngIf="authService.currentUser.isAuthenticated && !notificationsService.hasNotifications" (click)="handleNotifClick()"><md-icon>notifications_none</md-icon></div><!--
+            --><div class="header-notifications" *ngIf="authService.currentUser.isAuthenticated && notificationsService.hasNotifications" (click)="handleNotifClick()"><md-icon>notifications</md-icon><span class="badge"></span></div><!--
+            --><div class="header-user" (click)="handleUserClick()" [class.activated]="userDropActivated">
                 <span class="header-user-text" *ngIf="!authService.currentUser.isAuthenticated">LOG IN WITH GOOGLE</span>
                 <div class="header-user-image" *ngIf="authService.currentUser.isAuthenticated"
                     [ngStyle]="{'background-image': 'url('+authService.currentUser.profileUrl+')'}"></div>
@@ -18,17 +20,34 @@
         </div>
     </div>
 </header>
-<nav class="header-user-popup" [class.activated]="userDropActivated" *ngIf="authService.currentUser.isAuthenticated" (click)="hideDrop()">
+<nav class="header-user-popup" [class.activated]="userDropActivated" *ngIf="authService.currentUser.isAuthenticated" (click)="hideUserDrop()">
     <div class="header-ep-dash" routerLinkActive="activated" routerLink="/me">
         <md-icon>account_circle</md-icon> <span>User Panel</span>
     </div>
     <div class="header-ep-dash" routerLinkActive="activated" routerLink="/admin" *ngIf="authService.currentUser.rank <= 2">
         <md-icon>dashboard</md-icon> <span>Admin Panel</span>
     </div>
-    <div class="header-ep-dash" routerLinkActive="activated">
+    <!--<div class="header-ep-dash" routerLinkActive="activated">
         <md-icon>settings</md-icon> <span>Preferences</span>
-    </div>
+    </div>-->
     <div class="header-ep-dash" (click)="logout()">
         <md-icon>exit_to_app</md-icon> <span>Log Out</span>
     </div>
+</nav>
+<nav class="header-notifications-popup" [class.activated]="notifsDropActivated" *ngIf="authService.currentUser.isAuthenticated" (click)="hideNotifDrop()">
+    <div class="dim-container">
+        <span class="dim" *ngIf="notificationsService.hasNotifications">All Notifications</span>
+        <i class="dim" *ngIf="!notificationsService.hasNotifications">No Unread Notifications</i>
+    </div>
+    <div class="header-popup-notif" *ngFor="let notification of notificationsService.notifications">
+        <div class="pnotif-head">
+            <md-icon>{{notification.icon}}</md-icon>
+            <span class="metadata">from {{notification.author.name}}</span>
+        </div>
+        <div class="pnotif-content">
+            <h4>{{notification.title}}</h4>
+            <p>{{notification.content}}</p>
+        </div>
+    </div>
+    <br *ngIf="notificationsService.hasNotifications">
 </nav>

@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ITdDataTableColumn } from '@covalent/core';
 
-import { AdminPanelPage } from '../ap-datatypes';
+import { AdminPanelService } from '../admin-panel.service';
+import { AdminPanelPage, AdminPanelActions } from '../ap-datatypes';
 
 import * as moment from 'moment';
 
@@ -14,8 +15,12 @@ import * as moment from 'moment';
 export class AdminDatatableComponent implements OnInit {
     @Input() page;
     @Input() data;
+    @Input() selectedIds;
+    @Output() change = new EventEmitter<number[]>();
+    @Output() refresh = new EventEmitter<boolean>();
 
     pages = AdminPanelPage;
+    actions = AdminPanelActions;
 
     selectedData = null;
 
@@ -35,7 +40,6 @@ export class AdminDatatableComponent implements OnInit {
     ];
 
     // Announcements
-    selectedAnnouncements = [];
     openedAnnouncements = [];
 
     // Tags
@@ -66,7 +70,60 @@ export class AdminDatatableComponent implements OnInit {
         }
     }
 
-    constructor() { }
+    selectElement(id) {
+        if (this.selectedIds.indexOf(id) !== -1) {
+            this.selectedIds.splice(this.selectedIds.indexOf(id), 1);
+        } else {
+            this.selectedIds.push(id);
+        }
+        this.change.emit(this.selectedIds);
+    }
+
+    doAction(action, announcementId) {
+        this.adminPanelService.doAction(action, [announcementId], () => {
+            this.refresh.emit(true);
+        })
+    }
+
+    returnStringStatus(status) {
+        switch (status) {
+            case 0:
+                return 'PENDING APPROVAL';
+            case 1:
+                return 'APPROVED';
+            case 2:
+                return 'DENIED';
+            case 3:
+                return 'REMOVED BY USER';
+            default:
+                return 'NOT FOUND';
+        }
+    }
+
+    returnAnnouncementRating(announcement) {
+        if (moment(announcement.endDate).diff(moment(announcement.startDate), 'days') >= 14) {
+            return {
+                code: 'red',
+                icon: 'error_outline',
+                status: 'Review Dates Carefully'
+            }
+        } else if (moment(announcement.startDate).isBefore(moment().add(1, 'days'), 'day')) {
+            return {
+                code: 'yellow',
+                icon: 'warning',
+                status: 'Review Start Date'
+            }
+        } else {
+            return {
+                code: 'green',
+                icon: 'check',
+                status: 'Good'
+            }
+        }
+
+    }
+
+    constructor(private adminPanelService: AdminPanelService) { }
 
     ngOnInit() { }
 }

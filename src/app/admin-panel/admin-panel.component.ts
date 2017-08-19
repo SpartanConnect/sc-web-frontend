@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AnnouncementsService } from '../_services/announcements.service';
+import { NotificationsService } from '../_services/notifications.service';
 import { TagsService } from '../_services/tags.service';
 import { UsersService } from '../_services/users.service';
 import { AuthService } from '../_services/auth.service';
@@ -34,13 +35,16 @@ export class AdminPanelComponent implements OnInit {
         }
     };
     datatableData = [];
+    selectedIds = [];
 
     constructor(
         private authService: AuthService, private announcementsService: AnnouncementsService,
-        private tagsService: TagsService, private usersService: UsersService
+        private tagsService: TagsService, private usersService: UsersService,
+        private notificationsService: NotificationsService
     ) { }
 
     ngOnInit() {
+        this.notificationsService.fetchNotifications();
         Promise.all([
             this.announcementsService.getAnnouncements(),
             this.announcementsService.getCurrentAnnouncements(),
@@ -66,9 +70,18 @@ export class AdminPanelComponent implements OnInit {
         });
     }
 
+    selectionChange(selection) {
+        this.selectedIds = selection;
+    }
+
+    successfulChange(success) {
+        this.navigateChange(this.currentPage);
+    }
+
     navigateChange(page) {
         let promise;
         this.loading = true;
+        this.selectedIds = [];
         switch (page) {
             case AdminPanelPage.PAGE_ANNOUNCEMENTS_CURRENT:
                 promise = this.announcementsService.getCurrentAnnouncements().then((data) => {

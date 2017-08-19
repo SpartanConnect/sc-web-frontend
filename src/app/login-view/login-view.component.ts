@@ -16,7 +16,7 @@ export class LoginViewComponent implements OnInit {
         successLogin: [100],
         successLogout: [200],
         notLoggedIn: [101],
-        generalError: [102, 103, 104, 105, 106, 107, 108, 109, 110],
+        generalError: [102, 103, 104, 105, 106, 107, 108, 110, 111],
         incorrectDomain: [109]
     };
 
@@ -39,6 +39,7 @@ export class LoginViewComponent implements OnInit {
                 }
             });
         } else if (this.authStatus === 200) {
+            localStorage.removeItem('hasloggedin');
             this.router.navigate(['/home'], {
                 queryParams: {
                     loggedout: true

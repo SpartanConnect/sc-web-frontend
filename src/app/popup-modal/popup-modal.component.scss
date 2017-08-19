@@ -1,0 +1,166 @@
+.app-popup {
+  background-color: #fefefe;
+  box-sizing: border-box;
+  height: 100%;
+  opacity: 1;
+  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  transition: all 150ms ease 0s, visibility 0s linear;
+  width: 100%;
+  z-index: 1000;
+
+  .app-popup-header {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 20px;
+    padding-top: 40px;
+
+    .app-popup-header-close {
+      color: #444;
+      cursor: pointer;
+      font-size: 48px;
+      opacity: 1;
+      transform: scale(1);
+      transition: all 500ms ease 200ms;
+    }
+  }
+
+  .app-popup-body {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 20px 40px;
+    transition: all 500ms ease 200ms;
+  }
+}
+
+.app-popup.hidden {
+  background-color: transparent;
+  opacity: 0;
+  transition: all 150ms ease 0s, visibility 0s linear 150ms;
+  visibility: hidden;
+
+  .app-popup-header {
+    .app-popup-header-close {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 500ms ease;
+    }
+  }
+
+  .app-popup-body {
+    margin-top: 40px;
+    transition: all 500ms ease;
+  }
+}
+
+// Credits Styling
+.credits-heading {
+  cursor: default;
+  text-align: center;
+}
+
+.credits-blurb {
+  line-height: 1.5;
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.credits-contributors, .credits-libraries {
+  list-style: none;
+  margin: 40px auto;
+  max-width: 500px;
+  padding: 0;
+
+  li {
+    border: 1px solid #fefefe;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: default;
+    font-size: 14px;
+    margin: 2px 0;
+    padding: 10px 20px;
+    transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 250ms;
+    width: 100%;
+
+    .contributor-name {
+      font-weight: 500;
+    }
+
+    .contributor-role {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    &:hover {
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 12px 3px rgba(0, 0, 0, .1);
+      padding: 15px 20px;
+      transform: scale(1.2);
+      transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 250ms;
+
+      .contributor-right {
+        md-icon {
+          opacity: 1;
+          transform: scale(1);
+          transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 300ms;
+        }
+      }
+    }
+
+    .contributor-left {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .contributor-right {
+      float: right;
+      vertical-align: middle;
+
+      md-icon {
+        font-size: 18px;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 300ms;
+      }
+    }
+  }
+}
+
+// Final Setup Styling
+.app-popup-setup {
+  padding-top: 40px;
+}
+
+.setup-description {
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+.setup-input {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 5px 0;
+  .setup-input-before {
+    background-color: #aaa;
+    color: #fefefe;
+    display: inline-block;
+    font-weight: bold;
+    padding: 8px 10px;
+    transition: background-color 150ms ease;
+
+    &.correct {
+      background-color: #27ae60;
+      transition: background-color 150ms ease;
+    }
+  }
+  input {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    outline: none;
+    padding: 8px 5px;
+  }
+}

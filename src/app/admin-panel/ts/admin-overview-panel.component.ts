@@ -28,6 +28,8 @@ export class AdminOverviewPanelComponent implements OnInit {
     };
 
     @Input() page;
+    @Input() data;
+    @Input() selectedIds;
     @Output() change = new EventEmitter<AdminPanelPage>();
 
     navigateToPage(page) {

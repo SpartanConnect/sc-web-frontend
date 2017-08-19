@@ -24,7 +24,7 @@ export class AnnouncementAllViewComponent implements OnInit {
         this.announcementService.getAnnouncements().then((data) => {
             this.announcements = data.sort((a, b) => {
                 return new Date(b.timeSubmitted).getTime() - new Date(a.timeSubmitted).getTime();
-            }).filter((a) => a.status !== 0);
+            }).filter((a) => a.status === 1).filter((a) => (new Date().getTime() - new Date(a.startDate).getTime()) >= 0);
             this.loading = false;
         });
     }

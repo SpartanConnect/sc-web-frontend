@@ -2,7 +2,13 @@
     <div class="overarch orange">
         <div class="overarch-head">
             <md-icon class="overarch-head-background">supervisor_account</md-icon>
-            <h3 class="overarch-head-heading">Users</h3>
+            <h3 class="overarch-head-heading">
+                Users
+                <span class="overarch-urgent" *ngIf="adminData.users.unapproved.length">
+                    <md-icon>radio_button_checked</md-icon>
+                    PENDING
+                </span>
+            </h3>
             <p class="overarch-head-description">Invite and manage Spartan Connect users</p>
         </div>
         <div class="overarch-cta" (click)="navigateToPage(pages.PAGE_USERS_ALL)">
@@ -26,7 +32,13 @@
     <div class="overarch blue">
         <div class="overarch-head">
             <md-icon class="overarch-head-background">speaker_notes</md-icon>
-            <h3 class="overarch-head-heading">Announcements</h3>
+            <h3 class="overarch-head-heading">
+                Announcements
+                <span class="overarch-urgent" *ngIf="adminData.announcements.unapproved.length">
+                    <md-icon>radio_button_checked</md-icon>
+                    PENDING
+                </span>
+            </h3>
             <p class="overarch-head-description">Approve, reject, and manage announcements</p>
         </div>
         <div class="overarch-cta" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_PENDING)">

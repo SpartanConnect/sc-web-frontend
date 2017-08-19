@@ -1,6 +1,6 @@
 <div class="container container-tight" style="margin: 0 auto;">
     <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="!authStatus"></md-spinner>
-    <app-spotlight-card *ngIf="errors.successLogin.indexOf(authStatus) !== -1">
+    <app-spotlight-card *ngIf="false">
         <h1 style="font-size: 4em;">Logged in!</h1>
         <h3>Welcome to Spartan Connect!</h3>
         <div content>
@@ -13,7 +13,13 @@
         </div>
     </app-spotlight-card>
     <app-spotlight-card *ngIf="errors.generalError.indexOf(authStatus) !== -1" mode="compact">
+        <h1><md-icon>warning</md-icon></h1>
         <h3>An error has occurred.</h3>
         <p content>It seems like we couldn't authenticate you. Try and login again; if that doesn't work, contact the web team with the number code #{{authStatus}} (this number means something!).</p>
+    </app-spotlight-card>
+    <app-spotlight-card *ngIf="errors.incorrectDomain.indexOf(authStatus) !== -1" mode="compact">
+        <h1><md-icon>warning</md-icon></h1>
+        <h3>Sorry, your email domain is not allowed.</h3>
+        <p content>Our current system only permits lcusd.net accounts to create an account. Please contact a system administrator to add an exception.</p>
     </app-spotlight-card>
 </div>

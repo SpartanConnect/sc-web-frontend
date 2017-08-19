@@ -60,6 +60,10 @@
                 <md-datepicker #announceRangeEndDate></md-datepicker>
             </div>
             <p>At the moment, we do not support a mode for displaying an announcement periodically.</p>
+            <div class="pac-e-date-status {{getDateStatus().code}}">
+                <b style="font-weight: 600;">RATING: {{getDateStatus().status}}</b><br>
+                <p>{{getDateStatus().reason}}</p>
+            </div>
         </div>
         <div class="pac-step-four" *ngIf="step === steps.STEP_FOUR_EVENTS_CREATION">
             <md-icon style="font-size: 36px;">event</md-icon>
@@ -85,14 +89,13 @@
                 </md-card-header>
                 <md-card-content style="margin-bottom: 0">
                     <h3>{{announcement.title || "(no title)"}}</h3>
-                    <p>{{announcement.description || "(no description)"}}</p>
+                    <p style="white-space: pre-wrap;">{{announcement.description || "(no description)"}}</p>
                     <md-chip-list *ngIf="selectedTags">
                         <md-chip *ngFor="let tag of selectedTags">{{tag.name}}</md-chip>
                     </md-chip-list>
                 </md-card-content>
                 <md-card-actions>
                     <button md-button>READ MORE</button>
-                    <button md-button>EDIT</button>
                 </md-card-actions>
             </md-card>
         </div>

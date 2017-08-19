@@ -4,8 +4,8 @@
         <app-admin-overview-panel *ngIf="currentPage === pages.PAGE_OVERVIEW" (change)="navigateChange($event)" [adminData]="collectedData" [page]="currentPage"></app-admin-overview-panel>
         <div class="admin-panel-container" *ngIf="currentPage !== pages.PAGE_OVERVIEW">
             <app-admin-header-panel (change)="navigateChange($event)" [page]="currentPage" [data]="collectedData"></app-admin-header-panel>
-            <app-admin-toolbar [page]="currentPage"></app-admin-toolbar>
-            <app-admin-datatable [page]="currentPage" [data]="datatableData"></app-admin-datatable>
+            <app-admin-toolbar [page]="currentPage" [data]="datatableData" [selectedIds]="selectedIds" (change)="selectionChange($event)" (refresh)="successfulChange($event)"></app-admin-toolbar>
+            <app-admin-datatable [page]="currentPage" [data]="datatableData" [selectedIds]="selectedIds" (change)="selectionChange($event)" (refresh)="successfulChange($event)"></app-admin-datatable>
         </div>
     </div>
 </div>

@@ -1,0 +1,19 @@
+<div class="container container-tight">
+    <h1 class="setup-heading">Add New Teacher</h1>
+    <p class="setup-description">
+        From this page, you can create a new teacher account.
+    </p>
+    <form>
+        <small>Input the account email:</small><br><br>
+        <md-input-container style="width: 500px;">
+            <input mdInput placeholder="Email" [formControl]="emailFormControl" name="email" [(ngModel)]="setupUserEmail">
+            <md-error *ngIf="emailFormControl.hasError('pattern')">
+            Please enter a valid email address
+            </md-error>
+            <md-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+            </md-error>
+        </md-input-container><br><br>
+        <button (click)="submitForm()" md-raised-button [disabled]="emailFormControl.hasError('pattern') || emailFormControl.hasError('required')">CONTINUE</button>
+    </form>
+</div>

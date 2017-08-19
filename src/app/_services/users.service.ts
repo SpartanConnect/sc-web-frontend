@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 import { User } from '../_models/user';
-import { API_BASE, httpHandler } from '../_models/api';
+import { API_BASE, httpHandler, postHandler } from '../_models/api';
 
 // NOTICE: This does not contain any authentication code.
 // Instead, it simply provides easy access to user data.
@@ -18,6 +18,39 @@ export class UsersService implements OnInit {
     getUsers(): Promise<User[]> {
         let apiLink = `${API_BASE}/users`;
         return httpHandler(this.http, apiLink);
+    }
+
+    createUser(email: string) {
+        const apiLink = `${API_BASE}/users`;
+        return new Promise((resolve) => {
+            this.getUsers().then((allUsers) => {
+                if (allUsers.filter((u) => u.email === email).length !== 0) {
+                    resolve({
+                        success: false,
+                        message: 'Email already exists in the system.'
+                    });
+                } else {
+                    postHandler(this.http, apiLink, {
+                        name: '(not logged in)',
+                        email: email
+                    }).then(() => {
+                        this.getUsers().then((newUsers) => {
+                            const userId = newUsers.filter((u) => u.email === email)[0].id;
+                            postHandler(this.http, apiLink + `/${userId}`, {
+                                rank: 3
+                            }).then((data2) => {
+                                resolve({
+                                    success: true,
+                                    message: 'User has been added.'
+                                });
+                                return data2;
+                            });
+                        });
+                    });
+                }
+
+            });
+        })
     }
 
     constructor(private http: Http) { }

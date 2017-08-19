@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AnnouncementsService } from '../_services/announcements.service';
+import { NotificationsService } from '../_services/notifications.service';
 import { AuthService } from '../_services/auth.service';
 import { Announcement } from '../_models/announcement';
 import { USER_PANEL_VIEW } from '../_models/userview';
@@ -20,7 +21,9 @@ export class UserPanelComponent implements OnInit {
     selectedView = USER_PANEL_VIEW.VIEW_RECENT_FEED;
     userPanelViews = USER_PANEL_VIEW;
 
-    constructor(private announcementsService: AnnouncementsService, private route: ActivatedRoute, private authService: AuthService) { }
+    constructor(
+        private announcementsService: AnnouncementsService, private notificationsService: NotificationsService,
+        private route: ActivatedRoute, private authService: AuthService) { }
 
     changeView(view: USER_PANEL_VIEW) {
         this.loading = true;
@@ -61,8 +64,17 @@ export class UserPanelComponent implements OnInit {
 
     ngOnInit() {
         this.changeView(this.selectedView);
+        this.notificationsService.fetchNotifications();
         this.forbidden = (this.route.snapshot.queryParamMap.has('forbidden'));
         this.justLoggedIn = (this.route.snapshot.queryParamMap.has('loggedin'));
+
+        // To fix the issue of people refreshing their browser
+        // and getting the login message again
+        if (localStorage.getItem('hasloggedin') === 'true') {
+            this.justLoggedIn = false;
+        } else if (this.justLoggedIn) {
+            localStorage.setItem('hasloggedin', 'true');
+        }
     }
 
 }

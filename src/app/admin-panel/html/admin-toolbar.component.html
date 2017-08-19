@@ -1,16 +1,45 @@
 <div class="admin-toolbar">
     <div class="admin-toolbar-actions">
-        <div class="admin-toolbar-action admin-toolbar-checkbox">
-            <md-checkbox></md-checkbox>
+        <!-- Checkbox for selecting ids (disabled because we want to handle clicks ourselves) -->
+        <div class="admin-toolbar-action admin-toolbar-checkbox" (click)="toggleAll()">
+            <md-checkbox [checked]="(data.length === selectedIds.length)" [disabled]="true" [indeterminate]="(data.length !== selectedIds.length) && selectedIds.length"></md-checkbox>
         </div>
-        <div class="admin-toolbar-action">
+
+        <!-- Actions for Announcements -->
+        <!-- Approval: Pending Announcements, Total Announcements -->
+        <div class="admin-toolbar-action" mdTooltip="Approve"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_APPROVE)"
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>check</md-icon>
         </div>
-        <div class="admin-toolbar-action">
-            <md-icon>block</md-icon>
-        </div>
-        <div class="admin-toolbar-action">
+        <!-- Setting to Urgent: Pending Announcements, Total Announcements -->
+        <div class="admin-toolbar-action" mdTooltip="Set Urgency"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_SET_URGENT)"
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>notifications</md-icon>
         </div>
+        <!-- Removing Urgent: Pending Announcements, Total Announcements -->
+        <div class="admin-toolbar-action" mdTooltip="Remove Urgency"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_REMOVE_URGENT)"
+            *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
+            <md-icon>notifications_off</md-icon>
+        </div>
+
+        <!-- Actions for Users -->
+        <!-- Add New User: All User Actions -->
+        <div class="admin-toolbar-action" mdTooltip="Add User"
+            routerLink="/admin/newuser"
+            *ngIf="page === pages.PAGE_USERS_ALL || page === pages.PAGE_USERS_UNAPPROVED || page === pages.PAGE_USERS_TEACHERS">
+            <md-icon>person_add</md-icon>
+        </div>
+        <!-- Edit User: All User Actions -->
+        <!--<div class="admin-toolbar-action" mdTooltip="Edit User"
+            (click)="doAction(actions.ACTION_USER_EDIT)"
+            *ngIf="page === pages.PAGE_USERS_ALL || page === pages.PAGE_USERS_UNAPPROVED || page === pages.PAGE_USERS_TEACHERS">
+            <md-icon>mode_edit</md-icon>
+        </div>-->
+
+        <!-- Actions for Tags -->
+        <!-- Nothing yet. Come up with an idea sometime and add it as a GH issue... -->
     </div>
 </div>

@@ -1,21 +1,38 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'app-cx-status-tag',
     template: `<div [class]="statusStyle" [mdTooltip]="statusTip" mdTooltipPosition="right">{{statusValue}}</div>`,
     styleUrls: ['scss/status-tag.component.scss']
 })
-export class StatusTagComponent implements OnInit {
-    @Input() announcement;
+export class StatusTagComponent implements OnInit, OnChanges {
+    private _announcement;
+
     statusValue: string;
     statusStyle: string;
     statusTip: string;
 
+    @Input()
+    set announcement(announcement) {
+        this._announcement = announcement;
+        this.ngOnInit();
+    }
+
+    get announcement() {
+        return this._announcement;
+    }
+
+    @Input() status;
+
     constructor() {}
 
-    ngOnInit() {
+    ngOnChanges(changes) {
+        this.updateStatus();
+    }
+
+    updateStatus() {
         this.statusStyle = 'status-tag ';
-        switch (this.announcement.status) {
+        switch (this.status) {
             case 0:
                 this.statusValue = 'PENDING APPROVAL';
                 this.statusStyle += 'yellow';
@@ -43,6 +60,10 @@ export class StatusTagComponent implements OnInit {
                 this.statusStyle += 'gray';
                 this.statusTip = 'Could not correctly fetch announcement status. Please reload your page.';
         }
+    }
+
+    ngOnInit() {
+        this.updateStatus();
     }
 
 }

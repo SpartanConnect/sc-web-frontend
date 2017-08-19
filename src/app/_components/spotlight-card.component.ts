@@ -9,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SpotlightCardComponent implements OnInit {
 
     @Input() mode = 'default';
+    @Input() width = 600;
 
     constructor() { }
     ngOnInit() { }

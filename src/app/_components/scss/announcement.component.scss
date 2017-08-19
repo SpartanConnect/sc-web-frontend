@@ -52,11 +52,18 @@
   .card-a-title {
     display: inline-block;
     font-size: 16px;
+    margin: 10px 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   .card-a-description {
     font-size: 14px;
     line-height: 1.25;
+    margin: 10px 0;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   .card-a-title-tag {
@@ -67,6 +74,20 @@
     font-size: 12px;
     margin: 0 10px;
     padding: 4px 10px;
+  }
+
+  .card-a-tags {
+    display: block;
+    line-height: 1.5;
+    .card-a-tag {
+      background-color: #aaa;
+      border-radius: 4px;
+      color: #fefefe;
+      display: inline-block;
+      font-size: 12px;
+      margin-right: 5px;
+      padding: 3px 6px;
+    }
   }
 }
 
@@ -88,6 +109,7 @@
   }
 }
 
+// The compact style seen in the index page
 .compact {
   border-left: 5px solid mat-color($spartan-app-primary);
   box-shadow: none;
@@ -131,4 +153,36 @@
   position: absolute;
   right: 30px;
   transition: all 150ms ease;
+}
+
+.card-a-header-tools {
+  cursor: pointer;
+  float: right;
+  md-icon {
+    font-size: 16px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+}
+
+input.card-a-title {
+  background-color: #fefefe;
+  border: none;
+  font-weight: 500;
+  display: block;
+  margin: 10px 0;
+  outline: none;
+  width: 100%;
+}
+
+textarea.card-a-description {
+  background-color: #fefefe;
+  border: none;
+  display: block;
+  font-weight: 400;
+  margin: 10px 0;
+  min-height: 100px;
+  outline: none;
+  resize: none;
+  width: 100%;
 }

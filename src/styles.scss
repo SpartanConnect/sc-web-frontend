@@ -8,6 +8,10 @@ html, body {
   padding: 0;
 }
 
+body.noscroll {
+  overflow: hidden;
+}
+
 .app-container {
   background-color: #eee;
   margin-top: 60px;
@@ -32,6 +36,20 @@ html, body {
 // Spotlight card styles
 
 .card-spotlight {
+  &.small {
+    .card-spotlight-emoji {
+      h1, md-icon {
+        font-size: 36px;
+      }
+    }
+    .card-spotlight-title {
+      font-size: 14px;
+    }
+    .card-spotlight-description {
+      font-size: 13px;
+    }
+  }
+
   &.compact {
     .card-spotlight-emoji {
       display: inline-block;
@@ -39,10 +57,11 @@ html, body {
       h1, md-icon {
         display: inline-block;
         font-size: 14px;
-        margin: 0 5px;
+        margin: 0;
       }
       md-icon {
         font-size: 24px;
+        margin-right: 5px;
       }
     }
     .card-spotlight-title {

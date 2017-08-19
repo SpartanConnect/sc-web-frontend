@@ -1,12 +1,30 @@
-<div class="card-announcement" [class.compact]="mode === 'compact'" (click)="clickHandler()">
-    <div class="card-a-header">
-        <b>FROM #(replace with subject)</b>
-        <span class="card-a-fac" *ngIf="mode === 'default'">SUBSCRIBE</span>
+<div class="card-announcement" [class.compact]="mode === 'compact'" (click)="clickHandler()" *ngIf="!isHidden">
+    <div class="card-a-header" *ngIf="highlightTags.length">
+        <b>FROM #{{highlightTags[0].slug}}</b>
+        <!-- <span class="card-a-fac" *ngIf="mode === 'default'">SUBSCRIBE</span>-->
+        <span *ngIf="mode === 'adminpanel' || mode === 'userpanel'" class="card-a-header-tools">
+            <md-icon mdTooltip="Edit" (click)="toggleEditing()" *ngIf="!(announcement.status === 1 && mode === 'userpanel') && !(mode === 'adminpanel' && announcement.status === 3)">edit</md-icon>
+            <md-icon mdTooltip="Remove" (click)="archiveAnnouncement(true)" *ngIf="mode === 'userpanel' && announcement.status !== 3">delete</md-icon>
+            <md-icon mdTooltip="Resubmit for Approval" (click)="archiveAnnouncement(false)" *ngIf="mode === 'userpanel' && announcement.status === 3">restore</md-icon>
+        </span>
     </div>
-    <div class="card-a-content">
+    <div class="card-a-content" *ngIf="!isEditing">
         <h3 class="card-a-title">{{announcement.title}}</h3>
-        <div class="card-a-title-tag" *ngIf="mode === 'compact' || mode === 'adminpanel'">#(replace with subject)</div>
-        <p class="card-a-description" *ngIf="mode !== 'compact'">{{announcement.description}}</p>
+        <div class="card-a-title-tag" *ngIf="(mode === 'compact' || mode === 'adminpanel') && highlightTags.length">#{{highlightTags[0].slug}}</div>
+        <p class="card-a-description" *ngIf="mode !== 'compact'" [innerHTML]="announcement.description | htmlLink"></p>
+        <div class="card-a-tags" *ngIf="mode !== 'compact'">
+            <div class="card-a-tag" *ngFor="let tag of announcement.tags">{{tag.name}}</div>
+        </div>
+    </div>
+    <div class="card-a-content" *ngIf="isEditing" style="margin-bottom: 15px;">
+        <input class="card-a-title" [(ngModel)]="editedAnnouncement.title" placeholder="Insert a new announcement title here.."/>
+        <textarea class="card-a-description" [(ngModel)]="editedAnnouncement.description" placeholder="Insert a new announcement description here...">{{announcement.description}}</textarea>
+        <div>
+            <md-select placeholder="Category" [(ngModel)]="editedAnnouncement.category">
+                <md-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</md-option>
+            </md-select>
+            <button md-button style="float: right;" (click)="submitForEditing()">SUBMIT</button>
+        </div>
     </div>
     <div class="card-a-footer">
         <span class="card-a-footnote">
@@ -17,7 +35,7 @@
             <b>{{recentActionWord}}</b>
             <span>{{recentActionDate | timeAgo}}</span>
         </span>
-        <app-cx-status-tag [announcement]="announcement" style="margin-left: 40px;" *ngIf="mode === 'adminpanel' || mode === 'userpanel'"></app-cx-status-tag>
+        <app-cx-status-tag [announcement]="announcement" [status]="announcement.status" style="margin-left: 40px;" *ngIf="mode === 'adminpanel' || mode === 'userpanel'"></app-cx-status-tag>
     </div>
     <div class="card-a-float-action" *ngIf="mode === 'compact' || mode === 'adminpanel'">READ MORE</div>
 </div>
