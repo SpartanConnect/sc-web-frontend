@@ -31,7 +31,14 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { PostAnnouncementComponent } from './_components/post-announcement.component';
 // import { AnnouncementComponent } from './_components/announcement.component';
 import { SpotlightCardComponent } from './_components/spotlight-card.component';
+import { AnnouncementAllViewComponent } from './announcement-all-view/announcement-all-view.component';
+import { StaticPrivacyPolicyComponent } from './static-privacy-policy/static-privacy-policy.component';
+import { FooterComponent } from './footer/footer.component';
+import { PopupModalComponent } from './popup-modal/popup-modal.component';
+import { RedirectMobileAppComponent } from './redirect-mobile-app/redirect-mobile-app.component';
+import { NewUserComponent } from './new-user/new-user.component';
 
+import { HtmlLinkPipe } from './_pipes/html-link.pipe';
 import { AdminPanelModule } from './admin-panel/admin-panel.module';
 
 import { AnnouncementsService } from './_services/announcements.service';
@@ -46,12 +53,6 @@ import { AdminOnlyGuard } from './_guards/adminonly.guard';
 import { ConfirmLeaveGuard } from './_guards/confirmleave.guard';
 
 import 'hammerjs';
-import { AnnouncementAllViewComponent } from './announcement-all-view/announcement-all-view.component';
-import { StaticPrivacyPolicyComponent } from './static-privacy-policy/static-privacy-policy.component';
-import { FooterComponent } from './footer/footer.component';
-import { PopupModalComponent } from './popup-modal/popup-modal.component';
-import { RedirectMobileAppComponent } from './redirect-mobile-app/redirect-mobile-app.component';
-import { NewUserComponent } from './new-user/new-user.component';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, canActivate: [UserOnlyGuard, AdminOnlyGuard] },

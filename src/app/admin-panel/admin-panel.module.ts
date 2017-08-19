@@ -21,6 +21,7 @@ import { AnnouncementComponent } from '../_components/announcement.component';
 import { AdminPanelService } from './admin-panel.service';
 import { NotificationsService } from '../_services/notifications.service';
 
+import { HtmlLinkPipe } from '../_pipes/html-link.pipe';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import { NotificationsService } from '../_services/notifications.service';
         CovalentDataTableModule
     ],
     exports: [
-        AnnouncementComponent
+        AnnouncementComponent,
+        HtmlLinkPipe
     ],
     declarations: [
         AdminDatatableComponent,
@@ -47,7 +49,8 @@ import { NotificationsService } from '../_services/notifications.service';
         AdminOverviewPanelComponent,
         AdminPanelComponent,
         AnnouncementComponent,
-        StatusTagComponent
+        StatusTagComponent,
+        HtmlLinkPipe
     ],
     providers: [
         AdminPanelService,

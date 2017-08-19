@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 import { TdDialogService } from '@covalent/core';
+import { HtmlLinkPipe } from '../_pipes/html-link.pipe';
 
 import { AnnouncementsService } from '../_services/announcements.service';
 import { NotificationsService } from '../_services/notifications.service';

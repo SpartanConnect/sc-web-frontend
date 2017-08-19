@@ -11,7 +11,7 @@
     <div class="card-a-content" *ngIf="!isEditing">
         <h3 class="card-a-title">{{announcement.title}}</h3>
         <div class="card-a-title-tag" *ngIf="(mode === 'compact' || mode === 'adminpanel') && highlightTags.length">#{{highlightTags[0].slug}}</div>
-        <p class="card-a-description" *ngIf="mode !== 'compact'">{{announcement.description}}</p>
+        <p class="card-a-description" *ngIf="mode !== 'compact'" [innerHTML]="announcement.description | htmlLink"></p>
         <div class="card-a-tags" *ngIf="mode !== 'compact'">
             <div class="card-a-tag" *ngFor="let tag of announcement.tags">{{tag.name}}</div>
         </div>
