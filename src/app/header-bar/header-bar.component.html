@@ -39,7 +39,7 @@
         <span class="dim" *ngIf="notificationsService.hasNotifications">All Notifications</span>
         <i class="dim" *ngIf="!notificationsService.hasNotifications">No Unread Notifications</i>
     </div>
-    <div class="header-popup-notif" *ngFor="let notification of notificationsService.notifications">
+    <div class="header-popup-notif" *ngFor="let notification of notificationsService.notifications" [routerLink]="notification.url">
         <div class="pnotif-head">
             <md-icon>{{notification.icon}}</md-icon>
             <span class="metadata">from {{notification.author.name}}</span>

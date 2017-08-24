@@ -248,6 +248,7 @@ header {
     background-color: #FEFEFE;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.10);
     border-radius: 4px;
+    cursor: pointer;
     margin: 5px 20px;
   }
 
@@ -265,6 +266,12 @@ header {
       font-size: 13px;
       margin-left: 6px;
       vertical-align: middle;
+    }
+  }
+
+  &:hover {
+    .pnotif-content h4 {
+      text-decoration: underline;
     }
   }
 

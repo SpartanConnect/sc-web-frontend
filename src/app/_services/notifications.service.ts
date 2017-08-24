@@ -31,6 +31,7 @@ export class NotificationsService implements OnInit {
                     title: 'Admin Panel: New Pending Announcements',
                     content: 'There are new announcements awaiting approval.',
                     icon: 'assignment_late',
+                    url: '/admin',
                     timeCreated: new Date(),
                     author: {
                         name: 'Student Developer Team'
