@@ -5,13 +5,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "bprod": "ng build --prod --aot --env=prod && npm run precache && firebase deploy",
+    "build": "ng build --prod --aot --env=prod",
+    "bprod": "npm run build && npm run precache && npm run deploy",
+    "deploy": "firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "serve": "ng serve --proxy-config proxy.config.json -lr=false",
-    "precache": "sw-precache --root=dist --verbose"
+    "precache": "sw-precache --verbose --config=sw-precache-config.js"
   },
   "private": true,
   "dependencies": {
