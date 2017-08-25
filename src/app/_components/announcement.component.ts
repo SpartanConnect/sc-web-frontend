@@ -105,28 +105,35 @@ export class AnnouncementComponent implements OnInit {
                 );
             }
         });
-        // Only update if category changed
-        if (this.highlightTags[0].id !== this.editedAnnouncement.category) {
-            this.announcementsService.removeAnnouncementTag(
-                this.announcement.id,
-                this.highlightTags[0].id
-            ).then((d: any) => {
-                this.announcementsService.addAnnouncementTag(
+        // Only update if category changed && categories have loaded
+        if (this.categories) {
+            if (this.highlightTags[0].id !== this.editedAnnouncement.category) {
+                this.announcementsService.removeAnnouncementTag(
                     this.announcement.id,
-                    this.editedAnnouncement.category
-                ).then((di: any) => {
-                    if (di.success && d.success) {
-                        this.announcement.tags = this.announcement.tags.filter(t => t.id !== this.highlightTags[0].id);
-                        this.announcement.tags.push(this.categories.filter(t => t.id === this.editedAnnouncement.category)[0]);
-                        this.highlightTags[0] = this.categories.filter(t => t.id === this.editedAnnouncement.category)[0];
-                    } else {
-                        this.snackbar.open(
-                            'There was an error in updating the tags of "' + this.announcement.title + '".',
-                            'DISMISS'
-                        );
-                    }
+                    this.highlightTags[0].id
+                ).then((d: any) => {
+                    this.announcementsService.addAnnouncementTag(
+                        this.announcement.id,
+                        this.editedAnnouncement.category
+                    ).then((di: any) => {
+                        if (di.success && d.success) {
+                            this.announcement.tags = this.announcement.tags.filter(t => t.id !== this.highlightTags[0].id);
+                            this.announcement.tags.push(this.categories.filter(t => t.id === this.editedAnnouncement.category)[0]);
+                            this.highlightTags[0] = this.categories.filter(t => t.id === this.editedAnnouncement.category)[0];
+                        } else {
+                            this.snackbar.open(
+                                'There was an error in updating the tags of "' + this.announcement.title + '".',
+                                'DISMISS'
+                            );
+                        }
+                    });
                 });
-            });
+            }
+        } else {
+            this.snackbar.open(
+                'There was an error in updating the tags of "' + this.announcement.title + '".',
+                'DISMISS'
+            );
         }
     }
 

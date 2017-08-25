@@ -17,7 +17,7 @@ export class AdminToolbarComponent implements OnInit {
     @Input() data;
     @Input() selectedIds;
 
-    @Output() change = new EventEmitter<number[]>();
+    @Output() idChange = new EventEmitter<number[]>();
     @Output() refresh = new EventEmitter<boolean>();
 
     pages = AdminPanelPage;
@@ -37,7 +37,7 @@ export class AdminToolbarComponent implements OnInit {
                 this.selectedIds.push(d.id);
             });
         }
-        this.change.emit(this.selectedIds);
+        this.idChange.emit(this.selectedIds);
     }
 
     doAction(action, affectedIds = []) {

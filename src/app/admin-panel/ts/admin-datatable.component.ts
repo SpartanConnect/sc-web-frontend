@@ -15,8 +15,8 @@ import * as moment from 'moment';
 export class AdminDatatableComponent implements OnInit {
     @Input() page;
     @Input() data;
-    @Input() selectedIds;
-    @Output() change = new EventEmitter<number[]>();
+    @Input() selectedIds = [];
+    @Output() idChange = new EventEmitter<number[]>();
     @Output() refresh = new EventEmitter<boolean>();
 
     pages = AdminPanelPage;
@@ -76,7 +76,7 @@ export class AdminDatatableComponent implements OnInit {
         } else {
             this.selectedIds.push(id);
         }
-        this.change.emit(this.selectedIds);
+        this.idChange.emit(this.selectedIds);
     }
 
     doAction(action, announcementId) {
@@ -125,5 +125,5 @@ export class AdminDatatableComponent implements OnInit {
 
     constructor(private adminPanelService: AdminPanelService) { }
 
-    ngOnInit() { }
+    ngOnInit() {}
 }
