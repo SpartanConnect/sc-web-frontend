@@ -23,6 +23,13 @@ header {
   width: 960px;
 }
 
+@media (max-width: 960px) {
+  .header-bar {
+    width: auto;
+  }
+}
+
+
 // Elements that float left go here
 .header-bar-left {
   float: left;
@@ -303,4 +310,10 @@ span.dim, i.dim {
   display: inline-block;
   color: #aaa;
   font-size: 14px;
+}
+
+@media (max-width: 960px) {
+  .no-mobile {
+    display: none;
+  }
 }
