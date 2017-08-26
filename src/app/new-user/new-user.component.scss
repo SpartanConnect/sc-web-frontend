@@ -1,0 +1,15 @@
+@media (max-width: 960px) {
+  .container {
+    padding: 20px;
+    width: auto;
+  }
+  .setup-heading {
+    font-size: 18px;
+  }
+  .setup-description {
+    font-size: 14px;
+  }
+  md-input-container {
+    width: 90% !important;
+  }
+}
