@@ -186,3 +186,13 @@ textarea.card-a-description {
   resize: none;
   width: 100%;
 }
+
+@media (max-width: 600px) {
+  .card-a-footnote {
+    display: block;
+    margin: 5px 0 !important;
+  }
+  .br-mobile {
+    display: none;
+  }
+}

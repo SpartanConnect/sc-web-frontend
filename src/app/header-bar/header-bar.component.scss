@@ -79,11 +79,11 @@ header {
   }
 }
 
-.header-notifications {
+.header-notifications, .header-mobile-menu {
   cursor: pointer;
   display: inline-block;
   text-align: center;
-  padding: 10px 10px;
+  padding: 10px;
   padding-top: 12px;
   position: relative;
   transition: all 150ms ease;
@@ -171,6 +171,11 @@ header {
     border-bottom: 4px solid mat-color($spartan-app-primary);
     transition: all 150ms ease;
   }
+}
+
+.header-mobile-menu {
+  padding: 10px 15px;
+  padding-top: 12px;
 }
 
 // Popup when user profile is clicked on
@@ -312,8 +317,15 @@ span.dim, i.dim {
   font-size: 14px;
 }
 
+.mobile-only {
+  display: none;
+}
+
 @media (max-width: 960px) {
   .no-mobile {
     display: none;
+  }
+  .mobile-only {
+    display: inherit;
   }
 }
