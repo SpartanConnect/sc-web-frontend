@@ -67,6 +67,8 @@
     display: block;
     height: 40px;
     margin: 0;
+    position: relative;
+
     .overarch-cta-text {
       display: block;
       float: left;
@@ -77,10 +79,11 @@
     }
     .overarch-cta-arrow {
       display: block;
-      float: right;
       opacity: 0;
+      right: 0;
       padding: 8px 35px;
       padding-left: 0;
+      position: absolute;
       transition: all 150ms ease;
     }
 
@@ -162,7 +165,7 @@
   .overarch {
     cursor: pointer;
     margin: 10px;
-    min-height: auto;
+    min-height: 0;
     width: 90%;
 
     .overarch-head {

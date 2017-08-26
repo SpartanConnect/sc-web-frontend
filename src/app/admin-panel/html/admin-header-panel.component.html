@@ -6,41 +6,41 @@
 </div>-->
 <div class="admin-header">
     <div *ngIf="announcementPages.indexOf(page) !== -1" class="admin-header-g">
-        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_PENDING)">
+        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_PENDING)" [class.mdeselected]="page !== pages.PAGE_ANNOUNCEMENTS_PENDING">
             <h1 class="admin-header-btn-number">{{data.announcements.unapproved.length}}</h1>
-            <div class="admin-header-btn-desc">PENDING ANNOUNCEMENTS</div>
+            <div class="admin-header-btn-desc">PENDING<span class="no-mobile"> ANNOUNCEMENTS</span></div>
         </div>
-        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_CURRENT)">
+        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_CURRENT)" [class.mdeselected]="page !== pages.PAGE_ANNOUNCEMENTS_CURRENT">
             <h1 class="admin-header-btn-number">{{data.announcements.current.length}}</h1>
-            <div class="admin-header-btn-desc">CURRENT ANNOUNCEMENTS</div>
+            <div class="admin-header-btn-desc">CURRENT<span class="no-mobile"> ANNOUNCEMENTS</span></div>
         </div>
-        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_TOTAL)">
+        <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_TOTAL)" [class.mdeselected]="page !== pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <h1 class="admin-header-btn-number">{{data.announcements.all.length}}</h1>
-            <div class="admin-header-btn-desc">TOTAL ANNOUNCEMENTS</div>
+            <div class="admin-header-btn-desc">TOTAL<span class="no-mobile"> ANNOUNCEMENTS</span></div>
         </div>
     </div>
     <div *ngIf="tagPages.indexOf(page) !== -1" class="admin-header-g">
-        <div class="admin-header-btn red" (click)="navigateToPage(pages.PAGE_TAGS_CATEGORIES)">
+        <div class="admin-header-btn red" (click)="navigateToPage(pages.PAGE_TAGS_CATEGORIES)" [class.mdeselected]="page !== pages.PAGE_TAGS_CATEGORIES">
             <h1 class="admin-header-btn-number">{{data.tags.categories.length}}</h1>
-            <div class="admin-header-btn-desc">TOTAL CATEGORIES</div>
+            <div class="admin-header-btn-desc"><span class="no-mobile">TOTAL </span>CATEGORIES</div>
         </div>
-        <div class="admin-header-btn red" (click)="navigateToPage(pages.PAGE_TAGS_ALL)">
+        <div class="admin-header-btn red" (click)="navigateToPage(pages.PAGE_TAGS_ALL)" [class.mdeselected]="page !== pages.PAGE_TAGS_ALL">
             <h1 class="admin-header-btn-number">{{data.tags.all.length}}</h1>
-            <div class="admin-header-btn-desc">TOTAL TAGS</div>
+            <div class="admin-header-btn-desc"><span class="no-mobile">TOTAL </span>TAGS</div>
         </div>
     </div>
     <div *ngIf="userPages.indexOf(page) !== -1" class="admin-header-g">
-        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_ALL)">
+        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_ALL)" [class.mdeselected]="page !== pages.PAGE_USERS_ALL">
             <h1 class="admin-header-btn-number">{{data.users.all.length}}</h1>
             <div class="admin-header-btn-desc">TOTAL USERS</div>
         </div>
-        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_UNAPPROVED)">
+        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_UNAPPROVED)" [class.mdeselected]="page !== pages.PAGE_USERS_UNAPPROVED">
             <h1 class="admin-header-btn-number">{{data.users.unapproved.length}}</h1>
-            <div class="admin-header-btn-desc">UNAPPROVED ACCOUNTS</div>
+            <div class="admin-header-btn-desc">UNAPPROVED<span class="no-mobile"> ACCOUNTS</span></div>
         </div>
-        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_TEACHERS)">
+        <div class="admin-header-btn orange" (click)="navigateToPage(pages.PAGE_USERS_TEACHERS)" [class.mdeselected]="page !== pages.PAGE_USERS_TEACHERS">
             <h1 class="admin-header-btn-number">{{data.users.teachers.length}}</h1>
-            <div class="admin-header-btn-desc">TEACHER ACCOUNTS</div>
+            <div class="admin-header-btn-desc">TEACHER<span class="no-mobile"> ACCOUNT</span>S</div>
         </div>
     </div>
 </div>
