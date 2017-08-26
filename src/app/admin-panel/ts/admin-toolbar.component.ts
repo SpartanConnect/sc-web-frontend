@@ -19,6 +19,7 @@ export class AdminToolbarComponent implements OnInit {
 
     @Output() idChange = new EventEmitter<number[]>();
     @Output() refresh = new EventEmitter<boolean>();
+    @Output() pageChange = new EventEmitter<AdminPanelPage>();
 
     pages = AdminPanelPage;
     actions = AdminPanelActions;
@@ -38,6 +39,11 @@ export class AdminToolbarComponent implements OnInit {
             });
         }
         this.idChange.emit(this.selectedIds);
+    }
+
+    goBack() {
+        this.page = AdminPanelPage.PAGE_OVERVIEW;
+        this.pageChange.emit(this.page)
     }
 
     doAction(action, affectedIds = []) {

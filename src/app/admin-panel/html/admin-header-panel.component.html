@@ -1,5 +1,9 @@
 <button md-button (click)="goBack()" style="margin-bottom: 10px;">GO BACK</button>
 <br>
+<!--<div class="admin-header-mobile">
+    <span>Viewing <b>something</b>. Click to change view</span>
+    <md-icon>keyboard_arrow_down</md-icon>
+</div>-->
 <div class="admin-header">
     <div *ngIf="announcementPages.indexOf(page) !== -1" class="admin-header-g">
         <div class="admin-header-btn blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_PENDING)">

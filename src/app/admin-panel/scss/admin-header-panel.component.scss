@@ -3,6 +3,41 @@
   flex-direction: row;
 }
 
+.admin-header-mobile {
+  background-color: #b71c1c;
+  box-sizing: border-box;
+  color: #fefefe;
+  cursor: pointer;
+  display: none;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  top: 50px;
+  padding: 2px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 199;
+
+  span {
+    vertical-align: middle;
+  }
+  md-icon {
+    vertical-align: middle;
+  }
+}
+
+@media (max-width: 960px) {
+  .admin-header {
+    display: none;
+  }
+  .no-mobile {
+    display: none;
+  }
+  .admin-header-mobile {
+    display: block;
+  }
+}
+
 .admin-header-btn {
   background-color: #2196F3;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);

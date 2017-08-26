@@ -160,12 +160,17 @@
   }
 
   .overarch {
+    cursor: pointer;
     margin: 10px;
     min-height: auto;
     width: 90%;
 
     .overarch-head {
+      cursor: pointer;
       margin: 0;
+      .overarch-head-background {
+        cursor: pointer;
+      }
     }
 
     .overarch-body {
