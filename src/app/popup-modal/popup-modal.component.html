@@ -5,6 +5,7 @@
     <div *ngIf="popup.type === types.MOBILE_MENU">
         <div *ngIf="authService.currentUser.isAuthenticated" (click)="closePopup()">
             <b class="mmenu-nav-head">MY ACTIONS</b>
+            <div class="mmenu-nav-item" routerLink="/home"><md-icon>home</md-icon> <span>Home Page</span></div>
             <div class="mmenu-nav-item" routerLink="/me"><md-icon>account_circle</md-icon> <span>User Panel</span></div>
             <div class="mmenu-nav-item" routerLink="/admin"><md-icon>dashboard</md-icon> <span>Admin Panel</span></div>
             <br>
