@@ -68,3 +68,10 @@
     transition: all 150ms ease;
   }
 }
+
+.admin-toolbar-action.disabled {
+  background-color: transparent;
+  border: none;
+  color: #bbb;
+  cursor: not-allowed !important;
+}

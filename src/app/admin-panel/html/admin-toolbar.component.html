@@ -18,6 +18,14 @@
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>check</md-icon>
         </div>
+
+        <!-- Denial: For denying one announcement -->
+        <div class="admin-toolbar-action" mdTooltip="Deny"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_DENY)"
+            [class.disabled]="(selectedIds.length !== 1)"
+            *ngIf="(page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL || page === pages.PAGE_ANNOUNCEMENTS_CURRENT)">
+            <md-icon>block</md-icon>
+        </div>
         <!--
         <!\-\- Setting to Urgent: Pending Announcements, Total Announcements \-\->
         <div class="admin-toolbar-action" mdTooltip="Set Urgency"
