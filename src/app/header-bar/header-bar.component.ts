@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { AnnouncementsService } from '../_services/announcements.service';
 import { NotificationsService } from '../_services/notifications.service';
+import { PopupModalService, PopupModalTypes } from '../popup-modal/popup-modal.service';
 import { API_BASE } from '../_models/api';
 
 @Component({
@@ -19,7 +20,8 @@ export class HeaderBarComponent implements OnInit {
 
     constructor(
         public authService: AuthService, private router: Router,
-        public notificationsService: NotificationsService
+        public notificationsService: NotificationsService,
+        private popup: PopupModalService
     ) {}
 
     redirectToHome() {
@@ -51,6 +53,10 @@ export class HeaderBarComponent implements OnInit {
         } else {
             this.login();
         }
+    }
+
+    handleMenuClick() {
+        this.popup.openPopup(PopupModalTypes.MOBILE_MENU);
     }
 
     handleNotifClick() {

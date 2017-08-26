@@ -11,7 +11,7 @@
             <div class="header-search"></div><!--
             --><div class="header-notifications no-mobile" *ngIf="authService.currentUser.isAuthenticated && !notificationsService.hasNotifications" (click)="handleNotifClick()"><md-icon>notifications_none</md-icon></div><!--
             --><div class="header-notifications no-mobile" *ngIf="authService.currentUser.isAuthenticated && notificationsService.hasNotifications" (click)="handleNotifClick()"><md-icon>notifications</md-icon><span class="badge"></span></div><!--
-            --><div class="header-mobile-menu mobile-only" (click)="handleMenuClick()"><md-icon>menu</md-icon></div><!--
+            --><div class="header-mobile-menu mobile-only" (click)="handleMenuClick()"><md-icon>menu</md-icon><span class="badge" *ngIf="notificationsService.hasNotifications"></span></div><!--
             --><div class="header-user no-mobile" (click)="handleUserClick()" [class.activated]="userDropActivated">
                 <span class="header-user-text" *ngIf="!authService.currentUser.isAuthenticated">LOG IN WITH GOOGLE</span>
                 <div class="header-user-image" *ngIf="authService.currentUser.isAuthenticated"

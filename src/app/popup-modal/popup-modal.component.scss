@@ -164,3 +164,83 @@
     padding: 8px 5px;
   }
 }
+
+.mmenu-nav-item {
+  cursor: pointer;
+  padding: 12px 40px;
+  transition: all 150ms ease;
+  vertical-align: middle;
+
+  md-icon {
+    font-size: 28px;
+    vertical-align: middle;
+  }
+  span {
+    font-weight: 500;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  &:hover {
+    background-color: #D8D8D8;
+    transition: all 150ms ease;
+  }
+}
+
+.mmenu-nav-head {
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.mmenu-nav-notif {
+  cursor: pointer;
+  padding: 10px 40px;
+  transition: all 150ms ease;
+
+  &:hover {
+    background-color: #D8D8D8;
+    transition: all 150ms ease;
+  }
+
+  md-icon {
+    border: 2px solid #222;
+    border-radius: 48px;
+    display: inline-block;
+    font-size: 32px;
+    padding: 12px;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  .pnotif-head {
+    margin: 0;
+    margin-bottom: 10px;
+
+    .metadata {
+      color: #666;
+      font-size: 12px;
+      vertical-align: middle;
+    }
+  }
+
+  .pnotif-content {
+    padding-top: 0;
+
+    h4 {
+      font-size: 14px;
+      margin: 10px 0;
+      padding: 0;
+    }
+
+    p {
+      font-size: 13px;
+      margin: 5px 0;
+      padding: 0;
+    }
+  }
+}

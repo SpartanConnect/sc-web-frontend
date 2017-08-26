@@ -2,6 +2,44 @@
     <div class="app-popup-header" *ngIf="popup.type !== types.FIRST_SETUP">
         <md-icon class="app-popup-header-close" (click)="popup.closePopup()">close</md-icon>
     </div>
+    <div *ngIf="popup.type === types.MOBILE_MENU">
+        <div *ngIf="authService.currentUser.isAuthenticated" (click)="closePopup()">
+            <b class="mmenu-nav-head">MY ACTIONS</b>
+            <div class="mmenu-nav-item" routerLink="/me"><md-icon>account_circle</md-icon> <span>User Panel</span></div>
+            <div class="mmenu-nav-item" routerLink="/admin"><md-icon>dashboard</md-icon> <span>Admin Panel</span></div>
+            <br>
+        </div>
+        <div *ngIf="!authService.currentUser.isAuthenticated">
+            <b class="mmenu-nav-head">ACTIONS</b>
+            <div class="mmenu-nav-item" (click)="login()"><md-icon>account_box</md-icon> <span>Sign in with Google</span></div>
+            <br>
+        </div>
+        <div *ngIf="authService.currentUser.isAuthenticated">
+            <b class="mmenu-nav-head">MY NOTIFICATIONS</b>
+            <div *ngIf="notificationsService.hasNotifications">
+                <div class="mmenu-nav-notif" *ngFor="let notification of notificationsService.notifications" [routerLink]="notification.url" (click)="closePopup()">
+                    <md-icon>{{notification.icon}}</md-icon>
+                    <div style="display: inline-block; vertical-align: middle;">
+                        <div class="pnotif-content">
+                            <h4>{{notification.title}}</h4>
+                            <p>{{notification.content}}</p>
+                        </div>
+                        <div class="pnotif-head">
+                            <span class="metadata">From {{notification.author.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <i *ngIf="!notificationsService.hasNotifications" style="margin-left: 30px; color: #999; font-size: 14px;">No unread notifications</i>
+            <br *ngIf="!notificationsService.hasNotifications">
+        </div>
+        <br>
+        <br>
+        <div *ngIf="authService.currentUser.isAuthenticated">
+            <b class="mmenu-nav-head">LOG OUT</b>
+            <div class="mmenu-nav-item" (click)="logout()"><md-icon>exit_to_app</md-icon> <span>Log Out</span></div>
+        </div>
+    </div>
     <div class="app-popup-body app-popup-setup" *ngIf="popup.type === types.FIRST_SETUP">
         <h1 class="setup-heading">Account Setup</h1>
         <p class="setup-description">
