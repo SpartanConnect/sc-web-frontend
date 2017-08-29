@@ -1,0 +1,30 @@
+.status-tag {
+  background-color: #999;
+  border-radius: 4px;
+  color: #fdfdfd;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  margin: 5px 0;
+  padding: 4px 8px;
+}
+
+.red {
+  background-color: #df2552;
+  color: #fdfdfd;
+}
+
+.gray {
+  background-color: #999;
+  color: #fdfdfd;
+}
+
+.yellow {
+  background-color: #f1c40f;
+  color: #0d0d0d;
+}
+
+.green {
+  background-color: #27ae60;
+  color: #fdfdfd;
+}

@@ -1,0 +1,276 @@
+<div class="app-popup" [class.hidden]="!popup.activated">
+    <div class="app-popup-header" *ngIf="popup.type !== types.FIRST_SETUP">
+        <md-icon class="app-popup-header-close" (click)="popup.closePopup()">close</md-icon>
+    </div>
+    <div *ngIf="popup.type === types.MOBILE_MENU">
+        <div *ngIf="authService.currentUser.isAuthenticated" (click)="closePopup()">
+            <b class="mmenu-nav-head">MY ACTIONS</b>
+            <div class="mmenu-nav-item" routerLink="/home"><md-icon>home</md-icon> <span>Home Page</span></div>
+            <div class="mmenu-nav-item" routerLink="/me"><md-icon>account_circle</md-icon> <span>User Panel</span></div>
+            <div class="mmenu-nav-item" routerLink="/admin"><md-icon>dashboard</md-icon> <span>Admin Panel</span></div>
+            <br>
+        </div>
+        <div *ngIf="!authService.currentUser.isAuthenticated">
+            <b class="mmenu-nav-head">ACTIONS</b>
+            <div class="mmenu-nav-item" (click)="login()"><md-icon>account_box</md-icon> <span>Sign in with Google</span></div>
+            <br>
+        </div>
+        <div *ngIf="authService.currentUser.isAuthenticated">
+            <b class="mmenu-nav-head">MY NOTIFICATIONS</b>
+            <div *ngIf="notificationsService.hasNotifications">
+                <div class="mmenu-nav-notif" *ngFor="let notification of notificationsService.notifications" [routerLink]="notification.url" (click)="closePopup()">
+                    <md-icon>{{notification.icon}}</md-icon>
+                    <div style="display: inline-block; vertical-align: middle;">
+                        <div class="pnotif-content">
+                            <h4>{{notification.title}}</h4>
+                            <p>{{notification.content}}</p>
+                        </div>
+                        <div class="pnotif-head">
+                            <span class="metadata">From {{notification.author.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <i *ngIf="!notificationsService.hasNotifications" style="margin-left: 30px; color: #999; font-size: 14px;">No unread notifications</i>
+            <br *ngIf="!notificationsService.hasNotifications">
+        </div>
+        <br>
+        <br>
+        <div *ngIf="authService.currentUser.isAuthenticated">
+            <b class="mmenu-nav-head">LOG OUT</b>
+            <div class="mmenu-nav-item" (click)="logout()"><md-icon>exit_to_app</md-icon> <span>Log Out</span></div>
+        </div>
+    </div>
+    <div class="app-popup-body app-popup-setup" *ngIf="popup.type === types.FIRST_SETUP">
+        <h1 class="setup-heading">Account Setup</h1>
+        <p class="setup-description">
+            We just need to confirm a few details about your account before you can use Spartan Connect.
+            You may change these settings at any time by going to your Preferences page.
+        </p>
+        <small>Create a new username</small><br>
+        <div class="setup-input">
+            <div class="setup-input-before" [class.correct]="setupUserHandle.length >= 5 && (setupUserHandle.trim().length === setupUserHandle.length)">@</div>
+            <input [(ngModel)]="setupUserHandle" placeholder="username"/>
+        </div><br><br>
+        <small>Choose how your name will be displayed</small><br><br>
+        <md-checkbox [(ngModel)]="setupHasConsent">I agree to the Terms of Service and the Privacy Policy.</md-checkbox><br><br>
+        <button md-raised-button [disabled]="!setupHasConsent">CONTINUE</button>
+    </div>
+    <!-- Credits Popup -->
+    <div class="app-popup-body app-popup-credits" *ngIf="popup.type === types.CREDITS">
+        <h2 class="credits-heading">
+            <span class="credits-heading-red">Spartan</span>
+            <span class="credits-heading-yellow">Connect</span>
+        </h2>
+        <p class="credits-blurb">
+            Spartan Connect was made with ❤ by the following contributors.
+        </p>
+        <ul class="credits-contributors">
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Lucas Cardell</span>
+                    <span class="contributor-role">Project Advisor</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Harry Coleman</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Justin Hyon</span>
+                    <span class="contributor-role">Designer</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Rucha Kadam</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://www.linkedin.com/in/rucha-kadam-9389b9140">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Jeffrey Kaufman</span>
+                    <span class="contributor-role">Web Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Nicholas Lysek</span>
+                    <span class="contributor-role">Web Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://github.com/nrlysek">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Kevin Mo</span>
+                    <span class="contributor-role">Web Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://github.com/encadyma">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Jon Potter</span>
+                    <span class="contributor-role">Designer</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Sandro Del Rivo</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Kamyar Salahi</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Andre der Sarkissian</span>
+                    <span class="contributor-role">Mobile Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <p class="credits-blurb">
+            Special thanks to Mrs. Lewsadder, Mr. Lewsadder, and the whole Technology Department for their amazing help in bringing this project to life!
+        </p>
+        <br>
+        <h4 class="credits-heading">Open Source Libraries</h4>
+        <ul class="credits-libraries">
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Angular</span>
+                    <span class="contributor-role">Google</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://angular.io/">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Teradata Covalent</span>
+                    <span class="contributor-role">Teradata</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://github.com/Teradata/covalent">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Typescript</span>
+                    <span class="contributor-role">Microsoft</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://www.typescriptlang.org/">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">node.js</span>
+                    <span class="contributor-role">node.js Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://nodejs.org/">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Express</span>
+                    <span class="contributor-role">Express Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="http://expressjs.com/">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">React Native</span>
+                    <span class="contributor-role">Facebook</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://facebook.github.io/react-native/">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="contributor-left">
+                    <span class="contributor-name">Expo</span>
+                    <span class="contributor-role">Expo Team</span>
+                </div>
+                <div class="contributor-right">
+                    <a target="_blank" href="https://expo.io/">
+                        <md-icon>link</md-icon>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

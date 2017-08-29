@@ -1,3 +1,64 @@
-<div style="container container-tight">
+<div style="padding-top: 20px;">
+    <app-spotlight-card *ngIf="loggedOut" mode="compact">
+        <h1><md-icon>exit_to_app</md-icon></h1>
+        <h3>Logged out.</h3>
+        <p content>
+            You have logged out of Spartan Connect.
+        </p>
+    </app-spotlight-card>
+    <app-spotlight-card *ngIf="!authService.currentUser.isAuthenticated && !loggedOut" width="500" mode="small">
+        <h1 class="card-spotlight-emoji">👋</h1>
+        <h3>Say goodbye to PA announcements.</h3>
+        <div content>
+            <p>
+                You don't deserve to listen to minutes of boring announcements. With Spartan Connect, you can tune out the ones you don't care about
+                and stay connected to the rest. Download our announcements app today on the App Store or on the Play Store.
+            </p>
+            <div style="vertical-align:middle;">
+                <a target="_blank" href="http://itunes.apple.com/us/app/spartan-connect/id1257927264?mt=8" style="text-decoration: none;">
+                    <img style="vertical-align:middle;" height="40" alt='Download on the App Store' src='./assets/apple_badge.png'/>
+                </a>
+                <a target="_blank" href='https://play.google.com/store/apps/details?id=com.spartanconnect.SpartanConnect&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style="text-decoration: none;">
+                    <img style="vertical-align:middle;" height="60" alt='Get it on Google Play' src='./assets/google_play_badge.png'/>
+                </a>
+            </div>
+            <br>
+        </div>
+    </app-spotlight-card>
+</div>
+<md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
+<div class="index-body" *ngIf="!loading">
+    <div class="index-body-categories" *ngIf="announcements.length">
+        <h3 class="heading">Categories</h3>
+        <ul class="index-body-categories-list">
+            <li *ngFor="let category of categories" (click)="switchCategoryFilter(category.id)" [class.active]="categoryFilter === category.id">{{category.name}}</li>
+            <li *ngIf="categoryFilter" (click)="switchCategoryFilter(0)">View All</li>
+        </ul>
+    </div>
 
+    <div class="index-body-announcements">
+        <app-spotlight-card *ngIf="!announcements.length && !loading" style="margin-top: 20px;">
+            <h1 class="card-spotlight-emoji"><md-icon>info</md-icon></h1>
+            <h3>No announcements to display. Weird.</h3>
+            <div content>
+                <p>
+                    It seems like there are no announcements that are currently going on today.
+                    Why not take a look <a routerLink="/view/archived">at the archives</a>?
+                </p>
+            </div>
+        </app-spotlight-card>
+        <div *ngFor="let category of categories">
+            <div *ngIf="!sortedAnnouncements[category.slug].length && category.id === categoryFilter">
+                <br>
+                <td-message *ngIf="!sortedAnnouncements[category.slug].length && category.id === categoryFilter" label="Notice" sublabel="Could not find an announcement with the selected category. Please try again by selecting another category." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
+            </div>
+            <div *ngIf="(category.id === categoryFilter || !categoryFilter) && sortedAnnouncements[category.slug].length">
+                <h2 style="padding: 10px 20px;">{{category.name}}</h2>
+                <div *ngFor="let announcement of sortedAnnouncements[category.slug]">
+                    <span>{{announcement.name}}</span>
+                    <app-announcement mode="compact" [announcement]="announcement" [routerLink]="['/view', announcement.id]"></app-announcement>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

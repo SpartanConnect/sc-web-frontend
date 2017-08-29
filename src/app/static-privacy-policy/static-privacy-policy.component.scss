@@ -1,0 +1,14 @@
+.container {
+  line-height: 1.5;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    font-size: 14px;
+    padding: 20px;
+    width: auto;
+  }
+  h1 {
+    font-size: 18px;
+  }
+}

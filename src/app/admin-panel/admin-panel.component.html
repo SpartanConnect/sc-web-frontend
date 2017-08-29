@@ -1,80 +1,11 @@
 <div class="container container-tight">
     <div>
-        <h3 style="display: block; margin: 12px 0;">Admin Panel</h3>
-    </div>
-    <td-message *ngIf="!filteredTotal" label="Notice" sublabel="No rows returned from database (empty set)." color="primary" icon="warning" style="padding: 16px 5px;"></td-message>
-    <md-divider></md-divider>
-    <div style="max-width: 960px;">
-        <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" style="width: 100%;">
-          <!-- ACTION BUTTONS: START -->
-          <span *ngIf="!searchBox.searchVisible && this.selectedColumns === this.announcementColumns" style="float: right;">
-            <button md-icon-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
-                <md-icon mdTooltip="Approve" *ngIf="selectedRows.length <= 1">done</md-icon>
-                <md-icon mdTooltip="Approve" *ngIf="selectedRows.length > 1">done_all</md-icon>
-            </button>
-            <button md-icon-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
-                <md-icon mdTooltip="Deny">remove_circle_outline</md-icon>
-            </button>
-            <button md-icon-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
-                <md-icon mdTooltip="Set Urgent">add_alert</md-icon>
-            </button>
-          </span>
-          <span *ngIf="!searchBox.searchVisible && this.selectedColumns === this.tagColumns" style="float: right;">
-            <button md-icon-button [disabled]="selectedRows.length !== 1" (click)="openConfirmDialog()">
-                <md-icon mdTooltip="Edit" *ngIf="selectedRows.length <= 1">mode_edit</md-icon>
-                <md-icon mdTooltip="Cannot edit multiple tags" *ngIf="selectedRows.length > 1">mode_edit</md-icon>
-            </button>
-            <button md-icon-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
-                <md-icon mdTooltip="Archive (Move to Trash)">archive</md-icon>
-            </button>
-          </span>
-          <span *ngIf="!searchBox.searchVisible && this.selectedColumns === this.userColumns" style="float: right;">
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
-
-            </button>
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
-
-            </button>
-            <button md-button [disabled]="!selectedRows.length" (click)="openConfirmDialog()">
-
-            </button>
-          </span>
-          <!-- BUTTONS: END -->
-          <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
-            <span *ngIf="selectedRows.length" class="md-body-1">{{selectedRows.length}} row(s) selected</span>
-          </span>
-          <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)" flex>
-          </td-search-box>
-          <md-menu #appMenu="mdMenu">
-            <button md-menu-item (click)="setTableData(this.unapprovedAnnouncements, this.announcementColumns)">View Unapproved</button>
-            <button md-menu-item (click)="setTableData(this.approvedAnnouncements, this.announcementColumns)">View Approved</button>
-            <button md-menu-item (click)="setTableData(this.totalTags, this.tagColumns)">View Tags</button>
-            <button md-menu-item (click)="setTableData(this.totalUsers, this.userColumns)">View Users</button>
-          </md-menu>
-          <button md-icon-button [mdMenuTriggerFor]="appMenu">
-             <md-icon>more_vert</md-icon>
-          </button>
+        <app-admin-overview-panel *ngIf="currentPage === pages.PAGE_OVERVIEW && !loading" (change)="navigateChange($event)" [adminData]="collectedData" [page]="currentPage"></app-admin-overview-panel>
+        <div class="admin-panel-container" *ngIf="currentPage !== pages.PAGE_OVERVIEW">
+            <app-admin-header-panel (change)="navigateChange($event)" [page]="currentPage" [data]="collectedData"></app-admin-header-panel>
+            <app-admin-toolbar [page]="currentPage" [data]="datatableData" [selectedIds]="selectedIds" (idChange)="selectionChange($event)" (refresh)="successfulChange($event)" (pageChange)="navigateChange($event)"></app-admin-toolbar>
+            <app-admin-datatable *ngIf="!loading" [page]="currentPage" [data]="datatableData" [selectedIds]="selectedIds" (idChange)="selectionChange($event)" (refresh)="successfulChange($event)"></app-admin-datatable>
         </div>
-        <td-data-table
-          #dataTable
-          [data]="filteredData"
-          [columns]="selectedColumns"
-          [selectable]="true"
-          [multiple]="true"
-          [clickable]="true"
-          [sortable]="true"
-          [sortBy]="sortBy"
-          [sortOrder]="sortOrder"
-          [(ngModel)]="selectedRows"
-          (rowClick)="openInfoDialog($event)"
-          (sortChange)="sort($event)"
-        >
-        </td-data-table>
-        <md-divider></md-divider>
-        <td-paging-bar #pagingBar [pageSizes]="[10, 15, 20, 100, 200]" [total]="filteredTotal" (change)="page($event)">
-          <span td-paging-bar-label hide-xs>Row per page:</span>
-          {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
-        </td-paging-bar>
     </div>
-    <md-divider></md-divider>
+    <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
 </div>

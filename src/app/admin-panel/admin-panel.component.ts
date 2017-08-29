@@ -1,18 +1,11 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import {    ITdDataTableColumn,
-            IPageChangeEvent,
-            TdDataTableService,
-            TdDataTableSortingOrder,
-            ITdDataTableSortChangeEvent,
-            TdDialogService,
-            ITdDataTableRowClickEvent,
-            TdLoadingService
-    } from '@covalent/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AnnouncementsService } from '../_services/announcements.service';
+import { NotificationsService } from '../_services/notifications.service';
 import { TagsService } from '../_services/tags.service';
 import { UsersService } from '../_services/users.service';
-import { ANNOUNCEMENT_COLUMNS, TAG_COLUMNS, USER_COLUMNS } from '../models/datatable';
+import { AuthService } from '../_services/auth.service';
+import { AdminPanelPage } from './ap-datatypes';
 
 @Component({
   selector: 'app-admin-panel',
@@ -21,139 +14,176 @@ import { ANNOUNCEMENT_COLUMNS, TAG_COLUMNS, USER_COLUMNS } from '../models/datat
 })
 export class AdminPanelComponent implements OnInit {
 
-    announcementColumns: ITdDataTableColumn[] = ANNOUNCEMENT_COLUMNS;
-    tagColumns: ITdDataTableColumn[] = TAG_COLUMNS;
-    userColumns: ITdDataTableColumn[] = USER_COLUMNS;
+    loading = true;
+    currentPage = AdminPanelPage.PAGE_OVERVIEW;
+    pages = AdminPanelPage;
 
-    // The arrays used by this component for displaying and caching.
-    approvedAnnouncements = [];
-    unapprovedAnnouncements = [];
-    totalTags = [];
-    totalUsers = [];
-
-    selectedData: Array<any> = [];            // All of the rows in an entire table (unfiltered). Can be filtered and selected.
-    selectedColumns: Array<any> = ANNOUNCEMENT_COLUMNS;
-
-    fromRow: number = 1;
-    currentPage: number = 1;
-    pageSize: number = 10;
-    searchTerm: string = "";
-    filteredData: any[] = this.selectedData;
-    filteredTotal: number = this.selectedData.length;
-    selectedRows: any[] = [];
-
-    sortBy: string = 'title';
-    sortOrder: TdDataTableSortingOrder = TdDataTableSortingOrder.Ascending;
-
-    setTableData(rows, columns = this.selectedColumns) {
-        this.selectedRows = [];
-        this.selectedData = rows;
-        this.selectedColumns = columns;
-        this.sortBy = columns[0].name;
-        this.currentPage = 1;
-        this.fromRow = 1;
-        this.filteredData = this.selectedData;
-        this.filteredTotal = this.selectedData.length;
-        this.filter();
-    }
+    collectedData = {
+        users: {
+            all: [],
+            unapproved: [],
+            teachers: []
+        },
+        tags: {
+            all: [],
+            categories: []
+        },
+        announcements: {
+            all: [],
+            unapproved: [],
+            current: []
+        }
+    };
+    datatableData = [];
+    selectedIds = [];
 
     constructor(
-        private dataTableService: TdDataTableService,
-        private dialogService: TdDialogService,
-        private viewContainerRef: ViewContainerRef,
-        private loadingService: TdLoadingService,
-        private announcementsService: AnnouncementsService,
-        private tagsService: TagsService,
-        private usersService: UsersService
+        private authService: AuthService, private announcementsService: AnnouncementsService,
+        private tagsService: TagsService, private usersService: UsersService,
+        private notificationsService: NotificationsService
     ) { }
 
     ngOnInit() {
-        this.setTableData([], this.announcementColumns);
-        this.loadingService.register();
-        // Load all of our data from our services.
+        this.notificationsService.fetchNotifications();
         Promise.all([
-            this.announcementsService.getApprovedAnnouncements(0),
-            this.announcementsService.getApprovedAnnouncements(1),
-            this.tagsService.getVisibleTags(),
+            this.announcementsService.getAnnouncements(),
+            this.announcementsService.getCurrentAnnouncements(),
+            this.tagsService.getTags(),
+            this.tagsService.getCategories(),
             this.usersService.getUsers()
         ]).then((data) => {
-            this.unapprovedAnnouncements = data[0];
-            this.approvedAnnouncements = data[1];
-            this.totalTags = data[2];
-            this.totalUsers = data[3];
-            this.setTableData(this.unapprovedAnnouncements, this.announcementColumns);
-            this.loadingService.resolve();
+            this.collectedData.announcements.all = data[0];
+            this.collectedData.announcements.current = data[1];
+            this.collectedData.tags.all = data[2];
+            this.collectedData.tags.categories = data[3];
+            this.collectedData.users.all = data[4];
+            this.collectedData.users.teachers = data[4].filter((u) => {
+                return u.rank === 3;
+            });
+            this.collectedData.users.unapproved = data[4].filter((u) => {
+                return u.rank === 4 || u.rank === 99;
+            });
+            this.collectedData.announcements.unapproved = data[0].filter((a) => {
+                return a.status === 0;
+            });
+            this.loading = false;
         });
     }
 
-    // BEGIN SEARCH/FILTER + DIALOG CODE
-
-    search(searchTerm: string): void {
-        this.searchTerm = searchTerm;
-        this.filter();
+    selectionChange(selection) {
+        this.selectedIds = selection;
     }
 
-    openInfoDialog(clickEvent: ITdDataTableRowClickEvent): void {
-        console.log(clickEvent);
-        let message = "Viewing Information\n";
-        if (clickEvent.row.name) {          // User object
-            message += "Name: "+clickEvent.row.name+"\n";
-            message += "Email: "+clickEvent.row.email+"\n";
-            message += "Last Logged In: "+clickEvent.row.lastLogin+"\n";
-            message += "Post Count: "+clickEvent.row.postCount;
-        } else {
-            message += "Name: "+clickEvent.row.title+"\n";
-            message += "Author: "+clickEvent.row.author+"\n";
-            message += "Description: "+clickEvent.row.description+"\n";
-            message += "Tags: "+clickEvent.row.tags+"\n";
+    successfulChange(success) {
+        this.navigateChange(this.currentPage);
+    }
+
+    navigateChange(page) {
+        let promise;
+        this.loading = true;
+        this.selectedIds = [];
+        switch (page) {
+            case AdminPanelPage.PAGE_ANNOUNCEMENTS_CURRENT:
+                promise = this.announcementsService.getCurrentAnnouncements().then((data) => {
+                    this.collectedData.announcements.current = data.sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
+                    });
+                    return this.collectedData.announcements.current;
+                });
+                break;
+            case AdminPanelPage.PAGE_ANNOUNCEMENTS_PENDING:
+                promise = this.announcementsService.getAnnouncements().then((data) => {
+                    this.collectedData.announcements.all = data.sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
+                    });
+
+                    this.collectedData.announcements.unapproved = data.filter((a) => {
+                        return a.status === 0;
+                    }).sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
+                    });
+
+                    return this.collectedData.announcements.unapproved;
+                });
+                break;
+            case AdminPanelPage.PAGE_ANNOUNCEMENTS_TOTAL:
+                promise = this.announcementsService.getAnnouncements().then((data) => {
+                    this.collectedData.announcements.all = data.sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
+                    });
+
+                    this.collectedData.announcements.unapproved = data.filter((a) => {
+                        return a.status === 0;
+                    }).sort((a, b) => {
+                        return (new Date(b.timeEdited).getTime() - new Date(a.timeEdited).getTime());
+                    });
+
+                    return this.collectedData.announcements.all;
+                });
+                break;
+            case AdminPanelPage.PAGE_TAGS_ALL:
+                promise = this.tagsService.getTags().then((data) => {
+                    this.collectedData.tags.all = data;
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_TAGS_CATEGORIES:
+                promise = this.tagsService.getCategories().then((data) => {
+                    this.collectedData.tags.categories = data;
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_USERS_ALL:
+                promise = this.usersService.getUsers().then((data) => {
+                    this.collectedData.users.all = data;
+                    this.collectedData.users.teachers = data.filter((u) => {
+                        return u.rank === 3;
+                    });
+                    this.collectedData.users.unapproved = data.filter((u) => {
+                        return u.rank === 4;
+                    });
+                    return data;
+                });
+                break;
+            case AdminPanelPage.PAGE_USERS_TEACHERS:
+                promise = this.usersService.getUsers().then((data) => {
+                    this.collectedData.users.all = data;
+                    this.collectedData.users.teachers = data.filter((u) => {
+                        return u.rank === 3;
+                    });
+                    this.collectedData.users.unapproved = data.filter((u) => {
+                        return u.rank === 4;
+                    });
+                    return data.filter((u) => {
+                        return u.rank === 3;
+                    });
+                });
+                break;
+            case AdminPanelPage.PAGE_USERS_UNAPPROVED:
+                promise = this.usersService.getUsers().then((data) => {
+                    this.collectedData.users.all = data;
+                    this.collectedData.users.teachers = data.filter((u) => {
+                        return u.rank === 3;
+                    });
+                    this.collectedData.users.unapproved = data.filter((u) => {
+                        return u.rank === 4;
+                    });
+                    return data.filter((u) => {
+                        return u.rank === 4;
+                    });
+                });
+                break;
+            default:
+                promise = new Promise((resolve) => {
+                    resolve([]);
+                });
         }
-        this.dialogService.openAlert({
-          message: message,
-          disableClose: true,
-          viewContainerRef: this.viewContainerRef,
-          title: 'Information',
-          closeButton: 'Close',
+        promise.then((data) => {
+            this.currentPage = page;
+            this.datatableData = data;
+            window.scrollTo(0, 0);
+            this.loading = false;
         });
-    }
-
-    openConfirmDialog(): void {
-        this.dialogService.openConfirm({
-            message: "Are you sure you want to continue with this action? (Heads up: I don't actually know what you want to do.)",
-            disableClose: true,
-            viewContainerRef: this.viewContainerRef,
-            title: 'Confirm Action'
-        });
-    }
-
-    sort(sortEvent: ITdDataTableSortChangeEvent): void {
-        this.sortBy = sortEvent.name;
-        this.sortOrder = sortEvent.order;
-        this.filter();
-    }
-
-    page(pagingEvent: IPageChangeEvent): void {
-        this.fromRow = pagingEvent.fromRow;
-        this.currentPage = pagingEvent.page;
-        this.pageSize = pagingEvent.pageSize;
-        this.filter();
-    }
-
-    // Filtering code from Teradata: Thank you!
-    // TODO: configure code to our needs
-    filter(): void {
-        let newData: any[] = this.selectedData;
-        let excludedColumns: string[] = this.selectedColumns
-        .filter((column: ITdDataTableColumn) => {
-          return ((column.filter === undefined && column.hidden === true) ||
-                  (column.filter !== undefined && column.filter === false));
-        }).map((column: ITdDataTableColumn) => {
-          return column.name;
-        });
-        newData = this.dataTableService.filterData(newData, this.searchTerm, true, excludedColumns);
-        this.filteredTotal = newData.length;
-        newData = this.dataTableService.sortData(newData, this.sortBy, this.sortOrder);
-        newData = this.dataTableService.pageData(newData, this.fromRow, this.currentPage * this.pageSize);
-        this.filteredData = newData;
     }
 
 }

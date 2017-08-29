@@ -1,0 +1,188 @@
+// Import Material theme
+@import '~@angular/material/theming';
+@import 'src/spartan-theme.scss';
+
+.index-head {
+  background-color: #252525;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 25px;
+  width: 100%;
+}
+
+// Highlighted announcement
+.index-head-focus {
+  background-color: #d8d8d8;
+  background-image: url('../../assets/AnnouncementDefault.png');
+  display: inline-block;
+  height: 320px;
+  margin: 0 15px;
+  position: relative;
+  width: 540px;
+
+  // Text in highlighted announcement
+  .index-head-highlight {
+    background-color: rgba(0,0,0,.7);
+    bottom: 0;
+    box-sizing: border-box;
+    padding: 20px;
+    position: absolute;
+    width: 540px;
+
+    h1 {
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.index-head-list {
+  background-color: #2f2f2f;
+  display: inline-flex;
+  flex-direction: column;
+  height: 320px;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0 15px;
+  padding: 0;
+  width: 330px;
+
+  li {
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 40px;
+    margin: 0;
+    padding: 10px 15px;
+    vertical-align: middle;
+    width: 100%;
+  }
+
+  li:hover {
+    background-color: #1f1f1f;
+    text-decoration: underline;
+  }
+}
+
+.index-body {
+  max-width: 1080px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding-bottom: 20px;
+
+  md-card-content {
+    margin: 0;
+  }
+
+  .index-body-categories {
+    display: inline-flex;
+    flex-basis: 20vw;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    margin: 10px 10px;
+    max-width: 300px;
+    width: 250px;
+
+    ul {
+      background-color: mat-color($spartan-app-primary);
+      display: inline-flex;
+      flex-direction: column;
+      list-style: none;
+      margin: 0;
+      width: 250px;
+      padding: 0;
+
+      li {
+        box-sizing: border-box;
+        color: #fff;
+        height: 50px;
+        margin: 0;
+        padding: 15px 15px;
+        vertical-align: middle;
+
+        &.active, &:hover {
+          background-color: mat-color($spartan-app-accent);
+          color: #222;
+          cursor: pointer;
+        }
+      }
+    }
+
+  }
+
+  .index-body-announcements {
+    display: inline-flex;
+    flex-direction: column;
+    flex-grow: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .index-body .index-body-categories {
+    display: none;
+  }
+}
+
+a.small {
+  color: #fff;
+  font-size: 0.75em;
+  text-decoration: none;
+
+  &:active { color: #fff; }
+  &:hover { text-decoration: underline; }
+  &:visited { color: #fff; }
+}
+
+h3.heading {
+  border-bottom: 8px solid mat-color($spartan-app-accent);
+  box-sizing: border-box;
+  cursor: default;
+  display: block;
+  margin: 10px 0;
+  max-width: 250px;
+  padding: 10px 50px 10px 20px;
+}
+
+h2 {
+  cursor: default;
+}
+
+/*
+.card-spotlight {
+  background-color: #fefefe;
+  border-radius: 4px;
+  cursor: default;
+  margin: 10px auto;
+  margin-top: 20px;
+  max-width: 600px;
+  padding: 20px 60px;
+  text-align: center;
+
+  h3 {
+    font-size: 16px;
+    margin: 5px 0;
+    padding: 0;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.35;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  .card-spotlight-emoji {
+    font-size: 48px;
+    margin: 20px 0;
+  }
+}
+*/

@@ -1,0 +1,185 @@
+.overview {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+.overarch {
+  color: #fefefe;
+  display: block;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.2));
+  margin: 0 4px;
+  min-height: 300px;
+  overflow: hidden;
+  position: relative;
+  transition: all 150ms ease;
+  width: 316px;
+
+  &:hover {
+    filter: drop-shadow(0px 2px 12px rgba(0, 0, 0, 0.2));
+    transition: all 150ms ease;
+  }
+
+  .overarch-head {
+    background-color: #1E88E5;
+    cursor: default;
+    margin: 0 8px;
+    overflow: hidden;
+    padding: 14px 25px;
+    position: relative;
+
+    .overarch-head-heading {
+      margin: 0;
+      margin-top: 10px;
+      padding: 0;
+    }
+    .overarch-head-description {
+      font-size: 14px;
+      margin: 10px 0;
+      max-width: 240px;
+      padding: 0;
+    }
+    .overarch-head-background {
+      color: rgba(255, 255, 255, 0.2);
+      cursor: default;
+      font-size: 144px;
+      top: -20px;
+      position: absolute;
+      right: -30px;
+
+      &::-moz-selection{
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      &::selection {
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+  .overarch-cta {
+    background-color: #1565C0;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    margin: 0;
+    position: relative;
+
+    .overarch-cta-text {
+      display: block;
+      float: left;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 30px;
+      transition: all 150ms ease;
+    }
+    .overarch-cta-arrow {
+      display: block;
+      opacity: 0;
+      right: 0;
+      padding: 8px 35px;
+      padding-left: 0;
+      position: absolute;
+      transition: all 150ms ease;
+    }
+
+    &:hover {
+      .overarch-cta-text {
+        padding: 12px 25px;
+        transition: all 150ms ease;
+      }
+      .overarch-cta-arrow {
+        opacity: 1;
+        padding: 8px 20px;
+        padding-left: 0;
+        transition: all 150ms ease;
+      }
+    }
+  }
+  .overarch-body {
+    background-color: #2196F3;
+    margin: 0 8px;
+    min-height: 140px;
+    padding: 12px 28px;
+    .overarch-body-list {
+      margin-top: 4px;
+      .overarch-body-list-element {
+        cursor: default;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  &.orange {
+    .overarch-head {
+      background-color: #FB8C00;
+    }
+    .overarch-cta {
+      background-color: #EF6C00;
+    }
+    .overarch-body {
+      background-color: #FF9800;
+    }
+  }
+
+  &.red {
+    .overarch-head {
+      background-color: #E53935;
+    }
+    .overarch-cta {
+      background-color: #C62828;
+    }
+    .overarch-body {
+      background-color: #E53935;
+    }
+  }
+}
+
+// The "Pending" flag next to the overarch's title
+.overarch-urgent {
+  background-color: #E53935;
+  border-radius: 4px;
+  color: #fefefe;
+  font-size: 12px;
+  margin-left: 10px;
+  padding: 4px 6px;
+  vertical-align: middle;
+
+  md-icon {
+    font-size: 16px;
+    vertical-align: middle;
+  }
+}
+
+@media (max-width: 960px) {
+  .overview {
+    flex-direction: column;
+  }
+
+  .overarch {
+    cursor: pointer;
+    margin: 10px;
+    min-height: 0;
+    width: 90%;
+
+    .overarch-head {
+      cursor: pointer;
+      margin: 0;
+      .overarch-head-background {
+        cursor: pointer;
+      }
+    }
+
+    .overarch-body {
+      display: none;
+    }
+  }
+
+
+}
