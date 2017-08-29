@@ -4,7 +4,8 @@ import { AppComponent } from '../app.component';
 export enum PopupModalTypes {
     DEFAULT,
     CREDITS,
-    FIRST_SETUP
+    FIRST_SETUP,
+    MOBILE_MENU
 }
 
 @Injectable()

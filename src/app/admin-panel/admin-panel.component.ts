@@ -181,6 +181,7 @@ export class AdminPanelComponent implements OnInit {
         promise.then((data) => {
             this.currentPage = page;
             this.datatableData = data;
+            window.scrollTo(0, 0);
             this.loading = false;
         });
     }

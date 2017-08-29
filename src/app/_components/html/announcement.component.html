@@ -32,10 +32,14 @@
             <span class="card-a-creator">{{announcement.creator.name}}</span>
         </span>
         <span class="card-a-footnote margin-push">
+            <b>SHOWING</b>
+            <span>{{announcement.startDate | date:'M/d'}}<span *ngIf="announcement.startDate !== announcement.endDate"> - {{announcement.endDate | date:'M/d'}}</span></span>
+        </span>
+        <span class="card-a-footnote margin-push" *ngIf="mode !== 'compact'">
             <b>{{recentActionWord}}</b>
             <span>{{recentActionDate | timeAgo}}</span>
-        </span>
-        <app-cx-status-tag [announcement]="announcement" [status]="announcement.status" style="margin-left: 40px;" *ngIf="mode === 'adminpanel' || mode === 'userpanel'"></app-cx-status-tag>
+        </span><br class="br-mobile">
+        <app-cx-status-tag [announcement]="announcement" [status]="announcement.status" style="margin-top: 5px;" *ngIf="mode === 'adminpanel' || mode === 'userpanel'"></app-cx-status-tag>
     </div>
     <div class="card-a-float-action" *ngIf="mode === 'compact' || mode === 'adminpanel'">READ MORE</div>
 </div>

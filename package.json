@@ -5,12 +5,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "bprod": "ng build --prod --aot --env=prod && firebase deploy",
+    "build": "ng build --prod --aot --env=prod",
+    "bprod": "npm run build && npm run precache && npm run deploy",
+    "deploy": "firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "serve": "ng serve --proxy-config proxy.config.json -lr=false"
+    "serve": "ng serve --proxy-config proxy.config.json -lr=false",
+    "precache": "sw-precache --verbose --config=sw-precache-config.js"
   },
   "private": true,
   "dependencies": {
@@ -57,6 +59,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "node-sass": "^4.5.3",
     "protractor": "~5.1.2",
+    "sw-precache": "^5.2.0",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
     "typescript": "~2.3.3"

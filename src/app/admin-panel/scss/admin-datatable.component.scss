@@ -8,7 +8,7 @@
 }
 
 .admin-dt-announcement-head {
-  cursor: default;
+  cursor: pointer;
   min-height: 80px;
   position: relative;
   .admin-dt-announcement-head-check {
@@ -36,6 +36,7 @@
       max-width: 700px;
       padding: 0;
       word-wrap: break-word;
+      word-break: break-all;
 
       .admin-dt-announcement-head-rating {
         background-color: #ccc;
@@ -134,5 +135,20 @@
     max-height: 0;
     padding: 0 20px;
     transition: all 150ms ease;
+  }
+}
+
+@media (max-width: 960px) {
+  .no-mobile {
+    display: none !important;
+  }
+
+  .admin-dt-announcement-head .admin-dt-announcement-head-body .admin-dt-announcement-head-heading {
+    font-size: 14px;
+    margin-right: 70px;
+  }
+
+  .admin-dt-announcement {
+    margin: 0;
   }
 }

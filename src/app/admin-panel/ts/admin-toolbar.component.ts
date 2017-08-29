@@ -17,8 +17,9 @@ export class AdminToolbarComponent implements OnInit {
     @Input() data;
     @Input() selectedIds;
 
-    @Output() change = new EventEmitter<number[]>();
+    @Output() idChange = new EventEmitter<number[]>();
     @Output() refresh = new EventEmitter<boolean>();
+    @Output() pageChange = new EventEmitter<AdminPanelPage>();
 
     pages = AdminPanelPage;
     actions = AdminPanelActions;
@@ -37,27 +38,40 @@ export class AdminToolbarComponent implements OnInit {
                 this.selectedIds.push(d.id);
             });
         }
-        this.change.emit(this.selectedIds);
+        this.idChange.emit(this.selectedIds);
+    }
+
+    goBack() {
+        this.page = AdminPanelPage.PAGE_OVERVIEW;
+        this.pageChange.emit(this.page)
     }
 
     doAction(action, affectedIds = []) {
-        if (!affectedIds.length) {
-            affectedIds = this.selectedIds;
-        }
-        if (affectedIds.length) {
-            this.dialogService.openConfirm({
-                message: `Are you sure you want to affect ${affectedIds.length} rows?`,
-                disableClose: true,
-                title: 'Confirm Action?',
-                cancelButton: 'NO',
-                acceptButton: 'YES'
-            }).afterClosed().subscribe((accept) => {
-                if (accept) {
-                    this.adminPanelService.doAction(action, affectedIds, () => {
-                        this.refresh.emit(true);
-                    });
-                }
-            });
+        if (action === AdminPanelActions.ACTION_ANNOUNCEMENT_DENY) {
+            if (this.selectedIds.length === 1) {
+                this.adminPanelService.doAction(action, [this.selectedIds[0]], () => {
+                    this.refresh.emit(true);
+                });
+            }
+        } else {
+            if (!affectedIds.length) {
+                affectedIds = this.selectedIds;
+            }
+            if (affectedIds.length) {
+                this.dialogService.openConfirm({
+                    message: `Are you sure you want to affect ${affectedIds.length} rows?`,
+                    disableClose: true,
+                    title: 'Confirm Action?',
+                    cancelButton: 'NO',
+                    acceptButton: 'YES'
+                }).afterClosed().subscribe((accept) => {
+                    if (accept) {
+                        this.adminPanelService.doAction(action, affectedIds, () => {
+                            this.refresh.emit(true);
+                        });
+                    }
+                });
+            }
         }
     }
 

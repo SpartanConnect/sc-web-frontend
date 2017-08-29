@@ -69,3 +69,63 @@ hr {
     margin: 10px 0;
     text-align: center;
 }
+
+@media (max-width: 960px) {
+    .container {
+        display: block;
+        margin: 0 auto;
+        max-width: none;
+        padding-top: 10px;
+        width: auto;
+    }
+
+    .panel-user-left {
+        display: block;
+        width: auto;
+    }
+
+    .panel-user-nav {
+        display: block;
+        margin: 0;
+        margin-left: calc((100% - 600px)/2 + 10px);
+    }
+
+    .panel-user-nav hr {
+        display: none;
+    }
+
+    .panel-user-left .panel-user-nav a {
+        border: none;
+        border-radius: 6px;
+        display: inline-block;
+        font-size: 14px;
+        height: auto;
+        padding: 6px 12px;
+    }
+
+    .panel-user-left .panel-user-nav a span {
+        padding: 0;
+    }
+
+    .panel-user-right {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .panel-user-left {
+        margin: 0;
+    }
+    .panel-user-nav {
+        margin: 0;
+        margin-left: 10px;
+    }
+    .panel-user-right {
+        width: auto;
+    }
+    .card-announcement .margin-push {
+        display: block;
+        margin: 4px;
+    }
+
+}

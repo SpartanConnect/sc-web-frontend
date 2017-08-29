@@ -1,0 +1,16 @@
+{
+    "name": "Spartan Connect Web App",
+    "short_name": "SC Web",
+    "description": "Spartan Connect Web App for viewing and creating school related announcements.",
+    "icons": [
+        {
+            "src": "assets/logo.png",
+            "sizes": "512x512",
+            "type": "image\/png"
+        }
+    ],
+    "display": "standalone",
+    "start_url": "./?utm_source=web_app_manifest",
+    "background_color": "#eeeeee",
+    "theme_color": "#b71c1c"
+}

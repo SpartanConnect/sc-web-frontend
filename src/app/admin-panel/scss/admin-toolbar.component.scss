@@ -15,6 +15,10 @@
     width: 60px;
     transition: all 150ms ease;
 
+    &.only-mobile {
+      display: none;
+    }
+
     &.admin-toolbar-checkbox {
       float: left;
       padding: 20px;
@@ -39,4 +43,35 @@
       transition: all 150ms ease;
     }
   }
+}
+
+@media (max-width: 960px) {
+  .admin-toolbar-actions {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.10);
+    box-sizing: border-box;
+    height: 80px;
+    padding: 10px 20px;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 99;
+
+    .admin-toolbar-action {
+      &.only-mobile {
+        display: inline-block;
+      }
+    }
+  }
+
+  .admin-toolbar-action:hover {
+    border-bottom: 8px solid #666;
+    transition: all 150ms ease;
+  }
+}
+
+.admin-toolbar-action.disabled {
+  background-color: transparent;
+  border: none;
+  color: #bbb;
+  cursor: not-allowed !important;
 }

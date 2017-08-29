@@ -9,7 +9,7 @@
         For legal concerns, please contact the student development team at <a href="mailto:studentdevteam@mylcusd.net">studentdevteam@mylcusd.net</a>.
     </p>
     <br>
-    <button md-button routerLink="/home" style="display: block; margin: 0 auto;">RETURN TO HOME PAGE</button>
+    <button md-button routerLink="/home" style="display: block; margin: 0 auto;" class="no-mobile">RETURN TO HOME PAGE</button>
     <br>
     <app-announcement *ngFor="let announcement of announcements" [announcement]="announcement" mode="archive"></app-announcement>
     <!--<md-card class="card-announcement" *ngFor="let announcement of announcements">
@@ -24,6 +24,7 @@
         </md-card-content>
     </md-card>-->
     <br>
-    <button md-button routerLink="/home">RETURN TO HOME PAGE</button>
+    <button md-button routerLink="/home" class="no-mobile">RETURN TO HOME PAGE</button>
     <br>
+    <div class="mobile-only btn-av-back" routerLink="/home"><md-icon>home</md-icon> BACK TO HOME PAGE</div>
 </div>

@@ -67,6 +67,8 @@
     display: block;
     height: 40px;
     margin: 0;
+    position: relative;
+
     .overarch-cta-text {
       display: block;
       float: left;
@@ -77,10 +79,11 @@
     }
     .overarch-cta-arrow {
       display: block;
-      float: right;
       opacity: 0;
+      right: 0;
       padding: 8px 35px;
       padding-left: 0;
+      position: absolute;
       transition: all 150ms ease;
     }
 
@@ -138,6 +141,7 @@
   }
 }
 
+// The "Pending" flag next to the overarch's title
 .overarch-urgent {
   background-color: #E53935;
   border-radius: 4px;
@@ -151,4 +155,31 @@
     font-size: 16px;
     vertical-align: middle;
   }
+}
+
+@media (max-width: 960px) {
+  .overview {
+    flex-direction: column;
+  }
+
+  .overarch {
+    cursor: pointer;
+    margin: 10px;
+    min-height: 0;
+    width: 90%;
+
+    .overarch-head {
+      cursor: pointer;
+      margin: 0;
+      .overarch-head-background {
+        cursor: pointer;
+      }
+    }
+
+    .overarch-body {
+      display: none;
+    }
+  }
+
+
 }

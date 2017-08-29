@@ -1,5 +1,5 @@
 <div class="overview">
-    <div class="overarch orange">
+    <div class="overarch orange" (click)="navigateToPage(pages.PAGE_USERS_ALL)">
         <div class="overarch-head">
             <md-icon class="overarch-head-background">supervisor_account</md-icon>
             <h3 class="overarch-head-heading">
@@ -11,7 +11,7 @@
             </h3>
             <p class="overarch-head-description">Invite and manage Spartan Connect users</p>
         </div>
-        <div class="overarch-cta" (click)="navigateToPage(pages.PAGE_USERS_ALL)">
+        <div class="overarch-cta">
             <div class="overarch-cta-text">MANAGE USERS</div>
             <md-icon class="overarch-cta-arrow">chevron_right</md-icon>
         </div>
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <div class="overarch blue">
+    <div class="overarch blue" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_PENDING)">
         <div class="overarch-head">
             <md-icon class="overarch-head-background">speaker_notes</md-icon>
             <h3 class="overarch-head-heading">
@@ -41,7 +41,7 @@
             </h3>
             <p class="overarch-head-description">Approve, reject, and manage announcements</p>
         </div>
-        <div class="overarch-cta" (click)="navigateToPage(pages.PAGE_ANNOUNCEMENTS_PENDING)">
+        <div class="overarch-cta">
             <div class="overarch-cta-text">MANAGE ANNOUNCEMENTS</div>
             <md-icon class="overarch-cta-arrow">chevron_right</md-icon>
         </div>
@@ -59,13 +59,13 @@
             </div>
         </div>
     </div>
-    <div class="overarch red">
+    <div class="overarch red" (click)="navigateToPage(pages.PAGE_TAGS_ALL)">
         <div class="overarch-head">
             <md-icon class="overarch-head-background">local_offer</md-icon>
             <h3 class="overarch-head-heading">Tags</h3>
             <p class="overarch-head-description">Create, modify, and manage tags for announcements</p>
         </div>
-        <div class="overarch-cta" (click)="navigateToPage(pages.PAGE_TAGS_ALL)">
+        <div class="overarch-cta">
             <div class="overarch-cta-text">MANAGE TAGS</div>
             <md-icon class="overarch-cta-arrow">chevron_right</md-icon>
         </div>

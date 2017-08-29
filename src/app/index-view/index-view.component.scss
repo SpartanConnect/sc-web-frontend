@@ -126,6 +126,12 @@
   }
 }
 
+@media (max-width: 700px) {
+  .index-body .index-body-categories {
+    display: none;
+  }
+}
+
 a.small {
   color: #fff;
   font-size: 0.75em;

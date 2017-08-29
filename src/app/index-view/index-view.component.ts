@@ -24,7 +24,7 @@ export class IndexViewComponent implements OnInit {
     loading = true;
 
     constructor(public snackBar: MdSnackBar, private announcementsService: AnnouncementsService,
-                private tagsService: TagsService, private authService: AuthService,
+                private tagsService: TagsService, public authService: AuthService,
                 private route: ActivatedRoute) { }
 
     switchCategoryFilter(id: number) {

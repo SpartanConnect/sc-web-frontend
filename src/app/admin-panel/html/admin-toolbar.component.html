@@ -1,5 +1,11 @@
 <div class="admin-toolbar">
     <div class="admin-toolbar-actions">
+        <!-- Back Button -->
+        <div class="admin-toolbar-action only-mobile" mdTooltip="Go Back"
+            (click)="goBack()" style="float: left;">
+            <md-icon>arrow_back</md-icon>
+        </div>
+
         <!-- Checkbox for selecting ids (disabled because we want to handle clicks ourselves) -->
         <div class="admin-toolbar-action admin-toolbar-checkbox" (click)="toggleAll()">
             <md-checkbox [checked]="(data.length === selectedIds.length)" [disabled]="true" [indeterminate]="(data.length !== selectedIds.length) && selectedIds.length"></md-checkbox>
@@ -12,18 +18,28 @@
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>check</md-icon>
         </div>
-        <!-- Setting to Urgent: Pending Announcements, Total Announcements -->
+
+        <!-- Denial: For denying one announcement -->
+        <div class="admin-toolbar-action" mdTooltip="Deny"
+            (click)="doAction(actions.ACTION_ANNOUNCEMENT_DENY)"
+            [class.disabled]="(selectedIds.length !== 1)"
+            *ngIf="(page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL || page === pages.PAGE_ANNOUNCEMENTS_CURRENT)">
+            <md-icon>block</md-icon>
+        </div>
+        <!--
+        <!\-\- Setting to Urgent: Pending Announcements, Total Announcements \-\->
         <div class="admin-toolbar-action" mdTooltip="Set Urgency"
             (click)="doAction(actions.ACTION_ANNOUNCEMENT_SET_URGENT)"
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>notifications</md-icon>
         </div>
-        <!-- Removing Urgent: Pending Announcements, Total Announcements -->
+        <!\-\- Removing Urgent: Pending Announcements, Total Announcements \-\->
         <div class="admin-toolbar-action" mdTooltip="Remove Urgency"
             (click)="doAction(actions.ACTION_ANNOUNCEMENT_REMOVE_URGENT)"
             *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING || page === pages.PAGE_ANNOUNCEMENTS_TOTAL">
             <md-icon>notifications_off</md-icon>
         </div>
+        -->
 
         <!-- Actions for Users -->
         <!-- Add New User: All User Actions -->

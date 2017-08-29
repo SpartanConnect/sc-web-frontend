@@ -4,5 +4,6 @@
     <td-message *ngIf="isHidden" label="Notice" sublabel="This announcement is pending approval. It will be hidden from all other users until an administrator approves your announcement." color="purple" icon="warning" style="padding: 16px 5px;"></td-message>
     <app-announcement [announcement]="announcement" *ngIf="announcement"></app-announcement>
     <br>
-    <button md-button routerLink="/home">RETURN TO HOME PAGE</button>
+    <button md-button routerLink="/home" class="no-mobile">RETURN TO HOME PAGE</button>
+    <div class="mobile-only btn-av-back" routerLink="/home"><md-icon>home</md-icon> BACK TO HOME PAGE</div>
 </div>

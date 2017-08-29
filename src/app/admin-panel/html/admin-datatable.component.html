@@ -1,27 +1,28 @@
 <div class="admin-datatables">
     <div class="admin-datatable" *ngIf="announcementPages.indexOf(page) !== -1 && data.length">
         <div class="admin-dt-announcement" *ngFor="let announcement of data">
-            <div class="admin-dt-announcement-head">
-                <div class="admin-dt-announcement-head-check">
+            <div class="admin-dt-announcement-head" (click)="openAnnouncement(announcement.id)">
+                <div class="admin-dt-announcement-head-check" (click)="openAnnouncement(announcement.id)">
                     <md-checkbox [checked]="selectedIds.indexOf(announcement.id) !== -1" (change)="selectElement(announcement.id)"></md-checkbox>
                 </div>
                 <div class="admin-dt-announcement-head-body">
                     <h3 class="admin-dt-announcement-head-heading">
                         {{announcement.title}}
-                        <span *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING" class="admin-dt-announcement-head-rating {{returnAnnouncementRating(announcement).code}}">
+                        <span *ngIf="page === pages.PAGE_ANNOUNCEMENTS_PENDING" class="admin-dt-announcement-head-rating no-mobile {{returnAnnouncementRating(announcement).code}}">
                             <span class="circle"><md-icon>{{returnAnnouncementRating(announcement).icon}}</md-icon></span>
                             <span style="vertical-align: middle; padding: 4px 8px; margin-right: 8px;">Rating: {{returnAnnouncementRating(announcement).status}}</span>
                         </span>
                     </h3>
                     <div class="admin-dt-announcement-head-status">
                         <span style="min-width: 210px;"><b>POSTED BY</b> {{announcement.creator.name}}</span>
-                        <span style="margin-left: 40px; text-transform: uppercase;"><b>CREATED</b> {{announcement.timeSubmitted | timeAgo}}</span>
-                        <span style="margin-left: 40px; text-transform: uppercase;"><b>STATUS</b> {{returnStringStatus(announcement.status)}}</span>
+                        <!--<span style="margin-left: 40px; text-transform: uppercase;"><b>CREATED</b> {{announcement.timeSubmitted | timeAgo}}</span>-->
+                        <span style="margin-left: 40px; text-transform: uppercase; min-width: 120px;" class="no-mobile"><b>SHOWING</b> {{announcement.startDate | date:'M/d'}}<span *ngIf="announcement.startDate !== announcement.endDate" style="min-width: 80px;"> - {{announcement.endDate | date:'M/d'}}</span></span>
+                        <span style="margin-left: 40px; text-transform: uppercase;" class="no-mobile"><b>STATUS</b> {{returnStringStatus(announcement.status)}}</span>
                     </div>
                 </div>
-                <div class="admin-dt-announcement-head-buttons">
-                    <button md-icon-button (click)="doAction(actions.ACTION_ANNOUNCEMENT_APPROVE, announcement.id)" *ngIf="announcement.status !== 3"><md-icon>check</md-icon></button>
-                    <button md-icon-button (click)="doAction(actions.ACTION_ANNOUNCEMENT_DENY, announcement.id)" *ngIf="announcement.status !== 3"><md-icon>block</md-icon></button>
+                <div (click)="openAnnouncement(announcement.id)" class="admin-dt-announcement-head-buttons">
+                    <button class="no-mobile" md-icon-button (click)="doAction(actions.ACTION_ANNOUNCEMENT_APPROVE, announcement.id)" *ngIf="announcement.status !== 3"><md-icon>check</md-icon></button>
+                    <button class="no-mobile" md-icon-button (click)="doAction(actions.ACTION_ANNOUNCEMENT_DENY, announcement.id)" *ngIf="announcement.status !== 3"><md-icon>block</md-icon></button>
                     <button md-icon-button *ngIf="openedAnnouncements.indexOf(announcement.id) === -1" (click)="openAnnouncement(announcement.id)"><md-icon>expand_more</md-icon></button>
                     <button md-icon-button *ngIf="openedAnnouncements.indexOf(announcement.id) !== -1" (click)="openAnnouncement(announcement.id)"><md-icon>expand_less</md-icon></button>
                 </div>

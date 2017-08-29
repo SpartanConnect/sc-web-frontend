@@ -6,7 +6,7 @@
             You have logged out of Spartan Connect.
         </p>
     </app-spotlight-card>
-    <app-spotlight-card *ngIf="!currentUser.isAuthenticated && !loggedOut" width="500" mode="small">
+    <app-spotlight-card *ngIf="!authService.currentUser.isAuthenticated && !loggedOut" width="500" mode="small">
         <h1 class="card-spotlight-emoji">👋</h1>
         <h3>Say goodbye to PA announcements.</h3>
         <div content>

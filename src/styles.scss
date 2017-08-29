@@ -4,7 +4,7 @@ html, body {
   background-color: #eee;
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  min-width: 960px;     // Temporary until mobile style implemented.
+  // min-width: 960px;     // Temporary until mobile style implemented.
   padding: 0;
 }
 
@@ -117,5 +117,18 @@ body.noscroll {
     li {
       margin: 5px 0;
     }
+  }
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .no-mobile {
+    display: none;
+  }
+  .mobile-only {
+    display: inherit;
   }
 }
