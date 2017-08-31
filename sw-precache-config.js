@@ -3,7 +3,7 @@ module.exports = {
     stripPrefix: 'dist/',
     navigateFallback: '/index.html',
     runtimeCaching: [{
-        urlPattern: /connectapi\.lchsspartans\.net/,
+        urlPattern: /connectapi\.lchsspartans\.net\/announcements/,
         handler: 'networkFirst'
     }]
 }
