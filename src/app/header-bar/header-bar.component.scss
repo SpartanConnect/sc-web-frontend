@@ -8,7 +8,7 @@ header {
   border-bottom: 1px solid $gray-light-2;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
   box-sizing: border-box;
-  height: 50px;
+  height: 78px;
   margin: 0;
   overflow: hidden;
   position: fixed;
@@ -190,13 +190,13 @@ header {
   position: fixed;
   right: calc((100% - 960px) / 2);
   opacity: 0;
-  top: 45px;
+  top: 65px;
   visibility: hidden;
   z-index: 100;
   transition: all 250ms ease;
 
   &.activated {
-    top: 60px;
+    top: 80px;
     opacity: 1;
     transition: visibility 0s, all 250ms ease;
     visibility: visible;
@@ -244,13 +244,13 @@ header {
   position: fixed;
   right: calc((100% - 960px) / 2);
   opacity: 0;
-  top: 45px;
+  top: 65px;
   visibility: hidden;
   z-index: 100;
   transition: all 250ms ease;
 
   &.activated {
-    top: 60px;
+    top: 80px;
     opacity: 1;
     transition: visibility 0s, all 250ms ease;
     visibility: visible;
@@ -327,5 +327,41 @@ span.dim, i.dim {
   }
   .mobile-only {
     display: inherit;
+  }
+}
+
+.header-sparta-universal {
+  background-color: #333;
+  color: #fefefe;
+  font-weight: 600;
+  font-size: 12px;
+  height: 28px;
+
+  .nav {
+    width: 1080px;
+    margin: 0 auto;
+    padding-left: 20px;
+  }
+
+  .nav a {
+    cursor: pointer;
+    color: #fefefe;
+    display: inline-block;
+    margin-right: 20px;
+    margin-top: 7px;
+    vertical-align: middle;
+    transition: color 150ms ease;
+    text-decoration: none;
+
+    &:hover {
+      color: #f2a900;
+      transition: color 150ms ease;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .header-sparta-universal {
+    overflow-x: scroll;
   }
 }

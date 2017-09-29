@@ -6,25 +6,6 @@
             You have logged out of Spartan Connect.
         </p>
     </app-spotlight-card>
-    <app-spotlight-card *ngIf="!authService.currentUser.isAuthenticated && !loggedOut" width="500" mode="small">
-        <h1 class="card-spotlight-emoji">👋</h1>
-        <h3>Say goodbye to PA announcements.</h3>
-        <div content>
-            <p>
-                You don't deserve to listen to minutes of boring announcements. With Spartan Connect, you can tune out the ones you don't care about
-                and stay connected to the rest. Download our announcements app today on the App Store or on the Play Store.
-            </p>
-            <div style="vertical-align:middle;">
-                <a target="_blank" href="http://itunes.apple.com/us/app/spartan-connect/id1257927264?mt=8" style="text-decoration: none;">
-                    <img style="vertical-align:middle;" height="40" alt='Download on the App Store' src='./assets/apple_badge.png'/>
-                </a>
-                <a target="_blank" href='https://play.google.com/store/apps/details?id=com.spartanconnect.SpartanConnect&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style="text-decoration: none;">
-                    <img style="vertical-align:middle;" height="60" alt='Get it on Google Play' src='./assets/google_play_badge.png'/>
-                </a>
-            </div>
-            <br>
-        </div>
-    </app-spotlight-card>
 </div>
 <md-spinner [color]="primary" style="margin: 0 auto; width: 60px; height: 60px;" *ngIf="loading"></md-spinner>
 <div class="index-body" *ngIf="!loading">
@@ -39,7 +20,7 @@
     <div class="index-body-announcements">
         <app-spotlight-card *ngIf="!announcements.length && !loading" style="margin-top: 20px;">
             <h1 class="card-spotlight-emoji"><md-icon>info</md-icon></h1>
-            <h3>No announcements to display. Weird.</h3>
+            <h3>No announcements to display.</h3>
             <div content>
                 <p>
                     It seems like there are no announcements that are currently going on today.
